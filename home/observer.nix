@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ lib, pkgs, ... }: {
     home = {
         username = "observer";
         homeDirectory = "/home/observer";
@@ -29,6 +29,18 @@
             extraConfig = {
                 safe.directory = "/system-flake";
             };
+        };
+    };
+
+    # Set keyboard languages
+    dconf.settings = {
+        "org/gnome/desktop/input-sources" = {
+            show-all-sources = true;
+
+            sources = with lib.hm.gvariant; [
+                (mkTuple [ "xkb" "us" ])
+                (mkTuple [ "xkb" "ru" ])
+            ];
         };
     };
 
