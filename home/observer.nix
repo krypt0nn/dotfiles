@@ -9,6 +9,9 @@
             vscodium
 
             prismlauncher
+
+            cargo
+            clippy
         ];
     };
 
