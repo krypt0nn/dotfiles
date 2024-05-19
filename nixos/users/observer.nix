@@ -13,4 +13,6 @@
             ];
         };
     };
+
+    services.jellyfin.enable = true;
 }
