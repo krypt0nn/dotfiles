@@ -1,6 +1,7 @@
 { lib, pkgs, ... }: {
-    environment.systemPackages = [
-        pkgs.gnupg
+    environment.systemPackages = with pkgs; [
+        gnupg
+        gnupg1compat
     ];
 
     programs.gnupg.agent = {
