@@ -1,9 +1,11 @@
-{ pkgs, ... }: {
-    imports = [
-        # ./theme.nix
+{ pkgs, flakeConfig, ... }: {
+    imports = let imports = {
+            "observer-pc/observer" = [
+                ./users/observer.nix
+            ];
+        };
 
-        ./observer.nix
-    ];
+        in imports.${flakeConfig.hostname + "/" + flakeConfig.username};
 
     xdg = {
         userDirs = {

@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }: {
+{ lib, pkgs, pkgs-unstable, ... }: {
     home = {
         username = "observer";
         homeDirectory = "/home/observer";
@@ -10,8 +10,8 @@
 
             prismlauncher
 
-            cargo
-            clippy
+            pkgs-unstable.cargo
+            pkgs-unstable.clippy
         ];
     };
 
@@ -46,6 +46,4 @@
             ];
         };
     };
-
-    home.stateVersion = "23.11";
 }

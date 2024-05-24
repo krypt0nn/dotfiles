@@ -11,45 +11,45 @@
         };
     };
 
-    outputs = inputs@{ nixpkgs, home-manager, ... }:
-        let flakeConfig = {
-            username = "observer";
-            hostname = "observer-pc";
-        };
+    outputs = { nixpkgs, nixpkgs-unstable, home-manager, ... }@inputs:
+        let
+            flakeConfig = {
+                username = "observer";
+                hostname = "observer-pc";
+            };
+
+            system = "x86_64-linux";
+
+            pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
 
         in {
-            nixosConfigurations = {
-                "observer-pc" = nixpkgs.lib.nixosSystem {
-                    system = "x86_64-linux";
+            nixosConfigurations.${flakeConfig.hostname} = nixpkgs.lib.nixosSystem {
+                inherit system;
 
-                    specialArgs = {
-                        inherit inputs;
-                        inherit flakeConfig;
-                    };
-
-                    modules = [
-                        ./nixos/system.nix
-                        ./hosts
-                        ./users
-
-                        # ./hosts/observer-pc/hardware.nix
-                        # ./hosts/observer-pc/misc.nix
-                        # ./hosts/observer-pc/services.nix
-                        # ./users/observer
-
-                        home-manager.nixosModules.home-manager {
-                            home-manager.useGlobalPkgs = true;
-                            home-manager.useUserPackages = true;
-
-                            home-manager.users.observer = import ./home;
-
-                            home-manager.extraSpecialArgs = {
-                                inherit inputs;
-                                inherit flakeConfig;
-                            };
-                        }
-                    ];
+                specialArgs = {
+                    inherit inputs;
+                    inherit flakeConfig;
+                    inherit pkgs-unstable;
                 };
+
+                modules = [
+                    ./nixos/system.nix
+                    ./hosts
+                    ./users
+
+                    home-manager.nixosModules.home-manager {
+                        home-manager.useGlobalPkgs = true;
+                        home-manager.useUserPackages = true;
+
+                        home-manager.users.${flakeConfig.username} = import ./home;
+
+                        home-manager.extraSpecialArgs = {
+                            inherit inputs;
+                            inherit flakeConfig;
+                            inherit pkgs-unstable;
+                        };
+                    }
+                ];
             };
         };
 }
