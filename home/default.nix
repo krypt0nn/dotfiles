@@ -1,7 +1,16 @@
 { flakeConfig, ... }: {
     imports = let imports = {
             "observer-pc/observer" = [
+                # User config
                 ./users/observer.nix
+
+                # Packages
+                ./packages/rust.nix
+
+                # Apps
+                ./apps/vscodium.nix
+                ./apps/rust-rover.nix
+                ./apps/prismlauncher.nix
             ];
         };
 

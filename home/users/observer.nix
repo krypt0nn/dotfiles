@@ -6,13 +6,6 @@
         packages = with pkgs; [
             vesktop
             telegram-desktop
-            vscodium
-
-            prismlauncher
-
-            pkgs-unstable.cargo
-            pkgs-unstable.clippy
-            pkgs-unstable.jetbrains.rust-rover
         ];
     };
 
