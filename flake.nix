@@ -20,7 +20,17 @@
 
             system = "x86_64-linux";
 
-            pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
+            pkgs = import nixpkgs {
+                inherit system;
+
+                config.allowUnfree = true;
+            };
+
+            pkgs-unstable = import nixpkgs-unstable {
+                inherit system;
+
+                config.allowUnfree = true;
+            };
 
         in {
             nixosConfigurations.${flakeConfig.hostname} = nixpkgs.lib.nixosSystem {
@@ -29,6 +39,7 @@
                 specialArgs = {
                     inherit inputs;
                     inherit flakeConfig;
+                    inherit pkgs;
                     inherit pkgs-unstable;
                 };
 
@@ -46,6 +57,7 @@
                         home-manager.extraSpecialArgs = {
                             inherit inputs;
                             inherit flakeConfig;
+                            inherit pkgs;
                             inherit pkgs-unstable;
                         };
                     }

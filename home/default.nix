@@ -1,4 +1,4 @@
-{ pkgs, flakeConfig, ... }: {
+{ flakeConfig, ... }: {
     imports = let imports = {
             "observer-pc/observer" = [
                 ./users/observer.nix

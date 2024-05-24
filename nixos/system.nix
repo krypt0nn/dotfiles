@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }: {
+{ ... }: {
     imports = [
         ./boot.nix
         ./drivers.nix

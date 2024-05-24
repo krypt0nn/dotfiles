@@ -12,6 +12,7 @@
 
             pkgs-unstable.cargo
             pkgs-unstable.clippy
+            pkgs-unstable.jetbrains.rust-rover
         ];
     };
 
