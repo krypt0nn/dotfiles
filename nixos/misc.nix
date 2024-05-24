@@ -1,9 +1,5 @@
 { ... }: {
-    networking = {
-        hostName = "observer-pc";
-
-        networkmanager.enable = true;
-    };
+    networking.networkmanager.enable = true;
 
     time.timeZone = "Europe/Kaliningrad";
 
