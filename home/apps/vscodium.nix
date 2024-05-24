@@ -7,7 +7,7 @@
         #     clippy
         # ]);
 
-        package = pkgs.vscodium.fhs;
+        package = pkgs.vscodium;
 
         extensions = with pkgs.vscode-extensions; [
             # Misc

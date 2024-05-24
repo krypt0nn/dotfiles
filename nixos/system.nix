@@ -6,6 +6,7 @@
         ./sound.nix
         ./misc.nix
         ./services.nix
+        ./virtualisation.nix
         ./nix-config.nix
         ./fonts.nix
         ./desktop.nix
