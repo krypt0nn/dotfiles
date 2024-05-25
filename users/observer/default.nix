@@ -1,4 +1,8 @@
 { ... }: {
+    imports = [
+        ./syncing.nix
+    ];
+
     users.users = {
         observer = {
             isNormalUser = true;
