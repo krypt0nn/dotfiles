@@ -1,12 +1,8 @@
 { flakeConfig, ... }:
     let imports = {
-        "observer-pc" = [
-            ./observer-pc/hardware.nix
-            ./observer-pc/misc.nix
-            ./observer-pc/services.nix
-        ];
+        "observer-pc" = ./observer-pc;
     };
 
     in {
-        imports = imports.${flakeConfig.hostname};
+        imports = [ imports.${flakeConfig.hostname} ];
     }

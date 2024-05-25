@@ -11,6 +11,7 @@
                 # Apps
                 ./apps/vscodium.nix
                 ./apps/rust-rover.nix
+
                 ./apps/prismlauncher.nix
             ];
         };
