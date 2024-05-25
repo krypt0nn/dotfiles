@@ -27,6 +27,8 @@
                 safe.directory = "/system-flake";
             };
         };
+
+        bash.enable = true;
     };
 
     # Set keyboard languages

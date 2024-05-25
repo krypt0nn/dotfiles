@@ -2,11 +2,6 @@
     programs.vscode = {
         enable = true;
 
-        # package = pkgs.vscodium.fhsWithPackages (pkgs: with pkgs; [
-        #     cargo
-        #     clippy
-        # ]);
-
         package = pkgs.vscodium;
 
         extensions = with pkgs.vscode-extensions; [

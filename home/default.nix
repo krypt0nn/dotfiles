@@ -5,6 +5,7 @@
                 ./users/observer.nix
 
                 # Packages
+                ./packages/direnv.nix
                 ./packages/rust.nix
 
                 # Apps
