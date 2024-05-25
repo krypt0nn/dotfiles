@@ -11,8 +11,4 @@
             dockerSocket.enable = true;
         };
     };
-
-    environment.systemPackages = with pkgs; [
-        podman-tui
-    ];
 }
