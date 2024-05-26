@@ -13,6 +13,7 @@
                 ./apps/rust-rover.nix
 
                 ./apps/fragments.nix
+                ./apps/gimp.nix
 
                 ./apps/prismlauncher.nix
             ];
