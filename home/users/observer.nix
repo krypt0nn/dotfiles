@@ -28,7 +28,36 @@
             };
         };
 
-        bash.enable = true;
+        zsh = {
+            enable = true;
+
+            syntaxHighlighting.enable = true;
+            historySubstringSearch.enable = true;
+            enableAutosuggestions = true; # autosuggestion.enable = true;
+
+            plugins = [
+                {
+                    name = "zsh-powerlevel10k";
+                    src = "${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/";
+                    file = "powerlevel10k.zsh-theme";
+                }
+            ];
+
+            oh-my-zsh = {
+                enable = true;
+
+                plugins = [
+                    "git"
+                    "sudo"
+                ];
+            };
+
+            initExtra = "source ~/.p10k.zsh";
+
+            shellAliases = {
+                update-system = "sudo nix flake update /system-flake && sudo nixos-rebuild switch --flake /system-flake";
+            };
+        };
     };
 
     # Set keyboard languages

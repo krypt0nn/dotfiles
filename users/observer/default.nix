@@ -1,21 +1,22 @@
-{ ... }: {
+{ pkgs, ... }: {
     imports = [
         ./syncing.nix
     ];
 
-    users.users = {
-        observer = {
-            isNormalUser = true;
+    users.users.observer = {
+        isNormalUser = true;
 
-            name = "observer";
-            home = "/home/observer";
+        # useDefaultShell = true; # Doesn't work for whatever reason
+        shell = pkgs.zsh;
 
-            extraGroups = [
-                "wheel"
-                "networkmanager"
-                "libvirtd"
-                "podman"
-            ];
-        };
+        name = "observer";
+        home = "/home/observer";
+
+        extraGroups = [
+            "wheel"
+            "networkmanager"
+            "libvirtd"
+            "podman"
+        ];
     };
 }
