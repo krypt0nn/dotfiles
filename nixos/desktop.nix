@@ -10,6 +10,7 @@
     environment.systemPackages = with pkgs; [
         blackbox-terminal
         gnome-extension-manager
+        loupe
     ];
 
     # Remove unneeded built-in gnome apps
