@@ -55,7 +55,8 @@
             initExtra = "source ~/.p10k.zsh";
 
             shellAliases = {
-                update-system = "sudo nix flake update /system-flake && sudo nixos-rebuild switch --flake /system-flake";
+                update-system = "sudo nixos-rebuild switch --flake /system-flake";
+                upgrade-system = "sudo nix flake update /system-flake && sudo nixos-rebuild switch --flake /system-flake";
             };
         };
     };
