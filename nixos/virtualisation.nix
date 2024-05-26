@@ -1,6 +1,7 @@
 { pkgs, ... }: {
     virtualisation = {
         containers.enable = true;
+        libvirtd.enable = true;
 
         podman = {
             enable = true;
