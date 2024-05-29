@@ -7,6 +7,7 @@
         ./misc.nix
         ./services.nix
         ./virtualisation.nix
+        ./hosts.nix
         ./nix-config.nix
         ./fonts.nix
         ./desktop.nix
