@@ -2,11 +2,11 @@
     imports = [
         ./nix-config.nix
         ./overlays.nix
-
         ./boot.nix
         ./drivers.nix
         ./security.nix
         ./network.nix
+        ./bluetooth.nix
         ./sound.nix
         ./misc.nix
         ./services.nix
