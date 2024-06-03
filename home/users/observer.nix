@@ -31,12 +31,7 @@
 
             syntaxHighlighting.enable = true;
             historySubstringSearch.enable = true;
-
-            # NixOS 23.11
-            enableAutosuggestions = true;
-
-            # NixOS 24.05
-            # autosuggestion.enable = true;
+            autosuggestion.enable = true;
 
             plugins = [
                 {
