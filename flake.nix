@@ -2,10 +2,7 @@
     description = "System configuration flake";
 
     inputs = {
-        # Fix bcachefs not booting issue
-        nixpkgs.url = "github:nixos/nixpkgs?rev=25cf937a30bf0801447f6bf544fc7486c6309234";
-
-        # nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
+        nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
         nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
         home-manager = {
