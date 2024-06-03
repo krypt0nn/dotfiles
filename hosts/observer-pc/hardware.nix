@@ -18,7 +18,6 @@
                 "discard"
                 "ssd"
                 "compression=lz4"
-                "background_compression=zstd"
             ];
         };
 
