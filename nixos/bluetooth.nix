@@ -8,6 +8,4 @@
             KernelExperimental = true;
         };
     };
-
-    services.blueman.enable = true;
 }
