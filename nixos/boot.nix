@@ -8,4 +8,7 @@
     boot.kernel.sysctl = {
         "vm.swappiness" = 10;
     };
+
+    # FIXME: Hello NixOS 24.05, how are you?
+    boot.supportedFilesystems = ["bcachefs"]; 
 }

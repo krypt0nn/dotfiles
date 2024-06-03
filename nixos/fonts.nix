@@ -9,6 +9,7 @@
         jetbrains-mono
 
         # Windows fonts
+        # FIXME: Hello NixOS 24.05, how are you?
         pkgs-unstable.corefonts
     ];
 }
