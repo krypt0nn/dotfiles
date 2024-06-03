@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, pkgs-unstable, ... }: {
     fonts.packages = with pkgs; [
         noto-fonts
         noto-fonts-cjk
@@ -9,6 +9,6 @@
         jetbrains-mono
 
         # Windows fonts
-        corefonts
+        pkgs-unstable.corefonts
     ];
 }

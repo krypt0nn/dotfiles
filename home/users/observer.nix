@@ -33,7 +33,7 @@
 
             syntaxHighlighting.enable = true;
             historySubstringSearch.enable = true;
-            enableAutosuggestions = true; # autosuggestion.enable = true;
+            autosuggestion.enable = true;
 
             plugins = [
                 {
