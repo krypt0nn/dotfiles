@@ -2,6 +2,8 @@
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
 
+    boot.initrd.systemd.enable = true;
+
     boot.kernelPackages = pkgs.linuxPackages_latest;
 
     # Reduce swap use (extend SSD lifespan)
@@ -9,6 +11,5 @@
         "vm.swappiness" = 10;
     };
 
-    # FIXME: Hello NixOS 24.05, how are you?
     boot.supportedFilesystems = ["bcachefs"]; 
 }

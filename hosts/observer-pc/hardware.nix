@@ -9,7 +9,7 @@
     boot.extraModulePackages = [ ];
 
     fileSystems."/" = {
-        device = "UUID=daddd060-bcc7-4c43-92b7-4fe386b9e875";
+        device = "/dev/disk/by-uuid/daddd060-bcc7-4c43-92b7-4fe386b9e875";
         fsType = "bcachefs";
         options = [
             "noatime"
