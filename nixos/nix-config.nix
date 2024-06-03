@@ -1,5 +1,7 @@
-{ ... }: {
+{ pkgs, ... }: {
     nix = {
+        package = pkgs.nix;
+
         settings = {
             auto-optimise-store = true;
 
@@ -25,4 +27,6 @@
             options = "--delete-older-than 7d";
         };
     };
+
+    environment.sessionVariables.NIXPKGS_ALLOW_UNFREE = "1";
 }

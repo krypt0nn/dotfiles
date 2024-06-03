@@ -3,8 +3,8 @@
         noto-fonts
         noto-fonts-cjk
         noto-fonts-emoji
-
         liberation_ttf
+        roboto
 
         jetbrains-mono
 

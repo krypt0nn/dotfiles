@@ -9,11 +9,12 @@
                 ./packages/rust.nix
 
                 # Apps
-                ./apps/vscodium.nix
-                ./apps/rust-rover.nix
-
+                ./apps/firefox.nix
                 ./apps/fragments.nix
                 ./apps/gimp.nix
+
+                ./apps/vscodium.nix
+                # ./apps/rust-rover.nix
 
                 ./apps/prismlauncher.nix
             ];
@@ -30,5 +31,5 @@
 
     programs.home-manager.enable = true;
 
-    home.stateVersion = "24.05";
+    home.stateVersion = "23.11";
 }

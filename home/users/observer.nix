@@ -10,8 +10,6 @@
     };
 
     programs = {
-        firefox.enable = true;
-
         git = {
             enable = true;
 
@@ -33,7 +31,11 @@
 
             syntaxHighlighting.enable = true;
             historySubstringSearch.enable = true;
-            autosuggestion.enable = true;
+
+            enableAutosuggestions = true;
+
+            # NixOS 24.05
+            # autosuggestion.enable = true;
 
             plugins = [
                 {
