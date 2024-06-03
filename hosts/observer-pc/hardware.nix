@@ -16,7 +16,8 @@
             "nodiratime"
             "discard"
             "ssd"
-            "compression=zstd"
+            "compression=lz4"
+            "background_compression=zstd"
         ];
     };
 
