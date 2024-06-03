@@ -10,10 +10,10 @@
             inputs.nixpkgs.follows = "nixpkgs";
         };
 
-        bcachefs-tools = {
-            url = "github:koverstreet/bcachefs-tools";
-            inputs.nixpkgs.follows = "nixpkgs";
-        };
+        # bcachefs-tools = {
+        #     url = "github:koverstreet/bcachefs-tools";
+        #     inputs.nixpkgs.follows = "nixpkgs";
+        # };
     };
 
     outputs = { nixpkgs, nixpkgs-unstable, home-manager, ... }@inputs:

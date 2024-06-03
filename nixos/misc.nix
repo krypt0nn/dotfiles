@@ -5,6 +5,7 @@
 
     i18n.defaultLocale = "en_US.UTF-8";
 
+    # NixOS 23.11
     services.xserver.layout = "us,ru";
 
     # NixOS 24.05
