@@ -6,6 +6,25 @@
 
         policies = {
             HardwareAcceleration = true;
+
+            DisableFirefoxStudies = true;
+            DisablePocket = true;
+            DisableTelemetry = true;
+
+            settings = {
+                "browser.search.defaultenginename" = "DuckDuckGo";
+                "browser.search.order.1" = "DuckDuckGo";
+
+                "extensions.pocket.enabled" = false;
+                "browser.newtabpage.activity-stream.showSponsored" = false;
+                "browser.newtabpage.activity-stream.system.showSponsored" = false;
+                "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
+
+                "media.ffmpeg.vaapi.enabled" = true;
+                "media.ffvpx.enabled" = false;
+                "media.av1.enabled" = false;
+                "gfx.webrender.all" = true;
+            };
         };
     };
 }
