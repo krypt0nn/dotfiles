@@ -15,25 +15,27 @@
         };
 
         # Use local encrypted DNS resolver
-        nameservers = [
-            "127.0.0.1"
-            "::1"
-        ];
+        # nameservers = [
+        #     "127.0.0.1"
+        #     "::1"
+        # ];
 
         # Cloudflare DNS
-        # nameservers = [
-        #     "1.1.1.1"
-        #     "1.0.0.1"
-        # ];
+        nameservers = [
+            "1.1.1.1"
+            "1.0.0.1"
+        ];
     };
 
     # Setup encrypted DNS service
     services.dnscrypt-proxy2 = {
-        enable = true;
+        # enable = true;
 
         settings = {
             ipv4_servers = true;
             doh_servers = true;
+
+            http3 = true;
 
             require_dnssec = true;
             require_nolog = true;
@@ -66,28 +68,30 @@
                 };
             };
 
-            server_names = [
-                # Ad-blockers DNS
-                "adguard-dns-doh"
-                "mullvad-base-doh"
+            server_names = [ "mullvad-adblock-doh" ];
 
-                # Normal DNS with content filtering
-                "cloudflare-security"
-                "switch"
-                "adfree.usableprivacy.net"
-                "ams-ads-doh-nl"
-                "dnsforge.de"
-                "doh.tiarap.org"
+            # server_names = [
+            #     # Ad-blockers DNS
+            #     "adguard-dns-doh"
+            #     "mullvad-base-doh"
 
-                # Normal DNS without content filtering
-                # "cloudflare"
-                # "artikel10-doh-ipv4"
-                # "circl-doh"
-                # "doh.appliedprivacy.net"
-                # "doh.ffmuc.net"
-                # "fdn"
-                # "meganerd-doh"
-            ];
+            #     # Normal DNS with content filtering
+            #     "cloudflare-security"
+            #     "switch"
+            #     "adfree.usableprivacy.net"
+            #     "ams-ads-doh-nl"
+            #     "dnsforge.de"
+            #     "doh.tiarap.org"
+
+            #     # Normal DNS without content filtering
+            #     # "cloudflare"
+            #     # "artikel10-doh-ipv4"
+            #     # "circl-doh"
+            #     # "doh.appliedprivacy.net"
+            #     # "doh.ffmuc.net"
+            #     # "fdn"
+            #     # "meganerd-doh"
+            # ];
 
             netprobe_address = "9.9.9.9:53";
         };
