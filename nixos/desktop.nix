@@ -11,6 +11,7 @@
         blackbox-terminal
         gnome-extension-manager
         loupe
+        resources
     ];
 
     # Remove unneeded built-in gnome apps
