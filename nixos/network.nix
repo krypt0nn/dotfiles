@@ -80,14 +80,13 @@
                 "doh.tiarap.org"
 
                 # Normal DNS without content filtering
-                "cloudflare"
-                "dns.digitale-gesellschaft.ch"
-                "artikel10-doh-ipv4"
-                "circl-doh"
-                "doh.appliedprivacy.net"
-                "doh.ffmuc.net"
-                "fdn"
-                "meganerd-doh"
+                # "cloudflare"
+                # "artikel10-doh-ipv4"
+                # "circl-doh"
+                # "doh.appliedprivacy.net"
+                # "doh.ffmuc.net"
+                # "fdn"
+                # "meganerd-doh"
             ];
 
             netprobe_address = "9.9.9.9:53";
