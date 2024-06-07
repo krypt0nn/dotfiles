@@ -8,4 +8,7 @@
     boot.kernel.sysctl = {
         "vm.swappiness" = 10;
     };
+
+    # Enable loading screen
+    boot.plymouth.enable = true;
 }
