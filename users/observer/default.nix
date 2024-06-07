@@ -1,6 +1,6 @@
 { pkgs, ... }: {
     imports = [
-        ./syncing.nix
+        ./syncthing.nix
     ];
 
     users.users.observer = {

@@ -3,6 +3,8 @@
         syncthing = {
             enable = true;
 
+            user = "observer";
+
             dataDir = "/home/observer/.syncthing";
             configDir = "/home/observer/.syncthing/.config";
 
@@ -11,7 +13,7 @@
 
             settings = {
                 devices = {
-                    "observer-pc" = { id = "5HW7DWE-44ZING4-ZS4BTNF-264HIR6-3CMIKJJ-34G4RE6-V62OSLM-CJGOEAV"; };
+                    "observer-pc" = { id = "4TX2PRI-LGLEIOD-UFIWU7X-W3MVXTM-QAFSX2M-IJXUYZI-4NOSWPC-7GXT4AB"; };
                     # "observer-laptop" = { id = "DEVICE-ID-GOES-HERE"; };
                 };
 
