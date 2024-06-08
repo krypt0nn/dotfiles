@@ -10,5 +10,13 @@
     };
 
     # Enable loading screen
-    boot.plymouth.enable = true;
+    boot.plymouth = {
+        enable = true;
+
+        themePackages = with pkgs; [
+            catppuccin-plymouth
+        ];
+
+        theme = "catppuccin-macchiato";
+    };
 }
