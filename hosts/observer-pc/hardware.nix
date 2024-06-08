@@ -15,7 +15,6 @@
             options = [
                 "noatime"
                 "nodiratime"
-                "discard"
                 "ssd"
                 "compression=lz4"
             ];
