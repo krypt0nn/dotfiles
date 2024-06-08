@@ -17,6 +17,7 @@
                 "nodiratime"
                 "ssd"
                 "compression=lz4"
+                "fix_errors"
             ];
         };
 
