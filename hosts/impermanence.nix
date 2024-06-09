@@ -1,5 +1,5 @@
 { lib, ... }: {
-    boot.initrd.postDeviceCommands = lib.mkBefore ''
+    boot.initrd.postDeviceCommands = lib.mkAfter ''
         echo "impermanence: mounting base drive"
 
         mkdir -p /mnt
