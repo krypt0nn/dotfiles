@@ -1,12 +1,12 @@
-{ flakeConfig, pkgs, ... }: {
+{ flakeConfig, pkgs, pkgs-unstable, ... }: {
     programs.vscode = {
         enable = true;
 
         package = pkgs.vscodium;
 
-        extensions = with pkgs.vscode-extensions; [
+        extensions = with pkgs-unstable.vscode-extensions; [
             # Misc
-            # aaron-bond.better-comments
+            aaron-bond.better-comments
             # vivaxy.vscode-conventional-commits
             mhutchie.git-graph
             gruntfuggly.todo-tree
@@ -16,6 +16,7 @@
 
             # Nix
             bbenoist.nix
+            mkhl.direnv
 
             # Rust
             bungcip.better-toml
