@@ -4,7 +4,6 @@
         clippy
         rustc
         rustfmt
-        rustup
     ];
 
     home.sessionVariables = {
