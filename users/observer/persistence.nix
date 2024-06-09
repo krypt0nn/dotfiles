@@ -23,14 +23,14 @@
 
                 ".local"
 
-                { directory = ".config"; mode = "0700"; }
+                { directory = ".config"; mode = "0755"; }
 
                 { directory = ".gnupg"; mode = "0700"; }
                 { directory = ".ssh"; mode = "0700"; }
                 { directory = ".pki"; mode = "0700"; }
                 { directory = ".local/share/keyrings"; mode = "0700"; }
 
-                { directory = ".local/share/Trash"; mode = "0700"; }
+                { directory = ".local/share/Trash"; mode = "0755"; }
             ];
 
             files = [
