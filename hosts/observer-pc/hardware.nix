@@ -8,18 +8,6 @@
     boot.kernelModules = [ "kvm-amd" ];
     boot.extraModulePackages = [ ];
 
-    boot.initrd.postDeviceCommands = lib.mkBefore ''
-        mkdir /btrfs-drive
-
-        mount /dev/disk/by-uuid/c488a0f5-e628-400a-a1a3-08840009df1a /btrfs-drive
-
-        btrfs subvolume delete /btrfs-drive/root
-        btrfs subvolume snapshot /btrfs-drive/snapshots/root/blank /btrfs-drive/root
-
-        umount /btrfs-drive
-        rmdir /btrfs-drive
-    '';
-
     fileSystems = {
         "/" = {
             device = "/dev/disk/by-uuid/c488a0f5-e628-400a-a1a3-08840009df1a";

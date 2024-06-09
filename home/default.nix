@@ -24,11 +24,9 @@
             inputs.impermanence.nixosModules.home-manager.impermanence
         ];
 
-    xdg = {
-        userDirs = {
-            enable = true;
-            createDirectories = true;
-        };
+    xdg.userDirs = {
+        enable = true;
+        createDirectories = true;
     };
 
     programs.home-manager.enable = true;

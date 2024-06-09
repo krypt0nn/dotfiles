@@ -4,5 +4,9 @@
     };
 
     in {
-        imports = [ imports.${flakeConfig.hostname} ];
+        imports = [
+            ./impermanence.nix
+
+            imports.${flakeConfig.hostname}
+        ];
     }

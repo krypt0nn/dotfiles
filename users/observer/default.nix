@@ -6,12 +6,15 @@
 
     users.users.observer = {
         isNormalUser = true;
+        createHome = true;
 
         # useDefaultShell = true; # Doesn't work for whatever reason
         shell = pkgs.zsh;
 
         name = "observer";
         home = "/home/observer";
+
+        hashedPasswordFile = "/persistent/observer.password";
 
         extraGroups = [
             "wheel"

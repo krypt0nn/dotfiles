@@ -1,10 +1,14 @@
 { flakeConfig, ... }:
     let imports = {
-        "observer" = [
-            ./observer
-        ];
+        "observer" = ./observer;
     };
 
     in {
-        imports = imports.${flakeConfig.username};
+        imports = [
+            ./root
+
+            imports.${flakeConfig.username}
+        ];
+
+        users.mutableUsers = false;
     }

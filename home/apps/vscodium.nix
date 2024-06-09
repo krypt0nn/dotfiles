@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ flakeConfig, pkgs, ... }: {
     programs.vscode = {
         enable = true;
 
@@ -21,6 +21,14 @@
             bungcip.better-toml
             serayuzgur.crates
             rust-lang.rust-analyzer
+        ];
+    };
+
+    home.persistence."/persistent/home/${flakeConfig.username}" = {
+        allowOther = false;
+
+        directories = [
+            ".vscode-oss"
         ];
     };
 }

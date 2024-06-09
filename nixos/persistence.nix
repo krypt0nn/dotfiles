@@ -15,12 +15,6 @@
         files = [
             "/etc/machine-id"
             "/etc/adjtime"
-            "/etc/NIXOS"
-
-            "/etc/shadow"
-            "/etc/passwd"
-            "/etc/sudoers"
-            "/etc/group"
 
             { file = "/var/keys/secret_file"; parentDirectory = { mode = "u=rwx,g=,o="; }; }
         ];

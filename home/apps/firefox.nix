@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ flakeConfig, pkgs, ... }: {
     programs.firefox = {
         enable = true;
 
@@ -26,5 +26,13 @@
                 "gfx.webrender.all" = true;
             };
         };
+    };
+
+    home.persistence."/persistent/home/${flakeConfig.username}" = {
+        allowOther = false;
+
+        directories = [
+            ".mozilla"
+        ];
     };
 }

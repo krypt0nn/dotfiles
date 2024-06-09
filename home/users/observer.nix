@@ -60,12 +60,7 @@
     };
 
     home.persistence."/persistent/home/observer" = {
-        allowOther = true;
-
-        directories = [
-            ".vscode-oss"
-            ".mozilla"
-        ];
+        allowOther = false;
 
         files = [
             ".p10k.zsh"

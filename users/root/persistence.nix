@@ -2,7 +2,7 @@
     environment.persistence."/persistent" = {
         hideMounts = true;
 
-        users.observer = {
+        users.root = {
             directories = [
                 # Default folders
                 "Desktop"
@@ -14,28 +14,18 @@
                 "Videos"
                 "Templates"
 
-                # Personal folders
-                "projects"
-
                 # Apps folders
-                ".zsh"
-                ".syncthing"
-
                 ".local"
                 ".config"
 
                 { directory = ".gnupg"; mode = "0700"; }
                 { directory = ".ssh"; mode = "0700"; }
-                { directory = ".pki"; mode = "0700"; }
                 { directory = ".local/share/keyrings"; mode = "0700"; }
             ];
 
             files = [
-                # Zsh
-                ".zshrc"
-                ".zshenv"
-                ".zsh_history"
-                ".zcompdump"
+                ".back_history"
+                ".nix-channels"
             ];
         };
     };
