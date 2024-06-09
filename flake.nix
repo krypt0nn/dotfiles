@@ -11,11 +11,6 @@
             url = "github:nix-community/home-manager/release-24.05";
             inputs.nixpkgs.follows = "nixpkgs";
         };
-
-        # bcachefs-tools = {
-        #     url = "github:koverstreet/bcachefs-tools";
-        #     inputs.nixpkgs.follows = "nixpkgs";
-        # };
     };
 
     outputs = { nixpkgs, nixpkgs-unstable, impermanence, home-manager, ... }@inputs:

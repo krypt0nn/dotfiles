@@ -1,7 +1,6 @@
 { ... }: {
     imports = [
         ./nix-config.nix
-        ./overlays.nix
         ./persistence.nix
         ./boot.nix
         ./drivers.nix
