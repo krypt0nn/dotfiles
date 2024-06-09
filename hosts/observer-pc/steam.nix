@@ -7,6 +7,7 @@
         users.${flakeConfig.username} = {
             directories = [
                 ".steam"
+                ".local/share/Steam"
             ];
         };
     };
