@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ flakeConfig, pkgs, ... }: {
     home.packages = with pkgs; [
         prismlauncher
     ];
