@@ -1,4 +1,4 @@
-{ flakeConfig, ... }: {
+{ inputs, flakeConfig, ... }: {
     imports = let imports = {
             "observer-pc/observer" = [
                 # User config
@@ -20,7 +20,9 @@
             ];
         };
 
-        in imports.${flakeConfig.hostname + "/" + flakeConfig.username};
+        in imports.${flakeConfig.hostname + "/" + flakeConfig.username} ++ [
+            inputs.impermanence.nixosModules.home-manager.impermanence
+        ];
 
     xdg = {
         userDirs = {

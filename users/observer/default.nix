@@ -1,5 +1,6 @@
 { pkgs, ... }: {
     imports = [
+        ./persistence.nix
         ./syncthing.nix
     ];
 

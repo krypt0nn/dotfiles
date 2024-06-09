@@ -8,21 +8,71 @@
     boot.kernelModules = [ "kvm-amd" ];
     boot.extraModulePackages = [ ];
 
+    boot.initrd.postDeviceCommands = lib.mkBefore ''
+        mkdir /btrfs-drive
+
+        mount /dev/disk/by-uuid/c488a0f5-e628-400a-a1a3-08840009df1a /btrfs-drive
+
+        btrfs subvolume delete /btrfs-drive/root
+        btrfs subvolume snapshot /btrfs-drive/snapshots/root/blank /btrfs-drive/root
+
+        umount /btrfs-drive
+        rmdir /btrfs-drive
+    '';
+
     fileSystems = {
         "/" = {
-            device = "/dev/sda:/dev/sdb:/dev/nvme0n1p3"; # UUID=daddd060-bcc7-4c43-92b7-4fe386b9e875
-            fsType = "bcachefs";
+            device = "/dev/disk/by-uuid/c488a0f5-e628-400a-a1a3-08840009df1a";
+            fsType = "btrfs";
             options = [
                 "noatime"
                 "nodiratime"
                 "ssd"
-                "compression=lz4"
-                "fix_errors"
+                "compress=lzo"
+                "subvol=root"
             ];
         };
 
+        "/nix" = {
+            device = "/dev/disk/by-uuid/c488a0f5-e628-400a-a1a3-08840009df1a";
+            fsType = "btrfs";
+            options = [
+                "noatime"
+                "nodiratime"
+                "ssd"
+                "compress=lzo"
+                "subvol=nix"
+            ];
+        };
+
+        "/persistent" = {
+            device = "/dev/disk/by-uuid/c488a0f5-e628-400a-a1a3-08840009df1a";
+            fsType = "btrfs";
+            options = [
+                "noatime"
+                "nodiratime"
+                "ssd"
+                "compress=lzo"
+                "subvol=persistent"
+            ];
+            neededForBoot = true;
+        };
+
+        "/snapshots" = {
+            device = "/dev/disk/by-uuid/c488a0f5-e628-400a-a1a3-08840009df1a";
+            fsType = "btrfs";
+            options = [
+                "noatime"
+                "nodiratime"
+                "ssd"
+                "compress=lzo"
+                "subvol=snapshots"
+            ];
+            neededForBoot = true;
+        };
+
         "/boot" = {
-            device = "/dev/nvme0n1p1"; # /dev/disk/by-uuid/A07C-1DC5
+            device = "/dev/disk/by-uuid/9F95-2E5E";
             fsType = "vfat";
             options = [
                 "fmask=0022"
@@ -32,9 +82,7 @@
     };
 
     swapDevices = [
-        {
-            device = "/dev/nvme0n1p2"; # /dev/disk/by-uuid/25bc019c-d826-4499-92d8-d5d97cefc2b3
-        }
+        { device = "/dev/disk/by-uuid/22fd323e-aba4-4657-9667-f20b68a06fde"; }
     ];
 
     networking.useDHCP = lib.mkDefault true;
