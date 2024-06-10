@@ -12,6 +12,7 @@
                 ./apps/firefox.nix
                 ./apps/fragments.nix
                 ./apps/gimp.nix
+                ./apps/onlyoffice.nix
 
                 ./apps/vscodium.nix
                 # ./apps/rust-rover.nix
