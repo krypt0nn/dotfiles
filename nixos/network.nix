@@ -1,4 +1,4 @@
-{ ... }: {
+{ flakeConfig, ... }: {
     networking.hosts = {
         # Block telemetry servers
         "0.0.0.0" = [
@@ -14,16 +14,31 @@
             dns = "none";
         };
 
-        # Use local encrypted DNS resolver
-        # nameservers = [
-        #     "127.0.0.1"
-        #     "::1"
-        # ];
+        nameservers = if flakeConfig.network.blockMalware then [
+            # Local DNS
+            # "127.0.0.1"
+            # "::1"
 
-        # Cloudflare DNS
-        nameservers = [
+            # Cloudflare DNS (anti-malware filter)
+            "1.1.1.2"
+            "1.0.0.2"
+
+            "2606:4700:4700::1112"
+            "2606:4700:4700::1002"
+        ] else [
+            # Cloudflare DNS
             "1.1.1.1"
             "1.0.0.1"
+
+            "2606:4700:4700::1111"
+            "2606:4700:4700::1001"
+
+            # Google DNS
+            # "8.8.8.8"
+            # "8.8.4.4"
+
+            # "2001:4860:4860::8888"
+            # "2001:4860:4860::8844"
         ];
     };
 
@@ -44,6 +59,8 @@
             bootstrap_resolvers = [
                 "1.1.1.1:53"
                 "1.0.0.1:53"
+                "[2606:4700:4700::1111]:53"
+                "[2606:4700:4700::1001]:53"
             ];
 
             sources = {
