@@ -19,7 +19,7 @@
                 username = "observer";
                 hostname = "observer-pc";
                 network = {
-                    blockMalware = true;
+                    blockMalware = false;
                 };
             };
 
