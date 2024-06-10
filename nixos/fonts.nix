@@ -1,15 +1,14 @@
 { pkgs, pkgs-unstable, ... }: {
     fonts.packages = with pkgs; [
-        noto-fonts
-        noto-fonts-cjk
-        noto-fonts-emoji
+        open-fonts
         liberation_ttf
-        roboto
+        noto-fonts-emoji
+        times-newer-roman
 
         jetbrains-mono
 
         # Windows fonts
-        # FIXME: Hello NixOS 24.05, how are you?
         pkgs-unstable.corefonts
+        pkgs-unstable.vistafonts
     ];
 }
