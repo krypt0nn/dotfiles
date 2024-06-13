@@ -52,8 +52,20 @@
     boot.kernelModules = [ "tcp_bbr" ];
 
     security = {
-        # allow wayland lockers to unlock the screen
-        pam.services.hyprlock.text = "auth include login";
+        pam = {
+            # allow wayland lockers to unlock the screen
+            services.hyprlock.text = "auth include login";
+
+            # bump default nix's soft ulimit value
+            loginLimits = [
+                {
+                    domain = "*";
+                    type = "-";
+                    item = "nofile";
+                    value = "8192";
+                }
+            ];
+        };
 
         # userland niceness
         rtkit.enable = true;
