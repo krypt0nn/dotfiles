@@ -51,12 +51,16 @@
 
     boot.kernelModules = [ "tcp_bbr" ];
 
+    # Bump default nix's soft ulimit value
+    # Source: https://github.com/NixOS/nixpkgs/issues/159964#issuecomment-1477971458
+    systemd.user.extraConfig = "DefaultLimitNOFILE=8192";
+
     security = {
         pam = {
-            # allow wayland lockers to unlock the screen
+            # Allow wayland lockers to unlock the screen
             services.hyprlock.text = "auth include login";
 
-            # bump default nix's soft ulimit value
+            # Bump default nix's soft ulimit value
             loginLimits = [
                 {
                     domain = "*";
@@ -67,10 +71,10 @@
             ];
         };
 
-        # userland niceness
+        # Userland niceness
         rtkit.enable = true;
 
-        # don't ask for password for wheel group
+        # Don't ask for password for wheel group
         # sudo.wheelNeedsPassword = false;
     };
 }
