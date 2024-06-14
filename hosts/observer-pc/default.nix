@@ -1,7 +1,7 @@
 { ... }: {
     imports = [
         ./hardware.nix
-        ./services.nix
+        ./jellyfin.nix
         ./virt-manager.nix
         ./steam.nix
     ];
