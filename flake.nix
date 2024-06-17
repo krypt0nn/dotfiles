@@ -18,9 +18,6 @@
             flakeConfig = {
                 username = "observer";
                 hostname = "observer-pc";
-                network = {
-                    blockMalware = false;
-                };
             };
 
             system = "x86_64-linux";
