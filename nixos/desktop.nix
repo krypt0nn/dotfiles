@@ -11,12 +11,13 @@
         blackbox-terminal
         gnome-extension-manager
         loupe
+        papers
         mission-center
     ];
 
     # Remove unneeded built-in gnome apps
     environment.gnome.excludePackages = with pkgs.gnome; [
-        cheese eog epiphany simple-scan totem yelp geary
+        cheese eog epiphany simple-scan totem yelp geary evince
         gnome-calendar gnome-characters gnome-contacts
         gnome-font-viewer gnome-logs gnome-maps gnome-music
         gnome-system-monitor pkgs.gnome-connections
