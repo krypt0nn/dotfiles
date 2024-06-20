@@ -8,6 +8,7 @@
             "/var/lib/bluetooth"
             "/var/lib/nixos"
             "/var/lib/systemd/coredump"
+            "/var/lib/systemd/random-seed"
             "/var/lib/AccountsService"
             "/var/db/sudo"
             "/etc/NetworkManager/system-connections"
