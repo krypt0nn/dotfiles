@@ -8,6 +8,7 @@
 
         directories = [
             ".local/share/onlyoffice"
+            ".config/onlyoffice"
         ];
     };
 }

@@ -16,7 +16,8 @@
 
                 # Apps folders
                 ".local"
-                ".config"
+
+                { directory = ".config"; mode = "0755"; }
 
                 { directory = ".gnupg"; mode = "0700"; }
                 { directory = ".ssh"; mode = "0700"; }

@@ -30,6 +30,7 @@
 
         directories = [
             ".vscode-oss"
+            ".config/VSCodium"
         ];
     };
 }
