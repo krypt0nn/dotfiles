@@ -6,6 +6,7 @@
         times-newer-roman
 
         jetbrains-mono
+        monocraft
 
         # Windows fonts
         pkgs-unstable.corefonts
