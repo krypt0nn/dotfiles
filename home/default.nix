@@ -10,9 +10,12 @@
 
                 # Apps
                 ./apps/firefox.nix
-                ./apps/fragments.nix
                 ./apps/gimp.nix
                 ./apps/onlyoffice.nix
+
+                ./apps/fragments.nix
+                ./apps/tor-browser.nix
+                ./apps/bottles.nix
 
                 ./apps/vscodium.nix
                 # ./apps/rust-rover.nix
