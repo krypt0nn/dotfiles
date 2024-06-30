@@ -65,6 +65,11 @@
         files = [
             ".p10k.zsh"
         ];
+
+        directories = [
+            ".config/vesktop"
+            ".local/share/TelegramDesktop"
+        ];
     };
 
     # Set keyboard languages
