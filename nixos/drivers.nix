@@ -2,7 +2,6 @@
     environment.systemPackages = with pkgs; [
         (ffmpeg-full.override {
             withUnfree = true;
-            withOpenGL = true;
         })
     ];
 
