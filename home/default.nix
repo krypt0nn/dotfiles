@@ -21,6 +21,7 @@
                 # ./apps/rust-rover.nix
 
                 ./apps/prismlauncher.nix
+                ./apps/aagl.nix
             ];
         };
 
