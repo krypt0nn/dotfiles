@@ -16,6 +16,12 @@
             libva
             vaapiVdpau
             libvdpau-va-gl
+
+            # This should fix some wine games not being able
+            # to lookup GPU drivers via DXVK
+            vulkan-loader
+            vulkan-validation-layers
+            vulkan-extension-layer
         ];
 
         extraPackages32 = with pkgs.pkgsi686Linux; [
@@ -24,4 +30,9 @@
             libvdpau-va-gl
         ];
     };
+
+    # Workaround for HIP drivers on NixOS
+    systemd.tmpfiles.rules = [
+        "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
+    ];
 }
