@@ -21,6 +21,9 @@
                 ".zsh"
                 ".syncthing"
 
+                # Monitor ICC profiles
+                ".local/share/icc"
+
                 ".local"
 
                 { directory = ".config"; mode = "0755"; }
