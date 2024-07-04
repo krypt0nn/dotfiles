@@ -13,6 +13,11 @@
         loupe
         papers
         mission-center
+
+        # Setup GNOME extensions
+        gnomeExtensions.appindicator
+        gnomeExtensions.blur-my-shell
+        gnomeExtensions.night-theme-switcher
     ];
 
     # Remove unneeded built-in gnome apps
@@ -27,4 +32,7 @@
 
     # Remove XTerm
     services.xserver.excludePackages = [ pkgs.xterm ];
+
+    # Allow chromium-based apps to run on wayland
+    environment.sessionVariables.NIXOS_OZONE_WL = "1";
 }
