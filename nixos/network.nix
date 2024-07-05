@@ -16,6 +16,7 @@
                 # Hoyoverse games
                 "log-upload-os.hoyoverse.com"
                 "overseauspider.yuanshen.com"
+                "sg-public-data-api.hoyoverse.com"
             ];
         };
 
