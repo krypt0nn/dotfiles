@@ -1,7 +1,4 @@
 { config, lib, pkgs, ... }: {
-    # Enable xwayland for compatibility with some games
-    programs.xwayland.enable = true;
-
     # Enable GNOME DE
     services.xserver = {
         enable = true;
