@@ -1,5 +1,5 @@
 { inputs, flakeConfig, ... }: {
-	nix.settings = inputs.aagl.nixConfig;
+    nix.settings = inputs.aagl.nixConfig;
 
     home.packages = with inputs.aagl.packages.x86_64-linux; [
     	sleepy-launcher
