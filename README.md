@@ -73,7 +73,7 @@ mkdir /mnt/root/snapshots
 This empty snapshot will be used to restore the clean system state for impermanence setup.
 
 ```bash
-btrfs subvolume snapshot -r /mnt/root /mnt/snapshots/blank
+btrfs subvolume snapshot -r /mnt/root /mnt/snapshots/root/blank
 ```
 
 ### 7. Unmount the drive and mount subvolumes instead
@@ -122,8 +122,39 @@ sudo git clone https://github.com/krypt0nn/dotfiles /system-flake
 
 sudo nix flake update /system-flake
 sudo nixos-rebuild boot --flake /system-flake
+```
 
-reboot
+### 11. Create password files
+
+Create `root.password` and `<your username>.password` files in the `/persistent` folder
+containing your accounts' encrypted passwords.
+
+```bash
+mkpasswd -m sha-512
+```
+
+### 12. Restart the system
+
+```bash
+restart
 ```
 
 Done. Welcome to your impermanent NixOS system!
+
+## Troubleshooting
+
+### 1. I lost my account! How do I login?
+
+Boot from the live iso used to install the system. Then:
+
+```bash
+sudo -i
+
+mount -o subvol=root /dev/sda2 /mnt
+mount -o subvol=nix /dev/sda2 /mnt/nix
+mount -o subvol=persistent /dev/sda2 /mnt/persistent
+
+nixos-enter
+```
+
+Also you've probably forgot to create accounts' password files. Check out stage 11.
