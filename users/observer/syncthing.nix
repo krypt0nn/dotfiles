@@ -12,7 +12,7 @@
 
         settings = {
             devices = {
-                "observer-pc"     = { id = "4TX2PRI-LGLEIOD-UFIWU7X-W3MVXTM-QAFSX2M-IJXUYZI-4NOSWPC-7GXT4AB"; };
+                "observer-pc"     = { id = "ANN4CJX-BOC36L6-72EYUZP-6B3J3LB-LYTF3PN-YL2JMYX-7U5BQMO-4V766A3"; };
                 "observer-laptop" = { id = "JWIJBIA-6ZQUP33-GB4OEC3-KQPW3CM-YFAZDDW-LQQNPWE-DI6WYXI-XVSVKQR"; };
             };
 
