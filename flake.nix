@@ -20,10 +20,7 @@
 
     outputs = { nixpkgs, nixpkgs-unstable, impermanence, home-manager, ... }@inputs:
         let
-            flakeConfig = {
-                username = "observer";
-                hostname = "observer-pc";
-            };
+            flakeConfig = builtins.fromJSON (builtins.readFile ./config.json);
 
             system = "x86_64-linux";
 
