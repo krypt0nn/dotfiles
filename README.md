@@ -117,22 +117,26 @@ nixos-install
 restart
 ```
 
-### 10. Reproduce this configuration repo
-
-```bash
-sudo git clone https://github.com/krypt0nn/dotfiles /system-flake
-
-sudo nix flake update /system-flake
-sudo nixos-rebuild boot --flake /system-flake
-```
-
-### 11. Create password files
+### 10. Create password files
 
 Create `root.password` and `<your username>.password` files in the `/persistent` folder
 containing your accounts' encrypted passwords.
 
 ```bash
 mkpasswd -m sha-512
+```
+
+### 11. Reproduce this configuration repo
+
+Edit `/persistent/flakeConfig.json` file to set needed config.
+
+```bash
+sudo git clone https://github.com/krypt0nn/dotfiles /system-flake
+
+sudo cp /system-flake/flakeConfig.json /persistent/flakeConfig.json
+
+sudo nix flake update /system-flake
+sudo nixos-rebuild boot --flake /system-flake
 ```
 
 ### 12. Restart the system
@@ -159,4 +163,4 @@ mount -o subvol=persistent /dev/sda2 /mnt/persistent
 nixos-enter
 ```
 
-Also you've probably forgot to create accounts' password files. Check out stage 11.
+Also you've probably forgot to create accounts' password files. Check out stage 10.

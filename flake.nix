@@ -20,7 +20,7 @@
 
     outputs = { nixpkgs, nixpkgs-unstable, impermanence, home-manager, ... }@inputs:
         let
-            flakeConfig = builtins.fromJSON (builtins.readFile ./config.json);
+            flakeConfig = builtins.fromJSON (builtins.readFile "/persistent/flakeConfig.json");
 
             system = "x86_64-linux";
 
