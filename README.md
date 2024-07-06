@@ -2,6 +2,12 @@
 
 My own NixOS system configuration files.
 
+Edit `config.json` file to specify device and user. To untrack changes run:
+
+```bash
+git update-index --assume-unchanged config.json
+```
+
 ## Installation
 
 We will be cooking impermanent BTRFS NixOS setup here. The core idea is to make
