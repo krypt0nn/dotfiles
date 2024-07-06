@@ -119,8 +119,11 @@ restart
 
 ```bash
 sudo git clone https://github.com/krypt0nn/dotfiles /system-flake
+
 sudo nix flake update /system-flake
-sudo nixos-rebuild switch --flake /system-flake
+sudo nixos-rebuild boot --flake /system-flake
+
+reboot
 ```
 
 Done. Welcome to your impermanent NixOS system!
