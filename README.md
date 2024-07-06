@@ -2,11 +2,7 @@
 
 My own NixOS system configuration files.
 
-Edit `config.json` file to specify device and user. To untrack changes run:
-
-```bash
-git update-index --assume-unchanged config.json
-```
+Edit `config.json` file to specify device and user.
 
 ## Installation
 
