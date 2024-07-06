@@ -23,6 +23,26 @@
                 ./apps/prismlauncher.nix
                 ./apps/aagl.nix
             ];
+
+            "observer-laptop/observer" = [
+                # User config
+                ./users/observer.nix
+
+                # Packages
+                ./packages/direnv.nix
+                ./packages/rust.nix
+
+                # Apps
+                ./apps/firefox.nix
+                ./apps/gimp.nix
+                ./apps/onlyoffice.nix
+
+                ./apps/fragments.nix
+                ./apps/tor-browser.nix
+                ./apps/bottles.nix
+
+                ./apps/vscodium.nix
+            ];
         };
 
         in imports.${flakeConfig.hostname + "/" + flakeConfig.username} ++ [
