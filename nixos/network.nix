@@ -3,7 +3,7 @@
         # Configure networking
         networkmanager = {
             enable = true;
-            dns = "none";
+            dns = "default";
         };
 
         # Setup hosts file
@@ -23,16 +23,16 @@
         # DNS nameservers
         nameservers = [
             # Cloudflare DNS
-            # "1.1.1.1"
-            # "1.0.0.1"
-            # "2606:4700:4700::1111"
-            # "2606:4700:4700::1001"
+            "1.1.1.1"
+            "1.0.0.1"
+            "2606:4700:4700::1111"
+            "2606:4700:4700::1001"
 
             # Yandex DNS
-            "77.88.8.88"
-            "77.88.8.2"
-            "2a02:6b8::feed:bad"
-            "2a02:6b8:0:1::feed:bad"
+            # "77.88.8.88"
+            # "77.88.8.2"
+            # "2a02:6b8::feed:bad"
+            # "2a02:6b8:0:1::feed:bad"
         ];
     };
 }
