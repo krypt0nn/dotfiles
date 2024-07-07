@@ -34,6 +34,18 @@
     # Remove XTerm
     services.xserver.excludePackages = [ pkgs.xterm ];
 
+    # Fix xdg-open in FHS sandbox
+    xdg.portal = {
+        enable = true;
+        xdgOpenUsePortal = true;
+
+        config.common.default = "*";
+
+        extraPortals = with pkgs; [
+            xdg-desktop-portal-gtk
+        ];
+    };
+
     # Allow chromium-based apps to run on wayland
     environment.sessionVariables.NIXOS_OZONE_WL = "1";
 }
