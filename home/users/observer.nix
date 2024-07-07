@@ -53,7 +53,7 @@
             initExtra = "source ~/.p10k.zsh";
 
             shellAliases = {
-                system-allow-edit = "sudo chown -R observer /system-flake && sudo chmod -R 0777 /system-flake";
+                system-allow-edit = "sudo chown -R observer /system-flake && sudo chmod -R 0755 /system-flake";
                 system-forbid-edit = "sudo chown -R root /system-flake && sudo chown -R observer /system-flake/.git";
                 system-update = "sudo nixos-rebuild switch --flake /system-flake";
                 system-upgrade = "sudo nix flake update /system-flake && sudo nixos-rebuild switch --flake /system-flake";
