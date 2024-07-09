@@ -16,6 +16,9 @@
         };
     };
 
+    # Control cooling depending on the system temperature
+    services.thermald.enable = true;
+
     # Enable weekly SSD TRIM service (SSD optimization)
     services.fstrim.enable = true;
 
