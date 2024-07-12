@@ -66,7 +66,7 @@
                 ];
 
                 system-update = "sudo nixos-rebuild switch --flake /system-flake";
-                system-upgrade = "sudo nix flake update /system-flake && sudo nixos-rebuild switch --flake /system-flake";
+                system-upgrade = "sudo nix flake update /system-flake && sudo nixos-rebuild boot --flake /system-flake";
             };
         };
     };
