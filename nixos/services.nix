@@ -1,20 +1,23 @@
 { ... }: {
     # Enable automatic CPU frequency configuration
-    services.auto-cpufreq = {
-        enable = true;
+    # Disabled now because I use GNOME Power Manager deamon
+    # which interfer with this service and prevents it normal work
 
-        settings = {
-            battery = {
-                governor = "powersave";
-                turbo = "never";
-            };
+    # services.auto-cpufreq = {
+    #     enable = true;
 
-            charger = {
-                governor = "performance";
-                turbo = "auto";
-            };
-        };
-    };
+    #     settings = {
+    #         battery = {
+    #             governor = "powersave";
+    #             turbo = "never";
+    #         };
+
+    #         charger = {
+    #             governor = "performance";
+    #             turbo = "auto";
+    #         };
+    #     };
+    # };
 
     # Control cooling depending on the system temperature
     services.thermald.enable = true;
