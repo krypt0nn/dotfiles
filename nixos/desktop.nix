@@ -19,6 +19,7 @@
         gnomeExtensions.appindicator
         gnomeExtensions.blur-my-shell
         gnomeExtensions.night-theme-switcher
+        gnomeExtensions.caffeine
     ];
 
     # Remove unneeded built-in gnome apps
