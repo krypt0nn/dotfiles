@@ -5,6 +5,8 @@
                 ./users/observer.nix
 
                 # Packages
+                ./packages/zsh.nix
+                ./packages/zoxide.nix
                 ./packages/direnv.nix
                 ./packages/rust.nix
 
@@ -28,6 +30,8 @@
                 ./users/observer.nix
 
                 # Packages
+                ./packages/zsh.nix
+                ./packages/zoxide.nix
                 ./packages/direnv.nix
                 ./packages/rust.nix
 
@@ -41,7 +45,7 @@
                 ./apps/bottles.nix
 
                 ./apps/vscodium.nix
-                ./apps/zed-editor.nix
+                # ./apps/rust-rover.nix
             ];
         };
 

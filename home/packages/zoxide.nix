@@ -1,15 +1,15 @@
 { flakeConfig, ... }: {
-    programs.direnv = {
+    programs.zoxide = {
         enable = true;
-        nix-direnv.enable = true;
         enableBashIntegration = true;
+        enableZshIntegration = true;
     };
 
     home.persistence."/persistent/home/${flakeConfig.username}" = {
         allowOther = false;
 
         directories = [
-            ".local/share/direnv"
+            ".local/share/zoxide"
         ];
     };
 }
