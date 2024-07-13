@@ -18,7 +18,6 @@
                 ./apps/bottles.nix
 
                 ./apps/vscodium.nix
-                # ./apps/rust-rover.nix
 
                 ./apps/prismlauncher.nix
                 ./apps/aagl.nix
@@ -42,6 +41,7 @@
                 ./apps/bottles.nix
 
                 ./apps/vscodium.nix
+                ./apps/zed-editor.nix
             ];
         };
 
