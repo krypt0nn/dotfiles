@@ -45,7 +45,6 @@
                 ./apps/bottles.nix
 
                 ./apps/vscodium.nix
-                # ./apps/rust-rover.nix
             ];
         };
 
