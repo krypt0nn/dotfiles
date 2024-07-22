@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }: {
+{ config, lib, pkgs, pkgs-unstable, ... }: {
     # Enable GNOME DE
     services.xserver = {
         enable = true;
@@ -10,10 +10,14 @@
     # Add some default apps
     environment.systemPackages = with pkgs; [
         blackbox-terminal
+        mission-center
         gnome-extension-manager
         loupe
+        vlc
         papers
-        mission-center
+
+        # TODO: change to stable as soon as it becomes available
+        pkgs-unstable.decibels
 
         # Setup GNOME extensions
         gnomeExtensions.appindicator
