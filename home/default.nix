@@ -20,6 +20,7 @@
                 ./apps/bottles.nix
 
                 ./apps/vscodium.nix
+                ./apps/zed-editor.nix
 
                 ./apps/prismlauncher.nix
                 ./apps/aagl.nix
