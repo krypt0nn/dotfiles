@@ -25,6 +25,7 @@
         nameservers = [
             # Local DNS
             "127.0.0.1"
+            "::1"
 
             # Cloudflare DNS
             # "1.1.1.1"
@@ -41,88 +42,16 @@
     };
 
     # SystemD DNS resolving service
+    # Will be spawned under 127.0.0.53 address
     services.resolved = {
         # Enable DNS queries caching
         enable = true;
 
-        # Do not use any fallback DNS servers
-        fallbackDns = [ "" ];
-    };
-
-    # Local DNS with queries blocking
-    services.blocky = {
-        enable = true;
-
-        settings = {
-            ports.dns = 53;
-
-            upstreams.groups.default = [
-                # Local DNS over Tor
-                "127.0.0.1:9053"
-            ];
-
-            # These DNS servers are used to resolve upstream DoH and DoT servers
-            # that are specified as host names, and list domains
-            # 
-            # Source: https://0xerr0r.github.io/blocky/latest/configuration/#bootstrap-dns-configuration
-            bootstrapDns = {
-                upstream = "https://one.one.one.one/dns-query";
-
-                ips = [
-                    "1.1.1.1"
-                    "1.0.0.1"
-                ];
-            };
-
-            # Cache DNS queries
-            caching = {
-                minTime = "5m";
-                maxTime = "30m";
-
-                # Preload DNS results for often used queries
-                # (default: names queried more than 5 times in a 2 hour time window)
-                # 
-                # Source: https://0xerr0r.github.io/blocky/latest/configuration/#caching
-                prefetching = true;
-            };
-
-            blocking = {
-                blackLists = {
-                    ads = [
-                        "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts"
-                        "https://blocklistproject.github.io/Lists/ads.txt"
-                        "https://blocklistproject.github.io/Lists/tracking.txt"
-                    ];
-
-                    illegal = [
-                        "https://blocklistproject.github.io/Lists/drugs.txt"
-                        "https://blocklistproject.github.io/Lists/fraud.txt"
-                        "https://blocklistproject.github.io/Lists/gambling.txt"
-                    ];
-
-                    malware = [
-                        "https://blocklistproject.github.io/Lists/malware.txt"
-                        "https://blocklistproject.github.io/Lists/phishing.txt"
-                        "https://blocklistproject.github.io/Lists/ransomware.txt"
-                    ];
-
-                    # Meta-blocklists (combination of many others)
-                    meta = [
-                        # Source: https://github.com/Ultimate-Hosts-Blacklist/Ultimate.Hosts.Blacklist
-                        "https://hosts.ubuntu101.co.za/hosts"
-                    ];
-                };
-
-                clientGroupsBlock = {
-                    default = [
-                        "ads"
-                        "illegal"
-                        "malware"
-                        "meta"
-                    ];
-                };
-            };
-        };
+        # Fallback to blocky DNS
+        fallbackDns = [
+            "127.0.0.1"
+            "::1"
+        ];
     };
 
     # Tor
@@ -166,7 +95,7 @@
             DNSPort = [
                 {
                     addr = "127.0.0.1";
-                    port = 9053;
+                    port = 53;
                 }
             ];
 
