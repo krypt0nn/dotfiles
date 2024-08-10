@@ -7,6 +7,7 @@
         git
         btop
         fastfetch
+        onefetch
     ];
 
     programs.zsh.enable = true;
