@@ -71,26 +71,35 @@
             ClientTransportPlugin = "obfs4 exec ${pkgs.obfs4}/bin/lyrebird";
 
             Bridge = [
+                # Aug 10, 2024 | avg ping: 40 ms
+                # Aug 18, 2024 | avg ping: 44 ms
+                "obfs4 193.70.74.188:9831 23817363721D5DD71B658F37EE6D92F89B90E06B cert=jjWFUtbXZlygVFbVOUwLc1Ipdg0H/iiMEAHGOcWv2z6+UTiHoySvtxgvfbnMPLBmh2CvcQ iat-mode=0"
+
                 # Aug 1, 2024  | avg ping: 36 ms
                 # Aug 10, 2024 | avg ping: 35 ms
+                # Aug 18, 2024 | avg ping: 53 ms
                 "obfs4 95.179.181.148:3479 59A5D54882C6ADEA6E1F9B9ED508479475BFBDCA cert=xX+mvC/OWERv0oZXF6SemAOnXSmujQeP2IhNew3cSskyeZmhqnsaGHBDSw1XEGRkrvH2MA iat-mode=0"
 
                 # Aug 10, 2024 | avg ping: 39 ms
+                # Aug 18, 2024 | avg ping: 96 ms
                 "obfs4 37.228.129.80:2056 B9A0ABC85F8FDECD3D73F8252A73C4BB22AAD3BD cert=I+5neLvuWJWl6NId2yvwo1sFqgthuIeYAtQY+q6I0mVz3ITLPo9AP35f8WJQsS8o2g5EOw iat-mode=0"
 
                 # Aug 1, 2024  | avg ping: 46 ms
                 # Aug 10, 2024 | avg ping: 33 ms
+                # Aug 18, 2024 | avg ping: 116 ms
                 "obfs4 51.91.211.22:30314 EB58799CC45EE3430DF20112D7BAED05BBD4CCD4 cert=3kGMw/fAF+Lk8z1mpuNtULveQITOp4yMDnDTIXwmK4jiN6pqDrK3239nzGXSM1XLctT2cA iat-mode=0"
 
-                # Aug 10, 2024 | avg ping: 40 ms
-                "obfs4 193.70.74.188:9831 23817363721D5DD71B658F37EE6D92F89B90E06B cert=jjWFUtbXZlygVFbVOUwLc1Ipdg0H/iiMEAHGOcWv2z6+UTiHoySvtxgvfbnMPLBmh2CvcQ iat-mode=0"
+                # Aug 18, 2024 | avg ping: 146 ms
+                "obfs4 95.217.232.211:443 F32A7CD5589CCD2D700D790AB437DE8A6233372C cert=eqAb4zUDdQpKX9TFEuC/x82tiRjvlXkF/WnKxjjSuboPUB3URAwaXcn7m2GIzS8Kd2LDOQ iat-mode=0"
+
+                # Aug 10, 2024 | avg ping: 45 ms
+                # Aug 18, 2024 | avg ping: 149 ms
+                "obfs4 51.83.225.13:7137 064806FB24FDBF68139A716A638E33A5CBDE5F8B cert=gaIPYNWkt6gM1DU9UbLiH1XJw2qWe2jMcUyBebEfiI+LFRrQKeTccata7MG2yIb3ee7/cw iat-mode=0"
 
                 # Aug 1, 2024  | avg ping: 41 ms
                 # Aug 10, 2024 | avg ping: 40 ms
+                # Aug 18, 2024 | avg ping: 191 ms
                 "obfs4 79.137.11.77:56490 A95B850794AC06841FB93F32AD3C997FA8836E52 cert=C+Xz1PxmruAyp9uehauc9u+l+RJG6cZ3x+l3qMJaejVy8iJDTxqi6uOvTxFlrnJL/bMXcg iat-mode=0"
-
-                # Aug 10, 2024 | avg ping: 45 ms
-                "obfs4 51.83.225.13:7137 064806FB24FDBF68139A716A638E33A5CBDE5F8B cert=gaIPYNWkt6gM1DU9UbLiH1XJw2qWe2jMcUyBebEfiI+LFRrQKeTccata7MG2yIb3ee7/cw iat-mode=0"
             ];
 
             DNSPort = [
