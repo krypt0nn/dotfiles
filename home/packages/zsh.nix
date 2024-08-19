@@ -40,6 +40,20 @@
 
             system-update = "sudo nixos-rebuild switch --flake /system-flake";
             system-upgrade = "sudo nix flake update /system-flake && sudo nixos-rebuild boot --flake /system-flake";
+
+            system-diff = lib.concatStrings [
+                "nix store diff-closures "
+                "$(find /nix/var/nix/profiles -type l -regex '.*/system-.*-link' -print | tail -n 2 | head -n 1) "
+                "$(find /nix/var/nix/profiles -type l -regex '.*/system-.*-link' -print | tail -n 1) | "
+                "less"
+            ];
+
+            system-diff-running = lib.concatStrings [
+                "nix store diff-closures "
+                "/run/current-system "
+                "$(find /nix/var/nix/profiles -type l -regex '.*/system-.*-link' -print | tail -n 1) | "
+                "less"
+            ];
         };
     };
 
