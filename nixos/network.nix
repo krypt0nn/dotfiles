@@ -1,6 +1,23 @@
 { flakeConfig, pkgs, ... }: {
-    # DNS
     networking = {
+        # Firewall settings
+        firewall = {
+            enable = true;
+
+            allowedTCPPorts = [
+                # Default services ports
+                22 80 443
+
+                # Torrent client
+                51413
+            ];
+
+            allowedUDPPorts = [
+                # Torrent client
+                51413
+            ];
+        };
+
         # Configure networking
         networkmanager = {
             enable = true;
@@ -71,14 +88,23 @@
             ClientTransportPlugin = "obfs4 exec ${pkgs.obfs4}/bin/lyrebird";
 
             Bridge = [
+                # Aug 22, 2024 | avg ping: 41 ms
+                "obfs4 141.94.214.85:47941 D3505F20C398F457245404F52BB576874A0C6E31 cert=03FQLbVujQntzSzj816JxvOLvAGjta8XREyk1yedgO4/92QMfwgJ9nQER7EZXt17QtonGw iat-mode=0"
+
                 # Aug 10, 2024 | avg ping: 40 ms
                 # Aug 18, 2024 | avg ping: 44 ms
                 "obfs4 193.70.74.188:9831 23817363721D5DD71B658F37EE6D92F89B90E06B cert=jjWFUtbXZlygVFbVOUwLc1Ipdg0H/iiMEAHGOcWv2z6+UTiHoySvtxgvfbnMPLBmh2CvcQ iat-mode=0"
+
+                # Aug 22, 2024 | avg ping: 51 ms
+                "obfs4 82.165.190.146:9443 4E2353218AB9DB222A7686A0E23A53358444641F cert=oWFrOozg/SFBcbk/09n6TIgzEe3TBmeiIlyPTMG/7iqwyUOPhSkpDRYQ16MaigMAxyL4HA iat-mode=0"
 
                 # Aug 1, 2024  | avg ping: 36 ms
                 # Aug 10, 2024 | avg ping: 35 ms
                 # Aug 18, 2024 | avg ping: 53 ms
                 "obfs4 95.179.181.148:3479 59A5D54882C6ADEA6E1F9B9ED508479475BFBDCA cert=xX+mvC/OWERv0oZXF6SemAOnXSmujQeP2IhNew3cSskyeZmhqnsaGHBDSw1XEGRkrvH2MA iat-mode=0"
+
+                # Aug 22, 2024 | avg ping: 57 ms
+                "obfs4 141.94.209.150:60192 AAB1C871CA4760614BFCB6E94979F83727F905BF cert=C9MjwMKC5MryvrhLpaWWyB/MFTKd2H0kuBfoaPR0Dv9574sfsW+HjsemUepaw3KZ3o+WDA iat-mode=0"
 
                 # Aug 10, 2024 | avg ping: 39 ms
                 # Aug 18, 2024 | avg ping: 96 ms
