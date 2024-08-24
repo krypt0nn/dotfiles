@@ -25,6 +25,9 @@
     # Enable weekly SSD TRIM service (SSD optimization)
     services.fstrim.enable = true;
 
+    # Enable monthly btrfs data validation service
+    services.btrfs.autoScrub.enable = true;
+
     # Enable weekly firmware updates service
     services.fwupd.enable = true;
 }

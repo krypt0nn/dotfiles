@@ -10,11 +10,22 @@
 
                 # Torrent client
                 51413
+
+                # Baldur's Gate 3
+                27015 27036
             ];
 
             allowedUDPPorts = [
                 # Torrent client
                 51413
+
+                # Baldur's Gate 3
+                27015
+            ];
+
+            allowedUDPPortRanges = [
+                # Baldur's Gate 3
+                { from = 27031; to = 27036; }
             ];
         };
 
