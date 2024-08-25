@@ -85,6 +85,8 @@
         { device = "/dev/disk/by-uuid/22fd323e-aba4-4657-9667-f20b68a06fde"; }
     ];
 
+    zramSwap.enable = true;
+
     networking.useDHCP = lib.mkDefault true;
     # networking.interfaces.enp34s0.useDHCP = lib.mkDefault true;
 
