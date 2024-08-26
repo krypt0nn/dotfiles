@@ -168,7 +168,6 @@
             CookieAuthentication = true;
             HardwareAccel = 1;
             ClientOnly = 1;
-            RunAsDaemon = 1;
         };
     };
 }
