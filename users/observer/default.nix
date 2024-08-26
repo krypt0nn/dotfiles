@@ -21,6 +21,7 @@
             "networkmanager"
             "libvirtd"
             "podman"
+            "gamemode"
         ];
     };
 }
