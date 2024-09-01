@@ -117,15 +117,15 @@
                 "obfs4 37.228.129.80:2056 B9A0ABC85F8FDECD3D73F8252A73C4BB22AAD3BD cert=I+5neLvuWJWl6NId2yvwo1sFqgthuIeYAtQY+q6I0mVz3ITLPo9AP35f8WJQsS8o2g5EOw iat-mode=0"
 
                 # Aug 25, 2024 | avg ping: 92 ms
-                # Sep 01, 2024 | avg ping: 39 ms
-                "obfs4 130.255.76.46:9098 9B72F502756CDDD28966931B2C1296259DD57780 cert=xNYGvoaiALC4RCCDmkZfYApBHXK+IUBWfqc62QgPVrJo7qer3YUAv1tSYl1ozHEdId4Kfw iat-mode=0"
+                # Sep 01, 2024 | avg ping: 39 ms (stopped working?)
+                # "obfs4 130.255.76.46:9098 9B72F502756CDDD28966931B2C1296259DD57780 cert=xNYGvoaiALC4RCCDmkZfYApBHXK+IUBWfqc62QgPVrJo7qer3YUAv1tSYl1ozHEdId4Kfw iat-mode=0"
 
                 # Aug 01, 2024 | avg ping: 41 ms
                 # Aug 10, 2024 | avg ping: 40 ms
                 # Aug 18, 2024 | avg ping: 191 ms
                 # Aug 25, 2024 | avg ping: 42 ms
-                # Sep 01, 2024 | avg ping: 41 ms
-                "obfs4 79.137.11.77:56490 A95B850794AC06841FB93F32AD3C997FA8836E52 cert=C+Xz1PxmruAyp9uehauc9u+l+RJG6cZ3x+l3qMJaejVy8iJDTxqi6uOvTxFlrnJL/bMXcg iat-mode=0"
+                # Sep 01, 2024 | avg ping: 41 ms (stopped working?)
+                # "obfs4 79.137.11.77:56490 A95B850794AC06841FB93F32AD3C997FA8836E52 cert=C+Xz1PxmruAyp9uehauc9u+l+RJG6cZ3x+l3qMJaejVy8iJDTxqi6uOvTxFlrnJL/bMXcg iat-mode=0"
 
                 # Aug 22, 2024 | avg ping: 57 ms
                 # Aug 25, 2024 | avg ping: 53 ms
@@ -150,8 +150,8 @@
                 # Aug 10, 2024 | avg ping: 35 ms
                 # Aug 18, 2024 | avg ping: 53 ms
                 # Aug 25, 2024 | avg ping: 51 ms
-                # Sep 01, 2024 | avg ping: 51 ms
-                "obfs4 95.179.181.148:3479 59A5D54882C6ADEA6E1F9B9ED508479475BFBDCA cert=xX+mvC/OWERv0oZXF6SemAOnXSmujQeP2IhNew3cSskyeZmhqnsaGHBDSw1XEGRkrvH2MA iat-mode=0"
+                # Sep 01, 2024 | avg ping: 51 ms (stopped working?)
+                # "obfs4 95.179.181.148:3479 59A5D54882C6ADEA6E1F9B9ED508479475BFBDCA cert=xX+mvC/OWERv0oZXF6SemAOnXSmujQeP2IhNew3cSskyeZmhqnsaGHBDSw1XEGRkrvH2MA iat-mode=0"
 
                 # Aug 10, 2024 | avg ping: 40 ms
                 # Aug 18, 2024 | avg ping: 44 ms
