@@ -20,6 +20,8 @@
                 "browser.newtabpage.activity-stream.system.showSponsored" = false;
                 "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
 
+                "widget.use-xdg-desktop-portal.file-picker" = 1;
+
                 "media.ffmpeg.vaapi.enabled" = true;
                 "media.ffvpx.enabled" = false;
                 "media.av1.enabled" = false;
