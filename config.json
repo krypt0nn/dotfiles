@@ -6,6 +6,6 @@
         "rate": 48000
     },
     "network": {
-        "global_proxy": true
+        "global_proxy": false
     }
 }
