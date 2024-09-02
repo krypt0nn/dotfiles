@@ -4,5 +4,8 @@
     "pipewire": {
         "quantum": 64,
         "rate": 48000
+    },
+    "network": {
+        "global_proxy": true
     }
 }

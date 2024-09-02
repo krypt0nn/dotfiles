@@ -1,4 +1,4 @@
-{ flakeConfig, pkgs, ... }: {
+{ flakeConfig, lib, pkgs, ... }: {
     networking = {
         # Firewall settings
         firewall = {
@@ -67,6 +67,12 @@
             # "2a02:6b8::feed:bad"
             # "2a02:6b8:0:1::feed:bad"
         ];
+
+        # System-wide proxy
+        proxy = lib.attrsets.optionalAttrs flakeConfig.network.global_proxy {
+            default = "https://127.0.0.1:9050";
+            noProxy = "127.0.0.1,localhost,.localdomain";
+        };
     };
 
     # SystemD DNS resolving service
