@@ -29,5 +29,9 @@
         };
     };
 
+    systemd.services.nix-daemon = {
+        environment.TMPDIR = "/var/tmp";
+    };
+
     environment.sessionVariables.NIXPKGS_ALLOW_UNFREE = "1";
 }

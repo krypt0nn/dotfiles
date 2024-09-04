@@ -30,4 +30,10 @@
 
     # Enable weekly firmware updates service
     services.fwupd.enable = true;
+
+    # Faster dbus implementation
+    services.dbus.implementation = "broker";
+
+    # Load balancer
+    services.irqbalance.enable = true;
 }
