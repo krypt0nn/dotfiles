@@ -4,6 +4,7 @@
 
         directories = [
             "/system-flake"
+            "/var/tmp"
             "/var/log"
             "/var/lib/bluetooth"
             "/var/lib/nixos"
