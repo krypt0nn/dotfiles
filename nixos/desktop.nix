@@ -1,4 +1,4 @@
-{ config, lib, pkgs, pkgs-unstable, ... }: {
+{ lib, pkgs, ... }: {
     # Enable GNOME DE
     services.xserver = {
         enable = true;
@@ -15,11 +15,9 @@
         mission-center
         gnome-extension-manager
         loupe
+        amberol
         vlc
         papers
-
-        # TODO: change to stable as soon as it becomes available
-        pkgs-unstable.decibels
 
         # Setup GNOME extensions
         gnomeExtensions.appindicator
