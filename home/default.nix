@@ -46,6 +46,7 @@
                 ./apps/bottles.nix
 
                 ./apps/vscodium.nix
+                ./apps/zed-editor.nix
             ];
         };
 
