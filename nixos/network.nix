@@ -105,13 +105,8 @@
             ClientTransportPlugin = "obfs4 exec ${pkgs.obfs4}/bin/lyrebird";
 
             Bridge = [
-                # Aug 01, 2024 | avg ping: 46 ms
-                # Aug 10, 2024 | avg ping: 33 ms
-                # Aug 18, 2024 | avg ping: 116 ms
-                # Aug 25, 2024 | avg ping: 32 ms
-                # Sep 01, 2024 | avg ping: 32 ms
-                # Sep 08, 2024 | avg ping: 32 ms
-                "obfs4 51.91.211.22:30314 EB58799CC45EE3430DF20112D7BAED05BBD4CCD4 cert=3kGMw/fAF+Lk8z1mpuNtULveQITOp4yMDnDTIXwmK4jiN6pqDrK3239nzGXSM1XLctT2cA iat-mode=0"
+                # Sep 09, 2024 | avg ping: 37 ms
+                "obfs4 57.128.122.165:62234 A4C902326471ED615A20DDBC851505544A3BDD27 cert=KwmdQGMixsTEXcyMBK7mVIK2ywf1G/90UbZXlTfVq+SXogmpHlZXn2kT4+/+DH3zYtntfg iat-mode=0"
 
                 # Aug 10, 2024 | avg ping: 39 ms
                 # Aug 18, 2024 | avg ping: 96 ms
@@ -123,47 +118,11 @@
                 # Sep 08, 2024 | avg ping: 38 ms
                 "obfs4 79.137.11.195:56288 CDAA4933BE540D25CF8F391E23F9A4861ACB5F4C cert=EicEZ20+CMP7iwmwgVujZOCtZHyIikzAmQOxrjAF2khU+IMm9iVN/tMDlYtoHSeCj11bVQ iat-mode=0"
 
-                # Aug 25, 2024 | avg ping: 92 ms
-                # Sep 01, 2024 | avg ping: 39 ms (stopped working?)
-                # Sep 08, 2024 | avg ping: 40 ms
-                "obfs4 130.255.76.46:9098 9B72F502756CDDD28966931B2C1296259DD57780 cert=xNYGvoaiALC4RCCDmkZfYApBHXK+IUBWfqc62QgPVrJo7qer3YUAv1tSYl1ozHEdId4Kfw iat-mode=0"
-
-                # Aug 25, 2024 | avg ping: 44 ms
-                # Sep 01, 2024 | avg ping: 44 ms
-                # Sep 08, 2024 | avg ping: 44 ms
-                "obfs4 51.77.108.19:38048 C9190FBF5CE8D3A9CB5EF7B0FA3639A363DD0934 cert=thUg/P0x/IFk2d//p2iu5UPM4wK9ko9myJw4MB2nZ6A6tbjmXxQEiorMm373gUGh8iF6Vw iat-mode=0"
-
                 # Aug 22, 2024 | avg ping: 51 ms
                 # Aug 25, 2024 | avg ping: 96 ms
                 # Sep 01, 2024 | avg ping: 49 ms
                 # Sep 08, 2024 | avg ping: 48 ms
                 "obfs4 82.165.190.146:9443 4E2353218AB9DB222A7686A0E23A53358444641F cert=oWFrOozg/SFBcbk/09n6TIgzEe3TBmeiIlyPTMG/7iqwyUOPhSkpDRYQ16MaigMAxyL4HA iat-mode=0"
-
-                # Aug 01, 2024 | avg ping: 36 ms
-                # Aug 10, 2024 | avg ping: 35 ms
-                # Aug 18, 2024 | avg ping: 53 ms
-                # Aug 25, 2024 | avg ping: 51 ms
-                # Sep 01, 2024 | avg ping: 51 ms (stopped working?)
-                # Sep 08, 2024 | avg ping: 55 ms
-                "obfs4 95.179.181.148:3479 59A5D54882C6ADEA6E1F9B9ED508479475BFBDCA cert=xX+mvC/OWERv0oZXF6SemAOnXSmujQeP2IhNew3cSskyeZmhqnsaGHBDSw1XEGRkrvH2MA iat-mode=0"
-
-                # Sep 08, 2024 | avg ping: 54 ms
-                "obfs4 92.252.89.222:8080 02F00A33017A24E99112E5CA498AECD204F913F3 cert=eWfCYOE/3kdmDpYy/tT0CuKI01dWKY6BtSAMSu0uuD4ixo7RE4/av+0fNjw4sbZmORLKVQ iat-mode=0"
-
-                # Aug 01, 2024 | avg ping: 41 ms
-                # Aug 10, 2024 | avg ping: 40 ms
-                # Aug 18, 2024 | avg ping: 191 ms
-                # Aug 25, 2024 | avg ping: 42 ms
-                # Sep 01, 2024 | avg ping: 41 ms (stopped working?)
-                # Sep 08, 2024 | avg ping: 58 ms
-                "obfs4 79.137.11.77:56490 A95B850794AC06841FB93F32AD3C997FA8836E52 cert=C+Xz1PxmruAyp9uehauc9u+l+RJG6cZ3x+l3qMJaejVy8iJDTxqi6uOvTxFlrnJL/bMXcg iat-mode=0"
-
-                # Aug 10, 2024 | avg ping: 40 ms
-                # Aug 18, 2024 | avg ping: 44 ms
-                # Aug 25, 2024 | avg ping: 109 ms
-                # Sep 01, 2024 | avg ping: 57 ms
-                # Sep 08, 2024 | avg ping: 58 ms
-                "obfs4 193.70.74.188:9831 23817363721D5DD71B658F37EE6D92F89B90E06B cert=jjWFUtbXZlygVFbVOUwLc1Ipdg0H/iiMEAHGOcWv2z6+UTiHoySvtxgvfbnMPLBmh2CvcQ iat-mode=0"
 
                 # Aug 18, 2024 | avg ping: 146 ms
                 # Aug 25, 2024 | avg ping: 61 ms
