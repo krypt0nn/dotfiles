@@ -128,12 +128,10 @@ mkpasswd -m sha-512
 
 ### 11. Reproduce this configuration repo
 
-Edit `/persistent/flakeConfig.json` file to set needed config.
+Clone this repo and edit the `flakeConfig.json` file to setup your user.
 
 ```bash
 sudo git clone https://github.com/krypt0nn/dotfiles /system-flake
-
-sudo cp /system-flake/flakeConfig.json /persistent/flakeConfig.json
 
 sudo nix flake update /system-flake
 sudo nixos-rebuild boot --flake /system-flake
