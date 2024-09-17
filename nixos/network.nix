@@ -51,6 +51,9 @@
 
         # DNS nameservers
         nameservers = [
+            # Tailscale MagicDNS
+            "100.100.100.100"
+
             # Local DNS
             "127.0.0.1"
             "::1"
@@ -81,8 +84,11 @@
         # Enable DNS queries caching
         enable = true;
 
-        # Fallback to blocky DNS
         fallbackDns = [
+            # Tailscale MagicDNS
+            "100.100.100.100"
+
+            # Local DNS
             "127.0.0.1"
             "::1"
         ];
