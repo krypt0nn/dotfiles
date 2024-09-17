@@ -5,9 +5,6 @@
             enable = true;
 
             allowedTCPPorts = [
-                # Default services ports
-                22 80 443
-
                 # Torrent client
                 51413
 

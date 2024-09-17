@@ -36,4 +36,7 @@
 
     # Load balancer
     services.irqbalance.enable = true;
+
+    # Ban connections after failed login attempts
+    services.fail2ban.enable = true;
 }
