@@ -88,6 +88,9 @@
         ];
     };
 
+    # Tailscale
+    services.tailscale.enable = true;
+
     # Tor
     services.tor = {
         enable = true;
@@ -155,5 +158,15 @@
             HardwareAccel = 1;
             ClientOnly = 1;
         };
+    };
+
+    # Persist folders
+    environment.persistence."/persistent" = {
+        hideMounts = true;
+
+        directories = [
+            { directory = "/var/lib/tailscale"; mode = "0700"; }
+            { directory = "/var/lib/tor"; mode = "0700"; }
+        ];
     };
 }
