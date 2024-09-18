@@ -14,7 +14,6 @@
         ./fonts.nix
         ./desktop.nix
         ./gnupg.nix
-        ./ssh.nix
         ./programs.nix
     ];
 
