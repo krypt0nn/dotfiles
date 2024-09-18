@@ -111,8 +111,14 @@
             ClientTransportPlugin = "obfs4 exec ${pkgs.obfs4}/bin/lyrebird";
 
             Bridge = [
+                # Sep 18, 2024 | avg ping: 34 ms
+                "obfs4 57.129.55.85:44325 C3542E795BB2AEB4FD604914714BCB4374D1B603 cert=l2WgquhhPME6LgXRDaYD7V3UMnSGmiLoun2lnJ5ozRyKLMGBbYk0NtPxCptUZHv7ju7YOg iat-mode=0"
+
                 # Sep 15, 2024 | avg ping: 39 ms
                 "obfs4 37.59.25.181:29665 5755820AFDEB3149AC6F2FF6C558B3D335874C47 cert=jnjwkoZXFtB3UZnAmnTDQ+VyBteqrSBHn3xwZYvDHbJAsVldXxWp30TgezsPHWaekoQZag iat-mode=0"
+
+                # Sep 18, 2024 | avg ping: 40 ms
+                "obfs4 185.177.207.219:11219 598326DF0E32A1E1CCA87A10C9F614C104DD9DE9 cert=QJNjvqxkejHYUuMkM/cQmyV4Egj8S+f+7F4CPxcoWitFEsyP2dJXNQl8jU/M+5v9NeH4Hw iat-mode=1"
 
                 # Sep 08, 2024 | avg ping: 38 ms
                 # Sep 15, 2024 | avg ping: 41 ms
@@ -128,6 +134,9 @@
 
                 # Sep 15, 2024 | avg ping: 49 ms
                 "obfs4 141.95.109.65:45241 9AB77274A9BBA67451C3BAB1D965E5EA7DACCC54 cert=2GeuOgydh+4ledJQbGFcI+YZ9+9OoFbLz9WHwM6fpbopuTT2JK4WkCQG2eM1grgkKvJcQQ iat-mode=0"
+
+                # Sep 18, 2024 | avg ping: 52 ms
+                "obfs4 57.129.34.114:60855 3C90AE902026BF557D225E0605E84B376B2095FD cert=wvHdL7i/Pemb87f7j6Bovxc4RqNd55iU1jR5pQ2btVwGZctOyEsKPbtj+zznllv4lq1EKQ iat-mode=0"
 
                 # Sep 16, 2024 | avg ping: 64 ms
                 "obfs4 51.77.111.182:49885 55414CB64AD283F7FBEB9643EBCB7E3A67ECB115 cert=+ZblXK36ALspn481jpywY0GgbPpbD6jF7ExE2+tQWYVkXfUP2P5f9jpornJWGh+jTSb/cg iat-mode=0"
@@ -160,7 +169,7 @@
             CookieAuthentication = true;
             HardwareAccel = 1;
             ClientOnly = 1;
-            ClientUseIPv6 = 1;
+            ClientUseIPv6 = true;
         };
     };
 
