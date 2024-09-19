@@ -132,9 +132,6 @@
                 # Sep 15, 2024 | avg ping: 46 ms
                 "obfs4 37.228.129.80:2056 B9A0ABC85F8FDECD3D73F8252A73C4BB22AAD3BD cert=I+5neLvuWJWl6NId2yvwo1sFqgthuIeYAtQY+q6I0mVz3ITLPo9AP35f8WJQsS8o2g5EOw iat-mode=0"
 
-                # Sep 15, 2024 | avg ping: 49 ms
-                "obfs4 141.95.109.65:45241 9AB77274A9BBA67451C3BAB1D965E5EA7DACCC54 cert=2GeuOgydh+4ledJQbGFcI+YZ9+9OoFbLz9WHwM6fpbopuTT2JK4WkCQG2eM1grgkKvJcQQ iat-mode=0"
-
                 # Sep 18, 2024 | avg ping: 52 ms
                 "obfs4 57.129.34.114:60855 3C90AE902026BF557D225E0605E84B376B2095FD cert=wvHdL7i/Pemb87f7j6Bovxc4RqNd55iU1jR5pQ2btVwGZctOyEsKPbtj+zznllv4lq1EKQ iat-mode=0"
 
@@ -154,9 +151,6 @@
                 # Sep 08, 2024 | avg ping: 48 ms
                 # Sep 15, 2024 | avg ping: 105 ms
                 "obfs4 82.165.190.146:9443 4E2353218AB9DB222A7686A0E23A53358444641F cert=oWFrOozg/SFBcbk/09n6TIgzEe3TBmeiIlyPTMG/7iqwyUOPhSkpDRYQ16MaigMAxyL4HA iat-mode=0"
-
-                # Sep 16, 2024 | avg ping: 118 ms
-                "obfs4 148.113.141.237:15896 DA6D9EBFE447409A65CBB374BAB1FF2E4F8B87E2 cert=QpHxGej6p19e2Glh8m7Vbm2bBkG9D0+VOw73Js858QMHauI8zu5F8TWcuU6FxJY2XItrbw iat-mode=0"
             ];
 
             DNSPort = [
