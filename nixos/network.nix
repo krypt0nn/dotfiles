@@ -111,15 +111,6 @@
             ClientTransportPlugin = "obfs4 exec ${pkgs.obfs4}/bin/lyrebird";
 
             Bridge = [
-                # Aug 22, 2024 | avg ping: 51 ms
-                # Aug 25, 2024 | avg ping: 96 ms
-                # Sep 01, 2024 | avg ping: 49 ms
-                # Sep 08, 2024 | avg ping: 48 ms
-                # Sep 15, 2024 | avg ping: 105 ms
-                # Sep 21, 2024 | avg ping: 34 ms
-                # Sep 29, 2024 | avg ping: 34 ms
-                "obfs4 82.165.190.146:9443 4E2353218AB9DB222A7686A0E23A53358444641F cert=oWFrOozg/SFBcbk/09n6TIgzEe3TBmeiIlyPTMG/7iqwyUOPhSkpDRYQ16MaigMAxyL4HA iat-mode=0"
-
                 # Aug 10, 2024 | avg ping: 39 ms
                 # Aug 18, 2024 | avg ping: 96 ms
                 # Aug 25, 2024 | avg ping: 38 ms
