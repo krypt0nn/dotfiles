@@ -23,7 +23,6 @@
                 ./apps/zed-editor.nix
 
                 ./apps/prismlauncher.nix
-                ./apps/aagl.nix
             ];
 
             "observer-laptop/observer" = [

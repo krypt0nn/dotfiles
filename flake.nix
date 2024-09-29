@@ -11,11 +11,6 @@
             url = "github:nix-community/home-manager/release-24.05";
             inputs.nixpkgs.follows = "nixpkgs";
         };
-
-        aagl = {
-            url = "github:ezKEa/aagl-gtk-on-nix/release-24.05";
-            inputs.nixpkgs.follows = "nixpkgs";
-        };
     };
 
     outputs = { nixpkgs, nixpkgs-unstable, impermanence, home-manager, ... }@inputs:
