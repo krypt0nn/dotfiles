@@ -1,8 +1,8 @@
-{ pkgs, ... }: {
+{ pkgs, flakeConfig, ... }: {
     boot.kernelModules = [ "kvm-amd" ];
 
     virtualisation.virtualbox.host.enable = true;
-    users.extraGroups.vboxusers.members = [ "observer" ];
+    users.extraGroups.vboxusers.members = [ flakeConfig.username ];
 
     virtualisation = {
         containers.enable = true;
