@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }: {
+{ lib, pkgs, pkgs-unstable, ... }: {
     # Enable GNOME DE
     services.xserver = {
         enable = true;
@@ -12,7 +12,7 @@
     # Add some default apps
     environment.systemPackages = with pkgs; [
         blackbox-terminal
-        mission-center
+        pkgs-unstable.mission-center
         gnome-extension-manager
         loupe
         amberol
