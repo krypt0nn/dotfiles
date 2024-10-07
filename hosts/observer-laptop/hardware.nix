@@ -22,7 +22,7 @@
             "amd_pstate=active"
         ];
 
-    	extraModulePackages = [ ];
+        extraModulePackages = [ ];
     };
 
     fileSystems = {
