@@ -16,6 +16,11 @@
         # Incomplete protection again TIME-WAIT assassination
         "net.ipv4.tcp_rfc1337" = 1;
 
+        ## TCP forwarding
+
+        "net.ipv4.ip_forward" = 1;
+        "net.ipv6.conf.all.forwarding" = 1;
+
         ## TCP optimization
 
         # TCP Fast Open is a TCP extension that reduces network latency by packing
