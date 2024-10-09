@@ -47,6 +47,16 @@
                 ./apps/vscodium.nix
                 ./apps/zed-editor.nix
             ];
+
+            "observer-laptop/server" = [
+                # User config
+                ./users/observer.nix
+
+                # Packages
+                ./packages/zsh.nix
+                ./packages/zoxide.nix
+                ./packages/direnv.nix
+            ];
         };
 
         in imports.${flakeConfig.hostname + "/" + flakeConfig.username} ++ [

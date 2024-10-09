@@ -75,6 +75,8 @@ mkdir /mnt/root/snapshots
 This empty snapshot will be used to restore the clean system state for impermanence setup.
 
 ```bash
+mkdir /mnt/snapshots/root
+
 btrfs subvolume snapshot -r /mnt/root /mnt/snapshots/root/blank
 ```
 
@@ -103,7 +105,7 @@ a mount of `/dev/sda1`, and a swap device `/dev/sda3`.
 
 Then go to `/mnt/etc/nix/configuration.nix` and:
 
-1. Set `networking.hostname` to a proper value.
+1. Set `networking.hostName` to a proper value.
 2. Set `networking.networkmanager.enable = true;`.
 3. In `environment.systemPackages` enable `git`, `curl`, `wget`, `vim` and `micro` (more is better right?).
 4. Add flakes support with this: `nix.settings.experimental-features = [ "nix-command" "flakes" ];`.
@@ -114,7 +116,7 @@ Then go to `/mnt/etc/nix/configuration.nix` and:
 ```bash
 nixos-install
 
-restart
+reboot
 ```
 
 ### 10. Create password files

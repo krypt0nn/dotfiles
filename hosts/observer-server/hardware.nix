@@ -8,9 +8,7 @@
             availableKernelModules = [
                 "nvme"
                 "xhci_pci"
-                "ahci"
                 "usb_storage"
-                "usbhid"
                 "sd_mod"
             ];
 
@@ -24,12 +22,12 @@
             "amd_pstate=active"
         ];
 
-        extraModulePackages = [];
+        extraModulePackages = [ ];
     };
 
     fileSystems = {
         "/" = {
-            device = "/dev/disk/by-uuid/c488a0f5-e628-400a-a1a3-08840009df1a";
+            device = "/dev/disk/by-uuid/29fdc842-3082-4484-9a00-8df1ab098b1c";
             fsType = "btrfs";
             options = [
                 "noatime"
@@ -41,7 +39,7 @@
         };
 
         "/nix" = {
-            device = "/dev/disk/by-uuid/c488a0f5-e628-400a-a1a3-08840009df1a";
+            device = "/dev/disk/by-uuid/29fdc842-3082-4484-9a00-8df1ab098b1c";
             fsType = "btrfs";
             options = [
                 "noatime"
@@ -53,7 +51,7 @@
         };
 
         "/persistent" = {
-            device = "/dev/disk/by-uuid/c488a0f5-e628-400a-a1a3-08840009df1a";
+            device = "/dev/disk/by-uuid/29fdc842-3082-4484-9a00-8df1ab098b1c";
             fsType = "btrfs";
             options = [
                 "noatime"
@@ -66,7 +64,7 @@
         };
 
         "/snapshots" = {
-            device = "/dev/disk/by-uuid/c488a0f5-e628-400a-a1a3-08840009df1a";
+            device = "/dev/disk/by-uuid/29fdc842-3082-4484-9a00-8df1ab098b1c";
             fsType = "btrfs";
             options = [
                 "noatime"
@@ -79,7 +77,7 @@
         };
 
         "/boot" = {
-            device = "/dev/disk/by-uuid/9F95-2E5E";
+            device = "/dev/disk/by-uuid/3EE9-88BE";
             fsType = "vfat";
             options = [
                 "fmask=0022"
@@ -89,13 +87,12 @@
     };
 
     swapDevices = [
-        { device = "/dev/disk/by-uuid/22fd323e-aba4-4657-9667-f20b68a06fde"; }
+        { device = "/dev/disk/by-uuid/8172e6a1-8281-4ebb-ab9e-5c1f2b74ce57"; }
     ];
 
     zramSwap.enable = true;
 
     networking.useDHCP = lib.mkDefault true;
-    # networking.interfaces.enp34s0.useDHCP = lib.mkDefault true;
 
     nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
