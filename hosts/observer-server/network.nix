@@ -69,7 +69,7 @@
 
     # SpoofDPI
     environment.systemPackages = [
-        pkgs-unstable.spoodfpi
+        pkgs-unstable.spoofdpi
     ];
 
     systemd.services.spoofdpi = {
