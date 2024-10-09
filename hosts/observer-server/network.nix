@@ -90,9 +90,6 @@
                 addr = "observer-server";
                 port = 9050;
             };
-
-            # Local DNS
-            dns.enable = true;
         };
 
         settings = {
@@ -147,17 +144,85 @@
                 "obfs4 94.156.153.217:31337 AF9EABB157AE185E3D0F030D6F21C2044A794976 cert=Gg+YPaGTlB30p7x45igqEJQ4Af/8HqgbIzwJ1GBzqto1xSDS/k5H83mttmUh0Zob+vrQWw iat-mode=0"
             ];
 
-            DNSPort = [
-                {
-                    addr = "127.0.0.1";
-                    port = 53;
-                }
-            ];
-
             CookieAuthentication = true;
             HardwareAccel = 1;
             ClientOnly = 1;
             ClientUseIPv6 = true;
+        };
+    };
+
+    # Local DNS with queries blocking
+    services.blocky = {
+        enable = true;
+
+        settings = {
+            ports.dns = 53;
+
+            upstreams.groups.default = [
+                "https://one.one.one.one/dns-query"
+            ];
+
+            # These DNS servers are used to resolve upstream DoH and DoT servers
+            # that are specified as host names, and list domains
+            # 
+            # Source: https://0xerr0r.github.io/blocky/latest/configuration/#bootstrap-dns-configuration
+            bootstrapDns = {
+                upstream = "https://one.one.one.one/dns-query";
+
+                ips = [
+                    "1.1.1.1"
+                    "1.0.0.1"
+                ];
+            };
+
+            # Cache DNS queries
+            caching = {
+                minTime = "5m";
+                maxTime = "30m";
+
+                # Preload DNS results for often used queries
+                # (default: names queried more than 5 times in a 2 hour time window)
+                # 
+                # Source: https://0xerr0r.github.io/blocky/latest/configuration/#caching
+                prefetching = true;
+            };
+
+            blocking = {
+                blackLists = {
+                    ads = [
+                        "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts"
+                        "https://blocklistproject.github.io/Lists/ads.txt"
+                        "https://blocklistproject.github.io/Lists/tracking.txt"
+                    ];
+
+                    illegal = [
+                        "https://blocklistproject.github.io/Lists/drugs.txt"
+                        "https://blocklistproject.github.io/Lists/fraud.txt"
+                        "https://blocklistproject.github.io/Lists/gambling.txt"
+                    ];
+
+                    malware = [
+                        "https://blocklistproject.github.io/Lists/malware.txt"
+                        "https://blocklistproject.github.io/Lists/phishing.txt"
+                        "https://blocklistproject.github.io/Lists/ransomware.txt"
+                    ];
+
+                    # Meta-blocklists (combination of many others)
+                    meta = [
+                        # Source: https://github.com/Ultimate-Hosts-Blacklist/Ultimate.Hosts.Blacklist
+                        "https://hosts.ubuntu101.co.za/hosts"
+                    ];
+                };
+
+                clientGroupsBlock = {
+                    default = [
+                        "ads"
+                        "illegal"
+                        "malware"
+                        "meta"
+                    ];
+                };
+            };
         };
     };
 
