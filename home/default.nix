@@ -48,7 +48,7 @@
                 ./apps/zed-editor.nix
             ];
 
-            "observer-laptop/server" = [
+            "observer-server/observer" = [
                 # User config
                 ./users/observer.nix
 
