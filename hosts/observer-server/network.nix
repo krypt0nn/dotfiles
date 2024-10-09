@@ -68,14 +68,12 @@
     services.tailscale.enable = true;
 
     # SpoofDPI
-    environment.systemPackages = [
-        pkgs-unstable.spoofdpi
-    ];
-
     systemd.services.spoofdpi = {
-        serviceConfig = {
-            ExecStart = "spoofdpi -dns-addr 127.0.0.53 -port 10050";
-        };
+        description = "Start local SpoofDPI proxy on port 10050.";
+
+        wantedBy = [ "default.target" ];
+
+        script = "${pkgs-unstable.spoofdpi}/bin/spoofdpi -dns-addr 127.0.0.53 -port 10050";
     };
 
     # Tor
