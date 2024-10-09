@@ -1,6 +1,6 @@
 {
     "username": "observer",
-    "hostname": "observer-pc",
+    "hostname": "observer-laptop",
     "pipewire": {
         "quantum": 64,
         "rate": 48000
