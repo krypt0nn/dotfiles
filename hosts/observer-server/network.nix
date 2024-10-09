@@ -85,7 +85,7 @@
             enable = true;
 
             socksListenAddress = {
-                IsolateDestDir = true;
+                IsolateDestAddr = true;
 
                 addr = "observer-server";
                 port = 9050;
