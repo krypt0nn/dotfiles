@@ -58,9 +58,9 @@
             # Tailscale MagicDNS
             "100.100.100.100"
 
-            # Cloudflare DNS
-            "1.1.1.1"
-            "1.0.0.1"
+            # Local DNS
+            "127.0.0.1"
+            "::1"
         ];
     };
 
@@ -90,6 +90,9 @@
                 addr = "observer-server";
                 port = 9050;
             };
+
+            # Local DNS
+            dns.enable = true;
         };
 
         settings = {
@@ -142,6 +145,13 @@
 
                 # Oct 07, 2024 | avg ping: 62 ms
                 "obfs4 94.156.153.217:31337 AF9EABB157AE185E3D0F030D6F21C2044A794976 cert=Gg+YPaGTlB30p7x45igqEJQ4Af/8HqgbIzwJ1GBzqto1xSDS/k5H83mttmUh0Zob+vrQWw iat-mode=0"
+            ];
+
+            DNSPort = [
+                {
+                    addr = "127.0.0.1";
+                    port = 53;
+                }
             ];
 
             CookieAuthentication = true;
