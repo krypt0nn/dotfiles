@@ -43,7 +43,7 @@
 
         # System-wide proxy
         proxy = {
-            default = "https://127.0.0.1:10050";
+            default = "https://observer-server:10050";
             noProxy = "127.0.0.1,::1,localhost,.localdomain";
         };
     };
@@ -73,7 +73,7 @@
 
         wantedBy = [ "default.target" ];
 
-        script = "${pkgs-unstable.spoofdpi}/bin/spoofdpi -dns-addr 127.0.0.53 -port 10050";
+        script = "${pkgs-unstable.spoofdpi}/bin/spoofdpi -dns-addr 127.0.0.53 -addr observer-server -port 10050";
     };
 
     # Tor
@@ -83,6 +83,13 @@
         client = {
             # SOCKS5 proxy
             enable = true;
+
+            socksListenAddress = {
+                IsolateDestDir = true;
+
+                addr = "observer-server";
+                port = 9050;
+            };
 
             # Local DNS
             dns.enable = true;
