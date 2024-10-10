@@ -67,6 +67,15 @@
     # Tailscale
     services.tailscale.enable = true;
 
+    services.networkd-dispatcher = {
+        enable = true;
+
+        rules."50-tailscale" = {
+            onState = [ "routable" ];
+            script = "${lib.getExe ethtool} -K eth0 rx-udp-gro-forwarding on rx-gro-list off";
+        };
+    };
+
     # SpoofDPI
     systemd.services.spoofdpi = {
         description = "Start local SpoofDPI proxy on port 10050.";
