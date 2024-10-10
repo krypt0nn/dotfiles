@@ -68,7 +68,7 @@
     services.tailscale = {
         enable = true;
         openFirewall = true;
-        useRoutingFeatures = true;
+        useRoutingFeatures = "server";
     };
 
     services.networkd-dispatcher = {
