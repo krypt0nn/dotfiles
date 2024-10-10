@@ -72,7 +72,7 @@
 
         rules."50-tailscale" = {
             onState = [ "routable" ];
-            script = "${lib.getExe ethtool} -K eth0 rx-udp-gro-forwarding on rx-gro-list off";
+            script = "${lib.getExe pkgs.ethtool} -K eth0 rx-udp-gro-forwarding on rx-gro-list off";
         };
     };
 
