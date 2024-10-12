@@ -7,22 +7,11 @@
             allowedTCPPorts = [
                 # Torrent client
                 51413
-
-                # Baldur's Gate 3
-                # 27015 27036
             ];
 
             allowedUDPPorts = [
                 # Torrent client
                 51413
-
-                # Baldur's Gate 3
-                # 27015
-            ];
-
-            allowedUDPPortRanges = [
-                # Baldur's Gate 3
-                # { from = 27031; to = 27036; }
             ];
         };
 
@@ -85,6 +74,15 @@
 
     # Tailscale
     services.tailscale.enable = true;
+
+    # SpoofDPI
+    systemd.services.spoofdpi = {
+        description = "Start local SpoofDPI proxy on port 10050.";
+
+        wantedBy = [ "default.target" ];
+
+        script = "${pkgs-unstable.spoofdpi}/bin/spoofdpi -dns-addr 1.1.1.1 -addr 127.0.0.1 -port 10050";
+    };
 
     # Persist folders
     environment.persistence."/persistent" = {
