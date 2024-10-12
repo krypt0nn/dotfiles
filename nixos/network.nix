@@ -1,4 +1,4 @@
-{ flakeConfig, lib, pkgs, ... }: {
+{ flakeConfig, lib, pkgs, pkgs-unstable, ... }: {
     networking = {
         # Firewall settings
         firewall = {
