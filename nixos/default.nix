@@ -26,6 +26,7 @@
                 ./persistence.nix
                 ./boot.nix
                 ./drivers.nix
+                ./network.nix
                 ./bluetooth.nix
                 ./misc.nix
                 ./services.nix

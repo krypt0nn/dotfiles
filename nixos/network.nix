@@ -40,11 +40,15 @@
             # Tailscale MagicDNS
             "100.100.100.100"
 
+            # Local DNS
+            "127.0.0.1"
+            "::1"
+
             # Cloudflare DNS
-            "1.1.1.1"
-            "1.0.0.1"
-            "2606:4700:4700::1111"
-            "2606:4700:4700::1001"
+            # "1.1.1.1"
+            # "1.0.0.1"
+            # "2606:4700:4700::1111"
+            # "2606:4700:4700::1001"
 
             # Yandex DNS
             # "77.88.8.88"
@@ -65,10 +69,8 @@
             "100.100.100.100"
 
             # Local DNS
-            "1.1.1.1"
-            "1.0.0.1"
-            "2606:4700:4700::1111"
-            "2606:4700:4700::1001"
+            "127.0.0.1"
+            "::1"
         ];
     };
 
@@ -77,11 +79,100 @@
 
     # SpoofDPI
     systemd.services.spoofdpi = {
-        description = "Start local SpoofDPI proxy on port 10050.";
+        description = "Local SpoofDPI proxy on port 10050.";
 
         wantedBy = [ "default.target" ];
 
-        script = "${pkgs-unstable.spoofdpi}/bin/spoofdpi -dns-addr 1.1.1.1 -addr 127.0.0.1 -port 10050";
+        script = "${pkgs-unstable.spoofdpi}/bin/spoofdpi -dns-addr 127.0.0.53 -addr 0.0.0.0 -port 10050";
+    };
+
+    # ByeDPI
+    systemd.services.byedpi = {
+        description = "Local ByeDPI proxy on port 11050.";
+
+        wantedBy = [ "default.target" ];
+
+        script = "${pkgs-unstable.byedpi}/bin/ciadpi --disorder 1 --tfo --ip 0.0.0.0 --port 11050";
+    };
+
+    # Tor
+    services.tor = {
+        enable = true;
+
+        client = {
+            # SOCKS5 proxy
+            enable = true;
+
+            # Local DNS
+            dns.enable = true;
+        };
+
+        settings = {
+            UseBridges = true;
+            ClientTransportPlugin = "obfs4 exec ${pkgs.obfs4}/bin/lyrebird";
+
+            Bridge = [
+                # Aug 10, 2024 | avg ping: 39 ms
+                # Aug 18, 2024 | avg ping: 96 ms
+                # Aug 25, 2024 | avg ping: 38 ms
+                # Sep 01, 2024 | avg ping: 37 ms
+                # Sep 08, 2024 | avg ping: 38 ms
+                # Sep 15, 2024 | avg ping: 46 ms
+                # Sep 21, 2024 | avg ping: 38 ms
+                # Sep 29, 2024 | avg ping: 37 ms
+                # Oct 04, 2024 | avg ping: 45 ms
+                # Oct 13, 2024 | avg ping: 37 ms
+                "obfs4 37.228.129.80:2056 B9A0ABC85F8FDECD3D73F8252A73C4BB22AAD3BD cert=I+5neLvuWJWl6NId2yvwo1sFqgthuIeYAtQY+q6I0mVz3ITLPo9AP35f8WJQsS8o2g5EOw iat-mode=0"
+
+                # Oct 07, 2024 | avg ping: 41 ms
+                # Oct 13, 2024 | avg ping: 40 ms
+                "obfs4 85.215.50.238:10007 D27430CDF128406ED556434E8F908749EE6D0198 cert=GBiBNfVY/4VSWG6Qx7HmsPMB6WAq80HIr8JUUkTdxsk2L5QdrjdZap8WjyrpaizU58SQGA iat-mode=0"
+
+                # Oct 13, 2024 | avg ping: 42 ms
+                "obfs4 91.134.101.66:50853 7E0EA5CC553C59BB8D7B4542190161C16642B16E cert=dgfs+IzVdnGvjfk+Va2fvuRsQR0Q3bkdBerHXFjSTWkLJF5Oi9oEtaqHFgkjevTfw/zcBw iat-mode=0"
+
+                # Oct 13, 2024 | avg ping: 43 ms
+                "obfs4 37.187.16.190:443 941817DB0A9D6F47ED827CFB4171D2EF7BED5719 cert=fnaW6DGqRNwPeT6F7BiM4bncNyqRXRahMVSxrSkH5+FAMdltO54zPRFxl8naIQQmR3QCcQ iat-mode=0"
+
+                # Oct 07, 2024 | avg ping: 52 ms
+                # Oct 13, 2024 | avg ping: 49 ms
+                "obfs4 51.195.233.64:63542 06FA323EBE816B9DD68CA1561851C28009BD7906 cert=KD/MpxM0IWkugg4fKV2HhQZg6sDLbQfEVAqxlel+4aA0rudHUkUX1165dxUlzNVnBAHQQA iat-mode=0"
+
+                # Sep 18, 2024 | avg ping: 40 ms
+                # Sep 21, 2024 | avg ping: 39 ms
+                # Sep 29, 2024 | avg ping: 39 ms
+                # Oct 04, 2024 | avg ping: 39 ms
+                # Oct 13, 2024 | avg ping: 61 ms
+                "obfs4 185.177.207.219:11219 598326DF0E32A1E1CCA87A10C9F614C104DD9DE9 cert=QJNjvqxkejHYUuMkM/cQmyV4Egj8S+f+7F4CPxcoWitFEsyP2dJXNQl8jU/M+5v9NeH4Hw iat-mode=1"
+
+                # Aug 18, 2024 | avg ping: 146 ms
+                # Aug 25, 2024 | avg ping: 61 ms
+                # Sep 01, 2024 | avg ping: 60 ms
+                # Sep 08, 2024 | avg ping: 62 ms
+                # Sep 15, 2024 | avg ping: 80 ms
+                # Sep 21, 2024 | avg ping: 61 ms
+                # Sep 29, 2024 | avg ping: 61 ms
+                # Oct 04, 2024 | avg ping: 60 ms
+                # Oct 13, 2024 | avg ping: 61 ms
+                "obfs4 95.217.232.211:443 F32A7CD5589CCD2D700D790AB437DE8A6233372C cert=eqAb4zUDdQpKX9TFEuC/x82tiRjvlXkF/WnKxjjSuboPUB3URAwaXcn7m2GIzS8Kd2LDOQ iat-mode=0"
+
+                # Oct 07, 2024 | avg ping: 62 ms
+                # Oct 13, 2024 | avg ping: 79 ms
+                "obfs4 94.156.153.217:31337 AF9EABB157AE185E3D0F030D6F21C2044A794976 cert=Gg+YPaGTlB30p7x45igqEJQ4Af/8HqgbIzwJ1GBzqto1xSDS/k5H83mttmUh0Zob+vrQWw iat-mode=0"
+            ];
+
+            DNSPort = [
+                {
+                    addr = "127.0.0.1";
+                    port = 53;
+                }
+            ];
+
+            CookieAuthentication = true;
+            HardwareAccel = 1;
+            ClientOnly = 1;
+            ClientUseIPv6 = true;
+        };
     };
 
     # Persist folders
@@ -90,6 +181,7 @@
 
         directories = [
             { directory = "/var/lib/tailscale"; mode = "0700"; }
+            { directory = "/var/lib/tor"; mode = "0700"; }
         ];
     };
 }
