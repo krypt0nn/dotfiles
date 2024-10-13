@@ -76,7 +76,7 @@
 
         wantedBy = [ "default.target" ];
 
-        script = "${pkgs-unstable.spoofdpi}/bin/spoofdpi -dns-addr 127.0.0.53 -addr observer-server -port 10050";
+        script = "${pkgs-unstable.spoofdpi}/bin/spoofdpi -dns-addr 127.0.0.53 -addr :: -port 10050";
     };
 
     # Tor
@@ -90,7 +90,7 @@
             socksListenAddress = {
                 IsolateDestAddr = true;
 
-                addr = "observer-server";
+                addr = "::";
                 port = 9050;
             };
 
