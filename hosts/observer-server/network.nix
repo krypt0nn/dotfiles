@@ -115,9 +115,6 @@
                 # Oct 13, 2024 | avg ping: 37 ms
                 "obfs4 37.228.129.80:2056 B9A0ABC85F8FDECD3D73F8252A73C4BB22AAD3BD cert=I+5neLvuWJWl6NId2yvwo1sFqgthuIeYAtQY+q6I0mVz3ITLPo9AP35f8WJQsS8o2g5EOw iat-mode=0"
 
-                # Oct 13, 2024 | avg ping: 39 ms
-                "obfs4 185.177.207.36:28911 3CE3B592DAE2CB65D64DAFAB7E9AD99E3481E172 cert=p9L6+25s8bnfkye1ZxFeAE4mAGY7DH4Gaj7dxngIIzP9BtqrHHwZXdjMK0RVIQ34C7aqZw iat-mode=2"
-
                 # Oct 07, 2024 | avg ping: 41 ms
                 # Oct 13, 2024 | avg ping: 40 ms
                 "obfs4 85.215.50.238:10007 D27430CDF128406ED556434E8F908749EE6D0198 cert=GBiBNfVY/4VSWG6Qx7HmsPMB6WAq80HIr8JUUkTdxsk2L5QdrjdZap8WjyrpaizU58SQGA iat-mode=0"
