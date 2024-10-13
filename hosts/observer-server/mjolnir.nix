@@ -4,7 +4,7 @@
         enable = true;
 
         homeserverUrl = "https://matrix.envs.net"; # "https://mozilla.modular.im";
-        managementRoom = "!VVpzPiaLqqNcyYwyYL:mozilla.org";
+        managementRoom = "!XstyKkBZdLPNMYQzBA:mozilla.org";
 
         pantalaimon.username = "nobody";
         accessTokenFile = "/persistent/mjolnir.token";
