@@ -92,7 +92,7 @@
 
         wantedBy = [ "default.target" ];
 
-        script = "${pkgs-unstable.byedpi}/bin/ciadpi --disorder 1 --tfo --ip 0.0.0.0 --port 11050";
+        script = "${pkgs-unstable.byedpi}/bin/ciadpi -d1 -o25+s --ip 0.0.0.0 --port 11050";
     };
 
     # Tor
