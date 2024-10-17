@@ -78,13 +78,13 @@
     services.tailscale.enable = true;
 
     # SpoofDPI
-    systemd.services.spoofdpi = {
-        description = "Local SpoofDPI proxy on port 10050.";
+    # systemd.services.spoofdpi = {
+    #     description = "Local SpoofDPI proxy on port 10050.";
 
-        wantedBy = [ "default.target" ];
+    #     wantedBy = [ "default.target" ];
 
-        script = "${pkgs-unstable.spoofdpi}/bin/spoofdpi -dns-addr 127.0.0.53 -addr 0.0.0.0 -port 10050";
-    };
+    #     script = "${pkgs-unstable.spoofdpi}/bin/spoofdpi -dns-addr 127.0.0.53 -addr 0.0.0.0 -port 10050";
+    # };
 
     # ByeDPI
     systemd.services.byedpi = {
@@ -167,6 +167,8 @@
                     port = 53;
                 }
             ];
+
+            HTTPTunnelPort = 10050;
 
             CookieAuthentication = true;
             HardwareAccel = 1;
