@@ -11,7 +11,7 @@
 
     # Add some default apps
     environment.systemPackages = with pkgs; [
-        blackbox-terminal
+        ptyxis
         pkgs-unstable.mission-center
         gnome-extension-manager
         loupe
