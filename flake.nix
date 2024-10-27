@@ -5,15 +5,20 @@
         nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
         nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
-        impermanence.url = "github:nix-community/impermanence";
-
         home-manager = {
             url = "github:nix-community/home-manager/release-24.05";
             inputs.nixpkgs.follows = "nixpkgs";
         };
+
+        impermanence.url = "github:nix-community/impermanence";
+
+        rust-overlay = {
+            url = "github:oxalica/rust-overlay";
+            inputs.nixpkgs.follows = "nixpkgs-unstable";
+        };
     };
 
-    outputs = { nixpkgs, nixpkgs-unstable, impermanence, home-manager, ... }@inputs:
+    outputs = { nixpkgs, nixpkgs-unstable, home-manager, impermanence, rust-overlay, ... }@inputs:
         let
             flakeConfig = builtins.fromJSON (builtins.readFile ./config.json);
 
@@ -23,12 +28,16 @@
                 inherit system;
 
                 config.allowUnfree = true;
+
+                overlays = [ rust-overlay.overlays.default ];
             };
 
             pkgs-unstable = import nixpkgs-unstable {
                 inherit system;
 
                 config.allowUnfree = true;
+
+                overlays = [ rust-overlay.overlays.default ];
             };
 
         in {

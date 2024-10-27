@@ -1,6 +1,8 @@
 { flakeConfig, pkgs-unstable, ... }: {
     home.packages = with pkgs-unstable; [
-        rustup
+        (rust-bin.stable.latest.default.override {
+            extensions = [ "rust-src" ];
+        })
     ];
 
     home.sessionVariables.RUST_BACKTRACE = 1;
