@@ -10,6 +10,7 @@
             # vivaxy.vscode-conventional-commits
             mhutchie.git-graph
             gruntfuggly.todo-tree
+            github.copilot
 
             # Debugger
             vadimcn.vscode-lldb
