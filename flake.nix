@@ -24,20 +24,24 @@
 
             system = "x86_64-linux";
 
+            overlays = with (import ./overlays.nix); [
+                # Always use latest pre-compiled rust binaries.
+                rust-overlay.overlays.default
+
+                # Overlay vesktop to use local proxy.
+                (proxy { pkg = "vesktop"; proxy = "socks5://localhost:11050"; electron = true; })
+            ];
+
+            config = {
+                allowUnfree = true;
+            };
+
             pkgs = import nixpkgs {
-                inherit system;
-
-                config.allowUnfree = true;
-
-                overlays = [ rust-overlay.overlays.default ];
+                inherit system overlays config;
             };
 
             pkgs-unstable = import nixpkgs-unstable {
-                inherit system;
-
-                config.allowUnfree = true;
-
-                overlays = [ rust-overlay.overlays.default ];
+                inherit system overlays config;
             };
 
         in {
@@ -45,10 +49,7 @@
                 inherit system;
 
                 specialArgs = {
-                    inherit inputs;
-                    inherit flakeConfig;
-                    inherit pkgs;
-                    inherit pkgs-unstable;
+                    inherit inputs flakeConfig pkgs pkgs-unstable;
                 };
 
                 modules = [
@@ -65,10 +66,7 @@
                         home-manager.users.${flakeConfig.username} = import ./home;
 
                         home-manager.extraSpecialArgs = {
-                            inherit inputs;
-                            inherit flakeConfig;
-                            inherit pkgs;
-                            inherit pkgs-unstable;
+                            inherit inputs flakeConfig pkgs pkgs-unstable;
                         };
                     }
                 ];
