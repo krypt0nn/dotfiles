@@ -53,7 +53,7 @@
 
     # Bump default nix's soft ulimit value
     # Source: https://github.com/NixOS/nixpkgs/issues/159964#issuecomment-1477971458
-    systemd.user.extraConfig = "DefaultLimitNOFILE=32768";
+    systemd.user.extraConfig = "DefaultLimitNOFILE=128000";
 
     security = {
         pam = {
@@ -66,7 +66,7 @@
                     domain = "*";
                     type = "-";
                     item = "nofile";
-                    value = "32768";
+                    value = "128000";
                 }
             ];
         };
