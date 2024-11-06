@@ -28,6 +28,24 @@
                     ];
                 };
 
+                pictures = {
+                    path = "/home/observer/Pictures";
+
+                    devices = [
+                        "observer-pc"
+                        "observer-laptop"
+                    ];
+                };
+
+                videos = {
+                    path = "/home/observer/Videos";
+
+                    devices = [
+                        "observer-pc"
+                        "observer-laptop"
+                    ];
+                };
+
                 projects = {
                     path = "/home/observer/projects";
 
