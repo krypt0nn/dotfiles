@@ -9,19 +9,9 @@
                 51413
             ];
 
-            allowedTCPPortRanges = [
-                # Steam
-                { from = 27000; to = 27100; }
-            ];
-
             allowedUDPPorts = [
                 # Torrent client
                 51413
-            ];
-
-            allowedUDPPortRanges = [
-                # Steam
-                { from = 27000; to = 27100; }
             ];
         };
 
