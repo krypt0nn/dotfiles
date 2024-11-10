@@ -28,8 +28,9 @@
                 # Always use latest pre-compiled rust binaries.
                 rust-overlay.overlays.default
 
-                # Overlay vesktop to use local proxy.
-                (proxy { pkg = "vesktop"; proxy = "socks5://localhost:11050"; electron = true; })
+                # Overlay some apps to use local proxy.
+                (proxy { pkg = "vesktop"; proxy = "socks5://127.0.0.1:11050"; electron = true; })
+                (proxy { pkg = "fragments"; proxy = "socks5://127.0.0.1:9050"; })
             ];
 
             config = {
