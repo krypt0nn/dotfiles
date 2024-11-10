@@ -1,4 +1,4 @@
-{ pkgs, flakeConfig, ... }: {
+{ flakeConfig, ... }: {
     boot.kernelModules = [ "kvm-amd" ];
 
     virtualisation.virtualbox.host.enable = true;

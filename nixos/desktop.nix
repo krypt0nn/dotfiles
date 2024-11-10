@@ -1,4 +1,4 @@
-{ lib, pkgs, pkgs-unstable, ... }: {
+{ pkgs, pkgs-unstable, ... }: {
     # Enable GNOME DE
     services.xserver = {
         enable = true;
