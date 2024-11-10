@@ -1,11 +1,11 @@
 { flakeConfig, pkgs, ... }: {
-    home.packages = [ pkgs.fragments ];
+    home.packages = [ pkgs.apostrophe ];
 
     home.persistence."/persistent/home/${flakeConfig.username}" = {
         allowOther = false;
 
         directories = [
-            ".config/fragments"
+            ".local/share/apostrophe"
         ];
     };
 }

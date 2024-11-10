@@ -1,7 +1,5 @@
 { flakeConfig, pkgs, ... }: {
-    home.packages = with pkgs; [
-        telegram-desktop
-    ];
+    home.packages = [ pkgs.telegram-desktop ];
 
     home.persistence."/persistent/home/${flakeConfig.username}" = {
         allowOther = false;

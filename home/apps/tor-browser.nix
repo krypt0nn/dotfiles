@@ -1,7 +1,5 @@
 { flakeConfig, pkgs, ... }: {
-    home.packages = with pkgs; [
-        tor-browser
-    ];
+    home.packages = [ pkgs.tor-browser ];
 
     home.persistence."/persistent/home/${flakeConfig.username}" = {
         allowOther = false;

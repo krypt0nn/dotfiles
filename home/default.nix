@@ -16,6 +16,8 @@
                 ./apps/vesktop.nix
                 ./apps/gimp.nix
                 ./apps/onlyoffice.nix
+                ./apps/apostrophe.nix
+                ./apps/rnote.nix
 
                 ./apps/fragments.nix
                 ./apps/tor-browser.nix
@@ -43,6 +45,7 @@
                 ./apps/vesktop.nix
                 ./apps/gimp.nix
                 ./apps/onlyoffice.nix
+                ./apps/apostrophe.nix
 
                 ./apps/fragments.nix
                 ./apps/tor-browser.nix

@@ -1,7 +1,5 @@
 { flakeConfig, pkgs-unstable, ... }: {
-    home.packages = with pkgs-unstable; [
-        zed-editor
-    ];
+    home.packages = [ pkgs-unstable.zed-editor ];
 
     home.persistence."/persistent/home/${flakeConfig.username}" = {
         allowOther = false;

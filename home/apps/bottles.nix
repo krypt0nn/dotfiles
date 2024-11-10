@@ -1,7 +1,5 @@
 { flakeConfig, pkgs, ... }: {
-    home.packages = with pkgs; [
-        bottles
-    ];
+    home.packages = [ pkgs.bottles ];
 
     home.persistence."/persistent/home/${flakeConfig.username}" = {
         allowOther = false;

@@ -1,7 +1,5 @@
 { flakeConfig, pkgs, ... }: {
-    home.packages = with pkgs; [
-        onlyoffice-bin
-    ];
+    home.packages = [ pkgs.onlyoffice-bin ];
 
     home.persistence."/persistent/home/${flakeConfig.username}" = {
         allowOther = false;
