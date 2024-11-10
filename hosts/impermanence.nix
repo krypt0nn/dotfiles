@@ -25,8 +25,14 @@
             btrfs subvolume delete /mnt/snapshots/root/previous
         fi &&
 
+        echo "impermanence: making backup of the persistent subvolume" &&
+
+        mkdir -p /mnt/snapshots/persistent &&
+        btrfs subvolume snapshot -r /mnt/persistent /mnt/snapshots/persistent/previous &&
+
         echo "impermanence: making backup of the root subvolume" &&
 
+        mkdir -p /mnt/snapshots/root &&
         btrfs subvolume snapshot -r /mnt/root /mnt/snapshots/root/previous &&
 
         echo "impermanence: deleting root subvolume" &&
