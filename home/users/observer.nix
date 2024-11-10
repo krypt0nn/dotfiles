@@ -1,12 +1,7 @@
-{ lib, pkgs, ... }: {
+{ lib, ... }: {
     home = {
         username = "observer";
         homeDirectory = "/home/observer";
-
-        packages = with pkgs; [
-            vesktop
-            telegram-desktop
-        ];
     };
 
     programs = {
@@ -25,15 +20,6 @@
                 safe.directory = "/system-flake";
             };
         };
-    };
-
-    home.persistence."/persistent/home/observer" = {
-        allowOther = false;
-
-        directories = [
-            ".config/vesktop"
-            ".local/share/TelegramDesktop"
-        ];
     };
 
     # Set keyboard languages

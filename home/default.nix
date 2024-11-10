@@ -12,6 +12,8 @@
 
                 # Apps
                 ./apps/firefox.nix
+                ./apps/telegram.nix
+                ./apps/vesktop.nix
                 ./apps/gimp.nix
                 ./apps/onlyoffice.nix
 
@@ -37,6 +39,8 @@
 
                 # Apps
                 ./apps/firefox.nix
+                ./apps/telegram.nix
+                ./apps/vesktop.nix
                 ./apps/gimp.nix
                 ./apps/onlyoffice.nix
 
