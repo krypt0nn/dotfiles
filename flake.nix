@@ -71,5 +71,9 @@
                     }
                 ];
             };
+
+            devShells.${system}.default = pkgs.mkShell {
+                nativeBuildInputs = [ pkgs.nixd ];
+            };
         };
 }
