@@ -77,24 +77,6 @@
     # Tailscale
     services.tailscale.enable = true;
 
-    # SpoofDPI
-    # systemd.services.spoofdpi = {
-    #     description = "Local SpoofDPI proxy on port 10050.";
-
-    #     wantedBy = [ "default.target" ];
-
-    #     script = "${pkgs-unstable.spoofdpi}/bin/spoofdpi -dns-addr 127.0.0.53 -addr 0.0.0.0 -port 10050";
-    # };
-
-    # ByeDPI
-    systemd.services.byedpi = {
-        description = "Local ByeDPI proxy on port 11050.";
-
-        wantedBy = [ "default.target" ];
-
-        script = "${pkgs-unstable.byedpi}/bin/ciadpi -s1 -q1 -Y -Ar -s5 -o1+s -At -f-1 -r1+s -b661 -As -s1 -o1 +s -s-1 -An --ip 0.0.0.0 --port 11050";
-    };
-
     # Tor
     services.tor = {
         enable = true;
@@ -187,6 +169,13 @@
             ClientOnly = 1;
             ClientUseIPv6 = true;
         };
+    };
+
+    # Xray proxy
+    services.xray = {
+        enable = true;
+
+        settingsFile = "/persistent/xray.jsonc";
     };
 
     # Persist folders
