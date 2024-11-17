@@ -14,6 +14,9 @@
     # Ban connections after failed login attempts
     services.fail2ban.enable = true;
 
+    # Disks management service.
+    services.udisks2.enable = true;
+
     # Faster dbus implementation
     services.dbus.implementation = "broker";
 }
