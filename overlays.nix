@@ -1,11 +1,11 @@
 {
     # Overlay any package to use a proxy.
-    # Example: proxyPackage { pkg = "curl"; }
+    # Example: proxy { pkg = "curl"; }
     proxy = {
         pkg,
         mode ? "https",
-        proxy ? "https://localhost:10050",
-        ignore ? "127.0.0.1,localhost,::1,.localdomain.com",
+        proxy ? "socks5://127.0.0.1:9050",
+        ignore ? "127.0.0.1,::1,localhost,.localdomain.com",
         electron ? false
     }: self: super: {
         ${pkg} = super.symlinkJoin {
@@ -15,6 +15,8 @@
             postBuild = if electron then ''
                 wrapProgram $out/bin/${pkg} \
                     --add-flags "--proxy-server=\"${proxy}\"" \
+                    --set ${super.lib.strings.toLower mode}_proxy ${proxy} \
+                    --set ${super.lib.strings.toUpper mode}_PROXY ${proxy} \
                     --set no_proxy "${ignore}"
             '' else ''
                 wrapProgram $out/bin/${pkg} \
