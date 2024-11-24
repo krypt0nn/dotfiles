@@ -38,10 +38,12 @@
 
             files = [
                 # Zsh
-                ".zshrc"
-                ".zshenv"
                 ".zsh_history"
-                ".zcompdump"
+
+                # Cause breakages.
+                # ".zshrc"
+                # ".zshenv"
+                # ".zcompdump"
             ];
         };
     };
