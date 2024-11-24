@@ -12,7 +12,7 @@
     # Add some default apps
     environment.systemPackages = with pkgs; [
         ptyxis
-        # mission-center
+        mission-center
         gnome-extension-manager
         loupe
         amberol

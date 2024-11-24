@@ -28,6 +28,9 @@
                 # Always use latest pre-compiled rust binaries.
                 rust-overlay.overlays.default
 
+                # Pin apps to specific versions.
+                (pin { pkg = "mission-center"; rev = "4cb4d316e68938d454977d8181a1501445ce6320"; ref = "release-24.11"; })
+
                 # Overlay some apps to use local proxy.
                 (proxy { pkg = "vesktop"; proxy = "socks5://127.0.0.1:11050"; electron = true; })
                 (proxy { pkg = "fragments"; proxy = "socks5://127.0.0.1:9050"; })
@@ -38,11 +41,11 @@
             };
 
             pkgs = import nixpkgs {
-                inherit system overlays config;
+                inherit system config overlays;
             };
 
             pkgs-unstable = import nixpkgs-unstable {
-                inherit system overlays config;
+                inherit system config overlays;
             };
 
         in {
