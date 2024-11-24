@@ -28,7 +28,7 @@
     };
 
     # Pin specified package to the version under provided nixpkgs revision.
-    # Example: pin { pkg = "mission-center"; rev = "4cb4d316e68938d454977d8181a1501445ce6320"; }
+    # Example: pin { pkg = "mission-center"; rev = "4cb4d316e68938d454977d8181a1501445ce6320"; ref = "release-24.11"; }
     pin = { pkg, rev, ref ? "nixpkgs-unstable" }: self: super: {
         ${pkg} = let
             # https://github.com/NixOS/nixpkgs/commit/4cb4d316e68938d454977d8181a1501445ce6320
