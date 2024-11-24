@@ -1,4 +1,4 @@
-{ pkgs, pkgs-unstable, ... }: {
+{ pkgs, ... }: {
     # Enable GNOME DE
     services.xserver = {
         enable = true;
@@ -12,7 +12,7 @@
     # Add some default apps
     environment.systemPackages = with pkgs; [
         ptyxis
-        pkgs-unstable.mission-center
+        # mission-center
         gnome-extension-manager
         loupe
         amberol
@@ -27,12 +27,12 @@
     ];
 
     # Remove unneeded built-in gnome apps
-    environment.gnome.excludePackages = with pkgs.gnome; [
+    environment.gnome.excludePackages = with pkgs; [
         cheese eog epiphany simple-scan totem yelp geary evince
         gnome-calendar gnome-characters gnome-contacts
         gnome-font-viewer gnome-logs gnome-maps gnome-music
-        gnome-system-monitor pkgs.gnome-connections
-        pkgs.gnome-tour pkgs.snapshot pkgs.gnome-console
+        gnome-system-monitor gnome-connections
+        gnome-tour snapshot gnome-console
         # gnome-shell-extensions
     ];
 

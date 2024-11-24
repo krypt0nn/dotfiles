@@ -1,8 +1,4 @@
 { lib, pkgs, flakeConfig, ... }: {
-    sound.enable = true;
-
-    hardware.pulseaudio.enable = lib.mkForce false;
-
     services.pipewire = {
         enable = true;
 
@@ -25,7 +21,7 @@
                     modules = [
                         {
                             name = "libpipewire-module-rtkit";
-                            flags = ["ifexists" "nofail"];
+                            flags = [ "ifexists" "nofail" ];
 
                             args = {
                                 nice.level = -15;
@@ -42,7 +38,7 @@
                             name = "libpipewire-module-protocol-pulse";
 
                             args = {
-                                server.address = ["unix:native"];
+                                server.address = [ "unix:native" ];
 
                                 pulse.min = {
                                     req = qr;
@@ -68,7 +64,7 @@
                 matches = lib.generators.toLua {
                     multiline = false;
                     indent = false;
-                } [[["node.name" "matches" "alsa_output.*"]]];
+                } [[[ "node.name" "matches" "alsa_output.*" ]]];
 
                 apply_properties = lib.generators.toLua {} {
                     "audio.format" = "S32LE";
@@ -77,12 +73,12 @@
                 };
             in [
                 (pkgs.writeTextDir "share/lowlatency.lua.d/99-alsa-lowlatency.lua" ''
-                alsa_monitor.rules = {
-                    {
-                        matches = ${matches};
-                        apply_properties = ${apply_properties};
+                    alsa_monitor.rules = {
+                        {
+                            matches = ${matches};
+                            apply_properties = ${apply_properties};
+                        }
                     }
-                }
                 '')
             ];
         };

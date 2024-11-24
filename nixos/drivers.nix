@@ -13,24 +13,18 @@
         gst_all_1.gst-vaapi
     ];
 
-    hardware.firmware = with pkgs; [
-        linux-firmware
+    hardware.firmware = [
+        pkgs.linux-firmware
     ];
 
-    hardware.opengl = {
+    hardware.graphics = {
         enable = true;
-
-        driSupport = true;
-        driSupport32Bit = true;
+        enable32Bit = true;
 
         extraPackages = with pkgs; [
             libva
             vaapiVdpau
             libvdpau-va-gl
-
-            rocmPackages.clr.icd
-            rocm-opencl-icd
-            rocm-opencl-runtime
 
             # This should fix some wine games not being able
             # to lookup GPU drivers via DXVK
