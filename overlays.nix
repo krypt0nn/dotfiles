@@ -28,18 +28,14 @@
     };
 
     # Pin specified package to the version under provided nixpkgs revision.
-    # Example: pin { pkg = "mission-center"; rev = "4cb4d316e68938d454977d8181a1501445ce6320"; ref = "release-24.11"; }
-    pin = { pkg, rev, ref ? "nixpkgs-unstable" }: self: super: {
+    # Example: pin { pkg = "mission-center"; rev = "4cb4d316e68938d454977d8181a1501445ce6320"; hash = "183qvdh0kb9w4dksqwd94nz9pg188rqnmv2506y6qmi10fi55xw9"; }
+    pin = { pkg, rev, hash ? "" }: self: super: {
         ${pkg} = let
             # https://github.com/NixOS/nixpkgs/commit/4cb4d316e68938d454977d8181a1501445ce6320
-
-            pinnedRepo = fetchGit {
-                inherit rev ref;
-
-                url = "https://github.com/NixOS/nixpkgs";
+            pinnedRepo = fetchTarball {
+                url = "https://github.com/NixOS/nixpkgs/archive/${rev}.tar.gz";
+                sha256 = hash;
             };
-
-            # pinnedRepo = fetchTarball "https://github.com/NixOS/nixpkgs/archive/${rev}.tar.gz";
 
             pinnedPkgs = import pinnedRepo {
                 inherit (super) system config;
