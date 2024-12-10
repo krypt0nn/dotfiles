@@ -84,6 +84,15 @@
                 "dmask=0022"
             ];
         };
+
+        "/storage" = {
+            device = "/dev/disk/by-uuid/F7EF-B07D";
+            fsType = "exfat";
+            options = [
+                "noatime"
+                "nodiratime"
+            ];
+        };
     };
 
     swapDevices = [
