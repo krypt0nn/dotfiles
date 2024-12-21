@@ -28,13 +28,6 @@
                 # Always use latest pre-compiled rust binaries.
                 rust-overlay.overlays.default
 
-                # Pin mission center to the latest working version.
-                (pin {
-                    pkg = "mission-center";
-                    rev = "4cb4d316e68938d454977d8181a1501445ce6320";
-                    hash = "183qvdh0kb9w4dksqwd94nz9pg188rqnmv2506y6qmi10fi55xw9";
-                })
-
                 # Overlay some apps to use local proxy.
                 (proxy { pkg = "vesktop"; proxy = "socks5://127.0.0.1:11050"; electron = true; })
                 (proxy { pkg = "fragments"; proxy = "socks5://127.0.0.1:9050"; })
