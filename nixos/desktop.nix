@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, pkgs-unstable, ... }: {
     # Enable GNOME DE
     services.xserver = {
         enable = true;
@@ -11,7 +11,9 @@
 
     # Add some default apps
     environment.systemPackages = with pkgs; [
-        ptyxis
+        # ptyxis
+        pkgs-unstable.ghostty
+
         mission-center
         gnome-extension-manager
         loupe
