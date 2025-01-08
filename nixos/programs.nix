@@ -2,6 +2,7 @@
     environment.systemPackages = with pkgs; [
         vim
         micro
+        bat
         wget
         curl
         git

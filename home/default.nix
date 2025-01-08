@@ -6,6 +6,7 @@
 
                 # Packages
                 ./packages/zsh.nix
+                ./packages/fzf.nix
                 ./packages/zoxide.nix
                 ./packages/direnv.nix
                 ./packages/rust.nix
@@ -35,6 +36,7 @@
 
                 # Packages
                 ./packages/zsh.nix
+                ./packages/fzf.nix
                 ./packages/zoxide.nix
                 ./packages/direnv.nix
                 ./packages/rust.nix
@@ -61,6 +63,7 @@
 
                 # Packages
                 ./packages/zsh.nix
+                ./packages/fzf.nix
                 ./packages/zoxide.nix
                 ./packages/direnv.nix
             ];
