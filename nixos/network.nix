@@ -12,6 +12,9 @@
             allowedUDPPorts = [
                 # Torrent client
                 51413
+
+                # Minecraft Plasmo Voice
+                25565
             ];
         };
 
