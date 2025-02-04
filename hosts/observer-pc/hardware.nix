@@ -1,4 +1,4 @@
-{ config, lib, pkgs, modulesPath, ... }: {
+{ config, lib, modulesPath, ... }: {
     imports = [
         (modulesPath + "/installer/scan/not-detected.nix")
     ];
@@ -16,13 +16,6 @@
 
             kernelModules = [ "amdgpu" ];
         };
-
-        kernelModules = [ "amd-pstate" ];
-
-        kernelParams = [
-            "initcall_blacklist=acpi_cpufreq_init"
-            "amd_pstate=active"
-        ];
 
         extraModulePackages = [];
     };
