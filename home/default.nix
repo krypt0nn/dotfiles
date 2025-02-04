@@ -18,6 +18,7 @@
                 ./apps/gimp.nix
                 ./apps/onlyoffice.nix
                 ./apps/apostrophe.nix
+                ./apps/hieroglyphic.nix
                 ./apps/rnote.nix
 
                 ./apps/fragments.nix
@@ -48,6 +49,7 @@
                 ./apps/gimp.nix
                 ./apps/onlyoffice.nix
                 ./apps/apostrophe.nix
+                ./apps/hieroglyphic.nix
 
                 ./apps/fragments.nix
                 ./apps/tor-browser.nix
