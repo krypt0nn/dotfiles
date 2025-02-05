@@ -10,6 +10,7 @@
         fastfetch
         onefetch
         cachix
+        libqalculate
     ];
 
     programs.zsh.enable = true;

@@ -1,5 +1,5 @@
 { flakeConfig, ... }: {
-    imports = let imports = rec {
+    imports = let imports = {
             "default" = [
                 ./nix-config.nix
                 ./persistence.nix

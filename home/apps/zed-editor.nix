@@ -6,7 +6,57 @@
 
         directories = [
             ".local/share/zed"
-            ".config/zed"
         ];
+    };
+
+    home.file.".config/zed/settings.json".text = builtins.toJSON {
+        assistant = {
+            default_model = {
+                provider = "zed.dev";
+                model = "claude-3-5-sonnet-latest";
+            };
+
+            version = "2";
+        };
+
+        telemetry = {
+            metrics = false;
+            diagnostics = false;
+        };
+
+        proxy = "socks5://127.0.0.1:11050";
+
+        vim_mode = false;
+        auto_update = false;
+
+        theme = "Rosé Pine Dawn";
+        buffer_font_family = "JetBrains Mono";
+
+        ui_font_size = 16;
+        buffer_font_size = 16;
+
+        buffer_font_features = {
+            calt = true;
+            ligatures = true;
+        };
+
+        tab_size = 4;
+
+        load_direnv = "direct";
+        format_on_save = "off";
+
+        lsp = {
+            "rust-analyzer" = {
+                binary = {
+                    path_lookup = true;
+                };
+
+                initialization_options = {
+                    check = {
+                        command = "clippy";
+                    };
+                };
+            };
+        };
     };
 }

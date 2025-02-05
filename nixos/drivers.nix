@@ -39,9 +39,4 @@
             libvdpau-va-gl
         ];
     };
-
-    # Workaround for HIP drivers on NixOS
-    systemd.tmpfiles.rules = [
-        "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
-    ];
 }
