@@ -19,6 +19,10 @@
             version = "2";
         };
 
+        features = {
+            inline_completion_provider = "copilot";
+        };
+
         telemetry = {
             metrics = false;
             diagnostics = false;
@@ -29,7 +33,7 @@
         vim_mode = false;
         auto_update = false;
 
-        theme = "Rosé Pine Dawn";
+        theme = "Andromeda";
         buffer_font_family = "JetBrains Mono";
 
         ui_font_size = 16;
@@ -41,6 +45,12 @@
         };
 
         tab_size = 4;
+
+        languages = {
+            YAML = {
+                tab_size = 2;
+            };
+        };
 
         load_direnv = "direct";
         format_on_save = "off";
