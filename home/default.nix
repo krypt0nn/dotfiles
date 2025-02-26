@@ -12,7 +12,7 @@
                 ./packages/rust.nix
 
                 # Apps
-                ./apps/firefox.nix
+                ./apps/zen-browser.nix
                 ./apps/telegram.nix
                 ./apps/vesktop.nix
                 ./apps/gimp.nix
@@ -43,7 +43,7 @@
                 ./packages/rust.nix
 
                 # Apps
-                ./apps/firefox.nix
+                ./apps/zen-browser.nix
                 ./apps/telegram.nix
                 ./apps/vesktop.nix
                 ./apps/gimp.nix

@@ -17,13 +17,10 @@
             inputs.nixpkgs.follows = "nixpkgs-unstable";
         };
 
-        aagl = {
-            url = "github:ezKEa/aagl-gtk-on-nix/release-24.11";
-            inputs.nixpkgs.follows = "nixpkgs";
-        };
+        zen-browser.url = "github:0xc000022070/zen-browser-flake";
     };
 
-    outputs = { nixpkgs, nixpkgs-unstable, home-manager, impermanence, rust-overlay, aagl, ... }@inputs:
+    outputs = { nixpkgs, nixpkgs-unstable, home-manager, impermanence, rust-overlay, ... }@inputs:
         let
             flakeConfig = builtins.fromJSON (builtins.readFile ./config.json);
 
@@ -32,9 +29,6 @@
             overlays = with (import ./overlays.nix); [
                 # Always use latest pre-compiled rust binaries.
                 rust-overlay.overlays.default
-
-                # Add An Anime Team launchers.
-                aagl.overlays.default
 
                 # Overlay some apps to use local proxy.
                 (proxy { pkg = "vesktop"; proxy = "socks5://127.0.0.1:11050"; electron = true; })
@@ -58,7 +52,7 @@
                 inherit system;
 
                 specialArgs = {
-                    inherit inputs flakeConfig pkgs pkgs-unstable;
+                    inherit system inputs flakeConfig pkgs pkgs-unstable;
                 };
 
                 modules = [
@@ -67,7 +61,6 @@
                     ./users
 
                     impermanence.nixosModules.impermanence
-                    aagl.nixosModules.default
 
                     home-manager.nixosModules.home-manager {
                         home-manager.useGlobalPkgs = true;
@@ -76,7 +69,7 @@
                         home-manager.users.${flakeConfig.username} = import ./home;
 
                         home-manager.extraSpecialArgs = {
-                            inherit inputs flakeConfig pkgs pkgs-unstable;
+                            inherit system inputs flakeConfig pkgs pkgs-unstable;
                         };
                     }
                 ];
