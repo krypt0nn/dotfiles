@@ -13,12 +13,12 @@
             ];
 
             kernelModules = [ "amdgpu" ];
-
-            kernelParams = [
-                "amd_pstate=active"
-                "amdgpu"
-            ];
         };
+
+        kernelParams = [
+            "amd_pstate=active"
+            "amdgpu"
+        ];
 
         extraModulePackages = [];
     };
