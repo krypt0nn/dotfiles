@@ -140,6 +140,21 @@
         settingsFile = "/persistent/xray.jsonc";
     };
 
+    # Namespace with global xray proxy
+    systemd.services.tun2proxy = {
+        enable = true;
+
+        description = "tun2proxy";
+        after = [ "network.target" ];
+        wantedBy = [ "multi-user.target" ];
+
+        serviceConfig = {
+            ExecStart = "${pkgs.tun2proxy}/bin/tun2proxy-bin --setup --unshare --proxy 'socks5://127.0.0.1:11050' --dns-addr 1.1.1.1 --exit-on-fatal-error";
+            Environment = "PATH=${pkgs.util-linux}/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin";
+            Restart = "on-failure";
+        };
+    };
+
     # Persist folders
     environment.persistence."/persistent" = {
         hideMounts = true;

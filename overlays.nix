@@ -5,24 +5,25 @@
         pkg,
         mode ? "https",
         proxy ? "socks5://127.0.0.1:9050",
-        ignore ? "127.0.0.1,::1,localhost,.localdomain.com",
-        electron ? false
+        dns ? "1.1.1.1",
+        ignore ? "127.0.0.1,::1,localhost,.localdomain.com"
     }: self: super: {
         ${pkg} = super.symlinkJoin {
             name = pkg;
             paths = [ super.${pkg} ];
             buildInputs = [ super.makeWrapper ];
-            postBuild = if electron then ''
-                wrapProgram $out/bin/${pkg} \
-                    --add-flags "--proxy-server=\"${proxy}\"" \
-                    --set ${super.lib.strings.toLower mode}_proxy ${proxy} \
-                    --set ${super.lib.strings.toUpper mode}_PROXY ${proxy} \
-                    --set no_proxy "${ignore}"
-            '' else ''
+            postBuild = ''
                 wrapProgram $out/bin/${pkg} \
                     --set ${super.lib.strings.toLower mode}_proxy ${proxy} \
                     --set ${super.lib.strings.toUpper mode}_PROXY ${proxy} \
-                    --set no_proxy "${ignore}"
+                    --set no_proxy "${ignore}" \
+                    --run "${super.tun2proxy}/bin/tun2proxy-bin --setup --unshare --proxy '${proxy}' --dns-addr '${dns}' --verbosity off --exit-on-fatal-error -- bash -c 'PID1=\$(ps -eo pid,ppid | grep \"\$\$ \" | awk \"{print \\\$2}\"); PID2=\$(ps -eo pid,ppid | grep \"\$PID1 \" | awk \"{print \\\$2}\"); echo -n \$PID2 > \"${pkg}.pid\"' &" \
+                    --run "sleep 1" \
+                    --run "DAEMON_PID=\$(cat '${pkg}.pid')" \
+                    --run "rm '${pkg}.pid'" \
+                    --run "nsenter --preserve-credentials --user --net --target \"\$DAEMON_PID\" bash -c '" \
+                    --append-flags "'
+                        kill \"\$DAEMON_PID\""
             '';
         };
     };

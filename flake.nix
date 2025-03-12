@@ -31,7 +31,7 @@
                 rust-overlay.overlays.default
 
                 # Overlay some apps to use local proxy.
-                (proxy { pkg = "vesktop"; proxy = "socks5://127.0.0.1:11050"; electron = true; })
+                (proxy { pkg = "vesktop"; proxy = "socks5://127.0.0.1:11050"; })
                 (proxy { pkg = "fragments"; proxy = "socks5://127.0.0.1:9050"; })
             ];
 
