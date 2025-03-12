@@ -91,10 +91,16 @@
                     ads = [
                         "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts"
                     ];
+
+                    trackers = [
+                        "https://raw.githubusercontent.com/InAUGral/pihole-blocklist-gametrackers/main/pihole-blocklist-gametrackers.txt"
+                        "https://blocklistproject.github.io/Lists/tracking.txt"
+                    ];
                 };
 
                 clientGroupsBlock.default = [
                     "ads"
+                    "trackers"
                 ];
             };
         };
@@ -110,12 +116,11 @@
             ClientTransportPlugin = "obfs4 exec ${pkgs.obfs4}/bin/lyrebird";
 
             Bridge = [
-                "obfs4 83.226.191.248:2048 6FEC97F7437D5451211B42F35784FC2A436C2610 cert=3ubRj29BI4QtyMOVI/XiIE8tNTIypFqj5FtAtSnqMSdNu2ot43UL8PJ4U2c+asMV8YjZeA iat-mode=0"
                 "obfs4 150.43.248.236:443 E69FD1828D270D6F7DD94B1B2C5261CBF1A32583 cert=o3UL0xikRiafXXdnzXC3puRCDEaN7cRhwu+/0VnTcyVIgxFmg/Ds+LEGx2lKS/U7lYGLHQ iat-mode=0"
                 "obfs4 37.120.238.182:26565 9C5515135BA35FDB3707CCF3311BC5FF9E2BA3ED cert=ktM7yOCEhCd4Ani9DAo4KGst4BiIp++5yyfCZDbPTz6nty1pn6vuXX14U5nhR+jpZNbSAQ iat-mode=0"
                 "obfs4 185.183.34.172:54452 4269C427EED688BBD47E925602A5C557619612AF cert=wUWLiqbQ6K2MnguODPJI5YyMWIBTJqcWJKytY6ZRlc9W5hrn6b/MpePplYkaJUk2cQHgNw iat-mode=0"
-                "obfs4 141.94.213.29:34975 3CCF6211A6115BA32224E939C179AC2F8269E186 cert=xFW3DRM458PUIuWgi74qRg8IG7JElyFJIYgy9+V+flBQuvfKKonuPJb373QooLLR+eIqMg iat-mode=0"
-                "obfs4 57.128.35.251:17275 3411026D454DF9F94BB263BCED2CFBECEBBAAF4C cert=nDA6sKSsjz28b1XZVZwZcx2dBbRSdYFZR5yvenhtFKQA7zYY6N2otTaa562gZViSNSW9Kg iat-mode=0"
+                "obfs4 51.83.253.153:38383 99091F0346F7F484493C0221C80619DA452BE465 cert=8QjnFE+IMu6vlf72pepLBHlJsmwR5AK7q93bF3lUHPevU0KeS+FA0SR4IqmZs56+XZL9Sw iat-mode=0"
+                "obfs4 46.226.107.223:62947 E07EFAD34EBB1C9CCFAC96975361E849E4C2687A cert=qO5S0P4IRL84XbQYGZSR1eNfB4ovFgu726S9L7Na1GdHElJ389Lhq7fsqL//k2qk7Yqqbg iat-mode=0"
             ];
 
             Address = "0.0.0.0";
