@@ -17,11 +17,11 @@
                     --set ${super.lib.strings.toLower mode}_proxy ${proxy} \
                     --set ${super.lib.strings.toUpper mode}_PROXY ${proxy} \
                     --set no_proxy "${ignore}" \
-                    --run "${super.tun2proxy}/bin/tun2proxy-bin --setup --unshare --proxy '${proxy}' --dns-addr '${dns}' --verbosity off --exit-on-fatal-error -- bash -c 'PID1=\$(ps -eo pid,ppid | grep \"\$\$ \" | awk \"{print \\\$2}\"); PID2=\$(ps -eo pid,ppid | grep \"\$PID1 \" | awk \"{print \\\$2}\"); echo -n \$PID2 > \"${pkg}.pid\"' &" \
+                    --run "${super.tun2proxy}/bin/tun2proxy-bin --setup --unshare --proxy '${proxy}' --dns-addr '${dns}' --bypass '${dns}' --bypass '127.0.0.0/24' --bypass '192.168.0.0/24' --bypass '10.0.0.0/24' --verbosity off --exit-on-fatal-error -- bash -c 'PID1=\$(ps -eo pid,ppid | grep \"\$\$ \" | awk \"{print \\\$2}\"); PID2=\$(ps -eo pid,ppid | grep \"\$PID1 \" | awk \"{print \\\$2}\"); echo -n \$PID2 > \"${pkg}.pid\"' &" \
                     --run "sleep 1" \
                     --run "DAEMON_PID=\$(cat '${pkg}.pid')" \
                     --run "rm '${pkg}.pid'" \
-                    --run "nsenter --preserve-credentials --user --net --target \"\$DAEMON_PID\" bash -c '" \
+                    --run "nsenter --preserve-credentials --user --net --mount --target \"\$DAEMON_PID\" bash -c '" \
                     --append-flags "'
                         kill \"\$DAEMON_PID\""
             '';
