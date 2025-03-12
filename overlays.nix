@@ -21,7 +21,7 @@
                     --run "sleep 1" \
                     --run "DAEMON_PID=\$(cat '${pkg}.pid')" \
                     --run "rm '${pkg}.pid'" \
-                    --run "nsenter --preserve-credentials --user --net --mount --target \"\$DAEMON_PID\" bash -c '" \
+                    --run "nsenter --preserve-credentials --user --net --target \"\$DAEMON_PID\" bash -c '" \
                     --append-flags "'
                         kill \"\$DAEMON_PID\""
             '';
