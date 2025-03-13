@@ -11,7 +11,7 @@
             "127.0.0.0/24"
             "192.168.0.0/24"
             "10.0.0.0/24"
-            "100.100.100.0/24" # Tailscale
+            "100.64.0.0/10" # Tailscale: https://tailscale.com/kb/1015/100.x-addresses
         ]
     }: self: super: {
         ${pkg} = let
