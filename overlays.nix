@@ -6,9 +6,19 @@
         mode ? "https",
         proxy ? "socks5://127.0.0.1:9050",
         dns ? "1.1.1.1",
-        ignore ? "127.0.0.1,::1,localhost,.localdomain.com"
+        ignore ? "127.0.0.1,::1,localhost,.localdomain.com",
+        bypass ? [
+            "127.0.0.0/24"
+            "192.168.0.0/24"
+            "10.0.0.0/24"
+            "100.100.100.0/24" # Tailscale
+        ]
     }: self: super: {
-        ${pkg} = super.symlinkJoin {
+        ${pkg} = let
+            bypassFlags = builtins.concatStringsSep " " (
+                map (cidr: "--bypass '${cidr}'") bypass
+            );
+        in super.symlinkJoin {
             name = pkg;
             paths = [ super.${pkg} ];
             buildInputs = [ super.makeWrapper ];
@@ -17,7 +27,7 @@
                     --set ${super.lib.strings.toLower mode}_proxy ${proxy} \
                     --set ${super.lib.strings.toUpper mode}_PROXY ${proxy} \
                     --set no_proxy "${ignore}" \
-                    --run "${super.tun2proxy}/bin/tun2proxy-bin --setup --unshare --proxy '${proxy}' --dns-addr '${dns}' --bypass '${dns}' --bypass '127.0.0.0/24' --bypass '192.168.0.0/24' --bypass '10.0.0.0/24' --verbosity off --exit-on-fatal-error -- bash -c 'PID1=\$(ps -eo pid,ppid | grep \"\$\$ \" | awk \"{print \\\$2}\"); PID2=\$(ps -eo pid,ppid | grep \"\$PID1 \" | awk \"{print \\\$2}\"); echo -n \$PID2 > \"${pkg}.pid\"' &" \
+                    --run "${super.tun2proxy}/bin/tun2proxy-bin --setup --unshare --proxy '${proxy}' --dns-addr '${dns}' --bypass '${dns}' ${bypassFlags} --verbosity off --exit-on-fatal-error -- bash -c 'PID1=\$(ps -eo pid,ppid | grep \"\$\$ \" | awk \"{print \\\$2}\"); PID2=\$(ps -eo pid,ppid | grep \"\$PID1 \" | awk \"{print \\\$2}\"); echo -n \$PID2 > \"${pkg}.pid\"' &" \
                     --run "sleep 1" \
                     --run "DAEMON_PID=\$(cat '${pkg}.pid')" \
                     --run "rm '${pkg}.pid'" \
