@@ -5,7 +5,7 @@
         pkg,
         mode ? "https",
         proxy ? "socks5://127.0.0.1:9050",
-        dns ? "1.1.1.1",
+        dns ? "127.0.0.1",
         ignore ? "127.0.0.1,::1,localhost,.localdomain.com",
         bypass ? [
             "127.0.0.0/24"
