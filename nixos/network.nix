@@ -103,6 +103,11 @@
                     "trackers"
                 ];
             };
+
+            caching = {
+                prefetching = true;
+                minTime = "5m";
+            };
         };
     };
 
