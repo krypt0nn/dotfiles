@@ -15,6 +15,10 @@
 
                 # Minecraft Plasmo Voice
                 25565
+
+                # Factorio
+                34197
+                53747
             ];
         };
 
