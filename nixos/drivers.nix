@@ -25,6 +25,7 @@
             libva
             vaapiVdpau
             libvdpau-va-gl
+            rocmPackages.clr.icd
 
             # This should fix some wine games not being able
             # to lookup GPU drivers via DXVK
