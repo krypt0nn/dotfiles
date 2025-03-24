@@ -97,7 +97,7 @@
                     ];
 
                     trackers = [
-                        "https://raw.githubusercontent.com/InAUGral/pihole-blocklist-gametrackers/main/pihole-blocklist-gametrackers.txt"
+                        # "https://raw.githubusercontent.com/InAUGral/pihole-blocklist-gametrackers/main/pihole-blocklist-gametrackers.txt"
                         "https://blocklistproject.github.io/Lists/tracking.txt"
                     ];
                 };
