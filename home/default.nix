@@ -5,7 +5,6 @@
                 ./users/observer.nix
 
                 # Packages
-                ./packages/zsh.nix
                 ./packages/fish.nix
                 ./packages/fzf.nix
                 ./packages/zoxide.nix
@@ -37,7 +36,7 @@
                 ./users/observer.nix
 
                 # Packages
-                ./packages/zsh.nix
+                ./packages/fish.nix
                 ./packages/fzf.nix
                 ./packages/zoxide.nix
                 ./packages/direnv.nix
@@ -65,7 +64,7 @@
                 ./users/observer.nix
 
                 # Packages
-                ./packages/zsh.nix
+                ./packages/fish.nix
                 ./packages/fzf.nix
                 ./packages/zoxide.nix
                 ./packages/direnv.nix
