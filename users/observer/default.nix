@@ -9,7 +9,7 @@
         createHome = true;
 
         # useDefaultShell = true; # Doesn't work for whatever reason
-        shell = pkgs.zsh;
+        shell = pkgs.fish;
 
         name = "observer";
         home = "/home/observer";

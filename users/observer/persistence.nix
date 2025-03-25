@@ -32,18 +32,6 @@
                 { directory = ".ssh"; mode = "0700"; }
                 { directory = ".pki"; mode = "0700"; }
                 { directory = ".local/share/keyrings"; mode = "0700"; }
-
-                { directory = ".local/share/Trash"; mode = "0755"; }
-            ];
-
-            files = [
-                # Zsh
-                ".zsh_history"
-
-                # Cause breakages.
-                # ".zshrc"
-                # ".zshenv"
-                # ".zcompdump"
             ];
         };
     };

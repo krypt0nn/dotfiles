@@ -13,7 +13,7 @@
         libqalculate
     ];
 
-    programs.zsh.enable = true;
+    programs.fish.enable = true;
     programs.gamemode.enable = true;
 
     environment.sessionVariables.EDITOR = "micro";

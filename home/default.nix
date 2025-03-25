@@ -6,6 +6,7 @@
 
                 # Packages
                 ./packages/zsh.nix
+                ./packages/fish.nix
                 ./packages/fzf.nix
                 ./packages/zoxide.nix
                 ./packages/direnv.nix
