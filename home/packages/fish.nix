@@ -23,14 +23,14 @@
         shellAliases = {
             system-allow-edit = lib.concatStrings [
                 "sudo chown -R ${flakeConfig.username} /system-flake && "
-                "sudo chmod -R 644 /system-flake"
+                "sudo chmod -R 755 /system-flake"
             ];
 
             system-forbid-edit = lib.concatStrings [
                 "sudo chown -R root /system-flake && "
-                "sudo chmod -R 644 /system-flake && "
+                "sudo chmod -R 755 /system-flake && "
                 "sudo chown -R ${flakeConfig.username} /system-flake/.git && "
-                "sudo chmod -R 644 /system-flake/.git"
+                "sudo chmod -R 755 /system-flake/.git"
             ];
 
             system-update = "sudo nixos-rebuild switch --flake /system-flake";
