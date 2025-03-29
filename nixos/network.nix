@@ -76,11 +76,11 @@
             ports.dns = 53;
 
             upstreams.groups.default = [
-                "https://one.one.one.one/dns-query"
+                "https://1.1.1.1/dns-query"
             ];
 
             bootstrapDns = {
-                upstream = "https://one.one.one.one/dns-query";
+                upstream = "https://1.1.1.1/dns-query";
 
                 ips = [
                     "1.1.1.1"
@@ -128,7 +128,6 @@
                 "obfs4 150.43.248.236:443 E69FD1828D270D6F7DD94B1B2C5261CBF1A32583 cert=o3UL0xikRiafXXdnzXC3puRCDEaN7cRhwu+/0VnTcyVIgxFmg/Ds+LEGx2lKS/U7lYGLHQ iat-mode=0"
                 "obfs4 37.120.238.182:26565 9C5515135BA35FDB3707CCF3311BC5FF9E2BA3ED cert=ktM7yOCEhCd4Ani9DAo4KGst4BiIp++5yyfCZDbPTz6nty1pn6vuXX14U5nhR+jpZNbSAQ iat-mode=0"
                 "obfs4 185.183.34.172:54452 4269C427EED688BBD47E925602A5C557619612AF cert=wUWLiqbQ6K2MnguODPJI5YyMWIBTJqcWJKytY6ZRlc9W5hrn6b/MpePplYkaJUk2cQHgNw iat-mode=0"
-                "obfs4 51.83.253.153:38383 99091F0346F7F484493C0221C80619DA452BE465 cert=8QjnFE+IMu6vlf72pepLBHlJsmwR5AK7q93bF3lUHPevU0KeS+FA0SR4IqmZs56+XZL9Sw iat-mode=0"
                 "obfs4 94.156.153.217:31337 AF9EABB157AE185E3D0F030D6F21C2044A794976 cert=Gg+YPaGTlB30p7x45igqEJQ4Af/8HqgbIzwJ1GBzqto1xSDS/k5H83mttmUh0Zob+vrQWw iat-mode=0"
                 "obfs4 85.215.50.238:10007 D27430CDF128406ED556434E8F908749EE6D0198 cert=GBiBNfVY/4VSWG6Qx7HmsPMB6WAq80HIr8JUUkTdxsk2L5QdrjdZap8WjyrpaizU58SQGA iat-mode=0"
                 "obfs4 57.128.109.243:60354 3D2213B9342FACAEB0ACCD8B0CAA7C6BDD1824B1 cert=wbELe6T4as3a0N0LorQMYLH0hXSXOqXtrmtrdAHeA1FuLeFrZIMSJlPDIs7FAdzGnNETFg iat-mode=0"
