@@ -45,6 +45,8 @@
         };
 
         tab_size = 4;
+        wrap_guides = [80];
+        soft_wrap = "none";
 
         languages = {
             YAML = {
