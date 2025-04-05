@@ -59,11 +59,11 @@
             ports.dns = 53;
 
             upstreams.groups.default = [
-                "https://1.1.1.1/dns-query"
+                "https://one.one.one.one/dns-query"
             ];
 
             bootstrapDns = {
-                upstream = "https://1.1.1.1/dns-query";
+                upstream = "https://one.one.one.one/dns-query";
 
                 ips = [
                     "1.1.1.1"
@@ -93,6 +93,8 @@
 
             caching = {
                 prefetching = true;
+                prefetchExpires = "16h";
+                prefetchThreshold = 3;
                 minTime = "5m";
             };
         };
