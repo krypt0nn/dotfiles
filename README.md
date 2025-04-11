@@ -130,19 +130,22 @@ mkpasswd -m sha-512
 
 ### 11. Reproduce this configuration repo
 
-Clone this repo and edit the `flakeConfig.json` file to setup your user.
+Clone this repo and edit the `config.json` file to setup your user.
 
 ```bash
 sudo git clone https://github.com/krypt0nn/dotfiles /system-flake
 
-sudo nix flake update /system-flake
 sudo nixos-rebuild boot --flake /system-flake
 ```
+
+Don't forget to update `hardware.nix` file (disks UUID-s) for your host device.
+Note that after the first restart system can clean all your changes due to
+`/persistent` folder initialization.
 
 ### 12. Restart the system
 
 ```bash
-restart
+reboot
 ```
 
 Done. Welcome to your impermanent NixOS system!

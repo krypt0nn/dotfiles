@@ -13,7 +13,7 @@
 
         settings = {
             devices = {
-                "observer-pc"     = { id = "ANN4CJX-BOC36L6-72EYUZP-6B3J3LB-LYTF3PN-YL2JMYX-7U5BQMO-4V766A3"; autoAcceptFolders = true; };
+                "observer-pc"     = { id = "J4VSRJH-7ID4NSF-C6XWJL6-U4ZLQC2-JBMADG4-QXOSACW-FYYJNEA-5WVQMAH"; autoAcceptFolders = true; };
                 "observer-laptop" = { id = "JWIJBIA-6ZQUP33-GB4OEC3-KQPW3CM-YFAZDDW-LQQNPWE-DI6WYXI-XVSVKQR"; autoAcceptFolders = true; };
                 "observer-server" = { id = "KBAD6RT-GHQCXW7-WYDFXF7-RKE5QOL-XSIUD6A-4E4D4G3-HLC75OZ-3ERYFQA"; autoAcceptFolders = true; };
             };
@@ -25,6 +25,7 @@
                     devices = [
                         "observer-pc"
                         "observer-laptop"
+                        "observer-server"
                     ];
                 };
 
@@ -34,6 +35,7 @@
                     devices = [
                         "observer-pc"
                         "observer-laptop"
+                        "observer-server"
                     ];
                 };
 
@@ -43,6 +45,7 @@
                     devices = [
                         "observer-pc"
                         "observer-laptop"
+                        "observer-server"
                     ];
                 };
 
@@ -52,6 +55,7 @@
                     devices = [
                         "observer-pc"
                         "observer-laptop"
+                        "observer-server"
                     ];
                 };
             };

@@ -27,67 +27,67 @@
 
     fileSystems = {
         "/" = {
-            device = "/dev/disk/by-uuid/c488a0f5-e628-400a-a1a3-08840009df1a";
+            device = "/dev/disk/by-uuid/4740ea8c-ecab-417a-bf0a-0d14de06b058";
             fsType = "btrfs";
             options = [
                 "noatime"
                 "nodiratime"
                 "ssd"
-                "compress=lzo"
                 "subvol=root"
             ];
+            neededForBoot = true;
         };
 
         "/nix" = {
-            device = "/dev/disk/by-uuid/c488a0f5-e628-400a-a1a3-08840009df1a";
+            device = "/dev/disk/by-uuid/4740ea8c-ecab-417a-bf0a-0d14de06b058";
             fsType = "btrfs";
             options = [
                 "noatime"
                 "nodiratime"
                 "ssd"
-                "compress=lzo"
+                "compress=zstd"
                 "subvol=nix"
             ];
+            neededForBoot = true;
         };
 
         "/persistent" = {
-            device = "/dev/disk/by-uuid/c488a0f5-e628-400a-a1a3-08840009df1a";
+            device = "/dev/disk/by-uuid/4740ea8c-ecab-417a-bf0a-0d14de06b058";
             fsType = "btrfs";
             options = [
                 "noatime"
                 "nodiratime"
                 "ssd"
-                "compress=lzo"
                 "subvol=persistent"
             ];
             neededForBoot = true;
         };
 
         "/snapshots" = {
-            device = "/dev/disk/by-uuid/c488a0f5-e628-400a-a1a3-08840009df1a";
+            device = "/dev/disk/by-uuid/4740ea8c-ecab-417a-bf0a-0d14de06b058";
             fsType = "btrfs";
             options = [
                 "noatime"
                 "nodiratime"
                 "ssd"
-                "compress=lzo"
                 "subvol=snapshots"
             ];
             neededForBoot = true;
         };
 
         "/boot" = {
-            device = "/dev/disk/by-uuid/9F95-2E5E";
+            device = "/dev/disk/by-uuid/36C0-08DE";
             fsType = "vfat";
             options = [
                 "fmask=0022"
                 "dmask=0022"
             ];
+            neededForBoot = true;
         };
     };
 
     swapDevices = [
-        { device = "/dev/disk/by-uuid/22fd323e-aba4-4657-9667-f20b68a06fde"; }
+        { device = "/dev/disk/by-uuid/08adb28a-60a0-4d18-8d6f-1e7f1e4e92e1"; }
     ];
 
     zramSwap.enable = true;
