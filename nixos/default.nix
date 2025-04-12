@@ -37,6 +37,4 @@
         };
 
         in imports.${flakeConfig.hostname};
-
-    system.stateVersion = "23.11";
 }

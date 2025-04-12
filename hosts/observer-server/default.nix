@@ -9,4 +9,5 @@
     ];
 
     networking.hostName = "observer-server";
+    system.stateVersion = "24.05";
 }
