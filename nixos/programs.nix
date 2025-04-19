@@ -15,6 +15,7 @@
 
     programs.fish.enable = true;
     programs.gamemode.enable = true;
+    programs.nix-ld.enable = true;
 
     environment.sessionVariables.EDITOR = "micro";
 }
