@@ -10,19 +10,6 @@
     };
 
     home.file.".config/zed/settings.json".text = builtins.toJSON {
-        assistant = {
-            default_model = {
-                provider = "zed.dev";
-                model = "claude-3-7-sonnet-latest";
-            };
-
-            version = "2";
-        };
-
-        features = {
-            inline_completion_provider = "copilot";
-        };
-
         telemetry = {
             metrics = false;
             diagnostics = false;
@@ -33,7 +20,12 @@
         vim_mode = false;
         auto_update = false;
 
-        theme = "Andromeda";
+        theme = {
+            mode = "system";
+            light = "One Light";
+            dark = "One Dark";
+        };
+
         buffer_font_family = "JetBrains Mono";
 
         ui_font_size = 16;
@@ -69,6 +61,33 @@
                     };
                 };
             };
+        };
+
+        language_models = {
+            ollama = {
+                api_url = "http://127.0.0.1:11434";
+                available_models = [
+                    {
+                        name = "qwen2.5-coder:3b";
+                        display_name = "Qwen 2.5 Coder 3B";
+                        max_tokens = 32768;
+                    }
+                ];
+            };
+        };
+
+        assistant = {
+            # default_model = {
+            #     provider = "zed.dev";
+            #     model = "claude-3-7-sonnet-latest";
+            # };
+
+            default_model = {
+                provider = "ollama";
+                model = "qwen2.5-coder:3b";
+            };
+
+            version = "2";
         };
     };
 }
