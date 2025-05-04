@@ -37,6 +37,7 @@
 
             config = {
                 allowUnfree = true;
+                rocmSupport = true;
             };
 
             pkgs = import nixpkgs {
