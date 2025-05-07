@@ -63,6 +63,10 @@
             };
         };
 
+        features = {
+            edit_prediction_provider = "none";
+        };
+
         language_models = {
             ollama = {
                 api_url = "http://127.0.0.1:11434";
