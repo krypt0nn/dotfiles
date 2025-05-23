@@ -1,5 +1,5 @@
 { flakeConfig, pkgs, ... }: {
-    home.packages = [ pkgs.gimp ];
+    home.packages = [ pkgs.gimp3 ];
 
     home.persistence."/persistent/home/${flakeConfig.username}" = {
         allowOther = false;

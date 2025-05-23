@@ -25,7 +25,6 @@
                 ./apps/tor-browser.nix
                 ./apps/bottles.nix
 
-                ./apps/vscodium.nix
                 ./apps/zed-editor.nix
 
                 ./apps/prismlauncher.nix
@@ -55,7 +54,6 @@
                 ./apps/tor-browser.nix
                 ./apps/bottles.nix
 
-                ./apps/vscodium.nix
                 ./apps/zed-editor.nix
             ];
 
