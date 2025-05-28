@@ -17,7 +17,6 @@
         mission-center
         gnome-extension-manager
         loupe
-        amberol
         vlc
         papers
 
