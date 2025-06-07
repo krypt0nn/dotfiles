@@ -16,6 +16,7 @@
                 ./apps/telegram.nix
                 ./apps/vesktop.nix
                 ./apps/gimp.nix
+                ./apps/flowblade.nix
                 ./apps/onlyoffice.nix
                 ./apps/apostrophe.nix
                 ./apps/hieroglyphic.nix
