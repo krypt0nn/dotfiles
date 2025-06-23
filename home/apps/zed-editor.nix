@@ -16,6 +16,7 @@
         };
 
         proxy = "socks5://127.0.0.1:11050";
+        load_direnv = "direct";
 
         vim_mode = false;
         auto_update = false;
@@ -40,14 +41,13 @@
         wrap_guides = [80];
         soft_wrap = "none";
 
+        format_on_save = "off";
+
         languages = {
             YAML = {
                 tab_size = 2;
             };
         };
-
-        load_direnv = "direct";
-        format_on_save = "off";
 
         lsp = {
             "rust-analyzer" = {
@@ -56,8 +56,20 @@
                 };
 
                 initialization_options = {
+                    rust = {
+                        # Improves rust-analyzer performance in cost of increased
+                        # disk space use.
+                        analyzerTargetDir = true;
+                    };
+
                     check = {
                         command = "clippy";
+                    };
+
+                    rustfmt = {
+                        extraArgs = [
+                            "+nightly"
+                        ];
                     };
                 };
             };

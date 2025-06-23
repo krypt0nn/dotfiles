@@ -15,6 +15,7 @@
                 ./apps/zen-browser.nix
                 ./apps/telegram.nix
                 ./apps/vesktop.nix
+                ./apps/amberol.nix
                 ./apps/gimp.nix
                 ./apps/onlyoffice.nix
                 ./apps/apostrophe.nix
@@ -45,6 +46,7 @@
                 ./apps/zen-browser.nix
                 ./apps/telegram.nix
                 ./apps/vesktop.nix
+                ./apps/amberol.nix
                 ./apps/gimp.nix
                 ./apps/onlyoffice.nix
                 ./apps/apostrophe.nix
