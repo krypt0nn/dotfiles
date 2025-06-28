@@ -13,11 +13,11 @@
                 51413
 
                 # Minecraft Plasmo Voice
-                25565
+                # 25565
 
                 # Factorio
-                34197
-                53747
+                # 34197
+                # 53747
             ];
         };
 
@@ -110,14 +110,14 @@
             ClientTransportPlugin = "obfs4 exec ${pkgs.obfs4}/bin/lyrebird";
 
             Bridge = [
-                "obfs4 150.43.248.236:443 E69FD1828D270D6F7DD94B1B2C5261CBF1A32583 cert=o3UL0xikRiafXXdnzXC3puRCDEaN7cRhwu+/0VnTcyVIgxFmg/Ds+LEGx2lKS/U7lYGLHQ iat-mode=0"
                 "obfs4 37.120.238.182:26565 9C5515135BA35FDB3707CCF3311BC5FF9E2BA3ED cert=ktM7yOCEhCd4Ani9DAo4KGst4BiIp++5yyfCZDbPTz6nty1pn6vuXX14U5nhR+jpZNbSAQ iat-mode=0"
                 "obfs4 185.183.34.172:54452 4269C427EED688BBD47E925602A5C557619612AF cert=wUWLiqbQ6K2MnguODPJI5YyMWIBTJqcWJKytY6ZRlc9W5hrn6b/MpePplYkaJUk2cQHgNw iat-mode=0"
-                "obfs4 94.156.153.217:31337 AF9EABB157AE185E3D0F030D6F21C2044A794976 cert=Gg+YPaGTlB30p7x45igqEJQ4Af/8HqgbIzwJ1GBzqto1xSDS/k5H83mttmUh0Zob+vrQWw iat-mode=0"
                 "obfs4 85.215.50.238:10007 D27430CDF128406ED556434E8F908749EE6D0198 cert=GBiBNfVY/4VSWG6Qx7HmsPMB6WAq80HIr8JUUkTdxsk2L5QdrjdZap8WjyrpaizU58SQGA iat-mode=0"
-                "obfs4 31.171.241.111:80 943EC555C2265FAEE461081215224B1ADC7AD919 cert=+jYBlhLKXIWxOaYlDSuwzJ3nwjcWSubWSfmyPrLWGJMi1MACxR1a2otBVqCseTppuzUKbQ iat-mode=0"
                 "obfs4 195.201.33.106:59994 91EE0B1CE262E44C7BB96491651F7C86EF65B4D1 cert=AP8yy73Ww8AJYVJ1vnGx6aFJ1F/uRodvbPEpllfXsRHyTyAPV50xQBw+rfKWKdW2qMFVUg iat-mode=0"
                 "obfs4 5.75.149.207:29186 1B46786E7FF87921BBB52A0CBBC24B9D40830B63 cert=nss+FABLQKfwYqDVM+WqFz8YCTFzm+pN2xf/9Rk5HMbnnw/Zc/aUk1AJu4uI/2hujYxTeQ iat-mode=0"
+                "obfs4 198.50.223.26:80 A75FC19718138D8CD35AE2820E840D8E2BAC595F cert=l8/Zh4z+5/DBh8HBOyC4+nG6ygBFsJ+FWB3Ib+0U335kWFzoWpWTlra8tj9JS15s3uJ/Zg iat-mode=1"
+                "obfs4 57.128.56.248:30285 1CF4ED5D3C7F4E3BFB485DDA5C7E688BEBBAE9DA cert=wC6H6x0IDrTeIKVqOzzDAfZQxU6eyB2Eg/auzam+XCMWzQLHl3+qfgbqhMQxV7K3uQRMZw iat-mode=0"
+                "obfs4 51.68.81.140:2098 F205CB5B969389061477609F8E03470B982F64C1 cert=6hFyrclX8Cg16jHGbtYqZxbGxj+p0flBn2EYZu+hvx/tGL4GROXSvBtwVQ1sRYFbi0++fQ iat-mode=0"
             ];
 
             Address = "0.0.0.0";
