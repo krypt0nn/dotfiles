@@ -13,9 +13,6 @@
             # Better "cd" implementation
             { name = "z"; src = z.src; }
 
-            # Filter failed commands from the history
-            { name = "sponge"; src = sponge.src; }
-
             # Fuzzy finder support for fish
             { name = "fzf-fish"; src = fzf-fish.src; }
         ];
