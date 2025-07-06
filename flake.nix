@@ -33,6 +33,18 @@
                 # Overlay some apps to use local proxy.
                 (proxy { pkg = "vesktop"; proxy = "socks5://127.0.0.1:11050"; })
                 (proxy { pkg = "fragments"; proxy = "socks5://127.0.0.1:9050"; })
+
+                # Temporary workaround for ghostty performance regression.
+                # Link: https://github.com/ghostty-org/ghostty/discussions/7720
+                (self: super: {
+                    ghostty = super.ghostty.overrideAttrs (_: {
+                        preBuild = ''
+                            shopt -s globstar
+                            sed -i 's/^const xev = @import("xev");$/const xev = @import("xev").Epoll;/' **/*.zig
+                            shopt -u globstar
+                        '';
+                    });
+                })
             ];
 
             config = {
