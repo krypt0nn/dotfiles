@@ -80,8 +80,8 @@
                 api_url = "http://127.0.0.1:11434";
                 available_models = [
                     {
-                        name = "hf.co/unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF:IQ3_XXS";
-                        display_name = "Qwen 3 Coder 30B-A3B";
+                        name = "hf.co/unsloth/Qwen2.5-Coder-7B-Instruct-128K-GGUF:Q4_K_M";
+                        display_name = "Qwen 2.5 Coder 7B";
                         max_tokens = 16384;
                         supports_tools = true;
                     }
@@ -97,7 +97,7 @@
 
             default_model = {
                 provider = "ollama";
-                model = "hf.co/unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF:IQ3_XXS";
+                model = "hf.co/unsloth/Qwen2.5-Coder-7B-Instruct-128K-GGUF:Q4_K_M";
             };
         };
     };

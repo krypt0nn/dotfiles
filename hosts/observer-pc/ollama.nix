@@ -15,7 +15,7 @@
         rocmOverrideGfx = "10.1.0";
 
         loadModels = [
-            "hf.co/unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF:IQ3_XXS"
+            "hf.co/unsloth/Qwen2.5-Coder-7B-Instruct-128K-GGUF:Q4_K_M"
         ];
     };
 
