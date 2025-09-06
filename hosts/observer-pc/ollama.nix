@@ -1,6 +1,9 @@
 { flakeConfig, pkgs-unstable, ... }: {
-    environment.systemPackages = [
-        pkgs-unstable.ollama-rocm
+    environment.systemPackages = with pkgs-unstable; [
+        ollama-rocm
+        (llama-cpp.override {
+            rocmSupport = true;
+        })
     ];
 
     services.ollama = {
@@ -25,6 +28,7 @@
         users.${flakeConfig.username} = {
             directories = [
                 ".ollama"
+                ".cache/llama.cpp"
             ];
         };
     };
