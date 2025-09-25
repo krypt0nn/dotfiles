@@ -17,4 +17,14 @@
             dockerSocket.enable = true;
         };
     };
+
+    environment.persistence."/persistent" = {
+        hideMounts = true;
+
+        users.${flakeConfig.username} = {
+            directories = [
+                ".local/share/containers"
+            ];
+        };
+    };
 }
