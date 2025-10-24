@@ -12,6 +12,7 @@
                 ./packages/rust.nix
 
                 # Apps
+                ./apps/ghostty.nix
                 ./apps/zen-browser.nix
                 ./apps/telegram.nix
                 ./apps/vesktop.nix
@@ -43,6 +44,7 @@
                 ./packages/rust.nix
 
                 # Apps
+                ./apps/ghostty.nix
                 ./apps/zen-browser.nix
                 ./apps/telegram.nix
                 ./apps/vesktop.nix
