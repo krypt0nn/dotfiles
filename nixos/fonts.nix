@@ -10,6 +10,6 @@
 
         # Windows fonts
         pkgs-unstable.corefonts
-        pkgs-unstable.vistafonts
+        pkgs-unstable.vista-fonts
     ];
 }
