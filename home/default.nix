@@ -20,6 +20,7 @@
                 ./apps/gimp.nix
                 ./apps/onlyoffice.nix
                 ./apps/apostrophe.nix
+                ./apps/thunderbird.nix
                 ./apps/hieroglyphic.nix
                 ./apps/rnote.nix
 
@@ -52,6 +53,7 @@
                 ./apps/gimp.nix
                 ./apps/onlyoffice.nix
                 ./apps/apostrophe.nix
+                ./apps/thunderbird.nix
                 ./apps/hieroglyphic.nix
 
                 ./apps/fragments.nix
