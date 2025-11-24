@@ -18,9 +18,20 @@
         };
 
         zen-browser.url = "github:0xc000022070/zen-browser-flake";
+
+        nixcord = {
+            url = "github:kaylorben/nixcord";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
     };
 
-    outputs = { nixpkgs, nixpkgs-unstable, home-manager, impermanence, rust-overlay, ... }@inputs:
+    outputs = {
+        nixpkgs,
+        nixpkgs-unstable,
+        home-manager,
+        impermanence,
+        rust-overlay, ...
+    }@inputs:
         let
             flakeConfig = builtins.fromJSON (builtins.readFile ./config.json);
 
@@ -71,6 +82,10 @@
 
                         home-manager.users.${flakeConfig.username} = import ./home;
 
+                        home-manager.sharedModules = [
+                            inputs.nixcord.homeModules.nixcord
+                        ];
+
                         home-manager.extraSpecialArgs = {
                             inherit system inputs flakeConfig pkgs pkgs-unstable;
                         };
@@ -79,7 +94,7 @@
             };
 
             devShells.${system}.default = pkgs.mkShell {
-                nativeBuildInputs = [ pkgs.nixd ];
+                nativeBuildInputs = with pkgs; [ nixd nil ];
             };
         };
 }

@@ -15,6 +15,7 @@
                 ./apps/ghostty.nix
                 ./apps/zen-browser.nix
                 ./apps/telegram.nix
+                # ./apps/nixcord.nix
                 ./apps/vesktop.nix
                 ./apps/amberol.nix
                 ./apps/gimp.nix
@@ -48,6 +49,7 @@
                 ./apps/ghostty.nix
                 ./apps/zen-browser.nix
                 ./apps/telegram.nix
+                # ./apps/nixcord.nix
                 ./apps/vesktop.nix
                 ./apps/amberol.nix
                 ./apps/gimp.nix
