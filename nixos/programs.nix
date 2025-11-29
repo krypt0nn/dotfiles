@@ -9,7 +9,6 @@
         btop
         fastfetch
         onefetch
-        cachix
         libqalculate
     ];
 

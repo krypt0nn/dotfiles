@@ -2,7 +2,7 @@
     fonts.packages = with pkgs; [
         open-fonts
         liberation_ttf
-        noto-fonts-emoji
+        noto-fonts-color-emoji
         times-newer-roman
 
         jetbrains-mono

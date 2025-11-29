@@ -1,13 +1,7 @@
 { pkgs, ... }: {
     # Enable GNOME DE
-    services.xserver = {
-        enable = true;
-
-        displayManager.gdm.enable = true;
-        desktopManager.gnome.enable = true;
-
-        videoDrivers = [ "amdgpu" ];
-    };
+    services.displayManager.gdm.enable = true;
+    services.desktopManager.gnome.enable = true;
 
     # Add some default apps
     environment.systemPackages = with pkgs; [
@@ -15,7 +9,6 @@
         gnome-extension-manager
         loupe
         vlc
-        papers
 
         # Setup GNOME extensions
         gnomeExtensions.appindicator
@@ -27,7 +20,7 @@
 
     # Remove unneeded built-in gnome apps
     environment.gnome.excludePackages = with pkgs; [
-        cheese eog epiphany simple-scan totem yelp geary evince
+        cheese eog epiphany simple-scan showtime yelp geary
         gnome-calendar gnome-characters gnome-contacts
         gnome-font-viewer gnome-logs gnome-maps gnome-music
         gnome-system-monitor gnome-connections
