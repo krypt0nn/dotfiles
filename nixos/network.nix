@@ -124,7 +124,6 @@
 
             Bridge = builtins.filter (s: s != "") (builtins.map pkgs.lib.strings.trim (pkgs.lib.strings.splitString "\n" ''
                 webtunnel [2001:db8:7e0e:b70b:575d:c674:5178:139c]:443 55975C16B90225C762A211CE9C480A5F1A8E2B66 url=https://thedadhasit.com/Cqv6DKEa63nvIFPOevXW1SIx ver=0.0.2
-                webtunnel [2001:db8:888f:6b82:e4f2:19a9:81d3:659a]:443 626D6E238C6E19C09E551508A2C5EA5A514C64BA url=https://www2.notriddle.com/rPROWV6KWnDb2AA7xE2oTu3t ver=0.0.1
                 webtunnel [2001:db8:75ad:569c:7ea3:6af2:c922:7b23]:443 8E860A30788AA17A84C0AFB8F111BAB0D5504FE0 url=https://scorevote.xyz/aTzB6XNVkeh2XqT9XQ0RHmHw ver=0.0.2
                 webtunnel [2001:db8:cb5c:a26a:3b21:2976:2b15:2f74]:443 5115B382BF1F2DC55030B97D59300B3F9B45CAA1 url=https://bors.technology/Ul2qmvTA1F9TikmTFAOWtGoC ver=0.0.2
                 webtunnel [2001:db8:77a8:d427:4e0a:8cf7:a2c0:8cda]:443 77B60C7540BA105297FB91DD7BA3557F6ED15C5B url=https://alina-photos.art/da495ccdc73b948387c45c2ab82c1b1aac4b1582 ver=0.0.3
