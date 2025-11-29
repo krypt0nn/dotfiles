@@ -107,20 +107,31 @@
 
         settings = {
             UseBridges = true;
-            ClientTransportPlugin = "obfs4 exec ${pkgs.obfs4}/bin/lyrebird";
 
-            Bridge = [
-                "obfs4 77.22.111.228:444 31A820940B96F2089E5A235E1B7F09C468A327CA cert=db4/c4C8V0Vl+OJL4vOdVOr73fMfIgLcnG/LWN7ZxQnDeacmu3tSONz9EQD/IM3iSZYwUA iat-mode=0"
-                "obfs4 85.215.202.221:2342 F9CD642D3B0D16EF901FAA3974CC3E6628226D10 cert=9NdqO/bPA77Z9pxAC533rWzjyWeADpI6tZO1PZ15m7m/g3kElZji2ZHuq2dxube2HFqFag iat-mode=0"
-                "obfs4 46.226.107.235:57180 93BD2E597D164D9FE9C74BF3E0F68531AC17EFB2 cert=lkV0hpUCIEEpU1nIFGnBJoabeXn0BFykm3NIf4an09Kq8nTK+qv6Z3A1i3Rkkc3hGMoqSA iat-mode=0"
-                "obfs4 185.183.34.172:54452 4269C427EED688BBD47E925602A5C557619612AF cert=wUWLiqbQ6K2MnguODPJI5YyMWIBTJqcWJKytY6ZRlc9W5hrn6b/MpePplYkaJUk2cQHgNw iat-mode=0"
-                "obfs4 85.215.50.238:10007 D27430CDF128406ED556434E8F908749EE6D0198 cert=GBiBNfVY/4VSWG6Qx7HmsPMB6WAq80HIr8JUUkTdxsk2L5QdrjdZap8WjyrpaizU58SQGA iat-mode=0"
-                "obfs4 162.55.219.253:21358 A43C6D5A85CE5D52486293C507983409ED7C1EC0 cert=t0TUwf8Gu+jz8nxWYAPR/VMqh9k8+efrZFTIg6HNpitEdNH1fT1KlAz51jAZqxQq8/9nEA iat-mode=0"
-                "obfs4 82.67.29.26:42024 DE90DE5C6EC2435856CBFE39A0C6E16BC737412E cert=pv4sHJlCcHNiI6gFeAduNdnshJm2J/zPGvJzQ/CvTGfBZAByjzFeYJtpOS1iSIuKRmsdDA iat-mode=0"
-                "obfs4 95.217.11.29:22134 9859875C752128125D3179F90BA6351744B09040 cert=W+qSHr6JcFY6UyJiXR3Ec5I5bYHFwDAXNq8HRQU3C56h/aJB8PQqbr8Sq04zKvhEWGbxEw iat-mode=0"
-            ];
+            # ClientTransportPlugin = "obfs4 exec ${pkgs.obfs4}/bin/lyrebird";
 
-            Address = "0.0.0.0";
+            # Bridge = builtins.filter (s: s != "") (builtins.map pkgs.lib.strings.trim (pkgs.lib.strings.splitString "\n" ''
+            #     obfs4 77.22.111.228:444 31A820940B96F2089E5A235E1B7F09C468A327CA cert=db4/c4C8V0Vl+OJL4vOdVOr73fMfIgLcnG/LWN7ZxQnDeacmu3tSONz9EQD/IM3iSZYwUA iat-mode=0
+            #     obfs4 85.215.202.221:2342 F9CD642D3B0D16EF901FAA3974CC3E6628226D10 cert=9NdqO/bPA77Z9pxAC533rWzjyWeADpI6tZO1PZ15m7m/g3kElZji2ZHuq2dxube2HFqFag iat-mode=0
+            #     obfs4 185.183.34.172:54452 4269C427EED688BBD47E925602A5C557619612AF cert=wUWLiqbQ6K2MnguODPJI5YyMWIBTJqcWJKytY6ZRlc9W5hrn6b/MpePplYkaJUk2cQHgNw iat-mode=0
+            #     obfs4 85.215.50.238:10007 D27430CDF128406ED556434E8F908749EE6D0198 cert=GBiBNfVY/4VSWG6Qx7HmsPMB6WAq80HIr8JUUkTdxsk2L5QdrjdZap8WjyrpaizU58SQGA iat-mode=0
+            #     obfs4 82.67.29.26:42024 DE90DE5C6EC2435856CBFE39A0C6E16BC737412E cert=pv4sHJlCcHNiI6gFeAduNdnshJm2J/zPGvJzQ/CvTGfBZAByjzFeYJtpOS1iSIuKRmsdDA iat-mode=0
+            #     obfs4 79.117.113.41:52436 54FC151A1C8A58A70CE25AFDF974B9D476E27BBF cert=eKPD8mJfj0KHjlXTBC62SqJZ1JqzSXkY1j9m9PUu8WDNuEFkP2jPiufd3jL4xlA1SD/pQQ iat-mode=0
+            #     obfs4 94.104.205.121:7001 B66F75B2391D3C8FC14582621EEDFBD8600B8A0E cert=53Jhn7ty09hmSEzvnUBzW848VpFHTSrpgUfcX/q6MVGVapKBnQ5uDidxz4NBhmxDdoODXQ iat-mode=0
+            # ''));
+
+            ClientTransportPlugin = "webtunnel exec ${pkgs.webtunnel}/bin/client";
+
+            Bridge = builtins.filter (s: s != "") (builtins.map pkgs.lib.strings.trim (pkgs.lib.strings.splitString "\n" ''
+                webtunnel [2001:db8:7e0e:b70b:575d:c674:5178:139c]:443 55975C16B90225C762A211CE9C480A5F1A8E2B66 url=https://thedadhasit.com/Cqv6DKEa63nvIFPOevXW1SIx ver=0.0.2
+                webtunnel [2001:db8:888f:6b82:e4f2:19a9:81d3:659a]:443 626D6E238C6E19C09E551508A2C5EA5A514C64BA url=https://www2.notriddle.com/rPROWV6KWnDb2AA7xE2oTu3t ver=0.0.1
+                webtunnel [2001:db8:75ad:569c:7ea3:6af2:c922:7b23]:443 8E860A30788AA17A84C0AFB8F111BAB0D5504FE0 url=https://scorevote.xyz/aTzB6XNVkeh2XqT9XQ0RHmHw ver=0.0.2
+                webtunnel [2001:db8:cb5c:a26a:3b21:2976:2b15:2f74]:443 5115B382BF1F2DC55030B97D59300B3F9B45CAA1 url=https://bors.technology/Ul2qmvTA1F9TikmTFAOWtGoC ver=0.0.2
+                webtunnel [2001:db8:77a8:d427:4e0a:8cf7:a2c0:8cda]:443 77B60C7540BA105297FB91DD7BA3557F6ED15C5B url=https://alina-photos.art/da495ccdc73b948387c45c2ab82c1b1aac4b1582 ver=0.0.3
+                webtunnel [2001:db8:8334:d3bf:4a0b:86b1:e2b6:a59c]:443 98455BF447EE853891921A5179B23C748F5DFCC7 url=https://e.img-cdn.net/BjUJxiqz5vi8E6WvDE/ ver=0.0.2
+            ''));
+
+            Address = "127.0.0.1";
             HTTPTunnelPort = 10050;
 
             CookieAuthentication = true;
