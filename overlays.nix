@@ -27,7 +27,7 @@
                     --set ${super.lib.strings.toLower mode}_proxy ${proxy} \
                     --set ${super.lib.strings.toUpper mode}_PROXY ${proxy} \
                     --set no_proxy "${ignore}" \
-                    --run "${super.tun2proxy}/bin/tun2proxy-bin --setup --unshare --proxy '${proxy}' --dns-addr '${dns}' --bypass '${dns}' ${bypassFlags} --verbosity off --exit-on-fatal-error -- bash -c 'PID1=\$(ps -eo pid,ppid | grep \"\$\$ \" | awk \"{print \\\$2}\"); PID2=\$(ps -eo pid,ppid | grep \"\$PID1 \" | awk \"{print \\\$2}\"); echo -n \$PID2 > \"${pkg}.pid\"' &" \
+                    --run "${super.tun2proxy}/bin/tun2proxy-bin --setup --unshare --ipv6-enabled --proxy '${proxy}' --dns-addr '${dns}' --bypass '${dns}' ${bypassFlags} --verbosity off --exit-on-fatal-error -- bash -c 'PID1=\$(ps -eo pid,ppid | grep \"\$\$ \" | awk \"{print \\\$2}\"); PID2=\$(ps -eo pid,ppid | grep \"\$PID1 \" | awk \"{print \\\$2}\"); echo -n \$PID2 > \"${pkg}.pid\"' &" \
                     --run "sleep 1" \
                     --run "DAEMON_PID=\$(cat '${pkg}.pid')" \
                     --run "rm '${pkg}.pid'" \
