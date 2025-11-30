@@ -1,6 +1,7 @@
-{ pkgs, ... }: {
+{ ... }: {
     nix = {
-        package = pkgs.lix;
+        # Conflicts with impermanence home-manager-v2 branch.
+        # package = pkgs.lix;
 
         settings = {
             auto-optimise-store = true;

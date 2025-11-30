@@ -1,9 +1,7 @@
-{ flakeConfig, pkgs, ... }: {
+{ pkgs, ... }: {
     home.packages = [ pkgs.gimp3 ];
 
-    home.persistence."/persistent/home/${flakeConfig.username}" = {
-        allowOther = false;
-
+    home.persistence."/persistent" = {
         directories = [
             ".config/GIMP"
         ];

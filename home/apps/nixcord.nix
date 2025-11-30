@@ -1,4 +1,4 @@
-{ flakeConfig, ... }: {
+{ ... }: {
     # https://kaylorben.github.io/nixcord
     programs.nixcord = {
         enable = true;
@@ -22,9 +22,7 @@
         };
     };
 
-    home.persistence."/persistent/home/${flakeConfig.username}" = {
-        allowOther = false;
-
+    home.persistence."/persistent" = {
         directories = [
             ".config/vesktop"
         ];

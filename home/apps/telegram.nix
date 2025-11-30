@@ -1,9 +1,7 @@
-{ flakeConfig, pkgs, ... }: {
+{ pkgs, ... }: {
     home.packages = [ pkgs.telegram-desktop ];
 
-    home.persistence."/persistent/home/${flakeConfig.username}" = {
-        allowOther = false;
-
+    home.persistence."/persistent" = {
         directories = [
             ".local/share/TelegramDesktop"
         ];

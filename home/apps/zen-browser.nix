@@ -1,11 +1,9 @@
-{ flakeConfig, system, inputs, ... }: {
+{ inputs, pkgs, ... }: {
     home.packages = [
-        inputs.zen-browser.packages.${system}.default
+        inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
 
-    home.persistence."/persistent/home/${flakeConfig.username}" = {
-        allowOther = false;
-
+    home.persistence."/persistent" = {
         directories = [
             ".zen"
         ];

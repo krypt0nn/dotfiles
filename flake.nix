@@ -10,7 +10,13 @@
             inputs.nixpkgs.follows = "nixpkgs";
         };
 
-        impermanence.url = "github:nix-community/impermanence";
+        impermanence = {
+            url = "github:nix-community/impermanence/home-manager-v2";
+            inputs = {
+                nixpkgs.follows = "nixpkgs";
+                home-manager.follows = "nixpkgs";
+            };
+        };
 
         rust-overlay = {
             url = "github:oxalica/rust-overlay";
@@ -73,7 +79,7 @@
         in {
             nixosConfigurations.${flakeConfig.hostname} = nixpkgs.lib.nixosSystem {
                 specialArgs = {
-                    inherit system inputs flakeConfig pkgs-unstable;
+                    inherit inputs flakeConfig pkgs-unstable;
                 };
 
                 modules = [
@@ -81,11 +87,11 @@
 
                     { nixpkgs = { inherit pkgs; }; }
 
+                    impermanence.nixosModules.impermanence
+
                     ./hosts
                     ./users
                     ./nixos
-
-                    impermanence.nixosModules.impermanence
 
                     home-manager.nixosModules.home-manager {
                         home-manager.useGlobalPkgs = true;
@@ -98,7 +104,7 @@
                         ];
 
                         home-manager.extraSpecialArgs = {
-                            inherit system inputs flakeConfig pkgs pkgs-unstable;
+                            inherit inputs flakeConfig pkgs pkgs-unstable;
                         };
                     }
                 ];
