@@ -9,6 +9,7 @@
         gnome-extension-manager
         loupe
         vlc
+        file-roller
 
         # Setup GNOME extensions
         gnomeExtensions.appindicator
