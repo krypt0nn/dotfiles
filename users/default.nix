@@ -1,4 +1,4 @@
-{ flakeConfig, ... }:
+{ username, ... }:
     let imports = {
         "observer" = ./observer;
     };
@@ -7,7 +7,7 @@
         imports = [
             ./root
 
-            imports.${flakeConfig.username}
+            imports.${username}
         ];
 
         users.mutableUsers = false;

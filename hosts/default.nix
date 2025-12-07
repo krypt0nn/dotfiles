@@ -1,4 +1,4 @@
-{ flakeConfig, ... }:
+{ hostname, ... }:
     let imports = {
         "observer-pc"     = ./observer-pc;
         "observer-laptop" = ./observer-laptop;
@@ -9,6 +9,6 @@
         imports = [
             ./impermanence.nix
 
-            imports.${flakeConfig.hostname}
+            imports.${hostname}
         ];
     }

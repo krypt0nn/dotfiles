@@ -1,4 +1,4 @@
-{ flakeConfig, ... }: {
+{ hostname, ... }: {
     imports = let imports = {
             "default" = [
                 ./nix-config.nix
@@ -13,7 +13,7 @@
                 ./services.nix
                 ./virtualisation.nix
                 ./fonts.nix
-                ./desktop.nix
+                ./gnome-desktop.nix
                 ./gnupg.nix
                 ./programs.nix
             ];
@@ -36,5 +36,5 @@
             ];
         };
 
-        in imports.${flakeConfig.hostname};
+        in imports.${hostname};
 }

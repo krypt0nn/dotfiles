@@ -1,4 +1,4 @@
-{ flakeConfig, lib, pkgs, ... }: {
+{ username, lib, pkgs, ... }: {
     programs.fish = {
         enable = true;
 
@@ -19,14 +19,14 @@
 
         shellAliases = {
             system-allow-edit = lib.concatStrings [
-                "sudo chown -R ${flakeConfig.username} /system-flake && "
+                "sudo chown -R ${username} /system-flake && "
                 "sudo chmod -R 755 /system-flake"
             ];
 
             system-forbid-edit = lib.concatStrings [
                 "sudo chown -R root /system-flake && "
                 "sudo chmod -R 755 /system-flake && "
-                "sudo chown -R ${flakeConfig.username} /system-flake/.git && "
+                "sudo chown -R ${username} /system-flake/.git && "
                 "sudo chmod -R 755 /system-flake/.git"
             ];
 

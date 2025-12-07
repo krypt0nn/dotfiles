@@ -1,8 +1,8 @@
-{ flakeConfig, ... }: {
+{ username, ... }: {
     boot.kernelModules = [ "kvm-amd" ];
 
     virtualisation.virtualbox.host.enable = true;
-    users.extraGroups.vboxusers.members = [ flakeConfig.username ];
+    users.extraGroups.vboxusers.members = [ username ];
 
     virtualisation = {
         containers.enable = true;
@@ -21,7 +21,7 @@
     environment.persistence."/persistent" = {
         hideMounts = true;
 
-        users.${flakeConfig.username} = {
+        users.${username} = {
             directories = [
                 ".local/share/containers"
             ];

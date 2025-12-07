@@ -1,6 +1,6 @@
-{ inputs, flakeConfig, ... }: {
+{ inputs, hostname, username, ... }: {
     imports = let imports = {
-            "observer-pc/observer" = [
+            "observer@observer-pc" = [
                 # User config
                 ./users/observer.nix
 
@@ -34,7 +34,7 @@
                 ./apps/prismlauncher.nix
             ];
 
-            "observer-laptop/observer" = [
+            "observer@observer-laptop" = [
                 # User config
                 ./users/observer.nix
 
@@ -65,7 +65,7 @@
                 ./apps/zed-editor.nix
             ];
 
-            "observer-server/observer" = [
+            "observer@observer-server" = [
                 # User config
                 ./users/observer.nix
 
@@ -77,8 +77,9 @@
             ];
         };
 
-        in imports.${flakeConfig.hostname + "/" + flakeConfig.username} ++ [
+        in imports."${username}@${hostname}" ++ [
             inputs.impermanence.nixosModules.home-manager.impermanence
+            inputs.nixcord.homeModules.nixcord
         ];
 
     xdg.userDirs = {

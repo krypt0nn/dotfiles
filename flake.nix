@@ -43,6 +43,9 @@
 
             system = "x86_64-linux";
 
+            hostname = flakeConfig.hostname;
+            username = flakeConfig.username;
+
             overlays = with (import ./overlays.nix); [
                 # Always use latest pre-compiled rust binaries.
                 rust-overlay.overlays.default
@@ -77,9 +80,9 @@
             };
 
         in {
-            nixosConfigurations.${flakeConfig.hostname} = nixpkgs.lib.nixosSystem {
+            nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem {
                 specialArgs = {
-                    inherit inputs flakeConfig pkgs-unstable;
+                    inherit inputs hostname username pkgs-unstable;
                 };
 
                 modules = [
@@ -97,14 +100,10 @@
                         home-manager.useGlobalPkgs = true;
                         home-manager.useUserPackages = true;
 
-                        home-manager.users.${flakeConfig.username} = import ./home;
-
-                        home-manager.sharedModules = [
-                            inputs.nixcord.homeModules.nixcord
-                        ];
+                        home-manager.users.${username} = import ./home;
 
                         home-manager.extraSpecialArgs = {
-                            inherit inputs flakeConfig pkgs pkgs-unstable;
+                            inherit inputs hostname username pkgs pkgs-unstable;
                         };
                     }
                 ];

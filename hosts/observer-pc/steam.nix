@@ -1,4 +1,4 @@
-{ flakeConfig, pkgs, ... }: {
+{ username, pkgs, ... }: {
     programs.steam = {
         enable = true;
         dedicatedServer.openFirewall = true;
@@ -11,7 +11,7 @@
     environment.persistence."/persistent" = {
         hideMounts = true;
 
-        users.${flakeConfig.username} = {
+        users.${username} = {
             directories = [
                 ".steam"
                 ".local/share/Steam"
