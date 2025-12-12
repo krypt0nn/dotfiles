@@ -1,11 +1,7 @@
-{ username, pkgs, ... }: {
+{ username, ... }: {
     programs.steam = {
         enable = true;
         dedicatedServer.openFirewall = true;
-
-        extraCompatPackages = [
-            pkgs.proton-ge-bin
-        ];
     };
 
     environment.persistence."/persistent" = {
