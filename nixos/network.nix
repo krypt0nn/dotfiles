@@ -123,7 +123,6 @@
             ClientTransportPlugin = "webtunnel exec ${pkgs.webtunnel}/bin/client";
 
             Bridge = builtins.filter (s: s != "") (builtins.map pkgs.lib.strings.trim (pkgs.lib.strings.splitString "\n" ''
-                webtunnel [2001:db8:8e83:d0ca:d4a8:3fb6:c859:c9fd]:443 5739A92BBDBFFF14CC9DB57D760C5EE7AD4DED71 url=https://wtb006.unshakled.net/ ver=0.0.3
                 webtunnel [2001:db8:77a8:d427:4e0a:8cf7:a2c0:8cda]:443 77B60C7540BA105297FB91DD7BA3557F6ED15C5B url=https://alina-photos.art/da495ccdc73b948387c45c2ab82c1b1aac4b1582 ver=0.0.3
                 webtunnel [2001:db8:c151:8ea6:7ecb:78eb:97e9:e26a]:443 F6AC833BA7AE92AD01FA99195EA51BBC3265A6E2 url=https://cdn-133.triplebit.dev/6e7f8g9h0i1j2k3l4m5n6o7p ver=0.0.2
                 webtunnel [2001:db8:9d32:4edd:1c80:6113:b1dc:5d5e]:443 911592E0524B24C74F4BEC80B93D4FF3ED0C0542 url=https://cdn.raccoon.auction/MsdKeMxmDhdUhLsjFx0WAtC7 ver=0.0.2
