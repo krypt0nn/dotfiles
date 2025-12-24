@@ -1,9 +1,6 @@
 { username, ... }: {
     boot.kernelModules = [ "kvm-amd" ];
 
-    virtualisation.virtualbox.host.enable = true;
-    users.extraGroups.vboxusers.members = [ username ];
-
     virtualisation = {
         containers.enable = true;
         libvirtd.enable = true;
