@@ -125,10 +125,9 @@
             Bridge = builtins.filter (s: s != "") (builtins.map pkgs.lib.strings.trim (pkgs.lib.strings.splitString "\n" ''
                 webtunnel [2001:db8:77a8:d427:4e0a:8cf7:a2c0:8cda]:443 77B60C7540BA105297FB91DD7BA3557F6ED15C5B url=https://alina-photos.art/da495ccdc73b948387c45c2ab82c1b1aac4b1582 ver=0.0.3
                 webtunnel [2001:db8:c151:8ea6:7ecb:78eb:97e9:e26a]:443 F6AC833BA7AE92AD01FA99195EA51BBC3265A6E2 url=https://cdn-133.triplebit.dev/6e7f8g9h0i1j2k3l4m5n6o7p ver=0.0.2
-                webtunnel [2001:db8:9d32:4edd:1c80:6113:b1dc:5d5e]:443 911592E0524B24C74F4BEC80B93D4FF3ED0C0542 url=https://cdn.raccoon.auction/MsdKeMxmDhdUhLsjFx0WAtC7 ver=0.0.2
                 webtunnel [2001:db8:75ad:569c:7ea3:6af2:c922:7b23]:443 8E860A30788AA17A84C0AFB8F111BAB0D5504FE0 url=https://scorevote.xyz/aTzB6XNVkeh2XqT9XQ0RHmHw ver=0.0.2
                 webtunnel [2001:db8:cb5c:a26a:3b21:2976:2b15:2f74]:443 5115B382BF1F2DC55030B97D59300B3F9B45CAA1 url=https://bors.technology/Ul2qmvTA1F9TikmTFAOWtGoC ver=0.0.2
-                webtunnel [2001:db8:8334:d3bf:4a0b:86b1:e2b6:a59c]:443 98455BF447EE853891921A5179B23C748F5DFCC7 url=https://e.img-cdn.net/BjUJxiqz5vi8E6WvDE/ ver=0.0.2
+                webtunnel [2001:db8:a59d:cca5:a9c0:36c3:88f3:6c1a]:443 770720B9F3002D167DFE0AF26B5D42F9C8F067E1 url=https://salmiac.space/ve6m9H69rVP5uMrpxD2S8aaC ver=0.0.3
             ''));
 
             Address = "127.0.0.1";
