@@ -2,8 +2,7 @@
     # https://kaylorben.github.io/nixcord
     programs.nixcord = {
         enable = true;
-        discord.vencord.enable = true;
-        dorion.enable = true;
+        vesktop.enable = true;
 
         config = {
             frameless = true;
@@ -21,15 +20,6 @@
                 summaries.enable = true;
                 webScreenShareFixes.enable = true;
             };
-        };
-
-        dorion = {
-            blur = "acrylic";
-            sysTray = true;
-            openOnStartup = true;
-            autoClearCache = true;
-            disableHardwareAccel = false;
-            desktopNotifications = true;
         };
     };
 
