@@ -2,6 +2,8 @@
     # https://kaylorben.github.io/nixcord
     programs.nixcord = {
         enable = true;
+        discord.vencord.enable = true;
+        dorion.enable = true;
 
         config = {
             frameless = true;
@@ -20,11 +22,20 @@
                 webScreenShareFixes.enable = true;
             };
         };
+
+        dorion = {
+            blur = "acrylic";
+            sysTray = true;
+            openOnStartup = true;
+            autoClearCache = true;
+            disableHardwareAccel = false;
+            desktopNotifications = true;
+        };
     };
 
-    home.persistence."/persistent" = {
-        directories = [
-            ".config/vesktop"
-        ];
-    };
+    # home.persistence."/persistent" = {
+    #     directories = [
+    #         ".config/vesktop"
+    #     ];
+    # };
 }
