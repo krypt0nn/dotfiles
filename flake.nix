@@ -11,7 +11,7 @@
         };
 
         impermanence = {
-            url = "github:nix-community/impermanence/home-manager-v2";
+            url = "github:nix-community/impermanence";
             inputs = {
                 nixpkgs.follows = "nixpkgs";
                 home-manager.follows = "nixpkgs";
