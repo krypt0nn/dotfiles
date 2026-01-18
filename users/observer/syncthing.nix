@@ -52,6 +52,13 @@
                 projects = {
                     path = "/home/observer/projects";
 
+                    ignorePatterns = [
+                        "**/target/*"
+                        "**/node_modules/*"
+                        "**/.direnv/*"
+                        "**/.git/*"
+                    ];
+
                     devices = [
                         "observer-pc"
                         "observer-laptop"
