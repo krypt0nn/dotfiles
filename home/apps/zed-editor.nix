@@ -8,6 +8,8 @@
             "toml"
             "xml"
             "nix"
+            "lua"
+            "luau"
         ];
 
         userSettings = {
@@ -39,23 +41,17 @@
             };
 
             tab_size = 4;
-            wrap_guides = [80];
+            wrap_guides = [ 80 ];
             soft_wrap = "none";
 
             format_on_save = "off";
-
-            languages = {
-                YAML = {
-                    tab_size = 2;
-                };
-            };
 
             lsp = {
                 "rust-analyzer" = {
                     initialization_options = {
                         rust = {
-                            # Improves rust-analyzer performance in cost of increased
-                            # disk space use.
+                            # Improves rust-analyzer performance in cost of
+                            # increased disk space use.
                             analyzerTargetDir = true;
                         };
 
@@ -74,32 +70,6 @@
 
             features = {
                 edit_prediction_provider = "none";
-            };
-
-            language_models = {
-                ollama = {
-                    api_url = "http://127.0.0.1:11434";
-                    available_models = [
-                        {
-                            name = "hf.co/unsloth/Qwen2.5-Coder-7B-Instruct-128K-GGUF:Q4_K_M";
-                            display_name = "Qwen 2.5 Coder 7B";
-                            max_tokens = 16384;
-                            supports_tools = true;
-                        }
-                    ];
-                };
-            };
-
-            agent = {
-                # default_model = {
-                #     provider = "zed.dev";
-                #     model = "claude-3-7-sonnet-latest";
-                # };
-
-                default_model = {
-                    provider = "ollama";
-                    model = "hf.co/unsloth/Qwen2.5-Coder-7B-Instruct-128K-GGUF:Q4_K_M";
-                };
             };
         };
     };
