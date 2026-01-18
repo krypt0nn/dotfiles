@@ -9,6 +9,9 @@
             enable = true;
 
             settings = {
+                init.defaultBranch = "master";
+                advice.defaultBranchName = false;
+
                 user = {
                     name = "Nikita Podvirnyi";
                     email = "krypt0nn@vk.com";
