@@ -3,7 +3,7 @@
         ./hardware.nix
         ./virt-manager.nix
         ./steam.nix
-        ./ollama.nix
+        ./language-models.nix
     ];
 
     networking.hostName = "observer-pc";
