@@ -78,7 +78,6 @@
         };
 
         in imports."${username}@${hostname}" ++ [
-            inputs.impermanence.nixosModules.home-manager.impermanence
             inputs.nixcord.homeModules.nixcord
         ];
 
