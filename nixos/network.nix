@@ -127,7 +127,10 @@
                 webtunnel [2001:db8:c151:8ea6:7ecb:78eb:97e9:e26a]:443 F6AC833BA7AE92AD01FA99195EA51BBC3265A6E2 url=https://cdn-133.triplebit.dev/6e7f8g9h0i1j2k3l4m5n6o7p ver=0.0.2
                 webtunnel [2001:db8:75ad:569c:7ea3:6af2:c922:7b23]:443 8E860A30788AA17A84C0AFB8F111BAB0D5504FE0 url=https://scorevote.xyz/aTzB6XNVkeh2XqT9XQ0RHmHw ver=0.0.2
                 webtunnel [2001:db8:cb5c:a26a:3b21:2976:2b15:2f74]:443 5115B382BF1F2DC55030B97D59300B3F9B45CAA1 url=https://bors.technology/Ul2qmvTA1F9TikmTFAOWtGoC ver=0.0.2
-                webtunnel [2001:db8:a59d:cca5:a9c0:36c3:88f3:6c1a]:443 770720B9F3002D167DFE0AF26B5D42F9C8F067E1 url=https://salmiac.space/ve6m9H69rVP5uMrpxD2S8aaC ver=0.0.3
+                webtunnel [2001:db8:3c8c:672:b875:7eac:9c76:ec66]:443 2B936CD554AF5B16678DE517CC3866AA11170BC4 url=https://tech.localenby.is/D0CX0ykTaxzAgALpPd2hBMU6 ver=0.0.3
+                webtunnel [2001:db8:8719:f52e:5708:d05:377a:5494]:443 6476A667CC69D29B0AA42A421CA9A0D32698A505 url=https://wtb004.unshakled.net/pl51ucT70jwtW8tjhXL7waaI ver=0.0.3
+                webtunnel [2001:db8:603c:2434:873c:4d58:9fd0:91e0]:443 56626E4B996EB1C9F4C0B573888E8EE3C4E28472 url=https://kriptohomyaki.org/4USXwPrEoemgJOXPmgjxPOAkQa1UG7To ver=0.0.3
+                webtunnel [2001:db8:98c2:edac:ab7d:ea8c:62c:1dd3]:443 D68F41624A6510789DD6D839EF04BA4C2B17D946 url=https://forpeopleall.info/mcs89d7ychns9d8cyhb7hcusd ver=0.0.2
             ''));
 
             Address = "127.0.0.1";
