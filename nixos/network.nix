@@ -88,18 +88,6 @@
         settings = {
             UseBridges = true;
 
-            # ClientTransportPlugin = "obfs4 exec ${pkgs.obfs4}/bin/lyrebird";
-
-            # Bridge = builtins.filter (s: s != "") (builtins.map pkgs.lib.strings.trim (pkgs.lib.strings.splitString "\n" ''
-            #     obfs4 77.22.111.228:444 31A820940B96F2089E5A235E1B7F09C468A327CA cert=db4/c4C8V0Vl+OJL4vOdVOr73fMfIgLcnG/LWN7ZxQnDeacmu3tSONz9EQD/IM3iSZYwUA iat-mode=0
-            #     obfs4 85.215.202.221:2342 F9CD642D3B0D16EF901FAA3974CC3E6628226D10 cert=9NdqO/bPA77Z9pxAC533rWzjyWeADpI6tZO1PZ15m7m/g3kElZji2ZHuq2dxube2HFqFag iat-mode=0
-            #     obfs4 185.183.34.172:54452 4269C427EED688BBD47E925602A5C557619612AF cert=wUWLiqbQ6K2MnguODPJI5YyMWIBTJqcWJKytY6ZRlc9W5hrn6b/MpePplYkaJUk2cQHgNw iat-mode=0
-            #     obfs4 85.215.50.238:10007 D27430CDF128406ED556434E8F908749EE6D0198 cert=GBiBNfVY/4VSWG6Qx7HmsPMB6WAq80HIr8JUUkTdxsk2L5QdrjdZap8WjyrpaizU58SQGA iat-mode=0
-            #     obfs4 82.67.29.26:42024 DE90DE5C6EC2435856CBFE39A0C6E16BC737412E cert=pv4sHJlCcHNiI6gFeAduNdnshJm2J/zPGvJzQ/CvTGfBZAByjzFeYJtpOS1iSIuKRmsdDA iat-mode=0
-            #     obfs4 79.117.113.41:52436 54FC151A1C8A58A70CE25AFDF974B9D476E27BBF cert=eKPD8mJfj0KHjlXTBC62SqJZ1JqzSXkY1j9m9PUu8WDNuEFkP2jPiufd3jL4xlA1SD/pQQ iat-mode=0
-            #     obfs4 94.104.205.121:7001 B66F75B2391D3C8FC14582621EEDFBD8600B8A0E cert=53Jhn7ty09hmSEzvnUBzW848VpFHTSrpgUfcX/q6MVGVapKBnQ5uDidxz4NBhmxDdoODXQ iat-mode=0
-            # ''));
-
             ClientTransportPlugin = "webtunnel exec ${pkgs.webtunnel}/bin/client";
 
             Bridge = builtins.filter (s: s != "") (builtins.map pkgs.lib.strings.trim (pkgs.lib.strings.splitString "\n" ''
@@ -110,16 +98,38 @@
                 webtunnel [2001:db8:8719:f52e:5708:d05:377a:5494]:443 6476A667CC69D29B0AA42A421CA9A0D32698A505 url=https://wtb004.unshakled.net/pl51ucT70jwtW8tjhXL7waaI ver=0.0.3
                 webtunnel [2001:db8:603c:2434:873c:4d58:9fd0:91e0]:443 56626E4B996EB1C9F4C0B573888E8EE3C4E28472 url=https://kriptohomyaki.org/4USXwPrEoemgJOXPmgjxPOAkQa1UG7To ver=0.0.3
                 webtunnel [2001:db8:ce90:3593:272e:4975:a031:55b]:443 12382A2F3912AD1983A97C8709CBAE47ADB60BE3 url=https://miranda.today/LWwxIXDHCyyScn7oDauPMTmX ver=0.0.3
-                webtunnel [2001:db8:ce80:be51:9eda:6869:d906:eec]:443 B5A87A7E786DC0FF2008AC2A3A01E055C5F0D2B0 url=https://cdn-39.triplebit.dev/bohng8PeeDaiy6sh ver=0.0.2
+                webtunnel [2001:db8:3c2f:9f49:8f90:55f7:3d6b:5ebb]:443 39ADE0EB1AC1438815CE81A28713445F2F07331E url=https://spitfire.express/7TcoipyyI0PWdH4zBwt7aBbt ver=0.0.3
+                webtunnel [2001:db8:e65a:afaf:7443:b5a5:f71d:ca4]:443 6FE31638D6084EDA6D94FADC99B0EDD109D6AE3A url=https://eu.g3wip.uk/7ePavP0vnTTelEJWeJ4NwpGE ver=0.0.1
             ''));
 
             Address = "127.0.0.1";
             HTTPTunnelPort = 10050;
 
-            CookieAuthentication = true;
-            HardwareAccel = 1;
-            ClientOnly = 1;
+            HardwareAccel = true;
+
+            ClientOnly = true;
             ClientUseIPv6 = true;
+
+            ExitRelay = false;
+            BridgeRelay = false;
+
+            ExitNodes = [
+                "{de}" # Germany
+                "{dk}" # Denmark
+                "{at}" # Austria
+                "{be}" # Belgium
+                "{nl}" # Netherlands
+                "{pl}" # Poland
+                "{cz}" # Czech Republic
+                "{hu}" # Hungary
+                "{fi}" # Findland
+                "{se}" # Sweden
+                "{ee}" # Estonia
+                "{lt}" # Lithuania
+                "{lv}" # Latvia
+            ];
+
+            StrictNodes = true;
         };
     };
 
