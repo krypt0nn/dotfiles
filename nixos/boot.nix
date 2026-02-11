@@ -9,9 +9,6 @@
         "vm.swappiness" = 10;
     };
 
-    # Enable loading screen
-    boot.plymouth.enable = true;
-
     # Mount tmpfs in /tmp
     boot.tmp.useTmpfs = true;
 }

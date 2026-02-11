@@ -21,6 +21,8 @@
         ];
 
         extraModulePackages = [];
+
+        plymouth.enable = true;
     };
 
     fileSystems = {

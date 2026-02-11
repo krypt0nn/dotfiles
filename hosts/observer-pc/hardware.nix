@@ -14,7 +14,10 @@
                 "sd_mod"
             ];
 
-            kernelModules = [ "amdgpu" ];
+            kernelModules = [
+                "amdgpu"
+                "ntsync"
+            ];
         };
 
         kernelParams = [
@@ -23,6 +26,8 @@
         ];
 
         extraModulePackages = [];
+
+        plymouth.enable = true;
     };
 
     fileSystems = {
