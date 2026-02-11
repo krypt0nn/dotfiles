@@ -32,6 +32,13 @@
     # Remove XTerm
     services.xserver.excludePackages = [ pkgs.xterm ];
 
+    # Enable gnome QT theme
+    qt = {
+        enable = true;
+        platformTheme = "gnome";
+        style = "adwaita";
+    };
+
     # Allow chromium-based apps to run on wayland
     environment.sessionVariables.NIXOS_OZONE_WL = "1";
 }
