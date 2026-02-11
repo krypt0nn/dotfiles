@@ -4,6 +4,9 @@
             enable = true;
 
             allowedTCPPorts = [
+                # Tor
+                9050
+
                 # Torrent client
                 9090
             ];
@@ -83,7 +86,19 @@
     # Tor
     services.tor = {
         enable = true;
-        client.enable = true;
+
+        client = {
+            enable = true;
+
+            socksListenAddress = {
+                addr = "0.0.0.0";
+                port = 9050;
+                flags = [
+                    "IsolateClientAddr"
+                    "IsolateDestAddr"
+                ];
+            };
+        };
 
         settings = {
             UseBridges = true;
@@ -101,9 +116,6 @@
                 webtunnel [2001:db8:3c2f:9f49:8f90:55f7:3d6b:5ebb]:443 39ADE0EB1AC1438815CE81A28713445F2F07331E url=https://spitfire.express/7TcoipyyI0PWdH4zBwt7aBbt ver=0.0.3
                 webtunnel [2001:db8:e65a:afaf:7443:b5a5:f71d:ca4]:443 6FE31638D6084EDA6D94FADC99B0EDD109D6AE3A url=https://eu.g3wip.uk/7ePavP0vnTTelEJWeJ4NwpGE ver=0.0.1
             ''));
-
-            Address = "127.0.0.1";
-            HTTPTunnelPort = 10050;
 
             HardwareAccel = true;
 
