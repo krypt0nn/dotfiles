@@ -60,6 +60,7 @@
                 denylists = {
                     ads = [
                         "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts"
+                        "https://raw.githubusercontent.com/cbuijs/oisd/refs/heads/master/big/domains"
                     ];
 
                     trackers = [
