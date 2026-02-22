@@ -1,5 +1,5 @@
-{ username, pkgs-unstable, ... }: {
-    environment.systemPackages = with pkgs-unstable; [
+{ username, pkgs, ... }: {
+    environment.systemPackages = with pkgs; [
         ramalama
         llama-cpp-rocm
     ];

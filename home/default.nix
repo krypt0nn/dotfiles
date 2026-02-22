@@ -16,16 +16,14 @@
                 ./apps/zen-browser.nix
                 ./apps/telegram.nix
                 ./apps/nixcord.nix
-                # ./apps/vesktop.nix
                 ./apps/amberol.nix
                 ./apps/gimp.nix
                 ./apps/onlyoffice.nix
                 ./apps/apostrophe.nix
                 ./apps/thunderbird.nix
-                ./apps/hieroglyphic.nix
                 ./apps/rnote.nix
 
-                ./apps/fragments.nix
+                ./apps/qbittorrent.nix
                 ./apps/tor-browser.nix
                 ./apps/bottles.nix
 
@@ -50,15 +48,13 @@
                 ./apps/zen-browser.nix
                 ./apps/telegram.nix
                 ./apps/nixcord.nix
-                # ./apps/vesktop.nix
                 ./apps/amberol.nix
                 ./apps/gimp.nix
                 ./apps/onlyoffice.nix
                 ./apps/apostrophe.nix
                 ./apps/thunderbird.nix
-                ./apps/hieroglyphic.nix
 
-                ./apps/fragments.nix
+                ./apps/qbittorrent.nix
                 ./apps/tor-browser.nix
                 ./apps/bottles.nix
 
