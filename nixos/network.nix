@@ -7,12 +7,12 @@
                 # Tor
                 9050
 
-                # Torrent client
+                # BitTorrent
                 9090
             ];
 
             allowedUDPPorts = [
-                # Torrent client
+                # BitTorrent
                 9090
             ];
         };
@@ -117,7 +117,6 @@
                 webtunnel [2001:db8:87a6:51bd:ecd9:3d12:e0e3:1baa]:443 3683B1036F18DF4B560865C17AF85C373232A8D5 url=https://q.igrp.site/pg9PbqaxSvIbjtbVZMt9H7xF ver=0.0.3
                 webtunnel [2001:db8:9de4:c800:cc50:4c26:b192:b006]:443 1F5CA44230E96911836158A474E2AEB16EAEA57C url=https://ghosttown.dev/MTwam63OSHyUPQPcRRw8hx50 ver=0.0.2
                 webtunnel [2001:db8:44:614b:42f5:f87c:7072:151]:443 F0C55D7B465C94F71A9A8F0479073BC02565DA36 url=https://quantentoast.de/CDgakmo0QO5Rvo2jRCtu4n9D ver=0.0.1
-                webtunnel [2001:db8:8229:577b:8f3a:bc4c:7d18:24be]:443 4C26D2BA24011E89875857BDB338969D08CAAE0B url=https://test.notalot.org/ApKhNDWZv4MCjbH05W6eQFkF ver=0.0.2
                 webtunnel [2001:db8:dee9:5852:b4dc:7e14:21bd:c99b]:443 8ADF1761FA735FDD763781BB94A16EAB64A1CF6C url=https://app01.oneclickhost.eu/WJSgXJRlNnMStkuLZygVJ7lo ver=0.0.3
                 webtunnel [2001:db8:12ff:2d55:9130:36a7:c49b:d1f4]:443 933C998EC827D1C17CC93D1292BBC41735867CF8 url=https://x7t2qctb.xoomlia.com/qzxrtfmu/ ver=0.0.3
                 webtunnel [2001:db8:ce80:be51:9eda:6869:d906:eec]:443 B5A87A7E786DC0FF2008AC2A3A01E055C5F0D2B0 url=https://cdn-39.triplebit.dev/bohng8PeeDaiy6sh ver=0.0.2
