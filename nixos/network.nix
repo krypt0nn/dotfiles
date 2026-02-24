@@ -150,13 +150,6 @@
         };
     };
 
-    # Xray proxy
-    services.xray = {
-        enable = true;
-
-        settingsFile = "/persistent/xray.jsonc";
-    };
-
     # Persist folders
     environment.persistence."/persistent" = {
         hideMounts = true;
