@@ -18,7 +18,7 @@
                 diagnostics = false;
             };
 
-            proxy = "socks5://127.0.0.1:11050";
+            proxy = "socks5://127.0.0.1:1000";
             load_direnv = "direct";
 
             vim_mode = false;
