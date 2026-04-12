@@ -1,8 +1,15 @@
 { pkgs, ... }: {
     environment.systemPackages = with pkgs; [
-        (ffmpeg-full.override {
+        ((ffmpeg-full.override {
             withUnfree = true;
-        })
+            withAmf = true;
+            withVaapi = true;
+            withVulkan = true;
+            withX265 = true;
+            withWebp = true;
+        }).overrideAttrs (_: {
+            doCheck = false;
+        }))
 
         gst_all_1.gstreamer
         gst_all_1.gst-plugins-base
@@ -27,8 +34,8 @@
             libvdpau-va-gl
             rocmPackages.clr.icd
 
-            # This should fix some wine games not being able
-            # to lookup GPU drivers via DXVK
+            # This should fix some wine games not being able to lookup GPU
+            # drivers via DXVK
             vulkan-loader
             vulkan-validation-layers
             vulkan-extension-layer
