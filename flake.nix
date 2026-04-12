@@ -18,6 +18,8 @@
             };
         };
 
+        # nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
+
         rust-overlay = {
             url = "github:oxalica/rust-overlay";
             inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -35,6 +37,7 @@
         nixpkgs,
         nixpkgs-unstable,
         home-manager,
+        # nix-cachyos-kernel,
         impermanence,
         rust-overlay, ...
     }@inputs:
@@ -46,9 +49,13 @@
             hostname = flakeConfig.hostname;
             username = flakeConfig.username;
 
-            overlays = with (import ./overlays.nix); [
-                # Always use latest pre-compiled rust binaries.
+            # with (import ./overlays.nix);
+            overlays = [
+                # Always use latest pre-compiled rust binaries
                 rust-overlay.overlays.default
+
+                # Add CachyOS kernels
+                # nix-cachyos-kernel.overlays.default
             ];
 
             config = {

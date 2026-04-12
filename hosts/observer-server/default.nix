@@ -1,6 +1,7 @@
 { ... }: {
     imports = [
         ./hardware.nix
+        ./boot.nix
         ./security.nix
         ./services.nix
         ./jellyfin.nix

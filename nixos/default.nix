@@ -3,7 +3,6 @@
             "default" = [
                 ./nix-config.nix
                 ./persistence.nix
-                ./boot.nix
                 ./drivers.nix
                 ./security.nix
                 ./network.nix
@@ -24,7 +23,6 @@
             "observer-server" = [
                 ./nix-config.nix
                 ./persistence.nix
-                ./boot.nix
                 ./drivers.nix
                 ./network.nix
                 ./bluetooth.nix

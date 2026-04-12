@@ -1,6 +1,7 @@
 { ... }: {
     imports = [
         ./hardware.nix
+        ./boot.nix
     ];
 
     networking.hostName = "observer-laptop";
