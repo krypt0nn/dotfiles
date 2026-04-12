@@ -9,27 +9,18 @@
 
                 # BitTorrent
                 9090
-
-                7777
             ];
 
             allowedUDPPorts = [
                 # BitTorrent
                 9090
-
-                7777
             ];
         };
 
         networkmanager = {
             enable = true;
-            dns = "none";
+            dns = "systemd-resolved";
         };
-
-        nameservers = [
-            "127.0.0.1"
-            "::1"
-        ];
     };
 
     # Tailscale
