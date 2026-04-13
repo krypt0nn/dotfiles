@@ -1,16 +1,8 @@
-{ ... }: {
+{ pkgs, ... }: {
     # Force local DNS usage
-    networking = {
-        networkmanager = {
-            enable = true;
-            dns = "none";
-        };
-
-        nameservers = [
-            "127.0.0.1"
-            "::1"
-        ];
-    };
+    networking.nameservers = pkgs.lib.mkForce [
+        "127.0.0.1"
+    ];
 
     # Blocky service for local DNS requests
     services.blocky = {

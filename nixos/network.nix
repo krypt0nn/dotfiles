@@ -19,8 +19,12 @@
 
         networkmanager = {
             enable = true;
-            dns = "systemd-resolved";
+            dns = "none";
         };
+
+        nameservers = [
+            "192.168.1.1"
+        ];
     };
 
     # Tailscale
