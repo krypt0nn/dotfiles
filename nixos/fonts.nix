@@ -2,6 +2,9 @@
     fonts.packages = with pkgs; [
         open-fonts
         liberation_ttf
+        noto-fonts
+        noto-fonts-cjk-sans
+        noto-fonts-cjk-serif
         noto-fonts-color-emoji
         times-newer-roman
 
