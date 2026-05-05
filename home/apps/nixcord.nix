@@ -1,5 +1,5 @@
 { ... }: {
-    # https://kaylorben.github.io/nixcord
+    # https://flameflag.github.io/nixcord
     programs.nixcord = {
         enable = true;
         vesktop.enable = true;
@@ -22,6 +22,7 @@
                 whoReacted.enable = true;
                 validUser.enable = true;
                 summaries.enable = true;
+                serverInfo.enable = true;
                 showHiddenChannels.enable = true;
                 showHiddenThings.enable = true;
                 webScreenShareFixes.enable = true;
