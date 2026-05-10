@@ -64,7 +64,6 @@
                 webtunnel [2001:db8:1da7:e44a:892b:6ada:b3e2:4160]:443 ACBB486B9D60979A05E623D11CC8181A16A81E51 url=https://usa.bulger.au/7gBqm1jbTOpU0jLV91IZHN0f ver=0.0.1
                 webtunnel [2001:db8:eedb:cae7:a345:4f72:f9cc:5de0]:443 B3C81E7A0CA474270DAA4A2C8633E1CA8935C37D url=https://wordpress.far-east-investment.ru/sORes7268CEUSRD7hAWvJU5A ver=0.0.3
                 webtunnel [2001:db8:c151:8ea6:7ecb:78eb:97e9:e26a]:443 F6AC833BA7AE92AD01FA99195EA51BBC3265A6E2 url=https://cdn-133.triplebit.dev/6e7f8g9h0i1j2k3l4m5n6o7p ver=0.0.2
-                webtunnel [2001:db8:c28f:ab8d:dcc9:fdc2:7a6f:bef8]:443 B61E2E1E85B147F0FEAFBFB6FF6B5E5879ADA8B2 url=https://bbb.bm-dataprotect.ch/Csnoegi9ll226X5DLDzKDDjc ver=0.0.3
                 webtunnel [2001:db8:d513:341f:d853:76fe:aaf1:dedc]:443 C94F0B257D1950B17BB2147021B0E07C5891007A url=https://r4fo.com/7z0hLnrTxvkPIHmuPH94Ju2J ver=0.0.3
                 webtunnel [2001:db8:3be7:5113:eddb:210d:291f:b52c]:443 B6CFDBD17618C147903429AB1C0CC759933DB50E url=https://adm.unicoridor.ru/rtASSYlOJgl1nKtH8njdZLbs ver=0.0.3
                 webtunnel [2001:db8:915d:6373:6498:cec4:859d:4409]:443 0141998B7435FDFCE175410D5309C8EF2379EA68 url=https://homu.io/1zRuET5Xz19MUA4IwqbgUrcP ver=0.0.2
@@ -75,6 +74,8 @@
                 webtunnel [2001:db8:1c6b:27b9:a0a4:aa4:fa98:2734]:443 CE95A839CADA1ED38508B099C6C610CBB0EA7F81 url=https://cdn-37.triplebit.dev/oxaiBaa6ierohquu ver=0.0.2
                 webtunnel [2001:db8:1640:379c:ad30:db5f:bff5:37d0]:443 AF8F7548C886D6F53A652411DBB71D089517085A url=https://app05.oneclickhost.eu/alpfZGTB9FckCgOkOOA0OHlh ver=0.0.3
                 webtunnel [2001:db8:ce90:3593:272e:4975:a031:55b]:443 12382A2F3912AD1983A97C8709CBAE47ADB60BE3 url=https://miranda.today/LWwxIXDHCyyScn7oDauPMTmX ver=0.0.3
+                webtunnel [2001:db8:9e1a:414a:6386:1721:6e09:cbaf]:443 1B6EBD6C1D5438C4AEE8D1C903F58754FE11E1BD url=https://www2.ruhnama.net/VsCk1XCZv5noySVy1CERKqkx ver=0.0.3
+                webtunnel [2001:db8:ecc6:9ade:63b6:e98f:fac6:dc89]:443 C2C9072B0FAA99F95AE6A6899203AB0978B7CC4A url=https://www2.shouldiblockads.com/aTzB6XNVkeh2XqT9XQ0RHmHw ver=0.0.2
             ''));
 
             HardwareAccel = true;
