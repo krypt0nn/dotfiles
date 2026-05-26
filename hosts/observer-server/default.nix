@@ -5,6 +5,7 @@
         ./security.nix
         ./services.nix
         ./jellyfin.nix
+        ./meshtastic.nix
     ];
 
     networking.hostName = "observer-server";
