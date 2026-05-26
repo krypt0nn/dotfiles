@@ -7,8 +7,10 @@
         curl
         net-tools
         dnslookup
+        python3
         git
         btop
+        tmux
         fastfetch
         onefetch
         libqalculate
