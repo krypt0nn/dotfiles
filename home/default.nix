@@ -80,6 +80,7 @@
     xdg.userDirs = {
         enable = true;
         createDirectories = true;
+        setSessionVariables = false;
     };
 
     programs.home-manager.enable = true;
