@@ -35,6 +35,8 @@
         script = ''
             set -euo pipefail
 
+            # Mount btrfs into /mnt
+
             echo "impermanence: mounting base drive"
 
             mkdir -p /mnt
@@ -47,6 +49,9 @@
                 exit 1
             fi
 
+            # Check mounted filesystem into being write-able
+            # It can be mounted as read-only if there was some filesystem error
+
             echo "impermanence: checking filesystem writability"
 
             if ! touch /mnt/.write_test 2>/dev/null; then
@@ -58,6 +63,8 @@
 
             rm -f /mnt/.write_test
 
+            # Delete temporary btrfs subvolumes created by... systemd?
+
             echo "impermanence: deleting root subvolumes"
 
             btrfs subvolume list -o /mnt/root | cut -f9 -d' ' |
@@ -68,10 +75,12 @@
                 btrfs subvolume delete "/mnt/$subvolume"
             done
 
-            if [ -d "/mnt/snapshots/root/previous" ]; then
-                echo "impermanence: deleting previous root subvolume backup"
+            # Delete previous persistent subvolume backup and make a new one
 
-                btrfs subvolume delete /mnt/snapshots/root/previous
+            if [ -d "/mnt/snapshots/persistent/previous" ]; then
+                echo "impermanence: deleting previous persistent subvolume backup"
+
+                btrfs subvolume delete /mnt/snapshots/persistent/previous
             fi
 
             echo "impermanence: making backup of the persistent subvolume"
@@ -79,10 +88,20 @@
             mkdir -p /mnt/snapshots/persistent
             btrfs subvolume snapshot -r /mnt/persistent /mnt/snapshots/persistent/previous
 
+            # Delete previous root subvolume backup and make a new one
+
+            if [ -d "/mnt/snapshots/root/previous" ]; then
+                echo "impermanence: deleting previous root subvolume backup"
+
+                btrfs subvolume delete /mnt/snapshots/root/previous
+            fi
+
             echo "impermanence: making backup of the root subvolume"
 
             mkdir -p /mnt/snapshots/root
             btrfs subvolume snapshot -r /mnt/root /mnt/snapshots/root/previous
+
+            # Delete current root subvolume and replace it by a blank one
 
             echo "impermanence: deleting root subvolume"
 
@@ -91,6 +110,8 @@
             echo "impermanence: restoring root subvolume from the blank image"
 
             btrfs subvolume snapshot /mnt/snapshots/root/blank /mnt/root
+
+            # Unmount btrfs, allowing it to be mounted as root partition
 
             echo "impermanence: unmounting base drive"
 
