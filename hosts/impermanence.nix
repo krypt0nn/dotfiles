@@ -14,11 +14,10 @@
       # /dev/disk/by-label/nixos becomes dev-disk-by\x2dlabel-nixos.device
       unitName = "dev-disk-by\\x2dlabel-nixos.device";
     in {
-        # wantedBy = [ "initrd.target" ];
-        # before = [ "sysroot.mount" ];
+        enable = true;
 
-        wantedBy = [ "initrd-root-fs.target" ];
-        before = [ "sysroot.mount" "initrd-root-fs.target" ];
+        wantedBy = [ "initrd.target" ];
+        before = [ "sysroot.mount" ];
 
         after = [ unitName ];
         requires = [ unitName ];
@@ -34,6 +33,9 @@
 
         script = ''
             set -euo pipefail
+
+            # Ensure /mnt is always unmounted, even on error
+            trap 'umount /mnt 2>/dev/null || true' EXIT
 
             # Mount btrfs into /mnt
 
@@ -67,13 +69,11 @@
 
             echo "impermanence: deleting root subvolumes"
 
-            btrfs subvolume list -o /mnt/root | cut -f9 -d' ' |
-
-            while read subvolume; do
+            while read -r subvolume; do
                 echo "impermanence: deleting /$subvolume subvolume"
 
                 btrfs subvolume delete "/mnt/$subvolume"
-            done
+            done < <(btrfs subvolume list -o /mnt/root | cut -f9 -d' ')
 
             # Delete previous persistent subvolume backup and make a new one
 
