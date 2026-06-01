@@ -3,11 +3,6 @@
         nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
         nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
-        home-manager = {
-            url = "github:nix-community/home-manager/release-26.05";
-            inputs.nixpkgs.follows = "nixpkgs";
-        };
-
         impermanence = {
             url = "github:nix-community/impermanence";
             inputs = {
@@ -29,15 +24,18 @@
             url = "github:kaylorben/nixcord";
             inputs.nixpkgs.follows = "nixpkgs";
         };
+
+        nix-bwrapper.url = "github:Naxdy/nix-bwrapper";
     };
 
     outputs = {
         nixpkgs,
         nixpkgs-unstable,
-        home-manager,
         # nix-cachyos-kernel,
         impermanence,
-        rust-overlay, ...
+        rust-overlay,
+        nix-bwrapper,
+        ...
     }@inputs:
         let
             flakeConfig = builtins.fromJSON (builtins.readFile ./config.json);
@@ -51,6 +49,8 @@
             overlays = [
                 # Always use latest pre-compiled rust binaries
                 rust-overlay.overlays.default
+
+                nix-bwrapper.overlays.default
 
                 # Add CachyOS kernels
                 # nix-cachyos-kernel.overlays.default
@@ -84,18 +84,9 @@
 
                     ./hosts
                     ./users
-                    ./nixos
-
-                    home-manager.nixosModules.home-manager {
-                        home-manager.useGlobalPkgs = true;
-                        home-manager.useUserPackages = true;
-
-                        home-manager.users.${username} = import ./home;
-
-                        home-manager.extraSpecialArgs = {
-                            inherit inputs hostname username pkgs pkgs-unstable;
-                        };
-                    }
+                    ./system
+                    ./apps
+                    ./packages
                 ];
             };
 
