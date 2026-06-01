@@ -1,8 +1,8 @@
 { pkgs, lib, username, ... }: {
-    environment.systemPackages = [
-        pkgs.fishPlugins.tide
-        pkgs.fishPlugins.z
-        pkgs.fishPlugins.fzf-fish
+    environment.systemPackages = with pkgs; [
+        fishPlugins.tide
+        fishPlugins.z
+        fishPlugins.fzf-fish
     ];
 
     programs.fish = {

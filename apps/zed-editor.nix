@@ -32,10 +32,16 @@
             wrap_guides = [ 80 ];
             soft_wrap = "none";
 
+            project_panel.dock = "left";
+            git_panel.dock = "left";
+            agent_panel.dock = "right";
+            collaboration_panel.dock = "left";
+
             format_on_save = "off";
 
             edit_predictions = {
                 disabled_globs = [ "**/*" ];
+                provider = "none";
             };
 
             lsp = {
