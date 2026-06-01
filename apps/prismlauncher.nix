@@ -1,5 +1,6 @@
 { pkgs, ... }:
     let
+        # FIXME: cannot use GPU...
         prismlauncher-wrapped = pkgs.mkBwrapper {
             imports = [ pkgs.bwrapperPresets.desktop ];
 
@@ -19,7 +20,16 @@
             ];
         };
     in {
-        environment.systemPackages = [ prismlauncher-wrapped ];
+        environment.systemPackages = [
+            #prismlauncher-wrapped
+
+            (pkgs.prismlauncher.override {
+                jdks = with pkgs; [
+                    jdk17_headless
+                    jdk21_headless
+                ];
+            })
+        ];
 
         environment.persistence."/persistent" = {
             hideMounts = true;

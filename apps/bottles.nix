@@ -1,5 +1,6 @@
 { pkgs, ... }:
     let
+        # FIXME: cannot use GPU...
         bottles-wrapped = pkgs.bottles.override {
             removeWarningPopup = true;
 
@@ -22,7 +23,10 @@
             };
         };
     in {
-        environment.systemPackages = [ bottles-wrapped ];
+        environment.systemPackages = [
+            # bottles-wrapped
+            pkgs.bottles
+        ];
 
         environment.persistence."/persistent" = {
             hideMounts = true;
