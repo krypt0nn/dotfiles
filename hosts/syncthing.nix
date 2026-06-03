@@ -50,7 +50,7 @@
                 };
 
                 projects = {
-                    path = "/home/${username}/projects";
+                    path = "/home/${username}/Projects";
 
                     ignorePatterns = [
                         "**/target/*"
