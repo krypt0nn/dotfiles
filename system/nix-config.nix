@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ username, pkgs, ... }: {
     nix = {
         package = pkgs.nix;
 
@@ -34,4 +34,12 @@
     systemd.services.nix-daemon.environment.TMPDIR = "/var/tmp";
 
     environment.sessionVariables.NIXPKGS_ALLOW_UNFREE = "1";
+
+    environment.persistence."/persistent" = {
+        hideMounts = true;
+
+        users.${username}.directories = [
+            ".local/share/nix"
+        ];
+    };
 }

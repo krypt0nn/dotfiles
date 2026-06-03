@@ -1,4 +1,4 @@
-{ ... }: {
+{ username, ... }: {
     programs.git = {
         enable = true;
 
@@ -25,5 +25,13 @@
                 directory = "/system-flake";
             };
         };
+    };
+
+    environment.persistence."/persistent" = {
+        hideMounts = true;
+
+        users.${username}.directories = [
+            ".config/git"
+        ];
     };
 }

@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ username, pkgs, ... }: {
     # Enable GNOME DE
     services.displayManager.gdm.enable = true;
     services.desktopManager.gnome.enable = true;
@@ -41,4 +41,17 @@
 
     # Allow chromium-based apps to run on wayland
     environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
+    # Persist gnome config
+    environment.persistence."/persistent" = {
+        hideMounts = true;
+
+        users.${username}.directories = [
+            ".config/dconf"
+            ".local/share/gnome-shell"
+            ".local/share/gvfs-metadata"
+            ".local/share/applications"
+            ".local/share/nautilus"
+        ];
+    };
 }
