@@ -20,8 +20,12 @@
             ./zen-browser.nix
         ];
     in {
-        "observer-pc" = desktop;
+        "observer-pc" = desktop ++ [
+            ./virt-manager.nix
+        ];
+
         "observer-laptop" = desktop;
+
         "observer-server" = [];
     }.${hostname};
 }
