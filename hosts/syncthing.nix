@@ -19,7 +19,7 @@
             };
 
             folders = {
-                documents = {
+                Documents = {
                     path = "/home/${username}/Documents";
 
                     devices = [
@@ -29,7 +29,7 @@
                     ];
                 };
 
-                pictures = {
+                Pictures = {
                     path = "/home/${username}/Pictures";
 
                     devices = [
@@ -39,7 +39,7 @@
                     ];
                 };
 
-                videos = {
+                Videos = {
                     path = "/home/${username}/Videos";
 
                     devices = [
@@ -49,7 +49,7 @@
                     ];
                 };
 
-                projects = {
+                Projects = {
                     path = "/home/${username}/Projects";
 
                     ignorePatterns = [
