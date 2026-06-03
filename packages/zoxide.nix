@@ -1,5 +1,9 @@
-{ username, pkgs, ... }: {
-    environment.systemPackages = [ pkgs.zoxide ];
+{ username, ... }: {
+    programs.zoxide = {
+        enable = true;
+        enableBashIntegration = true;
+        enableFishIntegration = true;
+    };
 
     environment.persistence."/persistent" = {
         hideMounts = true;
