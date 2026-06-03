@@ -59,16 +59,13 @@
             # Default folders
             "Desktop"
             "Documents"
+            "Projects"
             "Downloads"
             "Music"
             "Pictures"
             "Public"
             "Videos"
             "Templates"
-            "Projects"
-
-            # Personal folders
-            "projects"
 
             # Monitor ICC profiles
             ".local/share/icc"
