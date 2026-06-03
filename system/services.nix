@@ -19,4 +19,16 @@
 
     # Faster dbus implementation
     services.dbus.implementation = "broker";
+
+    # Persist services folders
+    environment.persistence."/persistent" = {
+        hideMounts = true;
+
+        directories = [
+            "/var/lib/fwupd"
+            "/var/cache/fwupd"
+            "/var/lib/fail2ban"
+            "/var/lib/udisks2"
+        ];
+    };
 }

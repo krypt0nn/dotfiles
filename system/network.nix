@@ -113,8 +113,9 @@
         hideMounts = true;
 
         directories = [
-            { directory = "/var/lib/tailscale"; mode = "0700"; }
-            { directory = "/var/lib/tor"; mode = "0700"; }
+            "/var/lib/tailscale"
+            "/var/cache/tailscale"
+            "/var/lib/tor"
         ];
     };
 }

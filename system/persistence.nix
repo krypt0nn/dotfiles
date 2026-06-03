@@ -7,10 +7,11 @@
             "/var/tmp"
             "/var/log"
             "/var/lib/nixos"
-            "/var/lib/systemd/coredump"
-            "/var/lib/systemd/random-seed"
+            "/var/lib/systemd"
             "/var/lib/AccountsService"
+            "/var/lib/NetworkManager"
             "/var/db/sudo"
+            "/etc/ssh"
             "/etc/NetworkManager/system-connections"
             { directory = "/var/lib/colord"; user = "colord"; group = "colord"; mode = "u=rwx,g=rx,o="; }
         ];

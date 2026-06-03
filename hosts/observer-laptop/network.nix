@@ -53,4 +53,12 @@
             };
         };
     };
+
+    environment.persistence."/persistent" = {
+        hideMounts = true;
+
+        directories = [
+            "/var/lib/blocky"
+        ];
+    };
 }
