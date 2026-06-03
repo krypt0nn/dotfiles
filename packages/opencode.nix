@@ -9,19 +9,50 @@
                 edit = "ask";
                 bash = {
                     "*" = "ask";
-                    "git log *" = "allow";
-                    "git status *" = "allow";
-                    "git diff *" = "allow";
-                    "git show *" = "allow";
-                    "ls *" = "allow";
-                    "find *" = "allow";
-                    "grep *" = "allow";
-                    "head *" = "allow";
-                    "tail *" = "allow";
-                    "sort *" = "allow";
-                    "wc *" = "allow";
-                    "jq *" = "allow";
-                };
+                } // (builtins.listToAttrs (
+                    map (cmd: {
+                        name = cmd;
+                        value = "allow";
+                    }) [
+                        # Filesystem
+                        "ls *"
+                        "find *"
+                        "stat *"
+                        "file *"
+                        "df *"
+                        "du *"
+                        "lsblk *"
+                        "pwd *"
+                        "realpath *"
+                        "basename *"
+                        "dirname *"
+
+                        # Text and files content
+                        "cat *"
+                        "grep *"
+                        "head *"
+                        "tail *"
+                        "sort *"
+                        "cut *"
+                        "wc *"
+                        "jq *"
+                        "hexdump *"
+                        "printf *"
+                        "echo *"
+                        "diff *"
+
+                        # Files checksumming
+                        "sha256sum *"
+                        "sha512sum *"
+                        "md5sum *"
+
+                        # Git
+                        "git log *"
+                        "git status *"
+                        "git diff *"
+                        "git show *"
+                    ]
+                ));
             };
 
             provider.llama-cpp = {
