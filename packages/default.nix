@@ -11,10 +11,12 @@
         "observer-pc" = default ++ [
             ./rust.nix
             ./llamacpp.nix
+            ./opencode.nix
         ];
 
         "observer-laptop" = default ++ [
             ./rust.nix
+            ./opencode.nix
         ];
 
         "observer-server" = default;

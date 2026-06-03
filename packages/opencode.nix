@@ -1,0 +1,63 @@
+{ username, pkgs-unstable, ... }:
+    let
+        config = builtins.toJSON {
+            "$schema" = "https://opencode.ai/config.json";
+
+            lsp = true;
+
+            permission = {
+                edit = "ask";
+                bash = {
+                    "*" = "ask";
+                    "git log *" = "allow";
+                    "git status *" = "allow";
+                    "git diff *" = "allow";
+                    "git show *" = "allow";
+                    "ls *" = "allow";
+                    "find *" = "allow";
+                    "grep *" = "allow";
+                    "head *" = "allow";
+                    "tail *" = "allow";
+                    "sort *" = "allow";
+                    "wc *" = "allow";
+                    "jq *" = "allow";
+                };
+            };
+
+            provider.llama-cpp = {
+                npm = "@ai-sdk/openai-compatible";
+                name = "llama.cpp";
+                options = {
+                    baseURL = "http://127.0.0.1:9020";
+                    apiKey = "";
+                };
+                models.default = {
+                    name = "default";
+                    context = 32000;
+                    output = 8192;
+                };
+            };
+
+            compaction = {
+                auto = true;
+                prune = true;
+                reserved = 8192;
+            };
+        };
+    in {
+        environment.systemPackages = [ pkgs-unstable.opencode ];
+
+        systemd.tmpfiles.rules = [
+            "d /home/${username}/.config/opencode 0755 ${username} users -"
+            "F /home/${username}/.config/opencode/opencode.json 0644 ${username} users - ${config}"
+        ];
+
+        environment.persistence."/persistent" = {
+            hideMounts = true;
+
+            users.${username}.directories = [
+                ".config/opencode"
+                ".local/share/opencode"
+            ];
+        };
+    }
