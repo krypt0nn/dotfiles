@@ -2,9 +2,6 @@
     imports = [
         ./hardware.nix
         ./boot.nix
-        ./virt-manager.nix
-        ./steam.nix
-        ./language-models.nix
     ];
 
     networking.hostName = "observer-pc";

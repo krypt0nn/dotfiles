@@ -38,12 +38,10 @@
         ...
     }@inputs:
         let
-            flakeConfig = builtins.fromJSON (builtins.readFile ./config.json);
-
             system = "x86_64-linux";
 
-            hostname = flakeConfig.hostname;
-            username = flakeConfig.username;
+            username = "observer";
+            hostname = "observer-pc";
 
             # with (import ./overlays.nix);
             overlays = [
@@ -52,8 +50,8 @@
 
                 nix-bwrapper.overlays.default
 
-                # Add CachyOS kernels
-                # nix-cachyos-kernel.overlays.default
+                # Add CachyOS kernels (pinned for guaranteed binary cache)
+                # nix-cachyos-kernel.overlays.pinned
             ];
 
             config = {
@@ -72,7 +70,7 @@
         in {
             nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem {
                 specialArgs = {
-                    inherit inputs hostname username pkgs-unstable;
+                    inherit inputs username hostname pkgs-unstable;
                 };
 
                 modules = [
@@ -83,10 +81,9 @@
                     impermanence.nixosModules.impermanence
 
                     ./hosts
-                    ./users
                     ./system
-                    ./apps
                     ./packages
+                    ./apps
                 ];
             };
 

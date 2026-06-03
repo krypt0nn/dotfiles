@@ -7,11 +7,9 @@
     environment.persistence."/persistent" = {
         hideMounts = true;
 
-        users.${username} = {
-            directories = [
-                ".steam"
-                ".local/share/Steam"
-            ];
-        };
+        users.${username}.directories = [
+            ".steam"
+            ".local/share/Steam"
+        ];
     };
 }

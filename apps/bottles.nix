@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ username, pkgs, ... }:
     let
         # FIXME: cannot use GPU...
         bottles-wrapped = pkgs.bottles.override {
@@ -31,10 +31,8 @@
         environment.persistence."/persistent" = {
             hideMounts = true;
 
-            users.observer = {
-                directories = [
-                    ".local/share/bottles"
-                ];
-            };
+            users.${username}.directories = [
+                ".local/share/bottles"
+            ];
         };
     }

@@ -18,10 +18,8 @@
     environment.persistence."/persistent" = {
         hideMounts = true;
 
-        users.${username} = {
-            directories = [
-                ".local/share/containers"
-            ];
-        };
+        users.${username}.directories = [
+            ".local/share/containers"
+        ];
     };
 }

@@ -1,4 +1,4 @@
-{ pkgs, lib, username, ... }: {
+{ username, pkgs, lib, ... }: {
     environment.systemPackages = with pkgs; [
         fishPlugins.tide
         fishPlugins.z
@@ -45,11 +45,9 @@
     environment.persistence."/persistent" = {
         hideMounts = true;
 
-        users.observer = {
-            directories = [
-                ".config/fish"
-                ".local/share/fish"
-            ];
-        };
+        users.${username}.directories = [
+            ".config/fish"
+            ".local/share/fish"
+        ];
     };
 }

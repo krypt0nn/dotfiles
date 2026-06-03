@@ -1,4 +1,4 @@
-{ pkgs-unstable, ... }: {
+{ username, pkgs-unstable, ... }: {
     environment.systemPackages = [
         (pkgs-unstable.rust-bin.stable.latest.default.override {
             extensions = [
@@ -14,11 +14,9 @@
     environment.persistence."/persistent" = {
         hideMounts = true;
 
-        users.observer = {
-            directories = [
-                ".rustup"
-                ".cargo"
-            ];
-        };
+        users.${username}.directories = [
+            ".rustup"
+            ".cargo"
+        ];
     };
 }

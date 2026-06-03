@@ -1,4 +1,4 @@
-{ pkgs-unstable, ... }:
+{ username, pkgs-unstable, ... }:
     let
         config = builtins.toJSON {
             telemetry = {
@@ -68,17 +68,15 @@
         environment.systemPackages = [ pkgs-unstable.zed-editor ];
 
         systemd.tmpfiles.rules = [
-            "d /home/observer/.config/zed 0755 observer users -"
-            "F /home/observer/.config/zed/settings.json 0644 observer users - ${config}"
+            "d /home/${username}/.config/zed 0755 ${username} users -"
+            "F /home/${username}/.config/zed/settings.json 0644 ${username} users - ${config}"
         ];
 
         environment.persistence."/persistent" = {
             hideMounts = true;
 
-            users.observer = {
-                directories = [
-                    ".local/share/zed"
-                ];
-            };
+            users.${username}.directories = [
+                ".local/share/zed"
+            ];
         };
     }

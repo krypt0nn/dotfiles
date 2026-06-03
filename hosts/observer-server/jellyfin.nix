@@ -1,8 +1,8 @@
-{ ... }: {
+{ username, ... }: {
     services.jellyfin = {
         enable = true;
         openFirewall = true;
-        user = "observer";
+        user = username;
     };
 
     environment.persistence."/persistent" = {

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ username, pkgs, ... }:
     let
         # FIXME: cannot use GPU...
         prismlauncher-wrapped = pkgs.mkBwrapper {
@@ -34,10 +34,8 @@
         environment.persistence."/persistent" = {
             hideMounts = true;
 
-            users.observer = {
-                directories = [
-                    ".local/share/PrismLauncher"
-                ];
-            };
+            users.${username}.directories = [
+                ".local/share/PrismLauncher"
+            ];
         };
     }

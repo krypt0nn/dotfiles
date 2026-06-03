@@ -1,4 +1,4 @@
-{ inputs, username, ... }: {
+{ username, inputs, ... }: {
     imports = [ inputs.nixcord.nixosModules.nixcord ];
 
     programs.nixcord = {

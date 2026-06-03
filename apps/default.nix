@@ -11,7 +11,9 @@
             ./prismlauncher.nix
             ./qbittorrent.nix
             ./rnote.nix
+            ./steam.nix
             ./telegram.nix
+            ./throne.nix
             ./thunderbird.nix
             ./tor-browser.nix
             ./zed-editor.nix

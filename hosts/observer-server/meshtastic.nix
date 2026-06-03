@@ -6,6 +6,7 @@
         description = "Meshtastic Serial-to-TCP Bridge";
         after = [ "network.target" ];
         wantedBy = [ "multi-user.target" ];
+
         serviceConfig = {
             ExecStart = "${pkgs.socat}/bin/socat TCP-LISTEN:4403,fork,reuseaddr FILE:/dev/ttyUSB0,raw,echo=0,b115200";
             Restart = "always";

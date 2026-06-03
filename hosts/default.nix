@@ -1,12 +1,10 @@
-{ hostname, ... }:
-    let imports = {
-        "observer-pc"     = [ ./observer-pc ./throne.nix ];
-        "observer-laptop" = [ ./observer-laptop ./throne.nix ];
+{ hostname, ... }: {
+    imports = {
+        "observer-pc" = [ ./observer-pc ];
+        "observer-laptop" = [ ./observer-laptop ];
         "observer-server" = [ ./observer-server ];
-    };
-
-    in {
-        imports = imports.${hostname} ++ [
-            ./impermanence.nix
-        ];
-    }
+    }.${hostname} ++ [
+        ./impermanence.nix
+        ./syncthing.nix
+    ];
+}

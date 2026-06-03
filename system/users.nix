@@ -1,0 +1,77 @@
+{ username, pkgs, ... }: {
+    time.timeZone = "Europe/Kaliningrad";
+
+    i18n.defaultLocale = "en_US.UTF-8";
+
+    services.xserver.xkb.layout = "us,ru";
+
+    users = {
+        mutableUsers = false;
+
+        users = {
+            root = {
+                createHome = true;
+
+                shell = pkgs.bash;
+
+                name = "root";
+                home = "/root";
+
+                uid = 0;
+
+                hashedPasswordFile = "/persistent/root.password";
+            };
+
+            observer = {
+                isNormalUser = true;
+                createHome = true;
+
+                # useDefaultShell = true;
+                shell = pkgs.fish;
+
+                name = username;
+                home = "/home/${username}";
+
+                hashedPasswordFile = "/persistent/${username}.password";
+
+                extraGroups = [
+                    "wheel"
+                    "networkmanager"
+                    "libvirtd"
+                    "podman"
+                    "gamemode"
+                ];
+            };
+        };
+    };
+
+    environment.persistence."/persistent" = {
+        hideMounts = true;
+
+        users.${username}.directories = [
+            # Default folders
+            "Desktop"
+            "Documents"
+            "Downloads"
+            "Music"
+            "Pictures"
+            "Public"
+            "Videos"
+            "Templates"
+            "Projects"
+
+            # Personal folders
+            "projects"
+
+            # Monitor ICC profiles
+            ".local/share/icc"
+
+            ".local"
+            ".config"
+
+            { directory = ".ssh"; mode = "0700"; }
+            { directory = ".pki"; mode = "0700"; }
+            { directory = ".local/share/keyrings"; mode = "0700"; }
+        ];
+    };
+}

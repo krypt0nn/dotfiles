@@ -8,10 +8,8 @@
     environment.persistence."/persistent" = {
         hideMounts = true;
 
-        users.${username} = {
-            directories = [
-                ".config/Throne"
-            ];
-        };
+        users.${username}.directories = [
+            ".config/Throne"
+        ];
     };
 }

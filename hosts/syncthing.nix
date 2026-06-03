@@ -1,12 +1,12 @@
-{ ... }: {
+{ username, ... }: {
     services.syncthing = {
         enable = true;
         openDefaultPorts = true;
 
-        user = "observer";
+        user = username;
 
-        dataDir = "/home/observer/.syncthing";
-        configDir = "/home/observer/.syncthing/.config";
+        dataDir = "/home/${username}/.syncthing";
+        configDir = "/home/${username}/.syncthing/.config";
 
         overrideDevices = true;
         overrideFolders = true;
@@ -20,7 +20,7 @@
 
             folders = {
                 documents = {
-                    path = "/home/observer/Documents";
+                    path = "/home/${username}/Documents";
 
                     devices = [
                         "observer-pc"
@@ -30,7 +30,7 @@
                 };
 
                 pictures = {
-                    path = "/home/observer/Pictures";
+                    path = "/home/${username}/Pictures";
 
                     devices = [
                         "observer-pc"
@@ -40,7 +40,7 @@
                 };
 
                 videos = {
-                    path = "/home/observer/Videos";
+                    path = "/home/${username}/Videos";
 
                     devices = [
                         "observer-pc"
@@ -50,7 +50,7 @@
                 };
 
                 projects = {
-                    path = "/home/observer/projects";
+                    path = "/home/${username}/projects";
 
                     ignorePatterns = [
                         "**/target/*"
@@ -67,5 +67,13 @@
                 };
             };
         };
+    };
+
+    environment.persistence."/persistent" = {
+        hideMounts = true;
+
+        users.${username}.directories = [
+            ".syncthing"
+        ];
     };
 }

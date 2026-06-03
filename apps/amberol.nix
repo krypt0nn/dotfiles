@@ -1,13 +1,11 @@
-{ pkgs, ... }: {
+{ username, pkgs, ... }: {
     environment.systemPackages = [ pkgs.amberol ];
 
     environment.persistence."/persistent" = {
         hideMounts = true;
 
-        users.observer = {
-            directories = [
-                ".cache/amberol"
-            ];
-        };
+        users.${username}.directories = [
+            ".cache/amberol"
+        ];
     };
 }

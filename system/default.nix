@@ -3,33 +3,25 @@
         default = [
             ./nix-config.nix
             ./persistence.nix
+            ./users.nix
             ./drivers.nix
             ./security.nix
             ./network.nix
             ./bluetooth.nix
-            ./sound.nix
-            ./misc.nix
             ./services.nix
             ./virtualisation.nix
-            ./fonts.nix
-            ./gnome-desktop.nix
             ./gnupg.nix
             ./programs.nix
+        ];
+
+        desktop = default ++ [
+            ./gnome-desktop.nix
+            ./sound.nix
+            ./fonts.nix
         ];
     in {
-        "observer-pc"     = default;
-        "observer-laptop" = default;
-        "observer-server" = [
-            ./nix-config.nix
-            ./persistence.nix
-            ./drivers.nix
-            ./network.nix
-            ./bluetooth.nix
-            ./misc.nix
-            ./services.nix
-            ./virtualisation.nix
-            ./gnupg.nix
-            ./programs.nix
-        ];
+        "observer-pc"     = desktop;
+        "observer-laptop" = desktop;
+        "observer-server" = default;
     }.${hostname};
 }
