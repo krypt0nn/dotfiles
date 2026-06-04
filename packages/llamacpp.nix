@@ -11,11 +11,11 @@
                     --add-flags "/home/${username}/Models" \
                     --add-flags "--alias default" \
                     --add-flags "--parallel 1" \
-                    --add-flags "--ctx-size 32768" \
-                    --add-flags "--cache-type-k q4_0" \
-                    --add-flags "--cache-type-v q4_0" \
-                    --add-flags "--spec-draft-type-k q4_0" \
-                    --add-flags "--spec-draft-type-v q4_0" \
+                    --add-flags "--ctx-size 16384" \
+                    --add-flags "--cache-type-k q8_0" \
+                    --add-flags "--cache-type-v q8_0" \
+                    --add-flags "--spec-draft-type-k q8_0" \
+                    --add-flags "--spec-draft-type-v q8_0" \
                     --add-flags "--top-p 0.95" \
                     --add-flags "--top-k 20" \
                     --add-flags "--min-p 0.0" \
@@ -24,7 +24,7 @@
                     --add-flags "--fit on" \
                     --add-flags "--no-mmap" \
                     --add-flags "--no-mmproj" \
-                    --add-flags "--reasoning off" \
+                    --add-flags "--reasoning on" \
                     --add-flags "--tools read_file,file_glob_search,grep_search"
             '';
         };

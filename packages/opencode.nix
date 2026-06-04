@@ -64,15 +64,9 @@
                 };
                 models.default = {
                     name = "default";
-                    context = 32000;
+                    context = 16000;
                     output = 8192;
                 };
-            };
-
-            compaction = {
-                auto = true;
-                prune = true;
-                reserved = 8192;
             };
         };
     in {
