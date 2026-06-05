@@ -9,7 +9,7 @@
         })
     ];
 
-    environment.sessionVariables.RUST_BACKTRACE = 1;
+    environment.variables.RUST_BACKTRACE = 1;
 
     environment.persistence."/persistent" = {
         hideMounts = true;

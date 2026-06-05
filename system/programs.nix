@@ -18,5 +18,5 @@
 
     programs.nix-ld.enable = true;
 
-    environment.sessionVariables.EDITOR = "micro";
+    environment.variables.EDITOR = "micro";
 }

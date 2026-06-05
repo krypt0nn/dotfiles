@@ -33,7 +33,7 @@
 
     systemd.services.nix-daemon.environment.TMPDIR = "/var/tmp";
 
-    environment.sessionVariables.NIXPKGS_ALLOW_UNFREE = "1";
+    environment.variables.NIXPKGS_ALLOW_UNFREE = "1";
 
     environment.persistence."/persistent" = {
         hideMounts = true;
