@@ -26,6 +26,8 @@
         };
 
         nix-bwrapper.url = "github:Naxdy/nix-bwrapper";
+
+        anime-games-launcher.url = "github:an-anime-team/anime-games-launcher/next";
     };
 
     outputs = {
@@ -35,6 +37,7 @@
         impermanence,
         rust-overlay,
         nix-bwrapper,
+        anime-games-launcher,
         ...
     }@inputs:
         let
@@ -79,6 +82,7 @@
                     { nixpkgs = { inherit pkgs; }; }
 
                     impermanence.nixosModules.impermanence
+                    anime-games-launcher.nixosModules.anime-games-launcher
 
                     ./hosts
                     ./system

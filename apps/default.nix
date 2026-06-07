@@ -23,6 +23,7 @@
     in {
         "observer-pc" = desktop ++ [
             ./virt-manager.nix
+            ./anime-games-launcher.nix
         ];
 
         "observer-laptop" = desktop;
