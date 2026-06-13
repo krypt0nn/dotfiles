@@ -64,7 +64,7 @@
                 };
                 models.default = {
                     name = "default";
-                    context = 16000;
+                    context = 30000;
                     output = 8192;
                 };
             };
