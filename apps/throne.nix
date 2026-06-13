@@ -1,7 +1,7 @@
-{ username, pkgs-unstable, ... }: {
+{ username, pkgs, ... }: {
     programs.throne = {
         enable = true;
-        package = pkgs-unstable.throne;
+        package = pkgs.throne;
         tunMode.enable = true;
     };
 
