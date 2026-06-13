@@ -28,15 +28,15 @@
 
             system-diff = lib.concatStrings [
                 "nix store diff-closures "
-                "$(ls -tr /nix/var/nix/profiles/system-*-link | tail -n 2 | head -n 1) "
-                "$(ls -tr /nix/var/nix/profiles/system-*-link | tail -n 1) | "
+                "$(ls -dtr /nix/var/nix/profiles/system-*-link | tail -n 2 | head -n 1) "
+                "$(ls -dtr /nix/var/nix/profiles/system-*-link | tail -n 1) | "
                 "fzf"
             ];
 
             system-diff-running = lib.concatStrings [
                 "nix store diff-closures "
                 "/run/current-system "
-                "$(ls -tr /nix/var/nix/profiles/system-*-link | tail -n 1) | "
+                "$(ls -dtr /nix/var/nix/profiles/system-*-link | tail -n 1) | "
                 "fzf"
             ];
         };
