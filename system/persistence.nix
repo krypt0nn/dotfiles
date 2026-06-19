@@ -8,7 +8,6 @@
             "/var/log"
             "/var/lib/nixos"
             "/var/lib/systemd"
-            "/var/lib/AccountsService"
             "/var/lib/NetworkManager"
             "/var/db/sudo"
             "/etc/ssh"

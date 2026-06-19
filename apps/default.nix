@@ -2,9 +2,7 @@
     imports = let
         desktop = [
             ./amberol.nix
-            ./apostrophe.nix
             ./bottles.nix
-            ./crosspipe.nix
             ./ghostty.nix
             ./gimp.nix
             ./nixcord.nix

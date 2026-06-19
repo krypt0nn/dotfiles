@@ -29,6 +29,7 @@
                 };
 
                 flatpak.appId = "org.prismlauncher.PrismLauncher";
+                # flatpak.info = pkgs.lib.mkForce {};
 
                 gpu = {
                     enable = true;

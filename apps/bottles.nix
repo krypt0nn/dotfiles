@@ -37,6 +37,7 @@
                 };
 
                 flatpak.appId = "com.usebottles.bottles";
+                # flatpak.info = pkgs.lib.mkForce {};
 
                 dbus.policies = {
                     "com.feralinteractive.GameMode" = "talk";
