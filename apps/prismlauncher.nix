@@ -41,6 +41,10 @@
                         pipewire = true;
                     };
 
+                    bind.ro = [
+                        (sloth.concat' sloth.homeDir "/Downloads")
+                    ];
+
                     bind.rw = [
                         sloth.runtimeDir
                         (sloth.concat' sloth.homeDir "/.local/share/PrismLauncher")
