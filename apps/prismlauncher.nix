@@ -1,4 +1,4 @@
-{ username, pkgs, ... }:
+{ username, pkgs, inputs, ... }:
     let
         # https://github.com/PrismLauncher/Themes
         prismlauncher-themes = pkgs.fetchFromGitHub {
@@ -8,36 +8,53 @@
             hash = "sha256-V6mkItSVA/TSC0yWKvcps/ewAC0nSd1KSBr8Pvdv8z8=";
         };
 
-        # FIXME: cannot use GPU...
-        prismlauncher-wrapped = pkgs.mkBwrapper {
-            imports = [ pkgs.bwrapperPresets.desktop ];
+        mkNixPak = inputs.nixpak.lib.nixpak {
+            inherit (pkgs) lib;
+            inherit pkgs;
+        };
 
-            app = {
-                id = "org.prismlauncher.PrismLauncher";
+        prismlauncher-wrapped = mkNixPak {
+            config = { sloth, ... }: {
+                imports = with inputs.nixpak.nixpakModules; [
+                    gui-base
+                    network
+                ];
 
-                package = pkgs.prismlauncher.override {
+                app.package = pkgs.prismlauncher.override {
                     jdks = with pkgs; [
-                        jdk17_headless
+                        jdk25_headless
                         jdk21_headless
+                        jdk17_headless
+                    ];
+                };
+
+                flatpak.appId = "org.prismlauncher.PrismLauncher";
+
+                gpu = {
+                    enable = true;
+                    provider = pkgs.lib.mkForce "nixos";
+                };
+
+                bubblewrap = {
+                    sockets = {
+                        wayland = true;
+                        pipewire = true;
+                    };
+
+                    bind.rw = [
+                        sloth.runtimeDir
+                        (sloth.concat' sloth.homeDir "/.local/share/PrismLauncher")
+                    ];
+
+                    tmpfs = [
+                        "/tmp"
                     ];
                 };
             };
-
-            mounts.readWrite = [
-                "$HOME/.local/share/PrismLauncher"
-            ];
         };
     in {
         environment.systemPackages = [
-            #prismlauncher-wrapped
-
-            (pkgs.prismlauncher.override {
-                jdks = with pkgs; [
-                    jdk25_headless
-                    jdk21_headless
-                    jdk17_headless
-                ];
-            })
+            prismlauncher-wrapped.config.env
         ];
 
         systemd.tmpfiles.rules = [

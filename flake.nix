@@ -25,7 +25,10 @@
             inputs.nixpkgs.follows = "nixpkgs";
         };
 
-        nix-bwrapper.url = "github:Naxdy/nix-bwrapper";
+        nixpak = {
+            url = "github:nixpak/nixpak";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
 
         anime-games-launcher.url = "github:an-anime-team/anime-games-launcher/next";
     };
@@ -36,7 +39,6 @@
         # nix-cachyos-kernel,
         impermanence,
         rust-overlay,
-        nix-bwrapper,
         anime-games-launcher,
         ...
     }@inputs:
@@ -50,8 +52,6 @@
             overlays = [
                 # Always use latest pre-compiled rust binaries
                 rust-overlay.overlays.default
-
-                nix-bwrapper.overlays.default
 
                 # Add CachyOS kernels (pinned for guaranteed binary cache)
                 # nix-cachyos-kernel.overlays.pinned
