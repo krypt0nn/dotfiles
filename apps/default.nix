@@ -16,7 +16,6 @@
             ./telegram.nix
             ./throne.nix
             ./thunderbird.nix
-            ./tor-browser.nix
             ./zed-editor.nix
             ./zen-browser.nix
         ];
