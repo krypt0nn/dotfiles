@@ -7,10 +7,7 @@
             ./gimp.nix
             ./nixcord.nix
             ./onlyoffice.nix
-            ./prismlauncher.nix
             ./qbittorrent.nix
-            ./rnote.nix
-            ./steam.nix
             ./telegram.nix
             ./throne.nix
             ./thunderbird.nix
@@ -19,7 +16,10 @@
         ];
     in {
         "observer-pc" = desktop ++ [
+            ./rnote.nix
             ./virt-manager.nix
+            ./steam.nix
+            ./prismlauncher.nix
             ./anime-games-launcher.nix
         ];
 
