@@ -38,7 +38,7 @@ in {
             microvm = {
                 hypervisor = "qemu";
                 vcpu = 4;
-                mem = 8192;
+                mem = 4 * 1024;
 
                 registerWithMachined = true;
 
