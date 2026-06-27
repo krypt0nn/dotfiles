@@ -3,6 +3,8 @@
         nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
         nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
+        # nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
+
         impermanence = {
             url = "github:nix-community/impermanence";
             inputs = {
@@ -11,7 +13,15 @@
             };
         };
 
-        # nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
+        microvm = {
+            url = "github:microvm-nix/microvm.nix";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
+
+        nixpak = {
+            url = "github:nixpak/nixpak";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
 
         rust-overlay = {
             url = "github:oxalica/rust-overlay";
@@ -22,11 +32,6 @@
 
         nixcord = {
             url = "github:kaylorben/nixcord";
-            inputs.nixpkgs.follows = "nixpkgs";
-        };
-
-        nixpak = {
-            url = "github:nixpak/nixpak";
             inputs.nixpkgs.follows = "nixpkgs";
         };
 

@@ -9,6 +9,7 @@
             "/var/lib/nixos"
             "/var/lib/systemd"
             "/var/lib/NetworkManager"
+            "/var/lib/microvms"
             "/var/db/sudo"
             "/etc/ssh"
             "/etc/NetworkManager/system-connections"
