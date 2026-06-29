@@ -14,6 +14,7 @@
         fastfetch
         onefetch
         libqalculate
+        b3sum
     ];
 
     programs.nix-ld.enable = true;
