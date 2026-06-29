@@ -39,6 +39,7 @@
         hideMounts = true;
 
         users.${username}.directories = [
+            ".cache/nix"
             ".local/share/nix"
         ];
     };
