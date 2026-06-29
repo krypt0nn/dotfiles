@@ -30,6 +30,7 @@
                         # Text and files content
                         "cat *"
                         "grep *"
+                        "rg *"
                         "head *"
                         "tail *"
                         "sort *"
@@ -45,12 +46,17 @@
                         "sha256sum *"
                         "sha512sum *"
                         "md5sum *"
+                        "b3sum *"
 
                         # Git
                         "git log *"
                         "git status *"
                         "git diff *"
                         "git show *"
+
+                        # Cargo
+                        "cargo check *"
+                        "cargo build *"
                     ]
                 ));
             };
