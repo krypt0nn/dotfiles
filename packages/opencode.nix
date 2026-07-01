@@ -1,9 +1,26 @@
 { username, pkgs, pkgs-unstable, ... }:
     let
+        nixosSkill = fetchGit {
+            url = "https://github.com/marceloeatworld/nixos-ai-skill.git";
+            rev = "807265c89509ca9f4170f35c32ee916a52901922";
+        };
+
+        rustSkills = fetchGit {
+            url = "https://github.com/actionbook/rust-skills";
+            rev = "fa60f7931223646fb71c4586b4a6c8545016076a";
+        };
+
         configFile = pkgs.writeText "opencode.json" (builtins.toJSON {
             "$schema" = "https://opencode.ai/config.json";
 
             lsp = true;
+
+            skills = {
+                paths = [
+                    "${nixosSkill}"
+                    "${rustSkills}/skills"
+                ];
+            };
 
             permission = {
                 edit = {
@@ -57,6 +74,10 @@
                         "git status *"
                         "git diff *"
                         "git show *"
+                        "git ls-remote *"
+
+                        # Nix
+                        "nix flake check *"
 
                         # Cargo
                         "cargo check *"
