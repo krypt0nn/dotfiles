@@ -10,6 +10,11 @@
             rev = "fa60f7931223646fb71c4586b4a6c8545016076a";
         };
 
+        gtkSkill = fetchGit {
+            url = "https://github.com/gotar/opencode-config";
+            rev = "aa541e7066fcea4d054540410ddbeb44e165556b";
+        };
+
         configFile = pkgs.writeText "opencode.json" (builtins.toJSON {
             "$schema" = "https://opencode.ai/config.json";
 
@@ -19,6 +24,7 @@
                 paths = [
                     "${nixosSkill}"
                     "${rustSkills}/skills"
+                    "${gtkSkill}/skills/gtk-ui-ux-engineer"
                 ];
             };
 
@@ -68,6 +74,15 @@
                         "sha512sum *"
                         "md5sum *"
                         "b3sum *"
+
+                        # Processes
+                        "ps *"
+
+                        # Network
+                        "ping *"
+                        "curl *"
+                        "wget *"
+                        "nc *"
 
                         # Git
                         "git log *"
