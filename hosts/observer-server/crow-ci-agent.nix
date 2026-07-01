@@ -1,6 +1,7 @@
 { inputs, lib, ... }:
 let
     enableSSH = false;
+    limitedAccess = false;
     encryptedSecret = "/persistent/crow/agent-secret";
 in {
     imports = [ inputs.microvm.nixosModules.host ];
@@ -108,7 +109,7 @@ in {
                         CROW_BACKEND = "docker";
                         CROW_BACKEND_DOCKER_LIMIT_MEM = "4.3G";
                         CROW_BACKEND_DOCKER_LIMIT_CPU_QUOTA = "350000";
-                        # CROW_AGENT_LABELS = "org=dawn-winery";
+                        CROW_AGENT_LABELS = lib.mkIf limitedAccess "org=dawn-winery";
                     };
 
                     environmentFiles = [
