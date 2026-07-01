@@ -1,4 +1,4 @@
-{ username, ... }: {
+{ ... }: {
     programs.git = {
         enable = true;
 
@@ -14,7 +14,11 @@
             user = {
                 name = "Nikita Podvirnyi";
                 email = "krypt0nn@vk.com";
-                signingkey = "3B14311A878F6C8817482002859D416E5142AFF3";
+                signingkey = "~/.ssh/id_ed25519.pub";
+            };
+
+            gpg = {
+                format = "ssh";
             };
 
             commit = {
@@ -25,13 +29,5 @@
                 directory = "/system-flake";
             };
         };
-    };
-
-    environment.persistence."/persistent" = {
-        hideMounts = true;
-
-        users.${username}.directories = [
-            ".config/git"
-        ];
     };
 }
