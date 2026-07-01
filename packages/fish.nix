@@ -18,6 +18,7 @@
                 "nix store diff-closures "
                 "$(ls -dtr /nix/var/nix/profiles/system-*-link | tail -n 2 | head -n 1) "
                 "$(ls -dtr /nix/var/nix/profiles/system-*-link | tail -n 1) | "
+                "sed 's,\\x1b\\[[0-9;]*m,,g' | "
                 "fzf"
             ];
 
@@ -25,6 +26,7 @@
                 "nix store diff-closures "
                 "/run/current-system "
                 "$(ls -dtr /nix/var/nix/profiles/system-*-link | tail -n 1) | "
+                "sed 's,\\x1b\\[[0-9;]*m,,g' | "
                 "fzf"
             ];
         };

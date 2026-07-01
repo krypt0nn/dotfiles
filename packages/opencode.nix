@@ -1,7 +1,7 @@
 { username, pkgs, pkgs-unstable, ... }:
     let
         nixosSkill = fetchGit {
-            url = "https://github.com/marceloeatworld/nixos-ai-skill.git";
+            url = "https://github.com/marceloeatworld/nixos-ai-skill";
             rev = "807265c89509ca9f4170f35c32ee916a52901922";
         };
 
