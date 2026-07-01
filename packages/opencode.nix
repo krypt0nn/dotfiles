@@ -6,7 +6,11 @@
             lsp = true;
 
             permission = {
-                edit = "ask";
+                edit = {
+                    "AGENTS.md" = "allow";
+                    "*" = "ask";
+                };
+
                 bash = {
                     "*" = "ask";
                 } // (builtins.listToAttrs (
