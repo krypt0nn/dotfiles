@@ -1,6 +1,12 @@
 { username, inputs, pkgs, ... }: {
     environment.systemPackages = [
-        inputs.torlink.packages.${pkgs.system}.default
+        (pkgs.symlinkJoin {
+            name = "torlink";
+            paths = [ inputs.torlink.packages.${pkgs.system}.default ];
+            postBuild = ''
+                ln -sf torlnk "$out/bin/torlink"
+            '';
+        })
     ];
 
     environment.persistence."/persistent" = {
