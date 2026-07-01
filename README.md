@@ -2,22 +2,21 @@
 
 My own NixOS system configuration files.
 
-Edit `config.json` file to specify device and user.
-
 ## Installation
 
 We will be cooking impermanent BTRFS NixOS setup here. The core idea is to make
 four subvolumes on the disk itself - `root` for `/`, and `nix`, `persistent`
-and `snapshots` for `/nix`, `/persistent` and `/snapshots` accordingly. Later on
-we will be mounting those subvolumes to the folders inside of the `root` subvolume
-using our nixos mounts config.
+and `snapshots` for `/nix`, `/persistent` and `/snapshots` accordingly. Later
+on we will be mounting those subvolumes to the directories inside of the `root`
+subvolume using our nixos mounts config.
 
-Value of the `root` subvolume will be overwritten each reboot, while all the other
-subvolumes, being outside of `root`, will keep their state. In particular, we're
-really interested in `persistent`, which will keep our documents and other important
-data saved on the disk between reboots, and `snapshots` which will be used to store
-`root` subvolume snapshots to keep track of previously written files. This is needed
-to being able to restore some sensitive data if it was forgotten to be persisted.
+Value of the `root` subvolume will be overwritten each reboot, while all the
+other subvolumes, being outside of `root`, will keep their state. In particular,
+we're really interested in `persistent`, which will keep our documents and other
+important data saved on the disk between reboots, and `snapshots` which will be
+used to store `root` subvolume snapshots to keep track of previously written
+files. This is needed to being able to restore some sensitive data if it was
+forgotten to be persisted.
 
 ### 1. Create base partitions
 
@@ -59,9 +58,10 @@ btrfs subvolume create /mnt/persistent
 btrfs subvolume create /mnt/snapshots
 ```
 
-### 5. Create empty folders within the root subvolume for future mounts
+### 5. Create empty directories within the root subvolume for future mounts
 
-Later on we will be mounting other btrfs subvolumes to these folders, and root subvolume to the `/`.
+Later on we will be mounting other btrfs subvolumes to these directories, and
+root subvolume to the `/`.
 
 ```bash
 mkdir /mnt/root/boot
@@ -72,7 +72,8 @@ mkdir /mnt/root/snapshots
 
 ### 6. Create blank snapshot of the root subvolume
 
-This empty snapshot will be used to restore the clean system state for impermanence setup.
+This empty snapshot will be used to restore the clean system state for
+impermanence setup.
 
 ```bash
 mkdir /mnt/snapshots/root
@@ -99,16 +100,19 @@ mount /dev/sda1 /mnt/boot
 nixos-generate-config --root /mnt
 ```
 
-Verify `/mnt/etc/nix/hardware-configuration.nix` file using `nano`. It must contain mount options
-for `/nix`, `/persistent`, `/snapshots` and `/` being a btrfs subvolumes (options field), `/boot` being
-a mount of `/dev/sda1`, and a swap device `/dev/sda3`.
+Verify `/mnt/etc/nix/hardware-configuration.nix` file using `nano`. It must
+contain mount options for `/nix`, `/persistent`, `/snapshots` and `/` being a
+btrfs subvolumes (options field), `/boot` being a mount of `/dev/sda1`, and a
+swap device `/dev/sda3`.
 
 Then go to `/mnt/etc/nix/configuration.nix` and:
 
 1. Set `networking.hostName` to a proper value.
 2. Set `networking.networkmanager.enable = true;`.
-3. In `environment.systemPackages` enable `git`, `curl`, `wget`, `vim` and `micro` (more is better right?).
-4. Add flakes support with this: `nix.settings.experimental-features = [ "nix-command" "flakes" ];`.
+3. In `environment.systemPackages` enable `git`, `curl`, `wget`, `vim` and
+   `micro` (more is better right?).
+4. Add flakes support with this:
+   `nix.settings.experimental-features = [ "nix-command" "flakes" ];`.
 5. Allow unfree packages with this: `nixpkgs.config.allowUnfree = true;`.
 
 ### 9. Proceed NixOS installation and setup root password afterwards
@@ -121,8 +125,8 @@ reboot
 
 ### 10. Create password files
 
-Create `root.password` and `<your username>.password` files in the `/persistent` folder
-containing your accounts' encrypted passwords.
+Create `root.password` and `<your username>.password` files in the `/persistent`
+directory containing your accounts' encrypted passwords.
 
 ```bash
 mkpasswd -m sha-512
@@ -130,7 +134,8 @@ mkpasswd -m sha-512
 
 ### 11. Reproduce this configuration repo
 
-Clone this repo and edit the `config.json` file to setup your user.
+Clone this repo and edit the `flake.nix` file to setup your username and
+hostname.
 
 ```bash
 sudo git clone https://github.com/krypt0nn/dotfiles /system-flake
@@ -140,7 +145,7 @@ sudo nixos-rebuild boot --flake /system-flake
 
 Don't forget to update `hardware.nix` file (disks UUID-s) for your host device.
 Note that after the first restart system can clean all your changes due to
-`/persistent` folder initialization.
+`/persistent` directory initialization.
 
 ### 12. Restart the system
 
@@ -166,4 +171,5 @@ mount -o subvol=persistent /dev/sda2 /mnt/persistent
 nixos-enter
 ```
 
-Also you've probably forgot to create accounts' password files. Check out stage 10.
+Also you've probably forgot to create accounts' password files. Check out stage
+10.
