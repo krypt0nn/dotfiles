@@ -36,6 +36,8 @@
         };
 
         anime-games-launcher.url = "github:an-anime-team/anime-games-launcher/next";
+
+        torlink.url = "github:baairon/torlink";
     };
 
     outputs = {

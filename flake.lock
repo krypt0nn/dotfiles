@@ -304,6 +304,22 @@
     },
     "nixpkgs_3": {
       "locked": {
+        "lastModified": 1782467914,
+        "narHash": "sha256-pGvFkM8N0xEkIIXDe5YYfbEAvHrk4IxBrjB/x8OomhE=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "e73de5be04e0eff4190a1432b946d469c794e7b4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_4": {
+      "locked": {
         "lastModified": 1781074563,
         "narHash": "sha256-md8WlXOlfnIeHeOScMTTHFyf2d6iaTwPl2apR5EQ3P4=",
         "owner": "nixos",
@@ -328,6 +344,7 @@
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "rust-overlay": "rust-overlay_2",
+        "torlink": "torlink",
         "zen-browser": "zen-browser"
       }
     },
@@ -403,10 +420,28 @@
         "type": "github"
       }
     },
+    "torlink": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_3"
+      },
+      "locked": {
+        "lastModified": 1782928909,
+        "narHash": "sha256-EABv+xZ79R8VMwB15cTG1EmRNzX0u2hAuHVEPwRlyhQ=",
+        "owner": "baairon",
+        "repo": "torlink",
+        "rev": "f3880f15fed90c989564abdd12e78136c96d3994",
+        "type": "github"
+      },
+      "original": {
+        "owner": "baairon",
+        "repo": "torlink",
+        "type": "github"
+      }
+    },
     "zen-browser": {
       "inputs": {
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs_3"
+        "nixpkgs": "nixpkgs_4"
       },
       "locked": {
         "lastModified": 1782460457,

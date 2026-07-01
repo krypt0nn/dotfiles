@@ -12,11 +12,13 @@
             ./rust.nix
             ./llamacpp.nix
             ./opencode.nix
+            ./torlink.nix
         ];
 
         "observer-laptop" = default ++ [
             ./rust.nix
             ./opencode.nix
+            ./torlink.nix
         ];
 
         "observer-server" = default;
