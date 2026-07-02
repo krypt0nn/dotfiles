@@ -15,16 +15,26 @@
             rev = "aa541e7066fcea4d054540410ddbeb44e165556b";
         };
 
+        ponytail = fetchGit {
+            url = "https://github.com/DietrichGebert/ponytail";
+            rev = "40e50d9e03242aa5dd53ac771950f9127362b25f";
+        };
+
         configFile = pkgs.writeText "opencode.json" (builtins.toJSON {
             "$schema" = "https://opencode.ai/config.json";
 
             lsp = true;
+
+            plugin = [
+                "${ponytail}/.opencode/plugins/ponytail.mjs"
+            ];
 
             skills = {
                 paths = [
                     "${nixosSkill}"
                     "${rustSkills}/skills"
                     "${gtkSkill}/skills/gtk-ui-ux-engineer"
+                    "${ponytail}/skills"
                 ];
             };
 
