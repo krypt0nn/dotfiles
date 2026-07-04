@@ -99,6 +99,7 @@
                         "git status *"
                         "git diff *"
                         "git show *"
+                        "git ls-tree *"
                         "git ls-remote *"
 
                         # Nix
