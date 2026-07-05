@@ -70,11 +70,15 @@
             };
 
             pkgs = import nixpkgs {
-                inherit system config overlays;
+                inherit config overlays;
+
+                localSystem = { inherit system; };
             };
 
             pkgs-unstable = import nixpkgs-unstable {
-                inherit system config overlays;
+                inherit config overlays;
+
+                localSystem = { inherit system; };
             };
 
         in {

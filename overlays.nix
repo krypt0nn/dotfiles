@@ -49,7 +49,8 @@
             };
 
             pinnedPkgs = import pinnedRepo {
-                inherit (super) system config;
+                inherit (super) config;
+                localSystem = { system = super.system; };
             };
 
         in pinnedPkgs.${pkg};

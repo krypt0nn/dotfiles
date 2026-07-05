@@ -4,6 +4,7 @@
     programs.nixcord = {
         enable = true;
         vesktop.enable = true;
+        discord.enable = false;
 
         user = username;
 
