@@ -106,6 +106,7 @@
                         "nix flake check *"
 
                         # Cargo
+                        "cargo tree *"
                         "cargo check *"
                         "cargo build *"
                     ]
