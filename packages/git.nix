@@ -13,7 +13,7 @@
 
             user = {
                 name = "Nikita Podvirnyi";
-                email = "krypt0nn@vk.com";
+                email = "krypt0nn@dawn.wine";
                 signingkey = "~/.ssh/id_ed25519.pub";
             };
 
