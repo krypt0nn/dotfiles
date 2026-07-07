@@ -43,6 +43,8 @@
                     };
 
                     bind.ro = [
+                        "/etc/os-release"
+                        "/etc/lsb-release"
                         (sloth.concat' sloth.homeDir "/Downloads")
                     ];
 
