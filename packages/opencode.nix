@@ -39,6 +39,12 @@
             };
 
             permission = {
+                read = {
+                    "/nix/store/**" = "allow";
+                    "/home/*/.cargo/git/checkouts/**" = "allow";
+                    "*" = "ask";
+                };
+
                 edit = {
                     "AGENTS.md" = "allow";
                     "*" = "ask";
