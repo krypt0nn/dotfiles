@@ -39,14 +39,17 @@
             };
 
             permission = {
-                read = {
+                external_directory = {
                     "/nix/store/**" = "allow";
-                    "/home/*/.cargo/git/checkouts/**" = "allow";
+                    "$HOME/.cargo/git/checkouts/**" = "allow";
+                    "/persistent/**" = "deny";
+                    "$HOME/.ssh/**" = "deny";
+                    "$HOME/.gnupg/**" = "deny";
                     "*" = "ask";
                 };
 
                 edit = {
-                    "AGENTS.md" = "allow";
+                    "*.md" = "allow";
                     "*" = "ask";
                 };
 
