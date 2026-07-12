@@ -6,6 +6,7 @@
         ./services.nix
         ./jellyfin.nix
         ./meshtastic.nix
+        ./chekist.nix
         ./crow-ci-agent.nix
     ];
 

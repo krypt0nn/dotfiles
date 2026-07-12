@@ -35,9 +35,11 @@
             inputs.nixpkgs.follows = "nixpkgs";
         };
 
+        torlink.url = "github:baairon/torlink";
+
         anime-games-launcher.url = "github:an-anime-team/anime-games-launcher/next";
 
-        torlink.url = "github:baairon/torlink";
+        chekist.url = "git+https://dawn.wine/dawn-winery/chekist";
     };
 
     outputs = {
@@ -47,6 +49,7 @@
         impermanence,
         rust-overlay,
         anime-games-launcher,
+        chekist,
         ...
     }@inputs:
         let
@@ -94,6 +97,7 @@
 
                     impermanence.nixosModules.impermanence
                     anime-games-launcher.nixosModules.anime-games-launcher
+                    chekist.nixosModules.default
 
                     ./hosts
                     ./system
