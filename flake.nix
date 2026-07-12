@@ -28,17 +28,23 @@
             inputs.nixpkgs.follows = "nixpkgs-unstable";
         };
 
-        zen-browser.url = "github:0xc000022070/zen-browser-flake";
-
         nixcord = {
             url = "github:kaylorben/nixcord";
             inputs.nixpkgs.follows = "nixpkgs";
         };
 
-        torlink.url = "github:baairon/torlink";
+        zen-browser = {
+            url = "github:0xc000022070/zen-browser-flake";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
 
-        anime-games-launcher.url = "github:an-anime-team/anime-games-launcher/next";
+        torlink = {
+            # Master branch is currently broken, so I'm using pinned version.
+            url = "github:baairon/torlink/bf36076924ec4ba19f87003de63907f9dd7419c9";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
 
+        anime-games-launcher.url = "github:an-anime-team/anime-games-launcher";
         chekist.url = "git+https://dawn.wine/dawn-winery/chekist";
     };
 
@@ -48,8 +54,6 @@
         # nix-cachyos-kernel,
         impermanence,
         rust-overlay,
-        anime-games-launcher,
-        chekist,
         ...
     }@inputs:
         let
@@ -96,8 +100,6 @@
                     { nixpkgs = { inherit pkgs; }; }
 
                     impermanence.nixosModules.impermanence
-                    anime-games-launcher.nixosModules.anime-games-launcher
-                    chekist.nixosModules.default
 
                     ./hosts
                     ./system

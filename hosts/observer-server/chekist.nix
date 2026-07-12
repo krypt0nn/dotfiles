@@ -1,4 +1,6 @@
-{ ... }: {
+{ inputs, ... }: {
+    imports = [ inputs.chekist.nixosModules.default ];
+
     services.chekist = {
         enable = true;
         environmentFile = "/persistent/chekist.secrets";

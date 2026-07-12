@@ -1,4 +1,6 @@
-{ username, ... }: {
+{ inputs, username, ... }: {
+    imports = [ inputs.anime-games-launcher.nixosModules.anime-games-launcher ];
+
     programs.anime-games-launcher.enable = true;
 
     environment.persistence."/persistent" = {
