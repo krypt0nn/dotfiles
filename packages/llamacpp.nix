@@ -25,6 +25,8 @@
                     --add-flags "--no-mmap" \
                     --add-flags "--no-mmproj" \
                     --add-flags "--reasoning on" \
+                    --add-flags "--reasoning-budget 4096" \
+                    --add-flags "--no-reasoning-preserve" \
                     --add-flags "--tools read_file,file_glob_search,grep_search"
             '';
         };
