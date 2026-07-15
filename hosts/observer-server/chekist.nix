@@ -15,8 +15,8 @@
             ];
         in {
             bot.cache = {
-                messages = 1000;
-                duration = "1h";
+                messages = 10000;
+                duration = "2h";
             };
 
             database.cleanup_interval = "12h";
@@ -115,6 +115,11 @@
                         };
 
                         ban = {
+                            enable = true;
+                            operators = modsList;
+                        };
+
+                        audit = {
                             enable = true;
                             operators = modsList;
                         };
