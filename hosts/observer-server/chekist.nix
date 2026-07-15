@@ -128,6 +128,15 @@
                     rules = {
                         messages_retention = "28d";
 
+                        agent = {
+                            enable = true;
+                            model_name = "default";
+                            max_context = 16384;
+                            max_turn_steps = 10;
+                            channel_history = 7;
+                            operators = modsList;
+                        };
+
                         logs = {
                             joined_members = true;
                             left_members = true;
