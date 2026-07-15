@@ -130,8 +130,10 @@
 
                         agent = {
                             enable = true;
+                            api_url = "http://192.168.1.10:9020/v1";
+                            api_token = "";
                             model_name = "default";
-                            max_context = 16384;
+                            max_context = 8192;
                             max_turn_steps = 10;
                             channel_history = 7;
                             operators = modsList;
