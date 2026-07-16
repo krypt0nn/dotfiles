@@ -39,6 +39,13 @@ let
         top-k = 80
         repeat-penalty = 1.05
 
+        [LFM2.5-1.2B-Instruct-UD-Q6_K_XL]
+        alias = lfm2.5-1.2b
+        temperature = 0.05
+        top-p = 0.1
+        top-k = 50
+        repeat-penalty = 1.05
+
         [Bonsai-8B-Q1_0]
         alias = bonsai-8b
         ctx-size = 16384

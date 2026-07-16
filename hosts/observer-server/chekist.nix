@@ -110,9 +110,9 @@
                     agent = {
                         enable = true;
                         api_url = "http://127.0.0.1:9020/v1";
-                        model_name = "qwen3.5-4b";
+                        model_name = "lfm2.5-1.2b";
                         max_context = 8192;
-                        max_turn_steps = 8;
+                        max_turn_steps = 10;
                         channel_history = 5;
                         operators = modsList;
                     };
