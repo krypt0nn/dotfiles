@@ -125,18 +125,18 @@
                         };
                     };
 
+                    agent = {
+                        enable = true;
+                        api_url = "http://127.0.0.1:9020/v1";
+                        model_name = "bonsai-8b";
+                        max_context = 8192;
+                        max_turn_steps = 10;
+                        channel_history = 7;
+                        operators = modsList;
+                    };
+
                     rules = {
                         messages_retention = "28d";
-
-                        agent = {
-                            enable = true;
-                            api_url = "http://127.0.0.1:9020/v1";
-                            model_name = "bonsai-8b";
-                            max_context = 8192;
-                            max_turn_steps = 10;
-                            channel_history = 7;
-                            operators = modsList;
-                        };
 
                         logs = {
                             joined_members = true;
