@@ -14,8 +14,24 @@ let
         fit = on
         reasoning = on
         reasoning-budget = 2048
-        presence-penalty = 0.0
+
+        [Qwen3.5-4B-UD-Q4_K_XL]
+        alias = qwen3.5-4b
+        spec-type = draft-mtp
+        spec-draft-n-max = 6
+        temperature = 0.7
+        top-p = 0.8
+        top-k = 20
+        min-p = 0.0
+        presence-penalty = 1.5
         repeat-penalty = 1.0
+
+        [Qwen3-1.7B-UD-Q4_K_XL]
+        alias = qwen3-1.7b
+        temperature = 0.6
+        top-p = 0.95
+        top-k = 20
+        min-p = 0.0
 
         [LFM2.5-8B-A1B-UD-IQ4_XS]
         alias = lfm2.5-8b-a1b
@@ -32,13 +48,6 @@ let
         spec-draft-type-v = q4_0
         temperature = 0.5
         top-p = 0.9
-        top-k = 20
-        min-p = 0.0
-
-        [Qwen3-1.7B-UD-Q4_K_XL]
-        alias = qwen3-1.7b
-        temperature = 0.6
-        top-p = 0.95
         top-k = 20
         min-p = 0.0
     '';
