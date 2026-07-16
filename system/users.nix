@@ -39,6 +39,8 @@
                     "networkmanager"
                     "libvirtd"
                     "podman"
+                    "render"
+                    "video"
                     "gamemode"
                 ];
             };

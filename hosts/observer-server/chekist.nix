@@ -130,9 +130,8 @@
 
                         agent = {
                             enable = true;
-                            api_url = "http://192.168.1.10:9020/v1";
-                            api_token = "";
-                            model_name = "default";
+                            api_url = "http://127.0.0.1:9020/v1";
+                            model_name = "bonsai-8b";
                             max_context = 8192;
                             max_turn_steps = 10;
                             channel_history = 7;
