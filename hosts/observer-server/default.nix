@@ -8,6 +8,7 @@
         ./meshtastic.nix
         ./llama-server.nix
         ./chekist.nix
+        ./minecraft-server.nix
         ./crow-ci-agent.nix
     ];
 
