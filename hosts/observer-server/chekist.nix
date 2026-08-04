@@ -110,7 +110,7 @@
                     agent = {
                         enable = true;
                         api_url = "http://127.0.0.1:9020/v1";
-                        model_name = "bonsai-8b";
+                        model_name = "lfm2.5-2.6b";
                         max_context = 8192;
                         max_turn_steps = 8;
                         channel_history = 5;
