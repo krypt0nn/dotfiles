@@ -39,8 +39,7 @@
         };
 
         torlink = {
-            # Master branch is currently broken, so I'm using pinned version.
-            url = "github:baairon/torlink/bf36076924ec4ba19f87003de63907f9dd7419c9";
+            url = "github:baairon/torlink";
             inputs.nixpkgs.follows = "nixpkgs";
         };
 
