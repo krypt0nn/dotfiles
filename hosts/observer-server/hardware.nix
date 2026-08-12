@@ -89,6 +89,8 @@
             options = [
                 "noatime"
                 "nodiratime"
+                "uid=1000"
+                "gid=100"
             ];
         };
     };
