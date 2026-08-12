@@ -5,6 +5,7 @@
         ./security.nix
         ./services.nix
         ./jellyfin.nix
+        ./qbittorrent.nix
         ./meshtastic.nix
         ./llama-server.nix
         ./chekist.nix
