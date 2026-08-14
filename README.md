@@ -4,31 +4,45 @@ My own NixOS system configuration files.
 
 ## Installation
 
-We will be cooking impermanent BTRFS NixOS setup here. The core idea is to make
-four subvolumes on the disk itself - `root` for `/`, and `nix`, `persistent`
-and `snapshots` for `/nix`, `/persistent` and `/snapshots` accordingly. Later
-on we will be mounting those subvolumes to the directories inside of the `root`
-subvolume using our nixos mounts config.
+My system is using impermanence setup, i.e. root partition gets wiped every
+system restart and restored from nix store and persistent storage partition.
+To achieve this, I make root partition a CoW-filesystem's subvolume, and replace
+it by an empty snapshot, which is a cheap operation. Some of my devices use
+btrfs, while others rely on experimental bcachefs.
 
-Value of the `root` subvolume will be overwritten each reboot, while all the
-other subvolumes, being outside of `root`, will keep their state. In particular,
-we're really interested in `persistent`, which will keep our documents and other
-important data saved on the disk between reboots, and `snapshots` which will be
-used to store `root` subvolume snapshots to keep track of previously written
-files. This is needed to being able to restore some sensitive data if it was
-forgotten to be persisted.
+We will also make snapshots of root partitions as backups, in case some data
+gets wiped before we configure its persistence.
+
+| Subvolume    | Mount         |
+| ------------ | ------------- |
+| `root`       | `/`           |
+| `nix`        | `/nix`        |
+| `persistent` | `/persistent` |
+| `snapshots`  | `/snapshots`  |
+
+> Note that bcachefs is out of baseline kernel and you will need to build an ISO
+> image with bcachefs yourself if you go this route.
 
 ### 1. Create base partitions
 
 Lookup main storage drive name with the `lsblk`. Then:
 
 ```bash
+# Enter interactive sudo mode
 sudo -i
 
+# Clear previous partition records from disk
+wipefs --all -f /dev/sda1
+wipefs --all -f /dev/sda2
+wipefs --all -f /dev/sda3
+
+sgdisk --zap-all /dev/sda
+
+# Create boot, swap, and primary partitions
 parted /dev/sda -- mklabel gpt
-parted /dev/sda -- mkpart ESP fat32 1MB 512MB
+parted /dev/sda -- mkpart ESP fat32 1MB 1GB
 parted /dev/sda -- set 1 esp on
-parted /dev/sda -- mkpart primary 512MB -16GB
+parted /dev/sda -- mkpart primary 1GB -16GB
 parted /dev/sda -- mkpart swap linux-swap -16GB 100%
 ```
 
@@ -37,19 +51,49 @@ parted /dev/sda -- mkpart swap linux-swap -16GB 100%
 Verify partitions names via said `lsblk` again. Then:
 
 ```bash
+# Format boot partition
 mkfs.fat -F 32 -n boot /dev/sda1
-mkfs.btrfs -L nixos /dev/sda2
+
+# Format swap partition
 mkswap -L swap /dev/sda3
+
+# a) Format primary partition for btrfs
+mkfs.btrfs -L nixos /dev/sda2
+
+# b) Format primary partition for bcachefs
+bcachefs format \
+    --label=t1.nvme1 /dev/sda2 \
+    --label=t2.ssd1 /dev/sdb \
+    --label=t3.hdd1 /dev/sdc \
+    --foreground_target=t1 \
+    --promote_target=t2 \
+    --background_target=t3 \
+    --metadata_target=t3 \
+    --metadata_replicas=2 \
+    --compression=none \
+    --background_compression=zstd \
+    --data_replicas=1
 ```
+
+I'm using 3 storage devices on my PC, so I use bcachefs with devices tiering.
+My home server and laptop have only one SSD so I just use btrfs for them.
 
 ### 3. Mount created partitions
 
 ```bash
+# a) Mount btrfs with device name
 mount /dev/sda2 /mnt
+
+# b) Mount bcachefs with filesystem UUID
+mount -t bcachefs UUID=...
+
+# Enable swap
 swapon /dev/sda3
 ```
 
-### 4. Create btrfs subvolumes
+### 4. Create cow subvolumes
+
+If we're running btrfs:
 
 ```bash
 btrfs subvolume create /mnt/root
@@ -58,10 +102,20 @@ btrfs subvolume create /mnt/persistent
 btrfs subvolume create /mnt/snapshots
 ```
 
+If we're running bcachefs:
+
+```bash
+bcachefs subvolume create /mnt/root
+bcachefs subvolume create /mnt/nix
+bcachefs subvolume create /mnt/persistent
+bcachefs subvolume create /mnt/snapshots
+```
+
 ### 5. Create empty directories within the root subvolume for future mounts
 
-Later on we will be mounting other btrfs subvolumes to these directories, and
-root subvolume to the `/`.
+Btrfs requires an existing directory to mount a subvolume into, so we will make
+empty directories in root partition before making a snapshot of it, so we will
+not need to create this directories every reboot.
 
 ```bash
 mkdir /mnt/root/boot
@@ -72,8 +126,10 @@ mkdir /mnt/root/snapshots
 
 ### 6. Create blank snapshot of the root subvolume
 
-This empty snapshot will be used to restore the clean system state for
+Create empty snapshot which will be used to restore the clean system state for
 impermanence setup.
+
+If we're running btrfs:
 
 ```bash
 mkdir /mnt/snapshots/root
@@ -81,7 +137,17 @@ mkdir /mnt/snapshots/root
 btrfs subvolume snapshot -r /mnt/root /mnt/snapshots/root/blank
 ```
 
+If we're running bcachefs:
+
+```bash
+mkdir /mnt/snapshots/root
+
+bcachefs subvolume snapshot --read-only /mnt/root /mnt/snapshots/root/blank
+```
+
 ### 7. Unmount the drive and mount subvolumes instead
+
+If we're running btrfs:
 
 ```bash
 umount /mnt
@@ -94,15 +160,28 @@ mount -o subvol=snapshots /dev/sda2 /mnt/snapshots
 mount /dev/sda1 /mnt/boot
 ```
 
+If we're running bcachefs:
+
+```bash
+umount /mnt
+
+mount -t bcachefs -o subvol=root UUID=... /mnt
+mount -t bcachefs -o subvol=nix UUID=... /mnt/nix
+mount -t bcachefs -o subvol=persistent UUID=... /mnt/persistent
+mount -t bcachefs -o subvol=snapshots UUID=... /mnt/snapshots
+
+mount /dev/sda1 /mnt/boot
+```
+
 ### 8. Generate basic nixos config
 
 ```bash
 nixos-generate-config --root /mnt
 ```
 
-Verify `/mnt/etc/nix/hardware-configuration.nix` file using `nano`. It must
+Verify `/mnt/etc/nix/hardware-configuration.nix` file using `vi`. It must
 contain mount options for `/nix`, `/persistent`, `/snapshots` and `/` being a
-btrfs subvolumes (options field), `/boot` being a mount of `/dev/sda1`, and a
+subvolumes (options field), `/boot` being a mount of `/dev/sda1`, and a
 swap device `/dev/sda3`.
 
 Then go to `/mnt/etc/nix/configuration.nix` and:
@@ -159,7 +238,9 @@ Done. Welcome to your impermanent NixOS system!
 
 ### 1. I lost my account! How do I login?
 
-Boot from the live iso used to install the system. Then:
+Boot from the live iso used to install the system. Then..
+
+If we're running btrfs:
 
 ```bash
 sudo -i
@@ -167,6 +248,18 @@ sudo -i
 mount -o subvol=root /dev/sda2 /mnt
 mount -o subvol=nix /dev/sda2 /mnt/nix
 mount -o subvol=persistent /dev/sda2 /mnt/persistent
+
+nixos-enter
+```
+
+If we're running bcachefs:
+
+```bash
+sudo -i
+
+mount -t bcachefs -o subvol=root UUID=... /mnt
+mount -t bcachefs -o subvol=nix UUID=... /mnt/nix
+mount -t bcachefs -o subvol=persistent UUID=... /mnt/persistent
 
 nixos-enter
 ```

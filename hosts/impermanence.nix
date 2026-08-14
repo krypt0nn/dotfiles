@@ -1,11 +1,17 @@
-{ pkgs, ... }: {
+{ hostname, pkgs, ... }:
+let
     # <...>.services.impermanence.path is not enough and the impermanence
     # service doesn't have these binaries. So, we have to specify them here too.
-    boot.initrd.systemd.storePaths = with pkgs; [
-        btrfs-progs
+    boot-pkgs = with pkgs; [
         coreutils
         util-linux
-    ];
+    ] ++ {
+        observer-pc = [ btrfs-progs ]; # bcachefs-tools
+        observer-laptop = [ btrfs-progs ];
+        observer-server = [ btrfs-progs ];
+    }.${hostname};
+in {
+    boot.initrd.systemd.storePaths = boot-pkgs;
 
     boot.initrd.systemd.services.impermanence = let
       deviceName = "/dev/disk/by-label/nixos";
@@ -25,99 +31,175 @@
         unitConfig.DefaultDependencies = "no";
         serviceConfig.Type = "oneshot";
 
-        path = with pkgs; [
-            btrfs-progs
-            coreutils
-            util-linux
-        ];
+        path = boot-pkgs;
 
-        script = ''
-            set -euo pipefail
+        script = rec {
+            btrfs = ''
+                set -euo pipefail
 
-            # Ensure /mnt is always unmounted, even on error
-            trap 'umount /mnt 2>/dev/null || true' EXIT
+                # Ensure /mnt is always unmounted, even on error
+                trap 'umount /mnt 2>/dev/null || true' EXIT
 
-            # Mount btrfs into /mnt
+                # Mount btrfs into /mnt
 
-            echo "impermanence: mounting base drive"
+                echo "impermanence: mounting base drive"
 
-            mkdir -p /mnt
-            mount ${deviceName} /mnt
+                mkdir -p /mnt
+                mount ${deviceName} /mnt
 
-            if ! btrfs subvolume show /mnt/snapshots/root/blank &>/dev/null; then
-                echo "impermanence: blank snapshot missing! aborting root reset"
+                if ! btrfs subvolume show /mnt/snapshots/root/blank &>/dev/null; then
+                    echo "impermanence: blank snapshot missing! aborting root reset"
+
+                    umount /mnt
+                    exit 1
+                fi
+
+                # Check mounted filesystem into being write-able
+                # It can be mounted as read-only if there was some filesystem error
+
+                echo "impermanence: checking filesystem writability"
+
+                if ! touch /mnt/.write_test 2>/dev/null; then
+                    echo "impermanence: filesystem became read-only! aborting root reset"
+
+                    umount /mnt
+                    exit 1
+                fi
+
+                rm -f /mnt/.write_test
+
+                # Delete temporary btrfs subvolumes created by... systemd?
+
+                echo "impermanence: deleting root subvolumes"
+
+                while read -r subvolume; do
+                    echo "impermanence: deleting /$subvolume subvolume"
+
+                    btrfs subvolume delete "/mnt/$subvolume"
+                done < <(btrfs subvolume list -o /mnt/root | cut -f9 -d' ')
+
+                # Delete previous persistent subvolume backup and make a new one
+
+                if [ -d "/mnt/snapshots/persistent/previous" ]; then
+                    echo "impermanence: deleting previous persistent subvolume backup"
+
+                    btrfs subvolume delete /mnt/snapshots/persistent/previous
+                fi
+
+                echo "impermanence: making backup of the persistent subvolume"
+
+                mkdir -p /mnt/snapshots/persistent
+                btrfs subvolume snapshot -r /mnt/persistent /mnt/snapshots/persistent/previous
+
+                # Delete previous root subvolume backup and make a new one
+
+                if [ -d "/mnt/snapshots/root/previous" ]; then
+                    echo "impermanence: deleting previous root subvolume backup"
+
+                    btrfs subvolume delete /mnt/snapshots/root/previous
+                fi
+
+                echo "impermanence: making backup of the root subvolume"
+
+                mkdir -p /mnt/snapshots/root
+                btrfs subvolume snapshot -r /mnt/root /mnt/snapshots/root/previous
+
+                # Delete current root subvolume and replace it by a blank one
+
+                echo "impermanence: deleting root subvolume"
+
+                btrfs subvolume delete /mnt/root
+
+                echo "impermanence: restoring root subvolume from the blank image"
+
+                btrfs subvolume snapshot /mnt/snapshots/root/blank /mnt/root
+
+                # Unmount btrfs, allowing it to be mounted as root partition
+
+                echo "impermanence: unmounting base drive"
 
                 umount /mnt
-                exit 1
-            fi
 
-            # Check mounted filesystem into being write-able
-            # It can be mounted as read-only if there was some filesystem error
+                echo "impermanence: done"
+            '';
 
-            echo "impermanence: checking filesystem writability"
+            bcachefs = ''
+                set -euo pipefail
 
-            if ! touch /mnt/.write_test 2>/dev/null; then
-                echo "impermanence: filesystem became read-only! aborting root reset"
+                # Ensure /mnt is always unmounted, even on error
+                trap 'umount /mnt 2>/dev/null || true' EXIT
+
+                # Mount bcachefs into /mnt
+                echo "impermanence: mounting base drive"
+
+                mkdir -p /mnt
+                mount -t bcachefs ${deviceName} /mnt
+
+                # Check if the blank snapshot exists
+                if ! test -d /mnt/snapshots/root/blank; then
+                    echo "impermanence: blank snapshot missing! aborting root reset"
+
+                    umount /mnt
+                    exit 1
+                fi
+
+                # Check mounted filesystem into being write-able
+                # It can be mounted as read-only if there was some filesystem error
+                echo "impermanence: checking filesystem writability"
+
+                if ! touch /mnt/.write_test 2>/dev/null; then
+                    echo "impermanence: filesystem became read-only! aborting root reset"
+
+                    umount /mnt
+                    exit 1
+                fi
+
+                rm -f /mnt/.write_test
+
+                # Delete previous persistent subvolume backup and make a new one
+                if [ -d "/mnt/snapshots/persistent/previous" ]; then
+                    echo "impermanence: deleting previous persistent subvolume backup"
+
+                    bcachefs subvolume delete /mnt/snapshots/persistent/previous
+                fi
+
+                echo "impermanence: making backup of the persistent subvolume"
+
+                mkdir -p /mnt/snapshots/persistent
+                bcachefs subvolume snapshot --read-only /mnt/persistent /mnt/snapshots/persistent/previous
+
+                # Delete previous root subvolume backup and make a new one
+                if [ -d "/mnt/snapshots/root/previous" ]; then
+                    echo "impermanence: deleting previous root subvolume backup"
+
+                    bcachefs subvolume delete /mnt/snapshots/root/previous
+                fi
+
+                echo "impermanence: making backup of the root subvolume"
+
+                mkdir -p /mnt/snapshots/root
+                bcachefs subvolume snapshot --read-only /mnt/root /mnt/snapshots/root/previous
+
+                # Delete current root subvolume and replace it by a blank one
+                echo "impermanence: deleting root subvolume"
+
+                bcachefs subvolume delete /mnt/root
+
+                echo "impermanence: restoring root subvolume from the blank image"
+
+                bcachefs subvolume snapshot /mnt/snapshots/root/blank /mnt/root
+
+                # Unmount bcachefs, allowing it to be mounted as root partition
+                echo "impermanence: unmounting base drive"
 
                 umount /mnt
-                exit 1
-            fi
 
-            rm -f /mnt/.write_test
+                echo "impermanence: done"
+            '';
 
-            # Delete temporary btrfs subvolumes created by... systemd?
-
-            echo "impermanence: deleting root subvolumes"
-
-            while read -r subvolume; do
-                echo "impermanence: deleting /$subvolume subvolume"
-
-                btrfs subvolume delete "/mnt/$subvolume"
-            done < <(btrfs subvolume list -o /mnt/root | cut -f9 -d' ')
-
-            # Delete previous persistent subvolume backup and make a new one
-
-            if [ -d "/mnt/snapshots/persistent/previous" ]; then
-                echo "impermanence: deleting previous persistent subvolume backup"
-
-                btrfs subvolume delete /mnt/snapshots/persistent/previous
-            fi
-
-            echo "impermanence: making backup of the persistent subvolume"
-
-            mkdir -p /mnt/snapshots/persistent
-            btrfs subvolume snapshot -r /mnt/persistent /mnt/snapshots/persistent/previous
-
-            # Delete previous root subvolume backup and make a new one
-
-            if [ -d "/mnt/snapshots/root/previous" ]; then
-                echo "impermanence: deleting previous root subvolume backup"
-
-                btrfs subvolume delete /mnt/snapshots/root/previous
-            fi
-
-            echo "impermanence: making backup of the root subvolume"
-
-            mkdir -p /mnt/snapshots/root
-            btrfs subvolume snapshot -r /mnt/root /mnt/snapshots/root/previous
-
-            # Delete current root subvolume and replace it by a blank one
-
-            echo "impermanence: deleting root subvolume"
-
-            btrfs subvolume delete /mnt/root
-
-            echo "impermanence: restoring root subvolume from the blank image"
-
-            btrfs subvolume snapshot /mnt/snapshots/root/blank /mnt/root
-
-            # Unmount btrfs, allowing it to be mounted as root partition
-
-            echo "impermanence: unmounting base drive"
-
-            umount /mnt
-
-            echo "impermanence: done"
-        '';
+            observer-pc = btrfs; # bcachefs
+            observer-laptop = btrfs;
+            observer-server = btrfs;
+        }.${hostname};
     };
 }

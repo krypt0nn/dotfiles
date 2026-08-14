@@ -25,7 +25,7 @@
             "amdgpu"
         ];
 
-        extraModulePackages = [];
+        supportedFilesystems = [ "bcachefs" ];
 
         plymouth.enable = true;
     };
