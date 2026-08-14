@@ -80,14 +80,19 @@ My home server and laptop have only one SSD so I just use btrfs for them.
 
 ### 3. Mount created partitions
 
+If we're running btrfs:
+
 ```bash
-# a) Mount btrfs with device name
 mount /dev/sda2 /mnt
 
-# b) Mount bcachefs with filesystem UUID
-mount -t bcachefs UUID=...
+swapon /dev/sda3
+```
 
-# Enable swap
+If we're running bcachefs:
+
+```bash
+mount -t bcachefs /dev/sda2:/dev/sdb:/dev/sdc /mnt
+
 swapon /dev/sda3
 ```
 
@@ -162,13 +167,17 @@ mount /dev/sda1 /mnt/boot
 
 If we're running bcachefs:
 
+> As of Aug 14, 2026, bcachefs doesn't support `subvol` mount option. There is
+> a PR in `bcachefs-tools` project to add its support:
+> https://github.com/koverstreet/bcachefs-tools/pull/647
+
 ```bash
 umount /mnt
 
-mount -t bcachefs -o subvol=root UUID=... /mnt
-mount -t bcachefs -o subvol=nix UUID=... /mnt/nix
-mount -t bcachefs -o subvol=persistent UUID=... /mnt/persistent
-mount -t bcachefs -o subvol=snapshots UUID=... /mnt/snapshots
+mount -t bcachefs -o subvol=root /dev/sda2:/dev/sdb:/dev/sdc /mnt
+mount -t bcachefs -o subvol=nix /dev/sda2:/dev/sdb:/dev/sdc /mnt/nix
+mount -t bcachefs -o subvol=persistent /dev/sda2:/dev/sdb:/dev/sdc /mnt/persistent
+mount -t bcachefs -o subvol=snapshots /dev/sda2:/dev/sdb:/dev/sdc /mnt/snapshots
 
 mount /dev/sda1 /mnt/boot
 ```
