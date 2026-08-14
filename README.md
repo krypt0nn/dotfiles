@@ -157,6 +157,8 @@ If we're running btrfs:
 ```bash
 umount /mnt
 
+mkdir -p /mnt/{nix,persistent,snapshots,boot}
+
 mount -o subvol=root /dev/sda2 /mnt
 mount -o subvol=nix /dev/sda2 /mnt/nix
 mount -o subvol=persistent /dev/sda2 /mnt/persistent
@@ -165,7 +167,7 @@ mount -o subvol=snapshots /dev/sda2 /mnt/snapshots
 mount /dev/sda1 /mnt/boot
 ```
 
-If we're running bcachefs:
+If we're running bcachefs (subvol option):
 
 > As of Aug 14, 2026, bcachefs doesn't support `subvol` mount option. There is
 > a PR in `bcachefs-tools` project to add its support:
@@ -174,10 +176,33 @@ If we're running bcachefs:
 ```bash
 umount /mnt
 
+mkdir -p /mnt/{nix,persistent,snapshots,boot}
+
 mount -t bcachefs -o subvol=root /dev/sda2:/dev/sdb:/dev/sdc /mnt
 mount -t bcachefs -o subvol=nix /dev/sda2:/dev/sdb:/dev/sdc /mnt/nix
 mount -t bcachefs -o subvol=persistent /dev/sda2:/dev/sdb:/dev/sdc /mnt/persistent
 mount -t bcachefs -o subvol=snapshots /dev/sda2:/dev/sdb:/dev/sdc /mnt/snapshots
+
+mount /dev/sda1 /mnt/boot
+```
+
+If we're running bcachefs (bind option):
+
+> This is a hack for a problem explained above. It uses the same idea as in the
+> PR, but instead of making new directories per each subvolume mount we're doing
+> it only once in `/base`, and then use bind mounts for other directories.
+
+```bash
+umount /mnt
+
+mkdir -p /mnt/{nix,persistent,snapshots,boot} /base
+
+mount -t bcachefs /dev/sda2:/dev/sdb:/dev/sdc /base
+
+mount --bind /base/root /mnt
+mount --bind /base/nix /mnt/nix
+mount --bind /base/persistent /mnt/persistent
+mount --bind /base/snapshots /mnt/snapshots
 
 mount /dev/sda1 /mnt/boot
 ```
@@ -192,6 +217,20 @@ Verify `/mnt/etc/nix/hardware-configuration.nix` file using `vi`. It must
 contain mount options for `/nix`, `/persistent`, `/snapshots` and `/` being a
 subvolumes (options field), `/boot` being a mount of `/dev/sda1`, and a
 swap device `/dev/sda3`.
+
+For bcachefs setup, add the following:
+
+```nix
+boot.supportedFilesystems = [ "bcachefs" ];
+```
+
+For bind setup (no subvol), make sure that bcachefs is mounted to `/base`, and
+the rest are bind mounts. Add `depends = [ "/base" ];` to them to make them
+load *after* bcachefs mount. Add `neededForBoot = true;` for both `/base` and
+its bind mounts.
+
+For both btrfs, bcachefs and its binds, add `noatime` and `nodiratime` to mount
+options.
 
 Then go to `/mnt/etc/nix/configuration.nix` and:
 
@@ -213,11 +252,14 @@ reboot
 
 ### 10. Create password files
 
-Create `root.password` and `<your username>.password` files in the `/persistent`
-directory containing your accounts' encrypted passwords.
+Create `root.password` and `user.password` files in the `/persistent` directory
+containing your accounts' encrypted passwords.
 
 ```bash
-mkpasswd -m sha-512
+sudo -i
+
+mkpasswd -m sha-512 > /persistent/root.password
+mkpasswd -m sha-512 > /persistent/user.password
 ```
 
 ### 11. Reproduce this configuration repo
@@ -226,9 +268,9 @@ Clone this repo and edit the `flake.nix` file to setup your username and
 hostname.
 
 ```bash
-sudo git clone https://github.com/krypt0nn/dotfiles /system-flake
+git clone https://github.com/krypt0nn/dotfiles /system-flake
 
-sudo nixos-rebuild boot --flake /system-flake
+nixos-rebuild boot --flake /system-flake
 ```
 
 Don't forget to update `hardware.nix` file (disks UUID-s) for your host device.
@@ -266,9 +308,9 @@ If we're running bcachefs:
 ```bash
 sudo -i
 
-mount -t bcachefs -o subvol=root UUID=... /mnt
-mount -t bcachefs -o subvol=nix UUID=... /mnt/nix
-mount -t bcachefs -o subvol=persistent UUID=... /mnt/persistent
+mount -t bcachefs -o subvol=root /dev/sda2:/dev/sdb:/dev/sdc /mnt
+mount -t bcachefs -o subvol=nix /dev/sda2:/dev/sdb:/dev/sdc /mnt/nix
+mount -t bcachefs -o subvol=persistent /dev/sda2:/dev/sdb:/dev/sdc /mnt/persistent
 
 nixos-enter
 ```
