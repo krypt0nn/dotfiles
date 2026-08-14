@@ -142,7 +142,7 @@ If we're running bcachefs:
 ```bash
 mkdir /mnt/snapshots/root
 
-bcachefs subvolume snapshot --read-only /mnt/root /mnt/snapshots/root/blank
+bcachefs subvolume snapshot -r /mnt/root /mnt/snapshots/root/blank
 ```
 
 ### 7. Unmount the drive and mount subvolumes instead

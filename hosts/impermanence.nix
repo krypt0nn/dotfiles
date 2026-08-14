@@ -166,7 +166,7 @@ in {
                 echo "impermanence: making backup of the persistent subvolume"
 
                 mkdir -p /mnt/snapshots/persistent
-                bcachefs subvolume snapshot --read-only /mnt/persistent /mnt/snapshots/persistent/previous
+                bcachefs subvolume snapshot -r /mnt/persistent /mnt/snapshots/persistent/previous
 
                 # Delete previous root subvolume backup and make a new one
                 if [ -d "/mnt/snapshots/root/previous" ]; then
@@ -178,7 +178,7 @@ in {
                 echo "impermanence: making backup of the root subvolume"
 
                 mkdir -p /mnt/snapshots/root
-                bcachefs subvolume snapshot --read-only /mnt/root /mnt/snapshots/root/previous
+                bcachefs subvolume snapshot -r /mnt/root /mnt/snapshots/root/previous
 
                 # Delete current root subvolume and replace it by a blank one
                 echo "impermanence: deleting root subvolume"
