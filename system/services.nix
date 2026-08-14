@@ -1,26 +1,30 @@
 { ... }: {
-    # Enable weekly SSD TRIM service (SSD optimization)
-    services.fstrim.enable = true;
+    # Enable weekly SSD TRIM service.
+    services.fstrim = {
+        enable = true;
+        interval = "1week";
+    };
 
-    # Enable monthly btrfs data validation service
-    services.btrfs.autoScrub.enable = true;
-
-    # Enable weekly firmware updates service
+    # Enable firmware updates.
     services.fwupd.enable = true;
 
-    # Load balancer
+    # Load balancer.
     services.irqbalance.enable = true;
 
-    # Ban connections after failed login attempts
+    # Ban connections after failed login attempts.
     services.fail2ban.enable = true;
 
     # Disks management service.
     services.udisks2.enable = true;
 
-    # Faster dbus implementation
-    services.dbus.implementation = "broker";
+    # Don't write journald logs to disk.
+    # https://news.ycombinator.com/item?id=49290215
+    services.journald = {
+        storage = "volatile";
+        extraConfig = "MaxRetentionSec=1day";
+    };
 
-    # Persist services folders
+    # Persist services folders.
     environment.persistence."/persistent" = {
         hideMounts = true;
 

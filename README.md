@@ -82,10 +82,10 @@ bcachefs format \
     --promote_target=t2 \
     --background_target=t3 \
     --metadata_target=t3 \
+    --data_replicas=1 \
     --metadata_replicas=2 \
     --compression=none \
-    --background_compression=zstd \
-    --data_replicas=1
+    --background_compression=zstd:15
 ```
 
 I'm using 3 storage devices on my PC, so I use bcachefs with devices tiering.
