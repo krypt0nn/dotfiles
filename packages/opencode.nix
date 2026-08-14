@@ -1,4 +1,4 @@
-{ username, pkgs, pkgs-unstable, ... }:
+{ username, enableImpermanence, pkgs, pkgs-unstable, ... }:
     let
         nixosSkill = fetchGit {
             url = "https://github.com/marceloeatworld/nixos-ai-skill";
@@ -196,7 +196,12 @@
             serviceConfig = {
                 Type = "oneshot";
                 User = "root";
-                LoadCredentialEncrypted = "polzaai.key:/persistent/polzaai.key";
+
+                # HACK
+                LoadCredentialEncrypted = if enableImpermanence
+                    then "polzaai.key:/persistent/polzaai.key"
+                    else "polzaai.key:/etc/secrets/polzaai.key";
+
                 RuntimeDirectory = "opencode";
                 RuntimeDirectoryMode = "0750";
             };

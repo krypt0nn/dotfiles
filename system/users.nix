@@ -1,4 +1,4 @@
-{ username, pkgs, ... }: {
+{ username, enableImpermanence, pkgs, ... }: {
     time.timeZone = "Europe/Kaliningrad";
 
     i18n.defaultLocale = "en_US.UTF-8";
@@ -19,7 +19,10 @@
 
                 uid = 0;
 
-                hashedPasswordFile = "/persistent/root.password";
+                # HACK
+                hashedPasswordFile = if enableImpermanence
+                    then "/persistent/root.password"
+                    else "/etc/secrets/root.password";
             };
 
             observer = {
@@ -32,7 +35,10 @@
                 name = username;
                 home = "/home/${username}";
 
-                hashedPasswordFile = "/persistent/${username}.password";
+                # HACK
+                hashedPasswordFile = if enableImpermanence
+                    then "/persistent/${username}.password"
+                    else "/etc/secrets/${username}.password";
 
                 extraGroups = [
                     "wheel"
