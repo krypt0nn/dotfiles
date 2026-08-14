@@ -2,6 +2,19 @@
 
 My own NixOS system configuration files.
 
+> Note: while there are instructions for impermanence setup, I'm actually
+> planning to get rid of impermanence on all my devices. Currently I introduced
+> a stub module and a flag for non-impermanence setups. When I reinstall the
+> system on all my devices I will remove impermanence-related documentation
+> and code.
+>
+> If you want to do impermanence setup, I recommend you to think about it twice.
+> I used it for 2 years, which is most of my NixOS experience, and I didn't find
+> it much practical. Sure it deletes some junk data, but if it's some large
+> files then you can easily find them yourself with some terminal commands or
+> GUI tools, and if it's some small files then I don't think it's something
+> worth caring about.
+
 ## Installation
 
 My system is using impermanence setup, i.e. root partition gets wiped every
@@ -101,19 +114,19 @@ swapon /dev/sda3
 If we're running btrfs:
 
 ```bash
-btrfs subvolume create /mnt/root
-btrfs subvolume create /mnt/nix
-btrfs subvolume create /mnt/persistent
-btrfs subvolume create /mnt/snapshots
+btrfs subvolume create /mnt/@root
+btrfs subvolume create /mnt/@nix
+btrfs subvolume create /mnt/@persistent
+btrfs subvolume create /mnt/@snapshots
 ```
 
 If we're running bcachefs:
 
 ```bash
-bcachefs subvolume create /mnt/root
-bcachefs subvolume create /mnt/nix
-bcachefs subvolume create /mnt/persistent
-bcachefs subvolume create /mnt/snapshots
+bcachefs subvolume create /mnt/@root
+bcachefs subvolume create /mnt/@nix
+bcachefs subvolume create /mnt/@persistent
+bcachefs subvolume create /mnt/@snapshots
 ```
 
 ### 5. Create empty directories within the root subvolume for future mounts
@@ -123,10 +136,7 @@ empty directories in root partition before making a snapshot of it, so we will
 not need to create this directories every reboot.
 
 ```bash
-mkdir /mnt/root/boot
-mkdir /mnt/root/nix
-mkdir /mnt/root/persistent
-mkdir /mnt/root/snapshots
+mkdir -p /mnt/root/{boot,nix,persistent,snapshots}
 ```
 
 ### 6. Create blank snapshot of the root subvolume
@@ -139,7 +149,7 @@ If we're running btrfs:
 ```bash
 mkdir /mnt/snapshots/root
 
-btrfs subvolume snapshot -r /mnt/root /mnt/snapshots/root/blank
+btrfs subvolume snapshot -r /mnt/@root /mnt/snapshots/root/blank
 ```
 
 If we're running bcachefs:
@@ -147,7 +157,7 @@ If we're running bcachefs:
 ```bash
 mkdir /mnt/snapshots/root
 
-bcachefs subvolume snapshot -r /mnt/root /mnt/snapshots/root/blank
+bcachefs subvolume snapshot -r /mnt/@root /mnt/snapshots/root/blank
 ```
 
 ### 7. Unmount the drive and mount subvolumes instead
@@ -157,12 +167,12 @@ If we're running btrfs:
 ```bash
 umount /mnt
 
-mkdir -p /mnt/{nix,persistent,snapshots,boot}
+mkdir -p /mnt/{boot,nix,persistent,snapshots}
 
-mount -o subvol=root /dev/sda2 /mnt
-mount -o subvol=nix /dev/sda2 /mnt/nix
-mount -o subvol=persistent /dev/sda2 /mnt/persistent
-mount -o subvol=snapshots /dev/sda2 /mnt/snapshots
+mount -o subvol=@root /dev/sda2 /mnt
+mount -o subvol=@nix /dev/sda2 /mnt/nix
+mount -o subvol=@persistent /dev/sda2 /mnt/persistent
+mount -o subvol=@snapshots /dev/sda2 /mnt/snapshots
 
 mount /dev/sda1 /mnt/boot
 ```
@@ -176,33 +186,12 @@ If we're running bcachefs (subvol option):
 ```bash
 umount /mnt
 
-mkdir -p /mnt/{nix,persistent,snapshots,boot}
+mkdir -p /mnt/{boot,nix,persistent,snapshots}
 
-mount -t bcachefs -o subvol=root /dev/sda2:/dev/sdb:/dev/sdc /mnt
-mount -t bcachefs -o subvol=nix /dev/sda2:/dev/sdb:/dev/sdc /mnt/nix
-mount -t bcachefs -o subvol=persistent /dev/sda2:/dev/sdb:/dev/sdc /mnt/persistent
-mount -t bcachefs -o subvol=snapshots /dev/sda2:/dev/sdb:/dev/sdc /mnt/snapshots
-
-mount /dev/sda1 /mnt/boot
-```
-
-If we're running bcachefs (bind option):
-
-> This is a hack for a problem explained above. It uses the same idea as in the
-> PR, but instead of making new directories per each subvolume mount we're doing
-> it only once in `/base`, and then use bind mounts for other directories.
-
-```bash
-umount /mnt
-
-mkdir -p /mnt/{nix,persistent,snapshots,boot} /base
-
-mount -t bcachefs /dev/sda2:/dev/sdb:/dev/sdc /base
-
-mount --bind /base/root /mnt
-mount --bind /base/nix /mnt/nix
-mount --bind /base/persistent /mnt/persistent
-mount --bind /base/snapshots /mnt/snapshots
+mount -t bcachefs -o subvol=@root /dev/sda2:/dev/sdb:/dev/sdc /mnt
+mount -t bcachefs -o subvol=@nix /dev/sda2:/dev/sdb:/dev/sdc /mnt/nix
+mount -t bcachefs -o subvol=@persistent /dev/sda2:/dev/sdb:/dev/sdc /mnt/persistent
+mount -t bcachefs -o subvol=@snapshots /dev/sda2:/dev/sdb:/dev/sdc /mnt/snapshots
 
 mount /dev/sda1 /mnt/boot
 ```
@@ -223,11 +212,6 @@ For bcachefs setup, add the following:
 ```nix
 boot.supportedFilesystems = [ "bcachefs" ];
 ```
-
-For bind setup (no subvol), make sure that bcachefs is mounted to `/base`, and
-the rest are bind mounts. Add `depends = [ "/base" ];` to them to make them
-load *after* bcachefs mount. Add `neededForBoot = true;` for both `/base` and
-its bind mounts.
 
 For both btrfs, bcachefs and its binds, add `noatime` and `nodiratime` to mount
 options.
@@ -296,9 +280,9 @@ If we're running btrfs:
 ```bash
 sudo -i
 
-mount -o subvol=root /dev/sda2 /mnt
-mount -o subvol=nix /dev/sda2 /mnt/nix
-mount -o subvol=persistent /dev/sda2 /mnt/persistent
+mount -o subvol=@root /dev/sda2 /mnt
+mount -o subvol=@nix /dev/sda2 /mnt/nix
+mount -o subvol=@persistent /dev/sda2 /mnt/persistent
 
 nixos-enter
 ```
@@ -308,9 +292,9 @@ If we're running bcachefs:
 ```bash
 sudo -i
 
-mount -t bcachefs -o subvol=root /dev/sda2:/dev/sdb:/dev/sdc /mnt
-mount -t bcachefs -o subvol=nix /dev/sda2:/dev/sdb:/dev/sdc /mnt/nix
-mount -t bcachefs -o subvol=persistent /dev/sda2:/dev/sdb:/dev/sdc /mnt/persistent
+mount -t bcachefs -o subvol=@root /dev/sda2:/dev/sdb:/dev/sdc /mnt
+mount -t bcachefs -o subvol=@nix /dev/sda2:/dev/sdb:/dev/sdc /mnt/nix
+mount -t bcachefs -o subvol=@persistent /dev/sda2:/dev/sdb:/dev/sdc /mnt/persistent
 
 nixos-enter
 ```

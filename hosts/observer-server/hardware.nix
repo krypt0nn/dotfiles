@@ -19,8 +19,6 @@
             "amd_pstate=active"
             "amdgpu"
         ];
-
-        extraModulePackages = [];
     };
 
     fileSystems = {

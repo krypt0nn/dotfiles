@@ -61,6 +61,11 @@
             username = "observer";
             hostname = "observer-pc";
 
+            # HACK: I want to go away from impermanence at some point, but I
+            # also don't want to reinstall the system on all my devices. So for
+            # now I use this flag to mark impermanence-powered devices.
+            enableImpermanence = true;
+
             # with (import ./overlays.nix);
             overlays = [
                 # Always use latest pre-compiled rust binaries
@@ -86,11 +91,10 @@
 
                 localSystem = { inherit system; };
             };
-
         in {
             nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem {
                 specialArgs = {
-                    inherit inputs username hostname pkgs-unstable;
+                    inherit inputs username hostname enableImpermanence pkgs-unstable;
                 };
 
                 modules = [
@@ -98,7 +102,17 @@
 
                     { nixpkgs = { inherit pkgs; }; }
 
-                    impermanence.nixosModules.impermanence
+                    # HACK: use stub impermanence module in non-impermanence
+                    # setups to keep all the existing files unchanged.
+                    (if enableImpermanence
+                        then impermanence.nixosModules.impermanence
+                        else {
+                            options.environment.persistence = nixpkgs.lib.mkOption {
+                                type = nixpkgs.lib.types.attrsOf nixpkgs.lib.types.anything;
+                                default = {};
+                                apply = _: {};
+                            };
+                        })
 
                     ./hosts
                     ./system

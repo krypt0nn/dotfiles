@@ -1,8 +1,7 @@
-{ hostname, ... }: {
+{ hostname, enableImpermanence, lib, ... }: {
     imports = let
         default = [
             ./nix-config.nix
-            ./persistence.nix
             ./users.nix
             ./drivers.nix
             ./security.nix
@@ -12,7 +11,10 @@
             ./virtualisation.nix
             ./gnupg.nix
             ./programs.nix
-        ];
+        ] ++ (
+            # HACK
+            lib.optionals enableImpermanence [ ./persistence.nix ]
+        );
 
         desktop = default ++ [
             ./gnome-desktop.nix

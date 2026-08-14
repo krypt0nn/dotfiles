@@ -20,8 +20,6 @@
             "amdgpu"
         ];
 
-        extraModulePackages = [];
-
         plymouth.enable = true;
     };
 
