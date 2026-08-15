@@ -12,7 +12,10 @@
                 "sd_mod"
             ];
 
-            kernelModules = [ "amdgpu" ];
+            kernelModules = [
+                "kvm-amd"
+                "amdgpu"
+            ];
         };
 
         kernelParams = [

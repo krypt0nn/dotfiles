@@ -64,7 +64,7 @@
             # HACK: I want to go away from impermanence at some point, but I
             # also don't want to reinstall the system on all my devices. So for
             # now I use this flag to mark impermanence-powered devices.
-            enableImpermanence = true;
+            enableImpermanence = false;
 
             # with (import ./overlays.nix);
             overlays = [

@@ -1,4 +1,4 @@
-{ username, pkgs, lib, ... }: {
+{ username, enableImpermanence, lib, pkgs, ... }: {
     environment.systemPackages = with pkgs; [
         fishPlugins.tide
         fishPlugins.z
@@ -10,9 +10,14 @@
 
         shellInit = "set fish_greeting";
 
-        shellAliases = {
-            system-update = "sudo nixos-rebuild switch --flake /system-flake";
-            system-upgrade = "sudo nix flake update --flake /system-flake && sudo nixos-rebuild boot --flake /system-flake";
+        shellAliases = let
+            # HACK
+            flakePath = if enableImpermanence
+                then "/system-flake"
+                else "/env/nixos";
+        in {
+            system-update = "sudo nixos-rebuild switch --flake ${flakePath}";
+            system-upgrade = "sudo nix flake update --flake ${flakePath} && sudo nixos-rebuild boot --flake ${flakePath}";
 
             system-diff = lib.concatStrings [
                 "nix store diff-closures "

@@ -15,6 +15,7 @@
             ];
 
             kernelModules = [
+                "kvm-amd"
                 "amdgpu"
                 "ntsync"
             ];
@@ -32,67 +33,26 @@
 
     fileSystems = {
         "/" = {
-            device = "/dev/disk/by-uuid/4740ea8c-ecab-417a-bf0a-0d14de06b058";
-            fsType = "btrfs";
+            device = "UUID=1fc1d6b2-8507-4e98-88ce-c29a33820e8b";
+            fsType = "bcachefs";
             options = [
                 "noatime"
                 "nodiratime"
-                "ssd"
-                "subvol=root"
             ];
-            neededForBoot = true;
-        };
-
-        "/nix" = {
-            device = "/dev/disk/by-uuid/4740ea8c-ecab-417a-bf0a-0d14de06b058";
-            fsType = "btrfs";
-            options = [
-                "noatime"
-                "nodiratime"
-                "ssd"
-                "compress=zstd"
-                "subvol=nix"
-            ];
-            neededForBoot = true;
-        };
-
-        "/persistent" = {
-            device = "/dev/disk/by-uuid/4740ea8c-ecab-417a-bf0a-0d14de06b058";
-            fsType = "btrfs";
-            options = [
-                "noatime"
-                "nodiratime"
-                "ssd"
-                "subvol=persistent"
-            ];
-            neededForBoot = true;
-        };
-
-        "/snapshots" = {
-            device = "/dev/disk/by-uuid/4740ea8c-ecab-417a-bf0a-0d14de06b058";
-            fsType = "btrfs";
-            options = [
-                "noatime"
-                "nodiratime"
-                "ssd"
-                "subvol=snapshots"
-            ];
-            neededForBoot = true;
         };
 
         "/boot" = {
-            device = "/dev/disk/by-uuid/36C0-08DE";
+            device = "/dev/disk/by-uuid/A937-55E6";
             fsType = "vfat";
             options = [
                 "fmask=0022"
                 "dmask=0022"
             ];
-            neededForBoot = true;
         };
     };
 
     swapDevices = [
-        { device = "/dev/disk/by-uuid/08adb28a-60a0-4d18-8d6f-1e7f1e4e92e1"; }
+        { device = "/dev/disk/by-uuid/6778d8f4-7b66-494b-8001-6b3cab57e75b"; }
     ];
 
     zramSwap.enable = true;
