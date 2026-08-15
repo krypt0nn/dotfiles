@@ -1,15 +1,18 @@
 { pkgs, ... }: {
-    boot.loader.systemd-boot.enable = true;
-    boot.loader.efi.canTouchEfiVariables = true;
+    boot = {
+        loader = {
+            systemd-boot.enable = true;
+            efi.canTouchEfiVariables = true;
+        };
 
-    boot.kernelPackages = pkgs.linuxPackages_latest;
-    # boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest-lto-x86_64-v3;
+        # kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest-lto-x86_64-v3;
+        kernelPackages = pkgs.linuxPackages_latest;
 
-    # Reduce swap use (extend SSD lifespan)
-    boot.kernel.sysctl = {
-        "vm.swappiness" = 10;
+        # De-prioritize using swap.
+        kernel.sysctl."vm.swappiness" = 10;
+
+        tmp.cleanOnBoot = true;
+
+        plymouth.enable = true;
     };
-
-    # Mount tmpfs in /tmp
-    boot.tmp.useTmpfs = true;
 }

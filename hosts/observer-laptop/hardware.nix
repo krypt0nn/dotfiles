@@ -22,8 +22,6 @@
             "amd_pstate=active"
             "amdgpu"
         ];
-
-        plymouth.enable = true;
     };
 
     fileSystems = {

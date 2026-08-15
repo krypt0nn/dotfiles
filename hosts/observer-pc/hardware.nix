@@ -27,8 +27,6 @@
         ];
 
         supportedFilesystems = [ "bcachefs" ];
-
-        plymouth.enable = true;
     };
 
     fileSystems = {
