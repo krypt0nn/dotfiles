@@ -14,7 +14,7 @@
             # HACK
             flakePath = if enableImpermanence
                 then "/system-flake"
-                else "/env/nixos";
+                else "/etc/nixos";
         in {
             system-update = "sudo nixos-rebuild switch --flake ${flakePath}";
             system-upgrade = "sudo nix flake update --flake ${flakePath} && sudo nixos-rebuild boot --flake ${flakePath}";
