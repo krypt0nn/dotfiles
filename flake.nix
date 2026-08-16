@@ -35,7 +35,7 @@
 
         zen-browser = {
             url = "github:0xc000022070/zen-browser-flake";
-            inputs.nixpkgs.follows = "nixpkgs";
+            # inputs.nixpkgs.follows = "nixpkgs";
         };
 
         torlink = {
@@ -44,7 +44,7 @@
         };
 
         anime-games-launcher.url = "github:an-anime-team/anime-games-launcher";
-        chekist.url = "git+https://dawn.wine/dawn-winery/chekist";
+        chekist.url = "git+https://git.dawn.wine/dawn-winery/chekist";
     };
 
     outputs = {
