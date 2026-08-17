@@ -15,6 +15,7 @@
         onefetch
         libqalculate
         b3sum
+        ripgrep
     ];
 
     programs.nix-ld.enable = true;
