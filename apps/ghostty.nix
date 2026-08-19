@@ -1,9 +1,9 @@
 { username, pkgs-unstable, ... }:
     let
-        config = ''
-            window-width = 90
-            window-height = 26
-        '';
+        config = builtins.concatStringsSep "\\n" [
+            "window-width = 90"
+            "window-height = 26"
+        ];
     in {
         environment.systemPackages = [ pkgs-unstable.ghostty ];
 
