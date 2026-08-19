@@ -19,7 +19,7 @@
                     --add-flags "--fit on" \
                     --add-flags "--reasoning on" \
                     --add-flags "--reasoning-budget 4096" \
-                    --add-flags "--reasoning-budget-message \"...I'm overthinking it. Here's my final response:\""
+                    --add-flags "--reasoning-budget-message \" ...I'm overthinking it. Here's my final response: \""
             '';
         };
     in {

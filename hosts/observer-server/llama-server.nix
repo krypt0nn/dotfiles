@@ -14,6 +14,7 @@ let
         fit = on
         reasoning = on
         reasoning-budget = 2048
+        reasoning-budget-message = " ...I'm overthinking it. Here's my final response: "
 
         [Qwen3.5-4B-UD-Q4_K_XL]
         alias = qwen3.5-4b
@@ -32,7 +33,7 @@ let
         top-k = 80
         repeat-penalty = 1.05
 
-        [LFM2.5-2.6B-Q8_0]
+        [LFM2.5-2.6B-QAD-Q4_0]
         alias = lfm2.5-2.6b
         temperature = 0.1
         top-k = 50
