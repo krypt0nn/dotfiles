@@ -1,40 +1,8 @@
 # NixOS system configuration
 
-My own NixOS system configuration files.
-
-> Note: while there are instructions for impermanence setup, I'm actually
-> planning to get rid of impermanence on all my devices. Currently I introduced
-> a stub module and a flag for non-impermanence setups. When I reinstall the
-> system on all my devices I will remove impermanence-related documentation
-> and code.
->
-> If you want to do impermanence setup, I recommend you to think about it twice.
-> I used it for 2 years, which is most of my NixOS experience, and I didn't find
-> it much practical. Sure it deletes some junk data, but if it's some large
-> files then you can easily find them yourself with some terminal commands or
-> GUI tools, and if it's some small files then I don't think it's something
-> worth caring about.
+My NixOS system setup.
 
 ## Installation
-
-My system is using impermanence setup, i.e. root partition gets wiped every
-system restart and restored from nix store and persistent storage partition.
-To achieve this, I make root partition a CoW-filesystem's subvolume, and replace
-it by an empty snapshot, which is a cheap operation. Some of my devices use
-btrfs, while others rely on experimental bcachefs.
-
-We will also make snapshots of root partitions as backups, in case some data
-gets wiped before we configure its persistence.
-
-| Subvolume    | Mount         |
-| ------------ | ------------- |
-| `root`       | `/`           |
-| `nix`        | `/nix`        |
-| `persistent` | `/persistent` |
-| `snapshots`  | `/snapshots`  |
-
-> Note that bcachefs is out of baseline kernel and you will need to build an ISO
-> image with bcachefs yourself if you go this route.
 
 ### 1. Create base partitions
 
@@ -70,10 +38,7 @@ mkfs.fat -F 32 -n boot /dev/sda1
 # Format swap partition
 mkswap -L swap /dev/sda3
 
-# a) Format primary partition for btrfs
-mkfs.btrfs -L nixos /dev/sda2
-
-# b) Format primary partition for bcachefs
+# Format primary partition for bcachefs
 bcachefs format \
     --label=t1.nvme1 /dev/sda2 \
     --label=t2.ssd1 /dev/sdb \
@@ -85,148 +50,73 @@ bcachefs format \
     --data_replicas=1 \
     --metadata_replicas=2 \
     --compression=none \
-    --background_compression=zstd:15
+    --background_compression=lz4
 ```
-
-I'm using 3 storage devices on my PC, so I use bcachefs with devices tiering.
-My home server and laptop have only one SSD so I just use btrfs for them.
 
 ### 3. Mount created partitions
 
-If we're running btrfs:
-
-```bash
-mount /dev/sda2 /mnt
-
-swapon /dev/sda3
-```
-
-If we're running bcachefs:
-
 ```bash
 mount -t bcachefs /dev/sda2:/dev/sdb:/dev/sdc /mnt
-
+mount /dev/sda1 /mnt/boot
 swapon /dev/sda3
 ```
 
-### 4. Create cow subvolumes
+### 4. Bootstrap NixOS config
 
-If we're running btrfs:
-
-```bash
-btrfs subvolume create /mnt/@root
-btrfs subvolume create /mnt/@nix
-btrfs subvolume create /mnt/@persistent
-btrfs subvolume create /mnt/@snapshots
-```
-
-If we're running bcachefs:
-
-```bash
-bcachefs subvolume create /mnt/@root
-bcachefs subvolume create /mnt/@nix
-bcachefs subvolume create /mnt/@persistent
-bcachefs subvolume create /mnt/@snapshots
-```
-
-### 5. Create empty directories within the root subvolume for future mounts
-
-Btrfs requires an existing directory to mount a subvolume into, so we will make
-empty directories in root partition before making a snapshot of it, so we will
-not need to create this directories every reboot.
-
-```bash
-mkdir -p /mnt/root/{boot,nix,persistent,snapshots}
-```
-
-### 6. Create blank snapshot of the root subvolume
-
-Create empty snapshot which will be used to restore the clean system state for
-impermanence setup.
-
-If we're running btrfs:
-
-```bash
-mkdir /mnt/snapshots/root
-
-btrfs subvolume snapshot -r /mnt/@root /mnt/snapshots/root/blank
-```
-
-If we're running bcachefs:
-
-```bash
-mkdir /mnt/snapshots/root
-
-bcachefs subvolume snapshot -r /mnt/@root /mnt/snapshots/root/blank
-```
-
-### 7. Unmount the drive and mount subvolumes instead
-
-If we're running btrfs:
-
-```bash
-umount /mnt
-
-mkdir -p /mnt/{boot,nix,persistent,snapshots}
-
-mount -o subvol=@root /dev/sda2 /mnt
-mount -o subvol=@nix /dev/sda2 /mnt/nix
-mount -o subvol=@persistent /dev/sda2 /mnt/persistent
-mount -o subvol=@snapshots /dev/sda2 /mnt/snapshots
-
-mount /dev/sda1 /mnt/boot
-```
-
-If we're running bcachefs (subvol option):
-
-> As of Aug 14, 2026, bcachefs doesn't support `subvol` mount option. There is
-> a PR in `bcachefs-tools` project to add its support:
-> https://github.com/koverstreet/bcachefs-tools/pull/647
-
-```bash
-umount /mnt
-
-mkdir -p /mnt/{boot,nix,persistent,snapshots}
-
-mount -t bcachefs -o subvol=@root /dev/sda2:/dev/sdb:/dev/sdc /mnt
-mount -t bcachefs -o subvol=@nix /dev/sda2:/dev/sdb:/dev/sdc /mnt/nix
-mount -t bcachefs -o subvol=@persistent /dev/sda2:/dev/sdb:/dev/sdc /mnt/persistent
-mount -t bcachefs -o subvol=@snapshots /dev/sda2:/dev/sdb:/dev/sdc /mnt/snapshots
-
-mount /dev/sda1 /mnt/boot
-```
-
-### 8. Generate basic nixos config
+Run this command to generate bootstrap configuration:
 
 ```bash
 nixos-generate-config --root /mnt
 ```
 
-Verify `/mnt/etc/nix/hardware-configuration.nix` file using `vi`. It must
-contain mount options for `/nix`, `/persistent`, `/snapshots` and `/` being a
-subvolumes (options field), `/boot` being a mount of `/dev/sda1`, and a
-swap device `/dev/sda3`.
-
-For bcachefs setup, add the following:
+Then verify `/mnt/etc/nix/hardware-configuration.nix`:
 
 ```nix
 boot.supportedFilesystems = [ "bcachefs" ];
+
+fileSystems = {
+    "/" = {
+        device = "UUID=...";
+        fsType = "bcachefs";
+        options = [
+            "noatime"
+            "nodiratime"
+        ];
+    };
+
+    "/boot" = {
+        device = "/dev/disk/by-uuid/...";
+        fsType = "vfat";
+        options = [
+            "fmask=0022"
+            "dmask=0022"
+        ];
+    };
+};
+
+swapDevices = [
+    { device = "/dev/disk/by-uuid/..."; }
+];
 ```
 
-For both btrfs, bcachefs and its binds, add `noatime` and `nodiratime` to mount
-options.
+And `/mnt/etc/nix/configuration.nix`:
 
-Then go to `/mnt/etc/nix/configuration.nix` and:
+```nix
+boot.loader = {
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
+};
 
-1. Set `networking.hostName` to a proper value.
-2. Set `networking.networkmanager.enable = true;`.
-3. In `environment.systemPackages` enable `git`, `curl`, `wget`, `vim` and
-   `micro` (more is better right?).
-4. Add flakes support with this:
-   `nix.settings.experimental-features = [ "nix-command" "flakes" ];`.
-5. Allow unfree packages with this: `nixpkgs.config.allowUnfree = true;`.
+# Add the following values:
+networking.hostName = ""; # your hostname
+networking.networkmanager.enable = true;
 
-### 9. Proceed NixOS installation and setup root password afterwards
+environment.systemPackages = with pkgs; [ git curl wget vim micro ];
+
+nix.settings.experimental-features = [ "nix-command" "flakes" ];
+```
+
+### 5. Install bootstrap NixOS
 
 ```bash
 nixos-install
@@ -234,36 +124,38 @@ nixos-install
 reboot
 ```
 
-### 10. Create password files
+### 6. Create password files
 
-Create `root.password` and `user.password` files in the `/persistent` directory
-containing your accounts' encrypted passwords.
+After reboot to installed NixOS system create `root.password` and
+`username.password` files in the `/etc/secrets` directory containing your
+accounts' encrypted passwords.
 
 ```bash
 sudo -i
 
-mkpasswd -m sha-512 > /persistent/root.password
-mkpasswd -m sha-512 > /persistent/user.password
+mkpasswd -m sha-512 > /etc/secrets/root.password
+mkpasswd -m sha-512 > /etc/secrets/username.password
 ```
 
-### 11. Reproduce this configuration repo
+### 7. Clone this repository
 
-Clone this repo and edit the `flake.nix` file to setup your username and
+Clone this repository and edit the `flake.nix` file to setup your username and
 hostname.
 
 ```bash
-git clone https://github.com/krypt0nn/dotfiles /system-flake
+mv /etc/nixos /etc/nixos-bak
 
-nixos-rebuild boot --flake /system-flake
+git clone https://github.com/krypt0nn/dotfiles /etc/nixos
 ```
 
-Don't forget to update `hardware.nix` file (disks UUID-s) for your host device.
-Note that after the first restart system can clean all your changes due to
-`/persistent` directory initialization.
+Then go to `/etc/nixos/hosts/.../hardware.nix` and update it to much your
+`/etc/nixos-bak/hardware-configuration.nix` file.
 
-### 12. Restart the system
+### 8. Rebuild the system
 
 ```bash
+nixos-rebuild boot --flake /etc/nixos
+
 reboot
 ```
 
@@ -275,26 +167,10 @@ Done. Welcome to your impermanent NixOS system!
 
 Boot from the live iso used to install the system. Then..
 
-If we're running btrfs:
-
 ```bash
 sudo -i
 
-mount -o subvol=@root /dev/sda2 /mnt
-mount -o subvol=@nix /dev/sda2 /mnt/nix
-mount -o subvol=@persistent /dev/sda2 /mnt/persistent
-
-nixos-enter
-```
-
-If we're running bcachefs:
-
-```bash
-sudo -i
-
-mount -t bcachefs -o subvol=@root /dev/sda2:/dev/sdb:/dev/sdc /mnt
-mount -t bcachefs -o subvol=@nix /dev/sda2:/dev/sdb:/dev/sdc /mnt/nix
-mount -t bcachefs -o subvol=@persistent /dev/sda2:/dev/sdb:/dev/sdc /mnt/persistent
+mount -t bcachefs /dev/sda2:/dev/sdb:/dev/sdc /mnt
 
 nixos-enter
 ```
