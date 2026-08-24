@@ -19,7 +19,7 @@
             ./rnote.nix
             ./virt-manager.nix
             ./steam.nix
-            ./prismlauncher.nix
+            ./prism-launcher.nix
             ./anime-games-launcher.nix
         ];
 

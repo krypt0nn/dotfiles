@@ -57,6 +57,9 @@ bcachefs format \
 
 ```bash
 mount -t bcachefs /dev/sda2:/dev/sdb:/dev/sdc /mnt
+
+mkdir /mnt/boot
+
 mount /dev/sda1 /mnt/boot
 swapon /dev/sda3
 ```

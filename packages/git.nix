@@ -1,33 +1,24 @@
-{ ... }: {
+{ enableImpermanence, ... }: {
     programs.git = {
         enable = true;
 
         config = {
-            init = {
-                defaultBranch = "master";
-            };
-
-            advice = {
-                defaultBranchName = false;
-            };
-
             user = {
                 name = "Nikita Podvirnyi";
                 email = "krypt0nn@dawn.wine";
                 signingkey = "~/.ssh/id_ed25519.pub";
             };
 
-            gpg = {
-                format = "ssh";
-            };
+            commit.gpgsign = true;
+            gpg.format = "ssh";
 
-            commit = {
-                gpgsign = true;
-            };
+            init.defaultBranch = "master";
+            advice.defaultBranchName = false;
 
-            safe = {
-                directory = "/system-flake";
-            };
+            # HACK
+            safe.directory = if enableImpermanence
+                then "/system-flake"
+                else "/etc/nixos";
         };
     };
 }
