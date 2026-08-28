@@ -22,6 +22,11 @@
             "amd_pstate=active"
             "amdgpu"
         ];
+
+        zswap = {
+            enable = true;
+            compressor = "lz4";
+        };
     };
 
     fileSystems = {
@@ -99,8 +104,6 @@
     swapDevices = [
         { device = "/dev/disk/by-uuid/8172e6a1-8281-4ebb-ab9e-5c1f2b74ce57"; }
     ];
-
-    zramSwap.enable = true;
 
     networking.useDHCP = lib.mkDefault true;
 

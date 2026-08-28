@@ -27,6 +27,11 @@
         ];
 
         supportedFilesystems = [ "bcachefs" ];
+
+        zswap = {
+            enable = true;
+            compressor = "lz4";
+        };
     };
 
     fileSystems = {
@@ -52,8 +57,6 @@
     swapDevices = [
         { device = "/dev/disk/by-uuid/6778d8f4-7b66-494b-8001-6b3cab57e75b"; }
     ];
-
-    zramSwap.enable = true;
 
     networking.useDHCP = lib.mkDefault true;
     # networking.interfaces.enp34s0.useDHCP = lib.mkDefault true;
