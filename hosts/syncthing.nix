@@ -57,6 +57,7 @@
                         "**/node_modules/*"
                         "**/.direnv/*"
                         "**/.git/*"
+                        "**/.Trash-1000/*"
                     ];
 
                     devices = [
