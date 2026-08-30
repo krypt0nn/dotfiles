@@ -23,6 +23,8 @@
             "amdgpu"
         ];
 
+        supportedFilesystems = [ "bcachefs" ];
+
         zswap = {
             enable = true;
             compressor = "lz4";
@@ -31,57 +33,16 @@
 
     fileSystems = {
         "/" = {
-            device = "/dev/disk/by-uuid/d4c830ea-7dda-4b87-9901-ecffe81fbb99";
-            fsType = "btrfs";
+            device = "UUID=c68bbd96-190e-4dbc-b297-94d383c6eca6";
+            fsType = "bcachefs";
             options = [
                 "noatime"
                 "nodiratime"
-                "ssd"
-                "compress=lzo"
-                "subvol=root"
             ];
-        };
-
-        "/nix" = {
-            device = "/dev/disk/by-uuid/d4c830ea-7dda-4b87-9901-ecffe81fbb99";
-            fsType = "btrfs";
-            options = [
-                "noatime"
-                "nodiratime"
-                "ssd"
-                "compress=lzo"
-                "subvol=nix"
-            ];
-        };
-
-        "/persistent" = {
-            device = "/dev/disk/by-uuid/d4c830ea-7dda-4b87-9901-ecffe81fbb99";
-            fsType = "btrfs";
-            options = [
-                "noatime"
-                "nodiratime"
-                "ssd"
-                "compress=lzo"
-                "subvol=persistent"
-            ];
-            neededForBoot = true;
-        };
-
-        "/snapshots" = {
-            device = "/dev/disk/by-uuid/d4c830ea-7dda-4b87-9901-ecffe81fbb99";
-            fsType = "btrfs";
-            options = [
-                "noatime"
-                "nodiratime"
-                "ssd"
-                "compress=lzo"
-                "subvol=snapshots"
-            ];
-            neededForBoot = true;
         };
 
         "/boot" = {
-            device = "/dev/disk/by-uuid/1CF3-2DF9";
+            device = "/dev/disk/by-uuid/8831-B12E";
             fsType = "vfat";
             options = [
                 "fmask=0022"
@@ -91,7 +52,7 @@
     };
 
     swapDevices = [
-        { device = "/dev/disk/by-uuid/a9e51726-866b-4fcd-b891-6161826e0829"; }
+        { device = "/dev/disk/by-uuid/37a1b0ca-6e87-4844-af57-f8752ce61952"; }
     ];
 
     networking.useDHCP = lib.mkDefault true;
