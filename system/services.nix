@@ -1,9 +1,6 @@
 { ... }: {
     # Enable weekly SSD TRIM service.
-    services.fstrim = {
-        enable = true;
-        interval = "1week";
-    };
+    services.fstrim.enable = true;
 
     # Enable firmware updates.
     services.fwupd.enable = true;
