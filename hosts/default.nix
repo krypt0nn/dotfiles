@@ -3,9 +3,7 @@
         "observer-pc" = [ ./observer-pc ];
         "observer-laptop" = [ ./observer-laptop ];
         "observer-server" = [ ./observer-server ];
-    }.${hostname} ++ [
-        ./syncthing.nix
-    ] ++ (
+    }.${hostname} ++ (
         # HACK
         lib.optionals enableImpermanence [ ./impermanence.nix ]
     );
