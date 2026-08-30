@@ -109,11 +109,11 @@
 
                     agent = {
                         enable = true;
-                        api_url = "http://127.0.0.1:9020/v1";
-                        model_name = "lfm2.5-2.6b";
-                        max_context = 8192;
-                        max_turn_steps = 8;
-                        channel_history = 5;
+                        api_url = "https://openrouter.ai/api/v1";
+                        model_name = "inclusionai/ling-3.0-flash";
+                        max_context = 64 * 1024;
+                        max_turn_steps = 10;
+                        channel_history = 6;
                         operators = modsList;
                     };
 
