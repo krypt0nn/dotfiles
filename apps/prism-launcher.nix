@@ -24,7 +24,6 @@ let
                 jdks = with pkgs; [
                     jdk25
                     jdk21
-                    jdk17
                 ];
             };
 
@@ -69,12 +68,4 @@ in {
         "L+ /home/${username}/.local/share/PrismLauncher/themes - - - - ${prismlauncher-themes}/themes"
         "L+ /home/${username}/.local/share/PrismLauncher/iconthemes - - - - ${prismlauncher-themes}/icons"
     ];
-
-    environment.persistence."/persistent" = {
-        hideMounts = true;
-
-        users.${username}.directories = [
-            ".local/share/PrismLauncher"
-        ];
-    };
 }

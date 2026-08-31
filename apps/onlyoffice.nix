@@ -1,4 +1,4 @@
-{ username, pkgs, config, ... }: {
+{ pkgs, config, ... }: {
     environment.systemPackages = [ pkgs.onlyoffice-desktopeditors ];
 
     systemd.user.services.onlyoffice-fonts = {
@@ -18,14 +18,5 @@
             chmod 544 "$HOME/.local/share/fonts" 2>/dev/null || true
             chmod 444 "$HOME/.local/share/fonts/"* 2>/dev/null || true
         '';
-    };
-
-    environment.persistence."/persistent" = {
-        hideMounts = true;
-
-        users.${username}.directories = [
-            ".local/share/onlyoffice"
-            ".config/onlyoffice"
-        ];
     };
 }
