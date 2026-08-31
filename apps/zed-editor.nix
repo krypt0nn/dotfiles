@@ -1,82 +1,86 @@
 { username, pkgs-unstable, ... }:
-    let
-        config = builtins.toJSON {
-            telemetry = {
-                metrics = false;
-                diagnostics = false;
-            };
+let
+    config = builtins.toJSON {
+        telemetry = {
+            metrics = false;
+            diagnostics = false;
+        };
 
-            proxy = "socks5://127.0.0.1:1000";
-            load_direnv = "direct";
+        proxy = "socks5://127.0.0.1:1000";
+        load_direnv = "direct";
 
-            vim_mode = false;
-            auto_update = false;
+        vim_mode = false;
+        auto_update = false;
 
-            theme = {
-                mode = "system";
-                light = "One Light";
-                dark = "One Dark";
-            };
+        theme = {
+            mode = "system";
+            light = "One Light";
+            dark = "One Dark";
+        };
 
-            buffer_font_family = "JetBrains Mono";
+        buffer_font_family = "JetBrains Mono";
 
-            ui_font_size = 16;
-            buffer_font_size = 16;
+        ui_font_size = 16;
+        buffer_font_size = 16;
 
-            buffer_font_features = {
-                calt = true;
-                ligatures = true;
-            };
+        buffer_font_features = {
+            calt = true;
+            ligatures = true;
+        };
 
-            tab_size = 4;
-            wrap_guides = [ 80 ];
-            soft_wrap = "none";
+        tab_size = 4;
+        wrap_guides = [ 80 ];
+        soft_wrap = "none";
 
-            project_panel.dock = "left";
-            git_panel.dock = "left";
-            agent_panel.dock = "right";
-            collaboration_panel.dock = "left";
+        agent.dock = "right";
+        project_panel.dock = "left";
+        git_panel.dock = "left";
+        collaboration_panel.dock = "left";
 
-            format_on_save = "off";
+        format_on_save = "off";
 
-            edit_predictions = {
-                disabled_globs = [ "**/*" ];
-                provider = "none";
-            };
+        edit_predictions = {
+            disabled_globs = [ "**/*" ];
+            provider = "none";
+        };
 
-            lsp = {
-                "rust-analyzer" = {
-                    initialization_options = {
-                        rust = {
-                            analyzerTargetDir = true;
-                        };
-
-                        check = {
-                            command = "clippy";
-                        };
-
-                        rustfmt = {
-                            extraArgs = [
-                                "+nightly"
-                            ];
+        lsp = {
+            nil = {
+                settings = {
+                    nil = {
+                        nix = {
+                            flake = {
+                                autoArchive = true;
+                            };
                         };
                     };
                 };
             };
+
+            rust-analyzer = {
+                initialization_options = {
+                    rust = {
+                        analyzerTargetDir = true;
+                    };
+
+                    check = {
+                        command = "clippy";
+                    };
+
+                    rustfmt = {
+                        extraArgs = [
+                            "+nightly"
+                        ];
+                    };
+                };
+            };
         };
-    in {
-        environment.systemPackages = [ pkgs-unstable.zed-editor ];
+    };
+in {
+    environment.systemPackages = [ pkgs-unstable.zed-editor ];
 
-        systemd.tmpfiles.rules = [
-            "d /home/${username}/.config/zed 0755 ${username} users -"
-            "F /home/${username}/.config/zed/settings.json 0644 ${username} users - ${config}"
-        ];
-
-        environment.persistence."/persistent" = {
-            hideMounts = true;
-
-            users.${username}.directories = [
-                ".local/share/zed"
-            ];
-        };
-    }
+    systemd.tmpfiles.rules = [
+        "d /home/${username}/.config/zed 0755 ${username} users -"
+        "F /home/${username}/.config/zed/settings.json 0644 ${username} users - ${config}"
+    ];
+}
