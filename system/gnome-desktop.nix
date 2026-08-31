@@ -52,10 +52,22 @@
         '';
 
         # Set user profile picture
+        # AccountsService only shows the icon if Icon= is set in
+        # /var/lib/AccountsService/users/${username}, so write that too
         system.activationScripts.accounts-service-icon = ''
-            mkdir -p /var/lib/AccountsService/icons
+            mkdir -p /var/lib/AccountsService/icons /var/lib/AccountsService/users
             cp ${profileImg} /var/lib/AccountsService/icons/${username}
             chmod 644 /var/lib/AccountsService/icons/${username}
+
+            userfile=/var/lib/AccountsService/users/${username}
+
+            if [ -f "$userfile" ]; then
+                grep -q '^Icon=' "$userfile" \
+                    && sed -i "s|^Icon=.*|Icon=/var/lib/AccountsService/icons/${username}|" "$userfile" \
+                    || echo "Icon=/var/lib/AccountsService/icons/${username}" >> "$userfile"
+            else
+                printf '[User]\nIcon=/var/lib/AccountsService/icons/${username}\n' > "$userfile"
+            fi
         '';
 
         # Allow chromium-based apps to run on wayland
