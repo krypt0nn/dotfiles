@@ -91,8 +91,8 @@ fileSystems = {
         device = "/dev/disk/by-uuid/...";
         fsType = "vfat";
         options = [
-            "fmask=0022"
-            "dmask=0022"
+            "fmask=0077"
+            "dmask=0077"
         ];
     };
 };
