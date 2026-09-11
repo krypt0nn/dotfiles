@@ -19,119 +19,87 @@
                 duration = "2h";
             };
 
-            database.cleanup_interval = "12h";
+            database = {
+                cleanup_interval = "12h";
+                messages_retention = "28d";
+            };
 
-            guilds = [
-                {
-                    guild_id = "910869215857217596";
+            guilds = [{
+                guild_id = "910869215857217596";
 
-                    channels = {
-                        logs_id = "913441788893732864";
-                        reports_id = "1525460785285828708";
-                        whitelist = [];
-                        blacklist = [
-                            "910871800924229654"  # rules
-                            "910871843324456970"  # announcements
-                            "1104440225222111262" # trailblazers
-                            "968846770752856104"  # mod-rules
-                            "910873173808017488"  # mod-announcements
-                            "913441788893732864"  # mod-logs
-                            "1525460785285828708" # mod-reports
-                            "917438648809570354"  # faq
-                            "910871818158628954"  # repository-updates
+                channels.blacklist = [
+                    "910871800924229654"  # rules
+                    "910871843324456970"  # announcements
+                    "1104440225222111262" # trailblazers
+                    "968846770752856104"  # mod-rules
+                    "910873173808017488"  # mod-announcements
+                    "917438648809570354"  # faq
+                    "910871818158628954"  # repository-updates
+                    "1111152418172964916" # ban-reports
+                    "1463877200922022101" # capybara-times
+                    "1221929438241886301" # starboard
+                    "1274566688787922987" # owoboard
+                    "1308509001423650817" # noskillboard
+                    "1113025734521409556" # genshin-announcements
+                    "1108393184821792808" # genshin-codes
+                    "1113025688820273192" # hsr-announcements
+                    "1108393287909396720" # hsr-codes
+                    "1176844314870030346" # zzz-announcements
+                    "1256213160004685936" # zzz-codes
+                    "1242992386246840412" # wuwa-announcements
+                    "1256660185481609317" # wuwa-codes
+                    "1113025797247225867" # honkai-announcements
+                    "1410944118930014309" # hna-announcements
+                ];
+
+                agent = {
+                    enable = true;
+                    api_url = "https://openrouter.ai/api/v1";
+                    model_name = "deepseek/deepseek-v4-flash-0731";
+                    enable_vision = false;
+                    channel_context = 7;
+                    max_context = 65536;
+                    http_fetch_max_size = "1mb";
+                    stand_by_duration = "2m";
+                    operators = modsList;
+                };
+
+                plugins = [
+                    {
+                        name = "mod_logs";
+                        when = [
+                            "guild_member_join"
+                            "guild_member_leave"
+                            "message_delete"
                         ];
-
-                        special = [
-                            {
-                                # i-wanna-leave-the-server
-                                channel_id = "1525860388405514270";
-
-                                auto_ban = {
-                                    enable = true;
-                                    exceptions = modsList;
-                                };
-                            }
-                            {
-                                # memes
-                                channel_id = "1018900818029727774";
-
-                                filter_text_messages = {
-                                    enable = true;
-                                    whitelist = modsList;
-                                    blacklist = [];
-                                    exceptions = [
-                                        # Allow links (message embeddings)
-                                        ''(https?://)?[\da-z.-]+\.[a-z.]{2,6}([/\w .-]*/?)?''
-
-                                        # Allow emojis
-                                        ''<a?:\w+:\d+>''
-                                    ];
-                                };
-                            }
-                            {
-                                # tech-news
-                                channel_id = "1345289710544748585";
-
-                                filter_text_messages = {
-                                    enable = true;
-                                    whitelist = modsList;
-                                    blacklist = [];
-                                    exceptions = [
-                                        # Only allow messages with a link
-                                        ''(https?://)?[\da-z.-]+\.[a-z.]{2,6}([/\w .-]*/?)?''
-                                    ];
-                                };
-                            }
+                        env = {
+                            logs_channel_id = "913441788893732864";
+                        };
+                        source = "https://git.dawn.wine/dawn-winery/chekist/raw/branch/master/plugins/mod_logs.luau";
+                    }
+                    {
+                        name = "mod_commands";
+                        when = [
+                            "ready"
+                            "command_use"
                         ];
-                    };
-
-                    commands = {
-                        mute = {
-                            enable = true;
-                            operators = modsList;
+                        env = {
+                            logs_channel_id = "913441788893732864";
                         };
-
-                        kick = {
-                            enable = true;
-                            operators = modsList;
+                        admin = true;
+                        source = "https://git.dawn.wine/dawn-winery/chekist/raw/branch/master/plugins/mod_commands.luau";
+                    }
+                    {
+                        name = "auto_ban_channel";
+                        when = [ "message_add" ];
+                        env = {
+                            logs_channel_id = "913441788893732864";
+                            ban_channels = "1525860388405514270";
                         };
-
-                        ban = {
-                            enable = true;
-                            operators = modsList;
-                        };
-
-                        audit = {
-                            enable = true;
-                            operators = modsList;
-                        };
-                    };
-
-                    agent = {
-                        enable = true;
-                        api_url = "https://openrouter.ai/api/v1";
-                        model_name = "inclusionai/ling-3.0-flash";
-                        max_context = 65536;
-                        max_turn_steps = 10;
-                        channel_history = 6;
-                        operators = modsList;
-                    };
-
-                    rules = {
-                        messages_retention = "28d";
-
-                        logs = {
-                            joined_members = true;
-                            left_members = true;
-                            updated_messages = false;
-                            deleted_messages = true;
-                            muted_members = true;
-                            kicked_members = true;
-                            banned_members = true;
-                        };
-                    };
-                }
-            ];
+                        source = "https://git.dawn.wine/dawn-winery/chekist/raw/branch/master/plugins/auto_ban_channel.luau";
+                    }
+                ];
+            }];
         };
     };
 
