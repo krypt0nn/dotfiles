@@ -55,11 +55,18 @@
                 agent = {
                     enable = true;
                     api_url = "https://openrouter.ai/api/v1";
-                    model_name = "z-ai/glm-5.3-flash";
+                    api_request = {
+                        model = "z-ai/glm-5.3-flash";
+                        providers = {
+                            zdr = true;
+                            data_collection = "deny";
+                            quantizations = ["fp8"];
+                        };
+                    };
                     enable_vision = true;
                     channel_context = 7;
                     max_context = 65536;
-                    max_loop_steps = 100;
+                    max_loop_steps = 60;
                     http_fetch_max_size = "1mb";
                     stand_by_duration = "2m";
                     operators = modsList;
