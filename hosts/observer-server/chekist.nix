@@ -104,6 +104,7 @@
                             logs_channel_id = "913441788893732864";
                             ban_channels = "1525860388405514270";
                         };
+                        admin = true;
                         source = "https://git.dawn.wine/dawn-winery/chekist/raw/branch/master/plugins/auto_ban_channel.luau";
                     }
                 ];
