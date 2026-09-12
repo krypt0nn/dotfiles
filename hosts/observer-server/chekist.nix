@@ -55,8 +55,8 @@
                 agent = {
                     enable = true;
                     api_url = "https://openrouter.ai/api/v1";
-                    model_name = "deepseek/deepseek-v4-flash-0731";
-                    enable_vision = false;
+                    model_name = "z-ai/glm-5.3-flash";
+                    enable_vision = true;
                     channel_context = 7;
                     max_context = 65536;
                     max_loop_steps = 100;
