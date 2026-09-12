@@ -1,92 +1,81 @@
 { username, pkgs, ... }:
-    let
-        wallpaperLightImg = ./../images/wallpaper-light.jpg;
-        wallpaperDarkImg = ./../images/wallpaper-dark.jpg;
-        screensaverImg = ./../images/screensaver.jpg;
-        profileImg = ./../images/profile.jpg;
-    in {
-        # Enable gnome
-        services.displayManager.gdm.enable = true;
-        services.desktopManager.gnome.enable = true;
+let
+    wallpaperLightImg = ./../images/wallpaper-light.jpg;
+    wallpaperDarkImg = ./../images/wallpaper-dark.jpg;
+    screensaverImg = ./../images/screensaver.jpg;
+    profileImg = ./../images/profile.jpg;
+in {
+    # Enable gnome
+    services.displayManager.gdm.enable = true;
+    services.desktopManager.gnome.enable = true;
 
-        # Add some apps and extensions
-        environment.systemPackages = with pkgs; [
-            mission-center
-            gnome-extension-manager
-            loupe
-            vlc
-            file-roller
-            crosspipe
-            apostrophe
+    environment.systemPackages = with pkgs; [
+        # Basic GNOME apps
+        mission-center
+        gnome-extension-manager
+        loupe
+        vlc
+        file-roller
+        crosspipe
+        apostrophe
 
-            # Setup GNOME extensions
-            gnomeExtensions.appindicator
-            gnomeExtensions.blur-my-shell
-            gnomeExtensions.night-theme-switcher
-            gnomeExtensions.caffeine
-            gnomeExtensions.tiling-shell
-        ];
+        # QT apps theme compatibility
+        qadwaitadecorations
+        qadwaitadecorations-qt6
+        qgnomeplatform
+        qgnomeplatform-qt6
 
-        # Remove unneeded built-in gnome apps
-        environment.gnome.excludePackages = with pkgs; [
-            cheese eog epiphany simple-scan showtime yelp geary
-            gnome-calendar gnome-characters gnome-contacts
-            gnome-font-viewer gnome-logs gnome-maps gnome-music
-            gnome-system-monitor gnome-connections
-            gnome-tour snapshot gnome-console
-            gnome-shell-extensions
-        ];
+        # GNOME extensions
+        gnomeExtensions.appindicator
+        gnomeExtensions.blur-my-shell
+        gnomeExtensions.night-theme-switcher
+        gnomeExtensions.caffeine
+        gnomeExtensions.tiling-shell
+    ];
 
-        # Setup gnome settings
-        services.desktopManager.gnome.extraGSettingsOverrides = ''
-            [org.gnome.desktop.input-sources]
-            sources=[('xkb', 'us'), ('xkb', 'ru')]
-            show-all-sources=true
+    # Remove unneeded built-in gnome apps
+    environment.gnome.excludePackages = with pkgs; [
+        cheese eog epiphany simple-scan showtime yelp geary
+        gnome-calendar gnome-characters gnome-contacts
+        gnome-font-viewer gnome-logs gnome-maps gnome-music
+        gnome-system-monitor gnome-connections
+        gnome-tour snapshot gnome-console
+        gnome-shell-extensions
+    ];
 
-            [org.gnome.desktop.background]
-            picture-uri='file://${wallpaperLightImg}'
-            picture-uri-dark='file://${wallpaperDarkImg}'
+    # Setup gnome settings
+    services.desktopManager.gnome.extraGSettingsOverrides = ''
+        [org.gnome.desktop.input-sources]
+        sources=[('xkb', 'us'), ('xkb', 'ru')]
+        show-all-sources=true
 
-            [org.gnome.desktop.screensaver]
-            picture-uri='file://${screensaverImg}'
-        '';
+        [org.gnome.desktop.background]
+        picture-uri='file://${wallpaperLightImg}'
+        picture-uri-dark='file://${wallpaperDarkImg}'
 
-        # Set user profile picture
-        # AccountsService only shows the icon if Icon= is set in
-        # /var/lib/AccountsService/users/${username}, so write that too
-        system.activationScripts.accounts-service-icon = ''
-            mkdir -p /var/lib/AccountsService/icons /var/lib/AccountsService/users
-            cp ${profileImg} /var/lib/AccountsService/icons/${username}
-            chmod 644 /var/lib/AccountsService/icons/${username}
+        [org.gnome.desktop.screensaver]
+        picture-uri='file://${screensaverImg}'
+    '';
 
-            userfile=/var/lib/AccountsService/users/${username}
+    # Set user profile picture
+    # AccountsService only shows the icon if Icon= is set in
+    # /var/lib/AccountsService/users/${username}, so write that too
+    system.activationScripts.accounts-service-icon = ''
+        mkdir -p /var/lib/AccountsService/icons /var/lib/AccountsService/users
+        cp ${profileImg} /var/lib/AccountsService/icons/${username}
+        chmod 644 /var/lib/AccountsService/icons/${username}
 
-            if [ -f "$userfile" ]; then
-                grep -q '^Icon=' "$userfile" \
-                    && sed -i "s|^Icon=.*|Icon=/var/lib/AccountsService/icons/${username}|" "$userfile" \
-                    || echo "Icon=/var/lib/AccountsService/icons/${username}" >> "$userfile"
-            else
-                printf '[User]\nIcon=/var/lib/AccountsService/icons/${username}\n' > "$userfile"
-            fi
-        '';
+        userfile=/var/lib/AccountsService/users/${username}
 
-        # Allow chromium-based apps to run on wayland
-        environment.sessionVariables.NIXOS_OZONE_WL = "1";
+        if [ -f "$userfile" ]; then
+            grep -q '^Icon=' "$userfile" \
+                && sed -i "s|^Icon=.*|Icon=/var/lib/AccountsService/icons/${username}|" "$userfile" \
+                || echo "Icon=/var/lib/AccountsService/icons/${username}" >> "$userfile"
+        else
+            printf '[User]\nIcon=/var/lib/AccountsService/icons/${username}\n' > "$userfile"
+        fi
+    '';
 
-        # Persist gnome directories
-        environment.persistence."/persistent" = {
-            hideMounts = true;
-
-            directories = [
-                "/var/lib/AccountsService"
-            ];
-
-            users.${username}.directories = [
-                ".config/dconf"
-                ".local/share/gnome-shell"
-                ".local/share/gvfs-metadata"
-                ".local/share/applications"
-                ".local/share/nautilus"
-            ];
-        };
-    }
+    # Allow chromium-based apps to run on wayland
+    environment.sessionVariables.NIXOS_OZONE_WL = "1";
+}
