@@ -120,6 +120,8 @@
                     {
                         name = "anti_raid";
                         when = [ "message_add" ];
+                        before = [ "attachments_channel" ];
+                        after = [ "auto_ban_channel" ];
                         env = {
                             report_channel_id = "1525460785285828708";
                         };
