@@ -117,6 +117,15 @@
                         admin = true;
                         source = "https://git.dawn.wine/dawn-winery/chekist/raw/branch/master/plugins/attachments_channel.luau";
                     }
+                    {
+                        name = "anti_raid";
+                        when = [ "message_add" ];
+                        env = {
+                            report_channel_id = "1525460785285828708";
+                        };
+                        admin = true;
+                        source = "https://git.dawn.wine/dawn-winery/chekist/raw/branch/master/plugins/anti_raid.luau";
+                    }
                 ];
             }];
         };
