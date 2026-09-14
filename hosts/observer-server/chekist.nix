@@ -72,7 +72,6 @@
                     };
                     enable_vision = true;
                     channel_context = 7;
-                    max_context = 65536;
                     max_loop_steps = 100;
                     http_fetch_max_size = "1mb";
                     stand_by_duration = "2m";
