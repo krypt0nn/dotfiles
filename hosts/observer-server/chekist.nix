@@ -62,6 +62,13 @@
                             data_collection = "deny";
                             quantizations = ["fp8"];
                         };
+                        tools = [
+                            {
+                                type = "openrouter:web_search";
+                                max_results = 5;
+                                max_total_results = 20;
+                            }
+                        ];
                     };
                     enable_vision = true;
                     channel_context = 7;
