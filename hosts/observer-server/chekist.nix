@@ -25,21 +25,24 @@
             };
 
             guilds = [{
-                guild_id = "910869215857217596";
+                guild_id = "910869215857217596"; # The Dawn Winery
 
                 channels.blacklist = [
+                    # Welcome
                     "910871800924229654"  # rules
                     "910871843324456970"  # announcements
                     "1104440225222111262" # trailblazers
+
+                    # Mod channels
                     "968846770752856104"  # mod-rules
                     "910873173808017488"  # mod-announcements
+
+                    # Dev channels
                     "917438648809570354"  # faq
                     "910871818158628954"  # repository-updates
                     "1111152418172964916" # ban-reports
-                    "1463877200922022101" # capybara-times
-                    "1221929438241886301" # starboard
-                    "1274566688787922987" # owoboard
-                    "1308509001423650817" # noskillboard
+
+                    # Announcements channels
                     "1113025734521409556" # genshin-announcements
                     "1108393184821792808" # genshin-codes
                     "1113025688820273192" # hsr-announcements
@@ -50,6 +53,30 @@
                     "1256660185481609317" # wuwa-codes
                     "1113025797247225867" # honkai-announcements
                     "1410944118930014309" # hna-announcements
+
+                    # Bot channels
+                    "1221929438241886301" # starboard
+                    "1274566688787922987" # owoboard
+                    "1308509001423650817" # noskillboard
+
+                    # Secret channels
+                    "1099041689085157487" # ca-discussions
+                    "1463877200922022101" # ca-times
+                    "1099041689085157487" # ca-debates
+                    "1517941649676828906" # dwteam-general
+                    "1517945573024465017" # dwteam-software
+                    "1517948353285980482" # dwteam-packages
+                    "1517945635066872099" # dwteam-vpn
+                    "1517941420453789988" # dwteam-cdn
+                    "1517941463512649728" # dwteam-email
+                    "1523030746879492208" # dwteam-sso
+                    "1517941501546463433" # dwteam-forgejo
+                    "1518364715816976474" # dwteam-ci
+                    "1517941546480177303" # dwteam-zulip
+                    "1517952010186526720" # dwteam-gifs
+                    "1517941588989444127" # dwteam-proton
+                    "1243320450243891261" # dwteam-reveng
+                    "1243320450243891261" # dwteam-meetup
                 ];
 
                 agent = {
