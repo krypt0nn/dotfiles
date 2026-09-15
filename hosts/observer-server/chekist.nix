@@ -98,7 +98,8 @@
                         ];
                     };
                     enable_vision = true;
-                    channel_context = 7;
+                    memory_slots_num = 50;
+                    context_messages_num = 7;
                     max_loop_steps = 100;
                     http_fetch_max_size = "1mb";
                     stand_by_duration = "2m";
