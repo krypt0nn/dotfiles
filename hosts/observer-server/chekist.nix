@@ -87,7 +87,6 @@
                         providers = {
                             zdr = true;
                             data_collection = "deny";
-                            quantizations = ["fp8"];
                             order = [
                                 #              $ INPT OUTP CACH SPEED QAT HITRATE
                                 "wafer"        # 0.10 0.35 0.02 23tps     91% CHR
