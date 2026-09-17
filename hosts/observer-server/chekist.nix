@@ -87,6 +87,7 @@
                         providers = {
                             zdr = true;
                             data_collection = "deny";
+                            quantizations = [ "fp8" ];
                             order = [
                                 #              $ INPT OUTP CACH SPEED QAT HITRATE
                                 "novita/fp8"   # 0.13 0.44 0.03 27tps fp8 84% CHR
