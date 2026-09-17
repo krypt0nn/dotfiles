@@ -88,12 +88,13 @@
                             zdr = true;
                             data_collection = "deny";
                             quantizations = [ "fp8" ];
-                            order = [
-                                #              $ INPT OUTP CACH SPEED QAT HITRATE
-                                "novita/fp8"   # 0.13 0.44 0.03 27tps fp8 84% CHR
-                                "z-ai/fp8"     # 0.15 0.50 0.03 36tps fp8 80% CHR
-                                "fireworks"    # 0.15 0.50 0.05 59tps fp8 74% CHR
-                                "baseten/fp8"  # 0.15 0.50 0.03 64tps fp8 48% CHR
+                            allow_fallbacks = false;
+                            only = [
+                                #              $ INPT OUTP CACH SPEED QAT HIT
+                                "novita/fp8"   # 0.13 0.44 0.03 27tps fp8 84%
+                                "z-ai/fp8"     # 0.15 0.50 0.03 36tps fp8 80%
+                                "fireworks"    # 0.15 0.50 0.05 59tps fp8 74%
+                                "baseten/fp8"  # 0.15 0.50 0.03 64tps fp8 48%
                             ];
                         };
                         tools = [
