@@ -61,6 +61,8 @@ in {
     # AccountsService only shows the icon if Icon= is set in
     # /var/lib/AccountsService/users/${username}, so write that too
     system.activationScripts.accounts-service-icon = ''
+        export PATH=${pkgs.coreutils}/bin:${pkgs.gnused}/bin:$PATH
+
         mkdir -p /var/lib/AccountsService/icons /var/lib/AccountsService/users
         cp ${profileImg} /var/lib/AccountsService/icons/${username}
         chmod 644 /var/lib/AccountsService/icons/${username}

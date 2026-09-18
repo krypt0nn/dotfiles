@@ -11,13 +11,13 @@
         "observer-pc" = default ++ [
             ./rust.nix
             ./llama-cpp.nix
-            ./opencode.nix
+            ./pi-agent.nix
             ./torlink.nix
         ];
 
         "observer-laptop" = default ++ [
             ./rust.nix
-            ./opencode.nix
+            ./pi-agent.nix
             ./torlink.nix
         ];
 
