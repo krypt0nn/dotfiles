@@ -45,34 +45,18 @@ let
         };
 
         lsp = {
-            nil = {
-                settings = {
-                    nil = {
-                        nix = {
-                            flake = {
-                                autoArchive = true;
-                            };
-                        };
-                    };
-                };
+            nil.initialization_options = {
+                nix.flake.autoArchive = true;
             };
 
-            rust-analyzer = {
-                initialization_options = {
-                    rust = {
-                        analyzerTargetDir = true;
-                    };
+            rust-analyzer.initialization_options = {
+                rust.analyzerTargetDir = true;
 
-                    check = {
-                        command = "clippy";
-                    };
+                check.command = "clippy";
 
-                    rustfmt = {
-                        extraArgs = [
-                            "+nightly"
-                        ];
-                    };
-                };
+                rustfmt.extraArgs = [
+                    "+nightly"
+                ];
             };
         };
     };
