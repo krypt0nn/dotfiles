@@ -1,4 +1,4 @@
-{ username, pkgs, pkgs-unstable, ... }:
+{ username, pkgs-unstable, ... }:
 let
     nixosSkill = fetchGit {
         url = "https://github.com/marceloeatworld/nixos-ai-skill";
@@ -20,7 +20,7 @@ let
         rev = "40e50d9e03242aa5dd53ac771950f9127362b25f";
     };
 
-    config = pkgs.writeText "opencode.json" (builtins.toJSON {
+    config = builtins.toJSON {
         "$schema" = "https://opencode.ai/config.json";
 
         lsp = true;
@@ -144,7 +144,7 @@ let
                 };
             };
         };
-    });
+    };
 in {
     environment.systemPackages = [ pkgs-unstable.opencode ];
 
