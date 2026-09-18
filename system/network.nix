@@ -77,12 +77,13 @@
                 webtunnel [2001:db8:72cd:a490:2485:20b0:4987:35ec]:443 C0B90984E829C31BB316CCB8A89CB4F318891871 url=https://download-134.as401332.net/7f8g9h0i1j2k3l4m5n6o7p8q ver=0.0.2
                 webtunnel [2001:db8:b1d5:4998:8150:f75b:988f:1f48]:443 216C8BB1C44FC2BFF7AF823B55AC38F113079B93 url=https://cdn-38.triplebit.dev/Bai8aXeiPhar5gai ver=0.0.2
                 webtunnel [2001:db8:cf6:ce7:c7fc:5a42:72d5:8c8b]:443 D0A1F802127A925F47A7C9713F17A9E1D1292E54 url=https://cdn-131.airstrip1.net/4c5d6e7f8g9h0i1j2k3l4m5n ver=0.0.2
-                webtunnel [2001:db8:43cc:d277:5ba1:dcd1:516e:d983]:443 AD62C15FAC9C8695F41F4BB5D1F16373F906177F url=https://mitch.pmvl.eu/r9mZqSFwOHSQATtQoPWwZQk9 ver=0.0.1
                 webtunnel [2001:db8:50a9:c546:36be:96ad:4cd1:cfff]:443 D20CE64A82CF6E6DB6F4F95C1F8FA81B06C10888 url=https://cdn-35.triplebit.dev/iethae6ahvoo1ieV ver=0.0.2
                 webtunnel [2001:db8:8823:18d4:77e:e206:ef9c:627f]:443 241136D5BB0CA8120EF269AF7CB8A427CA23ED55 url=https://ardc.bulger.co.uk/bxSqZSmsNykSCHI1gp6zl94a ver=0.0.4
                 webtunnel [2001:db8:fe46:edd5:2139:2d5b:b732:854a]:443 6C0D57943B9AE19F4365FE98E068126003DA6D29 url=https://bridge.skyhong.tw/ee282d33589b789bf7e31653bcbaa9c195d7 ver=0.0.4
-                webtunnel [2001:db8:8398:7383:d015:afe5:11c2:61a6]:443 3BB18234DE40FE0313FBC3FCFFBAF16F42381BFF url=https://libreaxolotl.xyz/rKGGmPXyenWA0PDRpL6INM2Z ver=0.0.4
                 webtunnel [2001:db8:1f1e:4d2f:321b:6626:823e:c504]:443 4946C9B8410CF59953455C158F957CAB2055A61D url=https://mstdn.party/fooghee7naChifi0 ver=0.0.2
+                webtunnel [2001:db8:2091:9afb:4e45:7aab:e2d0:a8c7]:443 3683B1036F18DF4B560865C17AF85C373232A8D5 url=https://o.ofdma.de/pg9PbqaxSvIbjtbVZMt9H7xF ver=0.0.5
+                webtunnel [2001:db8:e026:e32:d3ef:1ddf:4a96:4386]:443 25E15F4A7E69AAF062B8353C4C37DD35D5417837 url=https://app04.oneclickhost.eu/dLHKfx5cEep0SWfJCLQqIBGF ver=0.0.6
+                webtunnel [2001:db8:9513:a2a7:e8de:e859:2818:6694]:443 34E2AC0B23D523B789EAD6E193DC05078943B94D url=https://us04-buf.beijing.st/fromwhereyoupickupthisgarbage ver=0.0.4
             ''));
 
             HardwareAccel = true;
