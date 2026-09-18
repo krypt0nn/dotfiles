@@ -10,7 +10,7 @@
     in {
         "observer-pc" = default ++ [
             ./rust.nix
-            ./llamacpp.nix
+            ./llama-cpp.nix
             ./opencode.nix
             ./torlink.nix
         ];
