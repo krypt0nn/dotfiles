@@ -67,14 +67,10 @@
         packages = piPackages;
     });
 
-    # pi-lens user config (~/.pi-lens/config.json), managed declaratively.
-    # format.enabled=false disables all auto-format mutations (immediate and
-    # deferred); diagnostics, LSP and linting stay active. A project-level
-    # .pi-lens.json can still override this per-project (closest-wins).
+    # Disable auto-formatting and auto-fixing via LSP.
     lensConfigFile = pkgs.writeText "pi-lens-config.json" (builtins.toJSON {
-        format = {
-            enabled = false;
-        };
+        format.enabled = false;
+        autofix.enabled = false;
     });
 
     skillRoot = "/home/${username}/.pi/agent/skills";
