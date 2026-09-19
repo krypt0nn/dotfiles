@@ -109,9 +109,9 @@
                     memory_slots_num = 50;
                     context_messages_num = 7;
                     max_loop_steps = 100;
-                    max_skill_duration = "1m";
+                    max_skill_duration = "5min";
                     http_fetch_max_size = "1mb";
-                    stand_by_duration = "2m";
+                    stand_by_duration = "2min";
                     operators = modsList;
                 };
 
