@@ -87,14 +87,14 @@
                         providers = {
                             zdr = true;
                             data_collection = "deny";
-                            quantizations = [ "fp8" ];
                             allow_fallbacks = false;
                             only = [
                                 #              $ INPT OUTP CACH SPEED QAT HIT
-                                "novita/fp8"   # 0.13 0.44 0.03 27tps fp8 84%
-                                "z-ai/fp8"     # 0.15 0.50 0.03 36tps fp8 80%
-                                "fireworks"    # 0.15 0.50 0.05 59tps fp8 74%
-                                "baseten/fp8"  # 0.15 0.50 0.03 64tps fp8 48%
+                                "relace"       # 0.09 0.30 0.02 35tps --- 89%
+                                "novita/fp8"   # 0.13 0.44 0.03 27tps fp8 92%
+                                "z-ai/fp8"     # 0.15 0.50 0.03 36tps fp8 95%
+                                "fireworks"    # 0.15 0.50 0.05 59tps fp8 63%
+                                "baseten/fp8"  # 0.15 0.50 0.03 64tps fp8 65%
                             ];
                         };
                         tools = [

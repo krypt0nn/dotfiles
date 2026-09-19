@@ -1,60 +1,84 @@
-{
-    username,
-    pkgs,
-    pkgs-unstable,
-    ...
-}: let
-    # Pi packages to install. Add new entries here. Git sources without a ref
-    # track the default branch; `pi update --extensions` (or `pi update --all`)
-    # reconciles the clones to the latest HEAD.
+{ username, pkgs, pkgs-unstable, inputs, ... }: let
+    mkNixPak = inputs.nixpak.lib.nixpak {
+        inherit (pkgs) lib;
+        inherit pkgs;
+    };
+
+    pi-wrapped = mkNixPak {
+        config = { sloth, ... }: {
+            imports = with inputs.nixpak.nixpakModules; [
+                network
+            ];
+
+            app.package = pkgs-unstable.pi-coding-agent;
+
+            locale.enable = true;
+            timeZone.enable = true;
+
+            bubblewrap = {
+                newSession = true;
+                dieWithParent = true;
+
+                bind.rw = [
+                    (sloth.envOr "PWD" sloth.homeDir)
+                    (sloth.concat' sloth.homeDir "/.pi/agent")
+                ];
+
+                bind.ro = [
+                    "/run/current-system/sw"
+                    [ "/run/current-system/sw/bin" "/usr/bin" ]
+                    [ "/run/current-system/sw/bin" "/bin" ]
+                    "/run/wrappers"
+                    "/run/nix"
+                    "/nix/store"
+                ];
+
+                tmpfs = [
+                    "/tmp"
+                ];
+            };
+        };
+    };
+
+    # NOTE: entries must be plain "git:<host>/<owner>/<repo>" sources;
+    # pi clones them into ~/.pi/agent/git/<host>/<owner>/<repo>.
     piPackages = [
-        "git:github.com/nicobailon/pi-subagents" # subagent orchestration
-        "git:github.com/nicobailon/pi-web-access" # web search + fetch tools
-        "git:github.com/apmantza/pi-lens" # real-time code feedback: LSP, linters, formatters
-        "git:github.com/tmonk/pi-goal-x" # /goal: persistent goal planning + completion auditor
+        "git:github.com/apmantza/pi-lens"         # LSP
+        "git:github.com/nicobailon/pi-web-access" # Web search
+        "git:github.com/tintinweb/pi-subagents"   # Agents
     ];
 
-    # Skill repos cloned into ~/.pi/agent/skills/<name>/ (auto-discovered by pi:
-    # any directory containing SKILL.md is found recursively). Kept up to date
-    # by the pi-skills-sync systemd service below — add new repos to this list.
+    # Relative clone paths (strip the "git:" scheme) used to prune
+    # undeclared clones from ~/.pi/agent/git.
+    piPackagePaths = map (p: pkgs.lib.removePrefix "git:" p) piPackages;
+
     piSkillRepos = [
         {
-            name = "nixos"; # https://github.com/marceloeatworld/nixos-ai-skill
+            name = "nixos";
             url = "https://github.com/marceloeatworld/nixos-ai-skill.git";
         }
         {
-            name = "rust"; # https://github.com/actionbook/rust-skills (skills/ subdirs are discovered)
+            name = "rust";
             url = "https://github.com/actionbook/rust-skills.git";
         }
     ];
 
-    settingsFile = pkgs.writeText "pi-settings-merge.json" (builtins.toJSON { packages = piPackages; });
-
-    # Idempotent activation: merge `piPackages` into the user's
-    # ~/.pi/agent/settings.json "packages" list, deduplicating by source
-    # (string entries match as-is, object entries match by .source), while
-    # preserving all other user-managed settings and any user-installed
-    # packages.
-    jqMerge = pkgs.writeText "pi-packages-merge.jq" ''
-        def src: if type == "object" then .source else . end;
-        .[0] as $cur
-        | .[1] as $new
-        | $cur
-        | .packages = (
-              (.packages // [])
-              + ($new.packages | map(select(
-                    (. | src) as $s
-                    | [($cur.packages // [])[] | src]
-                    | index($s) | not
-                )))
-          )
-    '';
+    settingsFile = pkgs.writeText "pi-settings-packages.json" (builtins.toJSON {
+        packages = piPackages;
+    });
 
     skillRoot = "/home/${username}/.pi/agent/skills";
 
+    keepList = pkgs.lib.concatStringsSep " ";
+
+    # Oneshot script that makes ~/.pi/agent/skills mirror `piSkillRepos`:
+    # declared repos are cloned/updated, anything not declared is deleted.
     syncScript = pkgs.writeShellScript "pi-skills-sync" ''
+        skillRoot=${skillRoot}
+        mkdir -p "$skillRoot"
+
         ${pkgs.lib.concatMapStringsSep "\n" (r: ''
-            dest=${skillRoot}/${r.name}
+            dest=$skillRoot/${r.name}
             if [ -d "$dest/.git" ]; then
                 ${pkgs.git}/bin/git -C "$dest" pull --ff-only >/dev/null 2>&1 || echo "pi-skills: failed to update ${r.name}"
             else
@@ -63,14 +87,64 @@
                     || echo "pi-skills: failed to clone ${r.name}"
             fi
         '') piSkillRepos}
+
+        # Prune skill dirs that are no longer declared.
+        keep="${keepList (map (r: r.name) piSkillRepos)}"
+        for d in "$skillRoot"/*; do
+            [ -d "$d" ] || continue
+            case " $keep " in
+                *" $(basename "$d") "*) ;;
+                *) rm -rf "$d" ;;
+            esac
+        done
+    '';
+
+    # Activation: enforce declarative state for plugins.
+    #  1. settings.json "packages" is set EXACTLY to `piPackages`
+    #     (user additions are removed — declarative, not additive).
+    #  2. Git clones under ~/.pi/agent/git that no longer correspond to a
+    #     declared package are deleted.
+    piAgentSync = pkgs.writeShellScript "pi-agent-sync" ''
+        export PATH=${pkgs.coreutils}/bin:${pkgs.jq}/bin:$PATH
+
+        homeDir=/home/${username}
+        f=$homeDir/.pi/agent/settings.json
+        g=$homeDir/.pi/agent/git
+
+        # 1. Enforce the packages list (preserving all other settings).
+        mkdir -p "$(dirname "$f")"
+        if [ -f "$f" ]; then
+            tmp=$(mktemp)
+            jq --slurpfile st ${settingsFile} '.packages = $st[0].packages' "$f" > "$tmp" \
+                && cat "$tmp" > "$f"
+            rm -f "$tmp"
+        else
+            cp ${settingsFile} "$f"
+        fi
+
+        # 2. Delete clones of packages that are no longer declared.
+        keep="${keepList piPackagePaths}"
+        for d in "$g"/*/*/*; do
+            [ -d "$d" ] || continue
+            rel=''${d#"$g"/}
+            case " $keep " in
+                *" $rel "*) ;;
+                *) rm -rf "$d" ;;
+            esac
+        done
+
+        # Remove now-empty host/owner directories (deepest first).
+        find "$g" -mindepth 1 -depth -type d -empty -delete 2>/dev/null || true
     '';
 in {
-    environment.systemPackages = [ pkgs-unstable.pi-coding-agent ];
+    environment.systemPackages = [
+        pi-wrapped.config.env
+    ];
 
     # One-shot service that clones/updates the skill repos into the user's
-    # global skill directory on every boot.
+    # global skill directory on every boot, and prunes undeclared ones.
     systemd.services.pi-skills-sync = {
-        description = "Clone/update pi agent skill repositories";
+        description = "Mirror pi agent skill repositories";
         wantedBy = [ "multi-user.target" ];
         serviceConfig = {
             Type = "oneshot";
@@ -81,15 +155,6 @@ in {
     };
 
     system.activationScripts.piAgentPackages = ''
-        export PATH=${pkgs.coreutils}/bin:${pkgs.diffutils}/bin:$PATH
-        f=/home/${username}/.pi/agent/settings.json
-        if [ -f "$f" ]; then
-            tmp=$(mktemp)
-            ${pkgs.jq}/bin/jq -s -f ${jqMerge} "$f" ${settingsFile} > "$tmp" \
-                && if ! cmp -s "$tmp" "$f"; then
-                    cat "$tmp" > "$f";
-                fi
-            rm -f "$tmp"
-        fi
+        ${piAgentSync}
     '';
 }

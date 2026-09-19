@@ -49,7 +49,7 @@
         "net.core.default_qdisc" = "cake";
     };
 
-    boot.kernelModules = [ "tcp_bbr" ];
+    boot.kernelModules = [ "tcp_bbr" "tun" ];
 
     # Bump default nix's soft ulimit value
     # Source: https://github.com/NixOS/nixpkgs/issues/159964#issuecomment-1477971458
