@@ -84,11 +84,12 @@
                     api_url = "https://openrouter.ai/api/v1";
                     api_request = {
                         model = "z-ai/glm-5.3-flash";
-                        providers = {
+                        provider = {
                             zdr = true;
                             data_collection = "deny";
-                            allow_fallbacks = false;
-                            only = [
+                            allow_fallbacks = true;
+                            quantizations = [ "fp8" ];
+                            order = [
                                 #              $ INPT OUTP CACH SPEED QAT HIT
                                 "relace"       # 0.09 0.30 0.02 35tps --- 89%
                                 "novita/fp8"   # 0.13 0.44 0.03 27tps fp8 92%
