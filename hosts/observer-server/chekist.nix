@@ -90,8 +90,8 @@
                             allow_fallbacks = true;
                             order = [
                                 #               $ INPT OUTP CACHE SPEED QAT HIT
-                                "relace"        # 0.13 0.52 0.003 37tps fp4 86%
                                 "deepinfra/fp8" # 0.14 0.42 0.004 42tps fp8 92%
+                                "relace/fp4"    # 0.13 0.52 0.003 37tps fp4 86%
                                 "wafer"         # 0.20 0.60 0.006 75tps --- 93%
                                 "fireworks"     # 0.22 0.66 0.007 69tps --- 94%
                                 "novita/fp8"    # 0.29 1.14 0.006 96tps fp8 83%
