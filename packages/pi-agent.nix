@@ -48,10 +48,6 @@
         "git:github.com/tintinweb/pi-subagents"   # Agents
     ];
 
-    # Relative clone paths (strip the "git:" scheme) used to prune
-    # undeclared clones from ~/.pi/agent/git.
-    piPackagePaths = map (p: pkgs.lib.removePrefix "git:" p) piPackages;
-
     piSkillRepos = [
         {
             name = "nixos";
@@ -63,8 +59,22 @@
         }
     ];
 
+    # Relative clone paths (strip the "git:" scheme) used to prune
+    # undeclared clones from ~/.pi/agent/git.
+    piPackagePaths = map (p: pkgs.lib.removePrefix "git:" p) piPackages;
+
     settingsFile = pkgs.writeText "pi-settings-packages.json" (builtins.toJSON {
         packages = piPackages;
+    });
+
+    # pi-lens user config (~/.pi-lens/config.json), managed declaratively.
+    # format.enabled=false disables all auto-format mutations (immediate and
+    # deferred); diagnostics, LSP and linting stay active. A project-level
+    # .pi-lens.json can still override this per-project (closest-wins).
+    lensConfigFile = pkgs.writeText "pi-lens-config.json" (builtins.toJSON {
+        format = {
+            enabled = false;
+        };
     });
 
     skillRoot = "/home/${username}/.pi/agent/skills";
@@ -135,6 +145,13 @@
 
         # Remove now-empty host/owner directories (deepest first).
         find "$g" -mindepth 1 -depth -type d -empty -delete 2>/dev/null || true
+
+        # 3. Enforce the pi-lens config (fully declarative: the file is
+        #    pi-lens-owned, so it is replaced, not merged).
+        lensDir=$homeDir/.pi-lens
+        mkdir -p "$lensDir"
+        install -m 644 ${lensConfigFile} "$lensDir/config.json"
+        chown -R ${username}: "$lensDir"
     '';
 in {
     environment.systemPackages = [
