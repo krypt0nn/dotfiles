@@ -33,6 +33,7 @@
                     (sloth.envOr "PWD" sloth.homeDir)
                     (sloth.concat' sloth.homeDir "/.pi/agent")
                     (sloth.concat' sloth.homeDir "/.npm")
+                    (sloth.concat' sloth.homeDir "/.cargo")
                 ];
 
                 bind.ro = [
