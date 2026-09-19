@@ -83,18 +83,19 @@
                     enable = true;
                     api_url = "https://openrouter.ai/api/v1";
                     api_request = {
-                        model = "deepseek/deepseek-v4.1-flash";
+                        model = "z-ai/glm-5.3-flash";
                         provider = {
                             zdr = true;
                             data_collection = "deny";
                             allow_fallbacks = true;
                             order = [
-                                #               $ INPT OUTP CACHE SPEED QAT HIT
-                                "deepinfra/fp8" # 0.14 0.42 0.004 42tps fp8 92%
-                                "relace/fp4"    # 0.13 0.52 0.003 37tps fp4 86%
-                                "wafer"         # 0.20 0.60 0.006 75tps --- 93%
-                                "fireworks"     # 0.22 0.66 0.007 69tps --- 94%
-                                "novita/fp8"    # 0.29 1.14 0.006 96tps fp8 83%
+                                #              $ INPT OUTP CACH SPEED QAT HIT
+                                "relace"       # 0.09 0.30 0.02 35tps --- 89%
+                                "wafer"        # 0.10 0.35 0.02 28tps --- 94%
+                                "novita/fp8"   # 0.13 0.44 0.03 27tps fp8 92%
+                                "z-ai/fp8"     # 0.15 0.50 0.03 36tps fp8 95%
+                                "fireworks"    # 0.15 0.50 0.05 59tps fp8 63%
+                                "baseten/fp8"  # 0.15 0.50 0.03 64tps fp8 65%
                             ];
                         };
                         tools = [
