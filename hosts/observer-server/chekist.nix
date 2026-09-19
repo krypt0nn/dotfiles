@@ -87,9 +87,7 @@
                         provider = {
                             zdr = true;
                             data_collection = "deny";
-                            allow_fallbacks = true;
-                            quantizations = [ "fp8" ];
-                            order = [
+                            only = [
                                 #              $ INPT OUTP CACH SPEED QAT HIT
                                 "relace"       # 0.09 0.30 0.02 35tps --- 89%
                                 "novita/fp8"   # 0.13 0.44 0.03 27tps fp8 92%
