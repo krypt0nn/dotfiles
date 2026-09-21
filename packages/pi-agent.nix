@@ -56,6 +56,7 @@
     piPackages = [
         "npm:@narumitw/pi-lsp"        # LSP
         "npm:pi-web-access"           # Web search
+        "npm:pi-loop-police"          # Infinite-loop detection/breaking
         "npm:@tintinweb/pi-subagents" # Agents
     ];
 
