@@ -131,10 +131,7 @@
                     }
                     {
                         name = "mod_commands";
-                        when = [
-                            "ready"
-                            "command_use"
-                        ];
+                        when = [ "ready" "command_use" ];
                         env = {
                             logs_channel_id = "913441788893732864";
                         };
@@ -171,6 +168,15 @@
                         };
                         admin = true;
                         source = "https://git.dawn.wine/dawn-winery/chekist/raw/branch/master/plugins/anti_raid.luau";
+                    }
+                    {
+                        name = "oracle_command";
+                        when = [ "ready" "command_use" ];
+                        env = {
+                            API_URL = "https://openrouter.ai/api/alpha/decisions";
+                            API_TOKEN = "$CHEKIST_AGENT_API_TOKEN";
+                        };
+                        source = "https://git.dawn.wine/dawn-winery/chekist/raw/branch/master/plugins/oracle_command.luau";
                     }
                 ];
             }];
