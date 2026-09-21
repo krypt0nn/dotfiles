@@ -9,9 +9,12 @@ let
                 --add-flags "--port 9931" \
                 --add-flags "--models-dir" \
                 --add-flags "/home/${username}/Models" \
+                --add-flags "--slot-save-path" \
+                --add-flags "/home/${username}/Models/kv-cache" \
                 --add-flags "--alias default" \
                 --add-flags "--parallel 1" \
                 --add-flags "--ctx-size 32768" \
+                --add-flags "--kv-unified" \
                 --add-flags "--cache-type-k q8_0" \
                 --add-flags "--cache-type-v q8_0" \
                 --add-flags "--spec-draft-type-k q8_0" \
@@ -19,7 +22,7 @@ let
                 --add-flags "--fit on" \
                 --add-flags "--reasoning on" \
                 --add-flags "--reasoning-preserve" \
-                --add-flags "--reasoning-budget 4096" \
+                --add-flags "--reasoning-budget 8192" \
                 --add-flags "--reasoning-budget-message \" ...I'm overthinking it. Here's my final response: \""
         '';
     };
