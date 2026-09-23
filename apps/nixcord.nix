@@ -25,6 +25,7 @@
                 silentTyping.enable = true;
                 whoReacted.enable = true;
                 validUser.enable = true;
+                noBlockedMessages.enable = true;
                 summaries.enable = true;
                 serverInfo.enable = true;
                 showHiddenChannels.enable = true;
