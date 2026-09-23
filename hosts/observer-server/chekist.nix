@@ -170,13 +170,23 @@
                         source = "https://git.dawn.wine/dawn-winery/chekist/raw/branch/master/plugins/anti_raid.luau";
                     }
                     {
-                        name = "oracle_command";
+                        name = "ai_oracle_command";
                         when = [ "ready" "command_use" ];
                         env = {
                             API_URL = "https://openrouter.ai/api/alpha/decisions";
                             API_TOKEN = "$CHEKIST_AGENT_API_TOKEN";
                         };
-                        source = "https://git.dawn.wine/dawn-winery/chekist/raw/branch/master/plugins/oracle_command.luau";
+                        source = "https://git.dawn.wine/dawn-winery/chekist/raw/branch/master/plugins/ai_oracle_command.luau";
+                    }
+                    {
+                        name = "ai_report_command";
+                        when = [ "ready" "command_use" ];
+                        env = {
+                            API_URL = "https://openrouter.ai/api/alpha/decisions";
+                            API_TOKEN = "$CHEKIST_AGENT_API_TOKEN";
+                            REPORTS_CHANNEL = "1525460785285828708";
+                        };
+                        source = "https://git.dawn.wine/dawn-winery/chekist/raw/branch/master/plugins/ai_report_command.luau";
                     }
                 ];
             }];
