@@ -13,6 +13,8 @@
                 "118563900521316353" # muffinsdesu
                 "712565315074261014" # natimerry
             ];
+
+            botId = "1375853323567108146"; # Layla
         in {
             bot.cache = {
                 messages = 10000;
@@ -153,7 +155,8 @@
                         name = "attachments_channel";
                         when = [ "message_add" ];
                         env = {
-                            channels = "1018900818029727774,1109591186840240212,1364910316609081374";
+                            CHANNEL_IDS = "1018900818029727774,1109591186840240212,1364910316609081374";
+                            ALLOW_USERS = "${botId},${builtins.concatStringsSep "," modsList}";
                         };
                         admin = true;
                         source = "https://git.dawn.wine/dawn-winery/chekist/raw/branch/master/plugins/attachments_channel.luau";
