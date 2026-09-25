@@ -54,10 +54,11 @@
 
     # npm package sources; pi installs them into ~/.pi/agent/npm/ at startup.
     piPackages = [
-        "npm:@narumitw/pi-lsp"        # LSP
-        "npm:pi-web-access"           # Web search
-        "npm:pi-loop-police"          # Infinite-loop detection/breaking
-        "npm:@tintinweb/pi-subagents" # Agents
+        "npm:@narumitw/pi-lsp"         # LSP
+        "npm:pi-web-access"            # Web search
+        "npm:@tintinweb/pi-subagents"  # Agents
+        "npm:@henryqw/pi-ask-question" # Ask user questions
+        "npm:pi-loop-police"           # Detect and break thinking loops
     ];
 
     piSkillRepos = [
