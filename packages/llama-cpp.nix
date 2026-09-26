@@ -27,6 +27,8 @@ let
         '';
     };
 in {
+    networking.firewall.allowedTCPPorts = [ 9931 ];
+
     environment.systemPackages = [
         llama-cpp-wrapped
     ];
