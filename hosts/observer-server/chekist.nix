@@ -16,183 +16,199 @@
 
             botId = "1375853323567108146"; # Layla
         in {
+            database = {
+                cleanup_interval = "12h";
+                embeddings_interval = "15m";
+                messages_retention = "28d";
+            };
+
             bot.cache = {
                 messages = 10000;
                 duration = "2h";
             };
 
-            database = {
-                cleanup_interval = "12h";
-                messages_retention = "28d";
+            guild = {
+                guild_id = "910869215857217596"; # The Dawn Winery
             };
 
-            guilds = [{
-                guild_id = "910869215857217596"; # The Dawn Winery
+            channels.blacklist = [
+                # Welcome
+                "910871800924229654"  # rules
+                "910871843324456970"  # announcements
+                "1104440225222111262" # trailblazers
 
-                channels.blacklist = [
-                    # Welcome
-                    "910871800924229654"  # rules
-                    "910871843324456970"  # announcements
-                    "1104440225222111262" # trailblazers
+                # Mod channels
+                "968846770752856104"  # mod-rules
+                "910873173808017488"  # mod-announcements
 
-                    # Mod channels
-                    "968846770752856104"  # mod-rules
-                    "910873173808017488"  # mod-announcements
+                # Dev channels
+                "917438648809570354"  # faq
+                "910871818158628954"  # repository-updates
+                "1111152418172964916" # ban-reports
 
-                    # Dev channels
-                    "917438648809570354"  # faq
-                    "910871818158628954"  # repository-updates
-                    "1111152418172964916" # ban-reports
+                # Announcements channels
+                "1113025734521409556" # genshin-announcements
+                "1108393184821792808" # genshin-codes
+                "1113025688820273192" # hsr-announcements
+                "1108393287909396720" # hsr-codes
+                "1176844314870030346" # zzz-announcements
+                "1256213160004685936" # zzz-codes
+                "1242992386246840412" # wuwa-announcements
+                "1256660185481609317" # wuwa-codes
+                "1113025797247225867" # honkai-announcements
+                "1410944118930014309" # hna-announcements
 
-                    # Announcements channels
-                    "1113025734521409556" # genshin-announcements
-                    "1108393184821792808" # genshin-codes
-                    "1113025688820273192" # hsr-announcements
-                    "1108393287909396720" # hsr-codes
-                    "1176844314870030346" # zzz-announcements
-                    "1256213160004685936" # zzz-codes
-                    "1242992386246840412" # wuwa-announcements
-                    "1256660185481609317" # wuwa-codes
-                    "1113025797247225867" # honkai-announcements
-                    "1410944118930014309" # hna-announcements
+                # Bot channels
+                "1221929438241886301" # starboard
+                "1274566688787922987" # owoboard
+                "1308509001423650817" # noskillboard
 
-                    # Bot channels
-                    "1221929438241886301" # starboard
-                    "1274566688787922987" # owoboard
-                    "1308509001423650817" # noskillboard
+                # Secret channels
+                "1099041689085157487" # ca-discussions
+                "1463877200922022101" # ca-times
+                "1099041689085157487" # ca-debates
+                "1517941649676828906" # dwteam-general
+                "1517945573024465017" # dwteam-software
+                "1517948353285980482" # dwteam-packages
+                "1517945635066872099" # dwteam-vpn
+                "1517941420453789988" # dwteam-cdn
+                "1517941463512649728" # dwteam-email
+                "1523030746879492208" # dwteam-sso
+                "1517941501546463433" # dwteam-forgejo
+                "1518364715816976474" # dwteam-ci
+                "1517941546480177303" # dwteam-zulip
+                "1517952010186526720" # dwteam-gifs
+                "1517941588989444127" # dwteam-proton
+                "1243320450243891261" # dwteam-reveng
+                "1243320450243891261" # dwteam-meetup
+            ];
 
-                    # Secret channels
-                    "1099041689085157487" # ca-discussions
-                    "1463877200922022101" # ca-times
-                    "1099041689085157487" # ca-debates
-                    "1517941649676828906" # dwteam-general
-                    "1517945573024465017" # dwteam-software
-                    "1517948353285980482" # dwteam-packages
-                    "1517945635066872099" # dwteam-vpn
-                    "1517941420453789988" # dwteam-cdn
-                    "1517941463512649728" # dwteam-email
-                    "1523030746879492208" # dwteam-sso
-                    "1517941501546463433" # dwteam-forgejo
-                    "1518364715816976474" # dwteam-ci
-                    "1517941546480177303" # dwteam-zulip
-                    "1517952010186526720" # dwteam-gifs
-                    "1517941588989444127" # dwteam-proton
-                    "1243320450243891261" # dwteam-reveng
-                    "1243320450243891261" # dwteam-meetup
-                ];
+            embeddings = {
+                enable = true;
+                api_url = "http://127.0.0.1:9931/v1";
+                model = "LFM2.5-Embedding-350M-Q8_0";
+                document_prefix = "document: ";
+                query_prefix = "query: ";
+                is_normalized = true;
+            };
 
-                agent = {
-                    enable = true;
-                    api_url = "https://openrouter.ai/api/v1";
-                    api_request = {
-                        model = "z-ai/glm-5.3-flash";
-                        provider = {
-                            zdr = true;
-                            data_collection = "deny";
-                            allow_fallbacks = true;
-                            order = [
-                                #              $ INPT OUTP CACH SPEED QAT HIT
-                                "relace"       # 0.09 0.30 0.02 35tps --- 89%
-                                "wafer"        # 0.10 0.35 0.02 28tps --- 94%
-                                "novita/fp8"   # 0.13 0.44 0.03 27tps fp8 92%
-                                "z-ai/fp8"     # 0.15 0.50 0.03 36tps fp8 95%
-                                "fireworks"    # 0.15 0.50 0.05 59tps fp8 63%
-                                "baseten/fp8"  # 0.15 0.50 0.03 64tps fp8 65%
-                            ];
-                        };
-                        tools = [
-                            {
-                                type = "openrouter:web_search";
-                                max_results = 5;
-                                max_total_results = 20;
-                            }
+            agent = {
+                enable = true;
+                api_url = "https://openrouter.ai/api/v1";
+                api_request = {
+                    model = "z-ai/glm-5.3-flash";
+                    provider = {
+                        zdr = true;
+                        data_collection = "deny";
+                        allow_fallbacks = true;
+                        order = [
+                            #              $ INPT OUTP CACH SPEED QAT HIT
+                            "relace"       # 0.09 0.30 0.02 35tps --- 89%
+                            "wafer"        # 0.10 0.35 0.02 28tps --- 94%
+                            "novita/fp8"   # 0.13 0.44 0.03 27tps fp8 92%
+                            "z-ai/fp8"     # 0.15 0.50 0.03 36tps fp8 95%
+                            "fireworks"    # 0.15 0.50 0.05 59tps fp8 63%
+                            "baseten/fp8"  # 0.15 0.50 0.03 64tps fp8 65%
                         ];
                     };
-                    enable_vision = true;
-                    memory_slots_num = 50;
-                    context_messages_num = 7;
-                    max_loop_steps = 100;
-                    max_skill_duration = "5min";
-                    http_fetch_max_size = "1mb";
-                    stand_by_duration = "2min";
-                    operators = modsList;
+                    tools = [
+                        {
+                            type = "openrouter:web_search";
+                            max_results = 5;
+                            max_total_results = 20;
+                        }
+                    ];
                 };
+                enable_vision = true;
+                memory_slots_num = 50;
+                context_messages_num = 7;
+                max_loop_steps = 100;
+                max_skill_duration = "5min";
+                http_fetch_max_size = "1mb";
+                stand_by_duration = "2min";
+                operators = modsList;
+            };
 
-                plugins = [
-                    {
-                        name = "mod_logs";
-                        when = [
-                            "guild_member_join"
-                            "guild_member_leave"
-                            "message_delete"
-                        ];
-                        env = {
-                            logs_channel_id = "913441788893732864";
-                        };
-                        source = "https://git.dawn.wine/dawn-winery/chekist/raw/branch/master/plugins/mod_logs.luau";
-                    }
-                    {
-                        name = "mod_commands";
-                        when = [ "ready" "command_use" ];
-                        env = {
-                            logs_channel_id = "913441788893732864";
-                        };
-                        admin = true;
-                        source = "https://git.dawn.wine/dawn-winery/chekist/raw/branch/master/plugins/mod_commands.luau";
-                    }
-                    {
-                        name = "auto_ban_channel";
-                        when = [ "message_add" ];
-                        env = {
-                            logs_channel_id = "913441788893732864";
-                            ban_channels = "1525860388405514270";
-                            delete_message_days = "1";
-                        };
-                        admin = true;
-                        source = "https://git.dawn.wine/dawn-winery/chekist/raw/branch/master/plugins/auto_ban_channel.luau";
-                    }
-                    {
-                        name = "attachments_channel";
-                        when = [ "message_add" ];
-                        env = {
-                            CHANNEL_IDS = "1018900818029727774,1109591186840240212,1364910316609081374";
-                            ALLOW_USERS = "${botId},${builtins.concatStringsSep "," modsList}";
-                        };
-                        admin = true;
-                        source = "https://git.dawn.wine/dawn-winery/chekist/raw/branch/master/plugins/attachments_channel.luau";
-                    }
-                    {
-                        name = "anti_raid";
-                        when = [ "message_add" ];
-                        before = [ "attachments_channel" ];
-                        after = [ "auto_ban_channel" ];
-                        env = {
-                            report_channel_id = "1525460785285828708";
-                        };
-                        admin = true;
-                        source = "https://git.dawn.wine/dawn-winery/chekist/raw/branch/master/plugins/anti_raid.luau";
-                    }
-                    {
-                        name = "ai_oracle_command";
-                        when = [ "ready" "command_use" ];
-                        env = {
-                            API_URL = "https://openrouter.ai/api/alpha/decisions";
-                            API_TOKEN = "$CHEKIST_AGENT_API_TOKEN";
-                        };
-                        source = "https://git.dawn.wine/dawn-winery/chekist/raw/branch/master/plugins/ai_oracle_command.luau";
-                    }
-                    {
-                        name = "ai_report_command";
-                        when = [ "ready" "command_use" ];
-                        env = {
-                            API_URL = "https://openrouter.ai/api/alpha/decisions";
-                            API_TOKEN = "$CHEKIST_AGENT_API_TOKEN";
-                            REPORTS_CHANNEL = "1525460785285828708";
-                        };
-                        source = "https://git.dawn.wine/dawn-winery/chekist/raw/branch/master/plugins/ai_report_command.luau";
-                    }
-                ];
-            }];
+            plugins = [
+                {
+                    name = "mod_logs";
+                    when = [
+                        "guild_member_join"
+                        "guild_member_leave"
+                        "message_delete"
+                    ];
+                    env = {
+                        logs_channel_id = "913441788893732864";
+                    };
+                    source = "https://git.dawn.wine/dawn-winery/chekist/raw/branch/master/plugins/mod_logs.luau";
+                }
+                {
+                    name = "mod_commands";
+                    when = [ "ready" "command_use" ];
+                    env = {
+                        logs_channel_id = "913441788893732864";
+                    };
+                    allow_admin = true;
+                    source = "https://git.dawn.wine/dawn-winery/chekist/raw/branch/master/plugins/mod_commands.luau";
+                }
+                {
+                    name = "auto_ban_channel";
+                    when = [ "message_add" ];
+                    env = {
+                        logs_channel_id = "913441788893732864";
+                        ban_channels = "1525860388405514270";
+                        delete_message_days = "1";
+                    };
+                    allow_admin = true;
+                    source = "https://git.dawn.wine/dawn-winery/chekist/raw/branch/master/plugins/auto_ban_channel.luau";
+                }
+                {
+                    name = "attachments_channel";
+                    when = [ "message_add" ];
+                    env = {
+                        CHANNEL_IDS = "1018900818029727774,1109591186840240212,1364910316609081374";
+                        ALLOW_USERS = "${botId},${builtins.concatStringsSep "," modsList}";
+                    };
+                    allow_admin = true;
+                    source = "https://git.dawn.wine/dawn-winery/chekist/raw/branch/master/plugins/attachments_channel.luau";
+                }
+                {
+                    name = "anti_raid";
+                    when = [ "message_add" ];
+                    before = [ "attachments_channel" ];
+                    after = [ "auto_ban_channel" ];
+                    env = {
+                        report_channel_id = "1525460785285828708";
+                    };
+                    allow_admin = true;
+                    source = "https://git.dawn.wine/dawn-winery/chekist/raw/branch/master/plugins/anti_raid.luau";
+                }
+                {
+                    name = "ai_oracle_command";
+                    when = [ "ready" "command_use" ];
+                    env = {
+                        API_URL = "https://openrouter.ai/api/alpha/decisions";
+                        API_TOKEN = "$CHEKIST_AGENT_API_TOKEN";
+                    };
+                    source = "https://git.dawn.wine/dawn-winery/chekist/raw/branch/master/plugins/ai_oracle_command.luau";
+                }
+                {
+                    name = "ai_report_command";
+                    when = [ "ready" "command_use" ];
+                    env = {
+                        API_URL = "https://openrouter.ai/api/alpha/decisions";
+                        API_TOKEN = "$CHEKIST_AGENT_API_TOKEN";
+                        REPORTS_CHANNEL = "1525460785285828708";
+                    };
+                    source = "https://git.dawn.wine/dawn-winery/chekist/raw/branch/master/plugins/ai_report_command.luau";
+                }
+                {
+                    name = "ai_search_command";
+                    when = [ "ready" "command_use" ];
+                    allow_ai = true;
+                    source = "https://git.dawn.wine/dawn-winery/chekist/raw/branch/master/plugins/ai_search_command.luau";
+                }
+            ];
         };
     };
 
