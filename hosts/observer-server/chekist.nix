@@ -86,9 +86,9 @@
             embeddings = {
                 enable = true;
                 api_url = "http://127.0.0.1:9931/v1";
-                model = "LFM2.5-Embedding-350M-Q8_0";
-                document_prefix = "document: ";
-                query_prefix = "query: ";
+                model = "embeddinggemma-300m-qat-Q8_0";
+                document_prefix = "title: none | text: ";
+                query_prefix = "task: search result | query: ";
                 is_normalized = true;
             };
 
