@@ -195,14 +195,14 @@
                         url = "http://192.168.1.10:9931/v1";
                         token = "";
                         alias = {
-                            embedding-model = "embeddinggemma-300m-qat-Q8_0";
-                            embedding-title-model = "Ling-3.0-tiny-Q6_K_L";
+                            embedding-model = "embeddinggemma-300m";
+                            embedding-title-model = "ling3.0-tiny";
                         };
                         supported = [
-                            "embeddinggemma-300m-qat-Q8_0"
-                            "LFM2.5-350M-Q8_0"
-                            "LFM2.5-2.6B-QAD-Q4_0"
-                            "Ling-3.0-tiny-Q6_K_L"
+                            "embeddinggemma-300m"
+                            "lfm2.5-350m"
+                            "lfm2.5-2.6b"
+                            "ling3.0-tiny"
                         ];
                     }
 
@@ -211,13 +211,13 @@
                         url = "http://127.0.0.1:9931/v1";
                         token = "";
                         alias = {
-                            embedding-model = "embeddinggemma-300m-qat-Q8_0";
-                            embedding-title-model = "LFM2.5-2.6B-QAD-Q4_0";
+                            embedding-model = "embeddinggemma-300m";
+                            embedding-title-model = "lfm2.5-2.6b";
                         };
                         supported = [
-                            "embeddinggemma-300m-qat-Q8_0"
-                            "LFM2.5-350M-Q8_0"
-                            "LFM2.5-2.6B-QAD-Q4_0"
+                            "embeddinggemma-300m"
+                            "lfm2.5-350m"
+                            "lfm2.5-2.6b"
                         ];
                     }
 
