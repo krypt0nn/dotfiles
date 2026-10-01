@@ -169,8 +169,8 @@
             ai = {
                 embeddings = {
                     enable = true;
-                    embedding_model = "embeddinggemma-300m-qat-Q8_0";
-                    title_model = "LFM2.5-350M-Q8_0";
+                    embedding_model = "embedding-model";
+                    title_model = "embedding-title-model";
                     document_template = "title: {{title}} | text: {{content}}";
                     query_template = "task: search result | query: {{content}}";
                     is_normalized = true;
@@ -194,9 +194,14 @@
                     {
                         url = "http://192.168.1.10:9931/v1";
                         token = "";
+                        alias = {
+                            embedding-model = "embeddinggemma-300m-qat-Q8_0";
+                            embedding-title-model = "LFM2.5-2.6B-QAD-Q4_0";
+                        };
                         supported = [
                             "embeddinggemma-300m-qat-Q8_0"
                             "LFM2.5-350M-Q8_0"
+                            "LFM2.5-2.6B-QAD-Q4_0"
                         ];
                     }
 
@@ -204,6 +209,10 @@
                     {
                         url = "http://127.0.0.1:9931/v1";
                         token = "";
+                        alias = {
+                            embedding-model = "embeddinggemma-300m-qat-Q8_0";
+                            embedding-title-model = "LFM2.5-350M-Q8_0";
+                        };
                         supported = [
                             "embeddinggemma-300m-qat-Q8_0"
                             "LFM2.5-350M-Q8_0"
