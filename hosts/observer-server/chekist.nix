@@ -17,8 +17,10 @@
             botId = "1375853323567108146"; # Layla
         in {
             database = {
+                embeddings_interval = "4h";
+                embeddings_chunk_tokens = 1024;
+                embeddings_overlap_tokens = 128;
                 cleanup_interval = "12h";
-                embeddings_interval = "15m";
                 messages_retention = "28d";
             };
 
@@ -83,52 +85,6 @@
                 "1243320450243891261" # dwteam-meetup
             ];
 
-            embeddings = {
-                enable = true;
-                api_url = "http://127.0.0.1:9931/v1";
-                model = "embeddinggemma-300m-qat-Q8_0";
-                document_prefix = "title: none | text: ";
-                query_prefix = "task: search result | query: ";
-                is_normalized = true;
-            };
-
-            agent = {
-                enable = true;
-                api_url = "https://openrouter.ai/api/v1";
-                api_request = {
-                    model = "z-ai/glm-5.3-flash";
-                    provider = {
-                        zdr = true;
-                        data_collection = "deny";
-                        allow_fallbacks = true;
-                        order = [
-                            #              $ INPT OUTP CACH SPEED QAT HIT
-                            "relace"       # 0.09 0.30 0.02 35tps --- 89%
-                            "wafer"        # 0.10 0.35 0.02 28tps --- 94%
-                            "novita/fp8"   # 0.13 0.44 0.03 27tps fp8 92%
-                            "z-ai/fp8"     # 0.15 0.50 0.03 36tps fp8 95%
-                            "fireworks"    # 0.15 0.50 0.05 59tps fp8 63%
-                            "baseten/fp8"  # 0.15 0.50 0.03 64tps fp8 65%
-                        ];
-                    };
-                    tools = [
-                        {
-                            type = "openrouter:web_search";
-                            max_results = 5;
-                            max_total_results = 20;
-                        }
-                    ];
-                };
-                enable_vision = true;
-                memory_slots_num = 50;
-                context_messages_num = 7;
-                max_loop_steps = 100;
-                max_skill_duration = "5min";
-                http_fetch_max_size = "1mb";
-                stand_by_duration = "2min";
-                operators = modsList;
-            };
-
             plugins = [
                 {
                     name = "mod_logs";
@@ -188,7 +144,7 @@
                     when = [ "ready" "command_use" ];
                     env = {
                         API_URL = "https://openrouter.ai/api/alpha/decisions";
-                        API_TOKEN = "$CHEKIST_AGENT_API_TOKEN";
+                        API_TOKEN = "$CHEKIST_AI_API_TOKEN";
                     };
                     source = "https://git.dawn.wine/dawn-winery/chekist/raw/branch/master/plugins/ai_oracle_command.luau";
                 }
@@ -197,7 +153,7 @@
                     when = [ "ready" "command_use" ];
                     env = {
                         API_URL = "https://openrouter.ai/api/alpha/decisions";
-                        API_TOKEN = "$CHEKIST_AGENT_API_TOKEN";
+                        API_TOKEN = "$CHEKIST_AI_API_TOKEN";
                         REPORTS_CHANNEL = "1525460785285828708";
                     };
                     source = "https://git.dawn.wine/dawn-winery/chekist/raw/branch/master/plugins/ai_report_command.luau";
@@ -209,6 +165,81 @@
                     source = "https://git.dawn.wine/dawn-winery/chekist/raw/branch/master/plugins/ai_search_command.luau";
                 }
             ];
+
+            ai = {
+                embeddings = {
+                    enable = true;
+                    embedding_model = "embeddinggemma-300m-qat-Q8_0";
+                    title_model = "LFM2.5-350M-Q8_0";
+                    document_template = "title: {{title}} | text: {{content}}";
+                    query_template = "task: search result | query: {{content}}";
+                    is_normalized = true;
+                };
+
+                agent = {
+                    enable = true;
+                    model = "z-ai/glm-5.3-flash";
+                    enable_vision = true;
+                    memory_slots_num = 50;
+                    context_messages_num = 7;
+                    max_loop_steps = 100;
+                    max_skill_duration = "5min";
+                    http_fetch_max_size = "1mb";
+                    stand_by_duration = "2min";
+                    operators = modsList;
+                };
+
+                models = [
+                    # PC local models
+                    {
+                        url = "http://192.168.1.10:9931/v1";
+                        token = "";
+                        supported = [
+                            "embeddinggemma-300m-qat-Q8_0"
+                            "LFM2.5-350M-Q8_0"
+                        ];
+                    }
+
+                    # Server local models
+                    {
+                        url = "http://127.0.0.1:9931/v1";
+                        token = "";
+                        supported = [
+                            "embeddinggemma-300m-qat-Q8_0"
+                            "LFM2.5-350M-Q8_0"
+                        ];
+                    }
+
+                    # Agent model API
+                    {
+                        url = "https://openrouter.ai/api/v1";
+                        supported = [ "z-ai/glm-5.3-flash" ];
+                        request = {
+                            provider = {
+                                zdr = true;
+                                data_collection = "deny";
+                                allow_fallbacks = true;
+                                order = [
+                                    #              $ INPT OUTP CACH SPEED QAT HIT
+                                    "relace"       # 0.09 0.30 0.02 35tps --- 89%
+                                    "wafer"        # 0.10 0.35 0.02 28tps --- 94%
+                                    "novita/fp8"   # 0.13 0.44 0.03 27tps fp8 92%
+                                    "z-ai/fp8"     # 0.15 0.50 0.03 36tps fp8 95%
+                                    "fireworks"    # 0.15 0.50 0.05 59tps fp8 63%
+                                    "baseten/fp8"  # 0.15 0.50 0.03 64tps fp8 65%
+                                ];
+                            };
+                            tools = [
+                                {
+                                    type = "openrouter:web_search";
+                                    max_results = 5;
+                                    max_total_results = 20;
+                                }
+                            ];
+                        };
+                    }
+                ];
+            };
         };
     };
 
