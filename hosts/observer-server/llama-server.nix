@@ -17,6 +17,7 @@
                     --host 0.0.0.0 \
                     --port 9931 \
                     --models-dir "/home/${username}/Models" \
+                    --models-preset "/home/${username}/Models/models.ini" \
                     --parallel 1 \
                     --ctx-size 8192 \
                     --kv-unified \
@@ -25,9 +26,7 @@
                     --spec-draft-type-k q8_0 \
                     --spec-draft-type-v q8_0 \
                     --fit on \
-                    --embeddings \
-                    --batch-size 2048 \
-                    --ubatch-size 2048
+                    --embeddings
             '';
 
             Restart = "always";

@@ -9,6 +9,8 @@ let
                 --add-flags "--port 9931" \
                 --add-flags "--models-dir" \
                 --add-flags "/home/${username}/Models" \
+                --add-flags "--models-preset" \
+                --add-flags "/home/${username}/Models/models.ini" \
                 --add-flags "--slot-save-path" \
                 --add-flags "/home/${username}/Models/kv-cache" \
                 --add-flags "--alias default" \
