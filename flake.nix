@@ -44,7 +44,7 @@
         };
 
         anime-games-launcher.url = "github:an-anime-team/anime-games-launcher";
-        chekist.url = "git+https://git.dawn.wine/dawn-winery/chekist";
+        chekist.url = "github:dawn-winery/chekist";
     };
 
     outputs = {

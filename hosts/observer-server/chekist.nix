@@ -96,7 +96,7 @@
                     env = {
                         logs_channel_id = "913441788893732864";
                     };
-                    source = "https://git.dawn.wine/dawn-winery/chekist/raw/branch/master/plugins/mod_logs.luau";
+                    source = "https://raw.githubusercontent.com/dawn-winery/chekist/refs/heads/master/plugins/mod_logs.luau";
                 }
                 {
                     name = "mod_commands";
@@ -105,7 +105,7 @@
                         logs_channel_id = "913441788893732864";
                     };
                     allow_admin = true;
-                    source = "https://git.dawn.wine/dawn-winery/chekist/raw/branch/master/plugins/mod_commands.luau";
+                    source = "https://raw.githubusercontent.com/dawn-winery/chekist/refs/heads/master/plugins/mod_commands.luau";
                 }
                 {
                     name = "auto_ban_channel";
@@ -116,7 +116,7 @@
                         delete_message_days = "1";
                     };
                     allow_admin = true;
-                    source = "https://git.dawn.wine/dawn-winery/chekist/raw/branch/master/plugins/auto_ban_channel.luau";
+                    source = "https://raw.githubusercontent.com/dawn-winery/chekist/refs/heads/master/plugins/auto_ban_channel.luau";
                 }
                 {
                     name = "attachments_channel";
@@ -126,7 +126,7 @@
                         ALLOW_USERS = "${botId},${builtins.concatStringsSep "," modsList}";
                     };
                     allow_admin = true;
-                    source = "https://git.dawn.wine/dawn-winery/chekist/raw/branch/master/plugins/attachments_channel.luau";
+                    source = "https://raw.githubusercontent.com/dawn-winery/chekist/refs/heads/master/plugins/attachments_channel.luau";
                 }
                 {
                     name = "anti_raid";
@@ -137,7 +137,7 @@
                         report_channel_id = "1525460785285828708";
                     };
                     allow_admin = true;
-                    source = "https://git.dawn.wine/dawn-winery/chekist/raw/branch/master/plugins/anti_raid.luau";
+                    source = "https://raw.githubusercontent.com/dawn-winery/chekist/refs/heads/master/plugins/anti_raid.luau";
                 }
                 {
                     name = "ai_oracle_command";
@@ -146,7 +146,7 @@
                         API_URL = "https://openrouter.ai/api/alpha/decisions";
                         API_TOKEN = "$CHEKIST_AI_API_TOKEN";
                     };
-                    source = "https://git.dawn.wine/dawn-winery/chekist/raw/branch/master/plugins/ai_oracle_command.luau";
+                    source = "https://raw.githubusercontent.com/dawn-winery/chekist/refs/heads/master/plugins/ai_oracle_command.luau";
                 }
                 {
                     name = "ai_report_command";
@@ -156,13 +156,13 @@
                         API_TOKEN = "$CHEKIST_AI_API_TOKEN";
                         REPORTS_CHANNEL = "1525460785285828708";
                     };
-                    source = "https://git.dawn.wine/dawn-winery/chekist/raw/branch/master/plugins/ai_report_command.luau";
+                    source = "https://raw.githubusercontent.com/dawn-winery/chekist/refs/heads/master/plugins/ai_report_command.luau";
                 }
                 {
                     name = "ai_search_command";
                     when = [ "ready" "command_use" ];
                     allow_ai = true;
-                    source = "https://git.dawn.wine/dawn-winery/chekist/raw/branch/master/plugins/ai_search_command.luau";
+                    source = "https://raw.githubusercontent.com/dawn-winery/chekist/refs/heads/master/plugins/ai_search_command.luau";
                 }
             ];
 
