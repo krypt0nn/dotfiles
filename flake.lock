@@ -27,17 +27,17 @@
         "rust-overlay": "rust-overlay_2"
       },
       "locked": {
-        "lastModified": 1790866182,
-        "narHash": "sha256-eH5jDv5O0WqBP6ggyL2na0ujFxFR1jZzl37wEFn1dbw=",
-        "ref": "refs/heads/master",
-        "rev": "b2cda8d0d119317ba6c6de20f9327578a86f2cc2",
-        "revCount": 369,
-        "type": "git",
-        "url": "https://git.dawn.wine/dawn-winery/chekist"
+        "lastModified": 1790867810,
+        "narHash": "sha256-RpEm2bqMlyOqYNNg+H1c5P/q/mQPoD9RoDr3fEuKQ04=",
+        "owner": "dawn-winery",
+        "repo": "chekist",
+        "rev": "fc29ece19ab0375263b25373238feb6758948b49",
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "https://git.dawn.wine/dawn-winery/chekist"
+        "owner": "dawn-winery",
+        "repo": "chekist",
+        "type": "github"
       }
     },
     "flake-parts": {
