@@ -1,6 +1,6 @@
 { username, lib, pkgs, ... }:
 let
-    enable = true;
+    enable = false;
     serverDir = "/home/${username}/Desktop/minecraft-server/statech-industries-s2";
 in lib.mkIf enable {
     systemd.services.minecraft-server = {
