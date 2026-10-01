@@ -8,12 +8,18 @@
                 9050
 
                 # BitTorrent
-                9090
+                9090 9091
+
+                # Minecraft
+                25565
             ];
 
             allowedUDPPorts = [
                 # BitTorrent
-                9090
+                9090 9091
+
+                # Minecraft
+                25565
             ];
         };
 
