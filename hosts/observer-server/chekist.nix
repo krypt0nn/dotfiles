@@ -196,12 +196,13 @@
                         token = "";
                         alias = {
                             embedding-model = "embeddinggemma-300m-qat-Q8_0";
-                            embedding-title-model = "LFM2.5-2.6B-QAD-Q4_0";
+                            embedding-title-model = "Ling-3.0-tiny-Q6_K_L";
                         };
                         supported = [
                             "embeddinggemma-300m-qat-Q8_0"
                             "LFM2.5-350M-Q8_0"
                             "LFM2.5-2.6B-QAD-Q4_0"
+                            "Ling-3.0-tiny-Q6_K_L"
                         ];
                     }
 
@@ -211,11 +212,12 @@
                         token = "";
                         alias = {
                             embedding-model = "embeddinggemma-300m-qat-Q8_0";
-                            embedding-title-model = "LFM2.5-350M-Q8_0";
+                            embedding-title-model = "LFM2.5-2.6B-QAD-Q4_0";
                         };
                         supported = [
                             "embeddinggemma-300m-qat-Q8_0"
                             "LFM2.5-350M-Q8_0"
+                            "LFM2.5-2.6B-QAD-Q4_0"
                         ];
                     }
 
