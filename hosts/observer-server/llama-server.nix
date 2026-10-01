@@ -1,7 +1,7 @@
 { username, pkgs-unstable, ... }: {
     networking.firewall.allowedTCPPorts = [ 9931 ];
 
-    systemd.services.llama-cpp = {
+    systemd.services.llama-server = {
         description = "llama-server";
         after = [ "network.target" ];
         wantedBy = [ "multi-user.target" ];
