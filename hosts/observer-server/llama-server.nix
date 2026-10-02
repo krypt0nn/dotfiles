@@ -16,7 +16,6 @@
                 ${pkgs-unstable.llama-cpp-vulkan}/bin/llama-server \
                     --host 0.0.0.0 \
                     --port 9931 \
-                    --models-dir "/home/${username}/Models" \
                     --models-preset "/home/${username}/Models/models.ini" \
                     --slot-save-path "/home/${username}/Models/kv-cache" \
                     --parallel 1 \
