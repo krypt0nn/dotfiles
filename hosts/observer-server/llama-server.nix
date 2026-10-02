@@ -27,7 +27,6 @@
                     --spec-draft-type-v q8_0 \
                     --fit on \
                     --embeddings \
-                    --reasoning on \
                     --reasoning-budget 4096 \
                     --reasoning-budget-message " ...I'm overthinking it. Here's my final response: "
             '';
