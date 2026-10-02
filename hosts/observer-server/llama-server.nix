@@ -26,7 +26,10 @@
                     --spec-draft-type-k q8_0 \
                     --spec-draft-type-v q8_0 \
                     --fit on \
-                    --embeddings
+                    --embeddings \
+                    --reasoning on \
+                    --reasoning-budget 4096 \
+                    --reasoning-budget-message " ...I'm overthinking it. Here's my final response: "
             '';
 
             Restart = "always";

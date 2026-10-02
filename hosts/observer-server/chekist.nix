@@ -198,12 +198,6 @@
                             embedding-model = "embeddinggemma-300m";
                             embedding-title-model = "ling3.0-tiny";
                         };
-                        supported = [
-                            "embeddinggemma-300m"
-                            "lfm2.5-350m"
-                            "lfm2.5-2.6b"
-                            "ling3.0-tiny"
-                        ];
                     }
 
                     # Server local models
@@ -212,13 +206,8 @@
                         token = "";
                         alias = {
                             embedding-model = "embeddinggemma-300m";
-                            embedding-title-model = "lfm2.5-2.6b";
+                            embedding-title-model = "minicpm5-1b";
                         };
-                        supported = [
-                            "embeddinggemma-300m"
-                            "lfm2.5-350m"
-                            "lfm2.5-2.6b"
-                        ];
                     }
 
                     # Agent model API
