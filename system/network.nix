@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ hostname, pkgs, lib, ... }: {
     networking = {
         firewall = {
             enable = true;
@@ -23,23 +23,49 @@
             ];
         };
 
-        networkmanager = {
-            enable = true;
-            dns = "none";
-        };
+        networkmanager.enable = true;
 
         nameservers = [
             "192.168.1.1"
         ];
+
+        # Search domain for short tailnet names, e.g. "observer-server".
+        # Only completes names in this domain; see services.resolved below.
+        search = [
+            "emperor-interval.ts.net"
+        ];
     };
 
+    # Split DNS for Tailscale.
+    #
+    # Without systemd-resolved, Tailscale falls back to its resolvconf manager
+    # and rewrites /etc/resolv.conf wholesale, which is what it does today:
+    #   search emperor-interval.ts.net
+    #   nameserver 100.100.100.100
+    #   nameserver fd7a:115c:a1e8::53
+    # Every lookup, github.com included, then goes through MagicDNS.
+    #
+    # With resolved running, Tailscale uses its D-Bus manager instead and only
+    # adds a routing-only domain (~emperor-interval.ts.net) pointing at
+    # 100.100.100.100. Tailnet names resolve via MagicDNS, everything else goes
+    # straight to the nameservers above, which is the default for
+    # services.resolved.settings.DNS.
+    services.resolved.enable = true;
+
     # .local domains resolver
-    services.avahi.nssmdns4 = true;
+    services.avahi = {
+        enable = true;
+        nssmdns4 = true;
+    };
 
     # Tailscale
     services.tailscale = {
         enable = true;
-        extraUpFlags = [ "--accept-dns=false" ];
+
+        # We don't need tailscale to access local network hosts on PC.
+        extraSetFlags = lib.optionals (hostname == "observer-pc") [
+            "--accept-routes=false"
+        ];
     };
 
     # Tor
@@ -78,7 +104,6 @@
                 webtunnel [2001:db8:adeb:7e0f:5140:7cd5:28b1:4503]:443 32F772D0970C2849B2B5BF9F0EC9D3F878DAEA43 url=https://files.bitrot.cz/Bho2k74VTFX6Bwr2XJG5V8gLhZEKgRQ5 ver=0.0.4
                 webtunnel [2001:db8:1c6b:27b9:a0a4:aa4:fa98:2734]:443 CE95A839CADA1ED38508B099C6C610CBB0EA7F81 url=https://cdn-37.triplebit.dev/oxaiBaa6ierohquu ver=0.0.2
                 webtunnel [2001:db8:1640:379c:ad30:db5f:bff5:37d0]:443 AF8F7548C886D6F53A652411DBB71D089517085A url=https://app05.oneclickhost.eu/alpfZGTB9FckCgOkOOA0OHlh ver=0.0.3
-                webtunnel [2001:db8:9e1a:414a:6386:1721:6e09:cbaf]:443 1B6EBD6C1D5438C4AEE8D1C903F58754FE11E1BD url=https://www2.ruhnama.net/VsCk1XCZv5noySVy1CERKqkx ver=0.0.3
                 webtunnel [2001:db8:ecc6:9ade:63b6:e98f:fac6:dc89]:443 C2C9072B0FAA99F95AE6A6899203AB0978B7CC4A url=https://www2.shouldiblockads.com/aTzB6XNVkeh2XqT9XQ0RHmHw ver=0.0.2
                 webtunnel [2001:db8:72cd:a490:2485:20b0:4987:35ec]:443 C0B90984E829C31BB316CCB8A89CB4F318891871 url=https://download-134.as401332.net/7f8g9h0i1j2k3l4m5n6o7p8q ver=0.0.2
                 webtunnel [2001:db8:b1d5:4998:8150:f75b:988f:1f48]:443 216C8BB1C44FC2BFF7AF823B55AC38F113079B93 url=https://cdn-38.triplebit.dev/Bai8aXeiPhar5gai ver=0.0.2
@@ -90,6 +115,10 @@
                 webtunnel [2001:db8:2091:9afb:4e45:7aab:e2d0:a8c7]:443 3683B1036F18DF4B560865C17AF85C373232A8D5 url=https://o.ofdma.de/pg9PbqaxSvIbjtbVZMt9H7xF ver=0.0.5
                 webtunnel [2001:db8:e026:e32:d3ef:1ddf:4a96:4386]:443 25E15F4A7E69AAF062B8353C4C37DD35D5417837 url=https://app04.oneclickhost.eu/dLHKfx5cEep0SWfJCLQqIBGF ver=0.0.6
                 webtunnel [2001:db8:9513:a2a7:e8de:e859:2818:6694]:443 34E2AC0B23D523B789EAD6E193DC05078943B94D url=https://us04-buf.beijing.st/fromwhereyoupickupthisgarbage ver=0.0.4
+                webtunnel [2001:db8:9e1a:414a:6386:1721:6e09:cbaf]:443 1B6EBD6C1D5438C4AEE8D1C903F58754FE11E1BD url=https://www2.ruhnama.net/VsCk1XCZv5noySVy1CERKqkx ver=0.0.5
+                webtunnel [2001:db8:d0f2:6cd4:8630:8185:18d2:a5c]:443 5A94C0CDB0ED58681BDAA8FDBC53F5C9E32058F8 url=https://beefstrognoff.com/xRiEjTMRdkc9l7vrlASBmOus ver=0.0.4
+                webtunnel [2001:db8:c28f:ab8d:dcc9:fdc2:7a6f:bef8]:443 B61E2E1E85B147F0FEAFBFB6FF6B5E5879ADA8B2 url=https://bbb.bm-dataprotect.ch/Csnoegi9ll226X5DLDzKDDjc ver=0.0.3
+                webtunnel [2001:db8:eedb:cae7:a345:4f72:f9cc:5de0]:443 B3C81E7A0CA474270DAA4A2C8633E1CA8935C37D url=https://wordpress.far-east-investment.ru/sORes7268CEUSRD7hAWvJU5A ver=0.0.6
             ''));
 
             HardwareAccel = true;
