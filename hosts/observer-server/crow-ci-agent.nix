@@ -99,7 +99,7 @@ in {
                 backend = "docker";
 
                 containers.crow-ci-agent = {
-                    image = "codefloe.com/crowci/crow-agent:v5";
+                    image = "codefloe.com/crowci/crow-agent:v6";
                     autoStart = true;
 
                     environment = {
