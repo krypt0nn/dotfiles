@@ -25,7 +25,6 @@
                 silentTyping.enable = true;
                 whoReacted.enable = true;
                 validUser.enable = true;
-                experiments.enable = true;
                 serverInfo.enable = true;
                 showHiddenChannels.enable = true;
                 showHiddenThings.enable = true;
