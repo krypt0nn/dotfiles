@@ -108,6 +108,26 @@
                     source = "https://git.dawn.wine/dawn-winery/chekist/raw/branch/master/plugins/mod_commands.luau";
                 }
                 {
+                    name = "memeboard";
+                    when = [ "message_reaction_add" ];
+                    env = {
+                        CHANNEL_ID = "1221929438241886301";
+                        REACTIONS = "xdd,xdx,kekw,kekl,dogekek";
+                        THRESHOLD = "5";
+                    };
+                    source = "https://git.dawn.wine/dawn-winery/chekist/raw/branch/master/plugins/starboard.luau";
+                }
+                {
+                    name = "owoboard";
+                    when = [ "message_reaction_add" ];
+                    env = {
+                        CHANNEL_ID = "1274566688787922987";
+                        REACTIONS = "peepoHappy,owo,uwucat";
+                        THRESHOLD = "5";
+                    };
+                    source = "https://git.dawn.wine/dawn-winery/chekist/raw/branch/master/plugins/starboard.luau";
+                }
+                {
                     name = "auto_ban_channel";
                     when = [ "message_add" ];
                     env = {
@@ -158,17 +178,17 @@
                     };
                     source = "https://git.dawn.wine/dawn-winery/chekist/raw/branch/master/plugins/ai_report_command.luau";
                 }
-                {
-                    name = "ai_search_command";
-                    when = [ "ready" "command_use" ];
-                    allow_ai = true;
-                    source = "https://git.dawn.wine/dawn-winery/chekist/raw/branch/master/plugins/ai_search_command.luau";
-                }
+                # {
+                #     name = "ai_search_command";
+                #     when = [ "ready" "command_use" ];
+                #     allow_ai = true;
+                #     source = "https://git.dawn.wine/dawn-winery/chekist/raw/branch/master/plugins/ai_search_command.luau";
+                # }
             ];
 
             ai = {
                 embeddings = {
-                    enable = true;
+                    # enable = true;
                     embedding_model = "embedding-model";
                     title_model = "embedding-title-model";
                     document_template = "title: {{title}} | text: {{content}}";
