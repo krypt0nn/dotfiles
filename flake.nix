@@ -1,7 +1,7 @@
 {
     inputs = {
-        nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
-        nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+        nixpkgs.url = "https://channels.nixos.org/nixos-26.05/nixexprs.tar.xz";
+        nixpkgs-unstable.url = "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.xz";
 
         # nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
 
