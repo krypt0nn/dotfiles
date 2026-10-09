@@ -1,7 +1,7 @@
 { pkgs, pkgs-unstable, config, ... }: {
     fonts = {
         enableDefaultPackages = true;
-        enableFontDir = true;
+        fontDir.enable = true;
 
         packages = with pkgs; [
             open-fonts

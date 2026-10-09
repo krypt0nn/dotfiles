@@ -1,9 +1,7 @@
 {
     inputs = {
-        nixpkgs.url = "https://channels.nixos.org/nixos-26.05/nixexprs.tar.xz";
-        nixpkgs-unstable.url = "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.xz";
-
-        # nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
+        nixpkgs.url = "https://channels.nixos.org/nixos-26.05/nixexprs.tar.zst";
+        nixpkgs-unstable.url = "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.zst";
 
         impermanence = {
             url = "github:nix-community/impermanence";
@@ -28,14 +26,19 @@
             inputs.nixpkgs.follows = "nixpkgs-unstable";
         };
 
+        zen-browser = {
+            url = "github:0xc000022070/zen-browser-flake";
+            inputs.nixpkgs.follows = "nixpkgs-unstable";
+        };
+
         nixcord = {
             url = "github:kaylorben/nixcord";
             inputs.nixpkgs.follows = "nixpkgs";
         };
 
-        zen-browser = {
-            url = "github:0xc000022070/zen-browser-flake";
-            inputs.nixpkgs.follows = "nixpkgs-unstable";
+        nix-craftapps = {
+            url = "github:olafkfreund/nix-craftapps";
+            inputs.nixpkgs.follows = "nixpkgs";
         };
 
         torlink = {
@@ -50,9 +53,9 @@
     outputs = {
         nixpkgs,
         nixpkgs-unstable,
-        # nix-cachyos-kernel,
         impermanence,
         rust-overlay,
+        nix-craftapps,
         ...
     }@inputs:
         let
@@ -66,14 +69,7 @@
             # now I use this flag to mark impermanence-powered devices.
             enableImpermanence = false;
 
-            # with (import ./overlays.nix);
-            overlays = [
-                # Always use latest pre-compiled rust binaries
-                rust-overlay.overlays.default
-
-                # Add CachyOS kernels (pinned for guaranteed binary cache)
-                # nix-cachyos-kernel.overlays.pinned
-            ];
+            overlays = [ rust-overlay.overlays.default ];
 
             config = {
                 allowUnfree = true;

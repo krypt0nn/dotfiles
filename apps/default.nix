@@ -4,9 +4,9 @@
             ./amberol.nix
             ./bottles.nix
             ./ghostty.nix
-            ./gimp.nix
             ./nixcord.nix
             ./onlyoffice.nix
+            ./craftapps.nix
             ./qbittorrent.nix
             ./telegram.nix
             ./throne.nix
