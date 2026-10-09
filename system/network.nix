@@ -115,10 +115,12 @@
                 webtunnel [2001:db8:2091:9afb:4e45:7aab:e2d0:a8c7]:443 3683B1036F18DF4B560865C17AF85C373232A8D5 url=https://o.ofdma.de/pg9PbqaxSvIbjtbVZMt9H7xF ver=0.0.5
                 webtunnel [2001:db8:e026:e32:d3ef:1ddf:4a96:4386]:443 25E15F4A7E69AAF062B8353C4C37DD35D5417837 url=https://app04.oneclickhost.eu/dLHKfx5cEep0SWfJCLQqIBGF ver=0.0.6
                 webtunnel [2001:db8:9513:a2a7:e8de:e859:2818:6694]:443 34E2AC0B23D523B789EAD6E193DC05078943B94D url=https://us04-buf.beijing.st/fromwhereyoupickupthisgarbage ver=0.0.4
-                webtunnel [2001:db8:9e1a:414a:6386:1721:6e09:cbaf]:443 1B6EBD6C1D5438C4AEE8D1C903F58754FE11E1BD url=https://www2.ruhnama.net/VsCk1XCZv5noySVy1CERKqkx ver=0.0.5
                 webtunnel [2001:db8:d0f2:6cd4:8630:8185:18d2:a5c]:443 5A94C0CDB0ED58681BDAA8FDBC53F5C9E32058F8 url=https://beefstrognoff.com/xRiEjTMRdkc9l7vrlASBmOus ver=0.0.4
                 webtunnel [2001:db8:c28f:ab8d:dcc9:fdc2:7a6f:bef8]:443 B61E2E1E85B147F0FEAFBFB6FF6B5E5879ADA8B2 url=https://bbb.bm-dataprotect.ch/Csnoegi9ll226X5DLDzKDDjc ver=0.0.3
                 webtunnel [2001:db8:eedb:cae7:a345:4f72:f9cc:5de0]:443 B3C81E7A0CA474270DAA4A2C8633E1CA8935C37D url=https://wordpress.far-east-investment.ru/sORes7268CEUSRD7hAWvJU5A ver=0.0.6
+                webtunnel [2001:db8:ea81:4de2:7f00:a080:8837:d7eb]:443 9FE1D3DE54B27FF2EB97A8E17FD0D352FFBA0310 url=https://viewletwhogdd.com/7TulQJ69bUWvTefBJRhSz7gE ver=0.0.5
+                webtunnel [2001:db8:12b1:a936:2095:ea48:63c4:2ffb]:443 5E5A525225F61595EB860044FB3E630C1A77DAEE url=https://secretinsociety.com/FuL5N2y4Tan9Wv4Xbsl2T4Ld ver=0.0.4
+                webtunnel [2001:db8:39ff:b176:96c8:fe95:7795:6a84]:443 8A619BB4906C5BA1CE1C411B39C5191991741BBF url=https://benches.date/Zjx8DRPQrFZUpUTdpFNu7x3r ver=0.0.7
             ''));
 
             HardwareAccel = true;
