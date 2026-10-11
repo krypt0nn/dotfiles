@@ -12,6 +12,7 @@
         ./chekist.nix
         ./minecraft-server.nix
         ./crow-ci-agent.nix
+        ./hermes-agent.nix
     ];
 
     networking.hostName = "observer-server";
