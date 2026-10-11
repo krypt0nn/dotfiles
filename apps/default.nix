@@ -13,7 +13,7 @@
             ./thunderbird.nix
             ./zed-editor.nix
             ./zen-browser.nix
-            ./hermes-desktop.nix
+            # ./hermes-desktop.nix
         ];
     in {
         "observer-pc" = desktop ++ [

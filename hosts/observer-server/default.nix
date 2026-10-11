@@ -8,11 +8,11 @@
         ./qbittorrent.nix
         ./meshtastic.nix
         ./llama-server.nix
-        ./searxng.nix
+        # ./searxng.nix
         ./chekist.nix
         ./minecraft-server.nix
         ./crow-ci-agent.nix
-        ./hermes-agent.nix
+        # ./hermes-agent.nix
     ];
 
     networking.hostName = "observer-server";
