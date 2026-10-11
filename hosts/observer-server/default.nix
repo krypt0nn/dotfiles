@@ -8,6 +8,7 @@
         ./qbittorrent.nix
         ./meshtastic.nix
         ./llama-server.nix
+        ./searxng.nix
         ./chekist.nix
         ./minecraft-server.nix
         ./crow-ci-agent.nix
