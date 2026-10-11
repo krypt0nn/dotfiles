@@ -31,6 +31,9 @@ in {
         gnomeExtensions.night-theme-switcher
         gnomeExtensions.caffeine
         gnomeExtensions.tiling-shell
+
+        # Wayland tools
+        wl-clipboard-rs
     ];
 
     # Remove unneeded built-in gnome apps
