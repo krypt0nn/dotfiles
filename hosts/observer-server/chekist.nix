@@ -249,12 +249,12 @@
                                 allow_fallbacks = true;
                                 order = [
                                     #              $ INPT OUTP CACH SPEED QAT HIT
-                                    "relace"       # 0.09 0.30 0.02 35tps --- 89%
-                                    "wafer"        # 0.10 0.35 0.02 28tps --- 94%
-                                    "novita/fp8"   # 0.13 0.44 0.03 27tps fp8 92%
-                                    "z-ai/fp8"     # 0.15 0.50 0.03 36tps fp8 95%
-                                    "fireworks"    # 0.15 0.50 0.05 59tps fp8 63%
-                                    "baseten/fp8"  # 0.15 0.50 0.03 64tps fp8 65%
+                                    "relace"       # 0.04 0.50 0.01 47tps --- 93%
+                                    "wafer"        # 0.06 0.50 0.01 41tps --- 97%
+                                    "novita/fp8"   # 0.09 0.28 0.02 36tps fp8 84%
+                                    "z-ai/fp8"     # 0.15 0.50 0.03 40tps fp8 69%
+                                    "fireworks"    # 0.15 0.50 0.03 99tps fp8 52%
+                                    "baseten/fp8"  # 0.15 0.50 0.03 74tps fp8 59%
                                 ];
                             };
                             tools = [
