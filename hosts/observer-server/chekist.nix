@@ -218,6 +218,10 @@
                             embedding-model = "embeddinggemma-300m";
                             embedding-title-model = "ling3.0-tiny";
                         };
+                        supported = [
+                            "embedding-model"
+                            "embedding-tilte-model"
+                        ];
                     }
 
                     # Server local models
@@ -228,6 +232,10 @@
                             embedding-model = "embeddinggemma-300m";
                             embedding-title-model = "minicpm5-1b";
                         };
+                        supported = [
+                            "embedding-model"
+                            "embedding-tilte-model"
+                        ];
                     }
 
                     # Agent model API
