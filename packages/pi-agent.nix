@@ -1,4 +1,5 @@
-{ username, pkgs, pkgs-unstable, inputs, ... }: let
+{ username, pkgs, pkgs-unstable, inputs, ... }:
+let
     mkNixPak = inputs.nixpak.lib.nixpak {
         inherit (pkgs) lib;
         inherit pkgs;

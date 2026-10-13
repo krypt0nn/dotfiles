@@ -255,13 +255,21 @@ in {
                                 data_collection = "deny";
                                 allow_fallbacks = true;
                                 order = [
-                                    #              $ INPT OUTP CACH SPEED QAT HIT
-                                    "relace"       # 0.04 0.50 0.01 47tps --- 93%
-                                    "wafer"        # 0.06 0.50 0.01 41tps --- 97%
-                                    "novita/fp8"   # 0.09 0.28 0.02 36tps fp8 84%
-                                    "z-ai/fp8"     # 0.15 0.50 0.03 40tps fp8 69%
-                                    "fireworks"    # 0.15 0.50 0.03 99tps fp8 52%
-                                    "baseten/fp8"  # 0.15 0.50 0.03 74tps fp8 59%
+                                    #           $ INPT OUTP CACH SPEED QAT HIT
+                                    "relace"    # 0.04 0.50 0.01 47tps --- 93%
+                                    "wafer"     # 0.06 0.50 0.01 41tps --- 97%
+                                    "novita"    # 0.09 0.28 0.02 36tps fp8 84%
+                                    "z-ai"      # 0.15 0.50 0.03 40tps fp8 69%
+                                    "fireworks" # 0.15 0.50 0.03 99tps fp8 52%
+                                    "baseten"   # 0.15 0.50 0.03 74tps fp8 59%
+                                ];
+                                ignore = [
+                                    "reka"
+                                    "morph"
+                                    "open-inference"
+                                    "inceptron"
+                                    "sail-research"
+                                    "together"
                                 ];
                             };
                             tools = [
