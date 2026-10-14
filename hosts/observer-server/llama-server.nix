@@ -18,14 +18,12 @@
                     --port 9931 \
                     --models-preset "/home/${username}/Models/models.ini" \
                     --slot-save-path "/home/${username}/Models/kv-cache" \
-                    --parallel 1 \
-                    --kv-unified \
                     --cache-type-k q8_0 \
                     --cache-type-v q8_0 \
                     --spec-draft-type-k q8_0 \
                     --spec-draft-type-v q8_0 \
-                    --fit on \
-                    --embeddings
+                    --parallel 1 \
+                    --fit on
             '';
 
             Restart = "always";
