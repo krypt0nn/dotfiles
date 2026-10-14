@@ -15,8 +15,7 @@ let
                 --add-flags "--cache-type-v q8_0" \
                 --add-flags "--spec-draft-type-k q8_0" \
                 --add-flags "--spec-draft-type-v q8_0" \
-                --add-flags "--parallel 1" \
-                --add-flags "--fit on"
+                --add-flags "--parallel 1"
         '';
     };
 in {
