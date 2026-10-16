@@ -60,6 +60,7 @@ let
         "npm:@tintinweb/pi-subagents"  # Agents
         "npm:@henryqw/pi-ask-question" # Ask user questions
         "npm:pi-loop-police"           # Detect and break thinking loops
+        "npm:pi-bansos"                # Free models provider
     ];
 
     piSkillRepos = [
