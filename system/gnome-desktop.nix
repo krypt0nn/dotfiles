@@ -33,7 +33,7 @@ in {
         gnomeExtensions.tiling-shell
 
         # Wayland tools
-        wl-clipboard-rs
+        wl-clipboard
     ];
 
     # Remove unneeded built-in gnome apps

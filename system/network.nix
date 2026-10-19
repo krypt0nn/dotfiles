@@ -99,7 +99,6 @@
                 webtunnel [2001:db8:c151:8ea6:7ecb:78eb:97e9:e26a]:443 F6AC833BA7AE92AD01FA99195EA51BBC3265A6E2 url=https://cdn-133.triplebit.dev/6e7f8g9h0i1j2k3l4m5n6o7p ver=0.0.2
                 webtunnel [2001:db8:d513:341f:d853:76fe:aaf1:dedc]:443 C94F0B257D1950B17BB2147021B0E07C5891007A url=https://r4fo.com/7z0hLnrTxvkPIHmuPH94Ju2J ver=0.0.3
                 webtunnel [2001:db8:3be7:5113:eddb:210d:291f:b52c]:443 B6CFDBD17618C147903429AB1C0CC759933DB50E url=https://adm.unicoridor.ru/rtASSYlOJgl1nKtH8njdZLbs ver=0.0.3
-                webtunnel [2001:db8:75a1:8038:7326:46ce:b078:370b]:443 2C9FF2DE2E07A722BCF233E607947241887FF295 url=https://app03.oneclickhost.eu/rTl1ijNSNKZzskFsMjNMRI0p ver=0.0.4
                 webtunnel [2001:db8:1b1d:debc:1c57:32bf:5baf:5948]:443 62B3904A4F84BF916310286FFEFE4CB4D24BFAFE url=https://dashboard-132.3b.lol/5d6e7f8g9h0i1j2k3l4m5n6o ver=0.0.2
                 webtunnel [2001:db8:adeb:7e0f:5140:7cd5:28b1:4503]:443 32F772D0970C2849B2B5BF9F0EC9D3F878DAEA43 url=https://files.bitrot.cz/Bho2k74VTFX6Bwr2XJG5V8gLhZEKgRQ5 ver=0.0.4
                 webtunnel [2001:db8:1c6b:27b9:a0a4:aa4:fa98:2734]:443 CE95A839CADA1ED38508B099C6C610CBB0EA7F81 url=https://cdn-37.triplebit.dev/oxaiBaa6ierohquu ver=0.0.2
@@ -109,7 +108,6 @@
                 webtunnel [2001:db8:b1d5:4998:8150:f75b:988f:1f48]:443 216C8BB1C44FC2BFF7AF823B55AC38F113079B93 url=https://cdn-38.triplebit.dev/Bai8aXeiPhar5gai ver=0.0.2
                 webtunnel [2001:db8:cf6:ce7:c7fc:5a42:72d5:8c8b]:443 D0A1F802127A925F47A7C9713F17A9E1D1292E54 url=https://cdn-131.airstrip1.net/4c5d6e7f8g9h0i1j2k3l4m5n ver=0.0.2
                 webtunnel [2001:db8:50a9:c546:36be:96ad:4cd1:cfff]:443 D20CE64A82CF6E6DB6F4F95C1F8FA81B06C10888 url=https://cdn-35.triplebit.dev/iethae6ahvoo1ieV ver=0.0.2
-                webtunnel [2001:db8:8823:18d4:77e:e206:ef9c:627f]:443 241136D5BB0CA8120EF269AF7CB8A427CA23ED55 url=https://ardc.bulger.co.uk/bxSqZSmsNykSCHI1gp6zl94a ver=0.0.4
                 webtunnel [2001:db8:fe46:edd5:2139:2d5b:b732:854a]:443 6C0D57943B9AE19F4365FE98E068126003DA6D29 url=https://bridge.skyhong.tw/ee282d33589b789bf7e31653bcbaa9c195d7 ver=0.0.4
                 webtunnel [2001:db8:1f1e:4d2f:321b:6626:823e:c504]:443 4946C9B8410CF59953455C158F957CAB2055A61D url=https://mstdn.party/fooghee7naChifi0 ver=0.0.2
                 webtunnel [2001:db8:2091:9afb:4e45:7aab:e2d0:a8c7]:443 3683B1036F18DF4B560865C17AF85C373232A8D5 url=https://o.ofdma.de/pg9PbqaxSvIbjtbVZMt9H7xF ver=0.0.5
@@ -121,6 +119,9 @@
                 webtunnel [2001:db8:ea81:4de2:7f00:a080:8837:d7eb]:443 9FE1D3DE54B27FF2EB97A8E17FD0D352FFBA0310 url=https://viewletwhogdd.com/7TulQJ69bUWvTefBJRhSz7gE ver=0.0.5
                 webtunnel [2001:db8:12b1:a936:2095:ea48:63c4:2ffb]:443 5E5A525225F61595EB860044FB3E630C1A77DAEE url=https://secretinsociety.com/FuL5N2y4Tan9Wv4Xbsl2T4Ld ver=0.0.4
                 webtunnel [2001:db8:39ff:b176:96c8:fe95:7795:6a84]:443 8A619BB4906C5BA1CE1C411B39C5191991741BBF url=https://benches.date/Zjx8DRPQrFZUpUTdpFNu7x3r ver=0.0.7
+                webtunnel [2001:db8:75a1:8038:7326:46ce:b078:370b]:443 2C9FF2DE2E07A722BCF233E607947241887FF295 url=https://app03.oneclickhost.eu/rTl1ijNSNKZzskFsMjNMRI0p ver=0.0.7
+                webtunnel [2001:db8:8823:18d4:77e:e206:ef9c:627f]:443 241136D5BB0CA8120EF269AF7CB8A427CA23ED55 url=https://ardc.bulger.co.uk/bxSqZSmsNykSCHI1gp6zl94a ver=0.0.4
+                webtunnel [2001:db8:4a7:f9d5:dd5:a50d:e609:b356]:443 0FF5783D11A1B411A5815CE0C6C25AD584D281FE url=https://cdn.xoomlia.com/dzq3/ ver=0.0.3
             ''));
 
             HardwareAccel = true;
@@ -133,18 +134,20 @@
 
             ExitNodes = [
                 "{de}" # Germany
-                "{dk}" # Denmark
-                "{at}" # Austria
-                "{be}" # Belgium
-                "{nl}" # Netherlands
                 "{pl}" # Poland
-                "{cz}" # Czech Republic
-                "{hu}" # Hungary
                 "{fi}" # Findland
                 "{se}" # Sweden
-                "{ee}" # Estonia
                 "{lt}" # Lithuania
                 "{lv}" # Latvia
+                "{ee}" # Estonia
+                "{nl}" # Netherlands
+                "{be}" # Belgium
+                "{dk}" # Denmark
+                "{at}" # Austria
+                "{hu}" # Hungary
+                "{cz}" # Czech Republic
+                "{it}" # Italy
+                "{fr}" # France
             ];
 
             StrictNodes = true;
