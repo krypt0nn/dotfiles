@@ -16,11 +16,25 @@ let
             # sandbox.
             app.package = pkgs.symlinkJoin {
                 name = "pi-coding-agent-wrapped";
-                paths = [
-                    pkgs-unstable.pi-coding-agent
-                    pkgs.nodejs
-                ];
                 meta.mainProgram = "pi";
+
+                paths = with pkgs; [
+                    pkgs-unstable.pi-coding-agent
+                    nodejs
+                    wl-clipboard
+                ];
+
+                # bin/pi becomes a launcher that applies the declarative
+                # optchat role defaults to the installed pi-optchat before the
+                # real agent starts, so profiles created this session get them.
+                postBuild = ''
+                    mv $out/bin/pi $out/bin/.pi-real
+                    cat > $out/bin/pi <<WRAP
+                    #!${pkgs.runtimeShell}
+                    exec ${patchDefaults} "$out/bin/.pi-real" "\$@"
+                    WRAP
+                    chmod +x $out/bin/pi
+                '';
             };
 
             locale.enable = true;
@@ -29,6 +43,7 @@ let
             bubblewrap = {
                 newSession = true;
                 dieWithParent = true;
+                sockets.wayland = true;
 
                 bind.rw = [
                     (sloth.envOr "PWD" sloth.homeDir)
@@ -46,24 +61,26 @@ let
                     "/nix/store"
                 ];
 
-                tmpfs = [
-                    "/tmp"
-                ];
+                tmpfs = [ "/tmp" ];
+
+                env.OPTCHAT_HOME = "/home/${username}/.pi/agent/optchat";
             };
         };
     };
 
     # npm package sources; pi installs them into ~/.pi/agent/npm/ at startup.
-    piPackages = [
-        "npm:@narumitw/pi-lsp"         # LSP
-        "npm:pi-web-access"            # Web search
-        "npm:@tintinweb/pi-subagents"  # Agents
-        "npm:@henryqw/pi-ask-question" # Ask user questions
-        "npm:pi-loop-police"           # Detect and break thinking loops
-        "npm:pi-bansos"                # Free models provider
-    ];
+    settingsFile = pkgs.writeText "pi-settings-packages.json" (builtins.toJSON {
+        packages = [
+            "npm:@narumitw/pi-lsp"         # LSP
+            "npm:pi-web-access"            # Web search
+            "npm:@henryqw/pi-ask-question" # Ask user questions
+            "npm:pi-optchat"               # Context compression and subagents
+            "npm:pi-loop-police"           # Detect and break thinking loops
+            "npm:pi-bansos"                # Free models provider
+        ];
+    });
 
-    piSkillRepos = [
+    skillRepos = [
         {
             name = "nixos";
             url = "https://github.com/marceloeatworld/nixos-ai-skill.git";
@@ -74,12 +91,44 @@ let
         }
     ];
 
-    settingsFile = pkgs.writeText "pi-settings-packages.json" (builtins.toJSON {
-        packages = piPackages;
+    optchatRolesFile = pkgs.writeText "pi-optchat-roles.json" (builtins.toJSON {
+        compactor = {
+            provider = "bansos";
+            model = "deepseek-v4.1-flash-free";
+            thinking = "medium";
+        };
+        subagent = {
+            provider = "openrouter";
+            model = "~deepseek/deepseek-flash-latest";
+            thinking = "high";
+        };
     });
 
     skillRoot = "/home/${username}/.pi/agent/skills";
     keepList = pkgs.lib.concatStringsSep " ";
+
+    # pi-optchat hardcodes its new-profile defaults (anthropic claude models) in
+    # src/profiles.ts and offers no override, so this script rewrites them to
+    # the declared roles on every pi launch (npm reinstalls revert it, so it
+    # must be re-applied at launch, not just at system activation).
+    patchDefaults = pkgs.writeShellScript "pi-optchat-patch-defaults" ''
+        export PATH=${pkgs.coreutils}/bin:${pkgs.gnugrep}/bin:${pkgs.gnused}/bin:${pkgs.jq}/bin:$PATH
+        real=$1; shift
+        f="$HOME/.pi/agent/npm/node_modules/pi-optchat/src/profiles.ts"
+        if [ -f "$f" ]; then
+            c=$(jq -c .compactor ${optchatRolesFile})
+            s=$(jq -c .subagent ${optchatRolesFile})
+            if ! grep -qF "compactor: $c" "$f"; then
+                sed -i -E \
+                    -e "s|compactor: [{] provider: '[^']*', model: '[^']*', thinking: '[^']*' [}]|compactor: $c|" \
+                    -e "s|subagent: [{] provider: '[^']*', model: '[^']*', thinking: '[^']*' [}]|subagent: $s|" \
+                    "$f" || echo "pi-optchat: failed to patch profile default models" >&2
+                grep -qF "compactor: $c" "$f" \
+                    || echo "pi-optchat: default models NOT patched (upstream defaults format changed?)" >&2
+            fi
+        fi
+        exec "$real" "$@"
+    '';
 
     # Oneshot script that makes ~/.pi/agent/skills mirror `piSkillRepos`:
     # declared repos are cloned/updated, anything not declared is deleted.
@@ -96,10 +145,10 @@ let
                 ${pkgs.git}/bin/git clone --depth 1 ${r.url} "$dest" >/dev/null 2>&1 \
                     || echo "pi-skills: failed to clone ${r.name}"
             fi
-        '') piSkillRepos}
+        '') skillRepos}
 
         # Prune skill dirs that are no longer declared.
-        keep="${keepList (map (r: r.name) piSkillRepos)}"
+        keep="${keepList (map (r: r.name) skillRepos)}"
         for d in "$skillRoot"/*; do
             [ -d "$d" ] || continue
             case " $keep " in
