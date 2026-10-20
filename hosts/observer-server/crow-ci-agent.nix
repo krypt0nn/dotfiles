@@ -118,7 +118,7 @@ in {
                 backend = "docker";
 
                 containers.crow-ci-agent = {
-                    image = "codefloe.com/crowci/crow-agent:v6";
+                    image = "codefloe.com/crowci/crow-agent:v6.9.0";
                     autoStart = true;
 
                     login = {
@@ -149,6 +149,15 @@ in {
                     ];
 
                     pull = "always";
+                };
+            };
+
+            # oci-containers sets Restart=on-failure with no RestartSec, so a
+            # failed container restarts instantly. Wait 5 minutes instead.
+            systemd.services."docker-crow-ci-agent" = {
+                serviceConfig = {
+                    Restart = lib.mkForce "on-failure";
+                    RestartSec = "5min";
                 };
             };
 
