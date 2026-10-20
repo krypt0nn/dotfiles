@@ -93,8 +93,8 @@ let
 
     optchatRolesFile = pkgs.writeText "pi-optchat-roles.json" (builtins.toJSON {
         compactor = {
-            provider = "bansos";
-            model = "deepseek-v4.1-flash-free";
+            provider = "openrouter";
+            model = "inclusionai/ling-3.0-flash";
             thinking = "medium";
         };
         subagent = {
