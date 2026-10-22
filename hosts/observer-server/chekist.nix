@@ -169,18 +169,12 @@ in {
                 {
                     name = "ai_oracle_command";
                     when = [ "ready" "command_use" ];
-                    env = {
-                        API_URL = "https://openrouter.ai/api/alpha/decisions";
-                        API_TOKEN = "$CHEKIST_AI_API_TOKEN";
-                    };
                     source = pluginSource "ai_oracle_command";
                 }
                 {
                     name = "ai_report_command";
                     when = [ "ready" "command_use" ];
                     env = {
-                        API_URL = "https://openrouter.ai/api/alpha/decisions";
-                        API_TOKEN = "$CHEKIST_AI_API_TOKEN";
                         REPORTS_CHANNEL = "1525460785285828708";
                     };
                     source = pluginSource "ai_report_command";
@@ -201,6 +195,11 @@ in {
                     document_template = "title: {{title}} | text: {{content}}";
                     query_template = "task: search result | query: {{content}}";
                     is_normalized = true;
+                };
+
+                decisions = {
+                    enable = true;
+                    model = "~typesafe/jev-latest";
                 };
 
                 agent = {
@@ -245,12 +244,21 @@ in {
                         ];
                     }
 
+                    # Decision model API
+                    {
+                        url = "https://openrouter.ai/api/v1";
+                        supported = [
+                            "~typesafe/jev-latest"
+                        ];
+                    }
+
                     # Agent model API
                     {
                         url = "https://openrouter.ai/api/v1";
                         supported = [
                             "~deepseek/deepseek-flash-latest"
                             "deepseek/deepseek-v4.1-flash-1017"
+                            "z-ai/glm-5.3-flash"
                         ];
                         request = {
                             provider = {
