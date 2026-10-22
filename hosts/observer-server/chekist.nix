@@ -197,7 +197,7 @@ in {
                 embeddings = {
                     # enable = true;
                     embedding_model = "embedding-model";
-                    title_model = "embedding-title-model";
+                    # title_model = "embedding-title-model";
                     document_template = "title: {{title}} | text: {{content}}";
                     query_template = "task: search result | query: {{content}}";
                     is_normalized = true;
@@ -205,7 +205,7 @@ in {
 
                 agent = {
                     enable = true;
-                    model = "z-ai/glm-5.3-flash";
+                    model = "~deepseek/deepseek-flash-latest";
                     enable_vision = true;
                     memory_slots_num = 50;
                     context_messages_num = 7;
@@ -248,20 +248,23 @@ in {
                     # Agent model API
                     {
                         url = "https://openrouter.ai/api/v1";
-                        supported = [ "z-ai/glm-5.3-flash" ];
+                        supported = [
+                            "~deepseek/deepseek-flash-latest"
+                            "deepseek/deepseek-v4.1-flash-1017"
+                        ];
                         request = {
                             provider = {
                                 zdr = true;
                                 data_collection = "deny";
                                 allow_fallbacks = true;
                                 order = [
-                                    #           $ INPT OUTP CACH SPEED QAT HIT
-                                    "relace"    # 0.04 0.50 0.01 47tps --- 93%
-                                    "wafer"     # 0.06 0.50 0.01 41tps --- 97%
-                                    "novita"    # 0.09 0.28 0.02 36tps fp8 84%
-                                    "z-ai"      # 0.15 0.50 0.03 40tps fp8 69%
-                                    "fireworks" # 0.15 0.50 0.03 99tps fp8 52%
-                                    "baseten"   # 0.15 0.50 0.03 74tps fp8 59%
+                                    #               $ INPT OUTP CACHE SPEED QAT HIT
+                                    "relace"        # 0.07 0.50 0.008 115tk --- 95%
+                                    "inference-net" # 0.08 0.50 0.008 108tk fp8 94%
+                                    "deepinfra"     # 0.10 0.30 0.003  65tk fp8 94%
+                                    "wafer"         # 0.16 0.50 0.008 133tk fp4 92%
+                                    "cloudflare"    # 0.10 0.60 0.003  63tk --- 73%
+                                    "decart"        # 0.14 0.55 0.003  68tk fp4 78%
                                 ];
                                 ignore = [
                                     "reka"
