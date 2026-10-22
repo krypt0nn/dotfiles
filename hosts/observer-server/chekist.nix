@@ -169,6 +169,7 @@ in {
                 {
                     name = "ai_oracle_command";
                     when = [ "ready" "command_use" ];
+                    allow_ai = true;
                     source = pluginSource "ai_oracle_command";
                 }
                 {
@@ -177,6 +178,7 @@ in {
                     env = {
                         REPORTS_CHANNEL = "1525460785285828708";
                     };
+                    allow_ai = true;
                     source = pluginSource "ai_report_command";
                 }
                 # {
