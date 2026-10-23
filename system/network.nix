@@ -28,10 +28,13 @@
         networkmanager = {
             enable = true;
 
+            # resolved.nix sets this to "systemd-resolved" for every host as
+            # soon as services.resolved is on (mkIf cfg.enable, plain
+            # definition at priority 100), so anything else has to be forced.
             dns = {
-                "observer-pc" = "default";
-                "observer-laptop" = "none";
-                "observer-server" = "default";
+                "observer-pc" = lib.mkDefault "default";
+                "observer-laptop" = lib.mkForce "none";
+                "observer-server" = lib.mkDefault "default";
             }.${hostname};
         };
 
