@@ -23,11 +23,23 @@
             ];
         };
 
-        networkmanager.enable = true;
+        # PC and server listen to fake-ip DNS running on router, while laptop
+        # is using throne with its own local DNS server.
+        networkmanager = {
+            enable = true;
 
-        nameservers = [
-            "192.168.1.1"
-        ];
+            dns = {
+                "observer-pc" = "default";
+                "observer-laptop" = "none";
+                "observer-server" = "default";
+            }.${hostname};
+        };
+
+        nameservers = {
+            "observer-pc" = [ "192.168.1.1" ];
+            "observer-laptop" = [ "127.0.0.1" ];
+            "observer-server" = [ "192.168.1.1" ];
+        }.${hostname};
 
         # Search domain for short tailnet names, e.g. "observer-server".
         # Only completes names in this domain; see services.resolved below.
