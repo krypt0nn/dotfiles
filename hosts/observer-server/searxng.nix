@@ -1,6 +1,6 @@
 { ... }:
 let
-    useTorProxy = false;
+    useTorProxy = true;
 in {
     services.searx = {
         enable = true;
@@ -20,7 +20,7 @@ in {
                 donation_url = false;
                 contact_url = false;
                 privacypolicy_url = false;
-                enable_metrics = false;
+                enable_metrics = true;
             };
 
             ui = {
@@ -37,27 +37,37 @@ in {
             };
 
             engines = [
-                { name = "bing"; shortcut = "bi"; disabled = false; }
-                { name = "mojeek"; shortcut = "mj"; disabled = false; }
-                { name = "qwant"; shortcut = "qw"; disabled = false; }
-                { name = "wikipedia"; shortcut = "wp"; disabled = false; }
-            ];
+                # Enabled: measured working through the Tor egress.
+                { name = "mwmbl"; disabled = false; }
+                { name = "fynd"; disabled = false; }
+                { name = "gmx"; disabled = false; }
+                { name = "encyclosearch"; disabled = false; }
+                { name = "wiby"; disabled = false; }
+                { name = "yacy"; disabled = false; }
+                { name = "seznam"; disabled = false; }
+                { name = "wikinews"; disabled = false; }
+            ] ++ (if useTorProxy then [
+                # Only dead on Tor exits; on a direct connection let them try.
+                { name = "duckduckgo"; disabled = true; }
+                { name = "qwant"; disabled = true; }
+                { name = "startpage"; disabled = true; }
+                { name = "brave"; disabled = true; }
+                { name = "presearch"; disabled = true; }
+                { name = "sogou"; disabled = true; }
+            ] else []);
 
-            outgoing = if useTorProxy then {
+            outgoing = {
+                request_timeout = 8.0;
+                max_request_timeout = 20.0;
+            } // (if useTorProxy then {
                 proxies = {
                     "all://" = [ "socks5h://127.0.0.1:9050" ];
                 };
-            } else {};
+                using_tor_proxy = true;
+                extra_proxy_timeout = 10;
+            } else {});
         };
 
-        environmentFile = "/persistent/searx/secret";
-    };
-
-    environment.persistence."/persistent" = {
-        hideMounts = true;
-
-        directories = [
-            "/persistent/searx"
-        ];
+        environmentFile = "/persistent/searx.secrets";
     };
 }

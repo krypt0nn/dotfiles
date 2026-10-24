@@ -63,7 +63,11 @@ let
 
                 tmpfs = [ "/tmp" ];
 
+                env.PI_CODING_AGENT_DIR = "/home/${username}/.pi/agent";
                 env.OPTCHAT_HOME = "/home/${username}/.pi/agent/optchat";
+
+                # Bypass list for pi-web-access.
+                env.NO_PROXY = "localhost,127.0.0.1,::1,.lan,.ts.net,observer-server";
             };
         };
     };
@@ -74,10 +78,19 @@ let
             "npm:@narumitw/pi-lsp"         # LSP
             "npm:pi-web-access"            # Web search
             "npm:@henryqw/pi-ask-question" # Ask user questions
-            "npm:pi-optchat"               # Context compression and subagents
+            # "npm:pi-optchat"             # Context compression and subagents
             "npm:pi-loop-police"           # Detect and break thinking loops
             "npm:pi-bansos"                # Free models provider
         ];
+    });
+
+    webSearchFile = pkgs.writeText "pi-web-search.json" (builtins.toJSON {
+        searxngBaseUrl = "http://observer-server.lan:8080";
+        proxy = "socks5h://127.0.0.1:1000";
+
+        # 198.18.0.0/15: fake-IP pool (the local resolver returns fake IPs for
+        # public names). 192.168.1.0/24 + fd00::/8: the instance's LAN.
+        ssrf.allowRanges = [ "198.18.0.0/15" "192.168.1.0/24" "fd00::/8" ];
     });
 
     skillRepos = [
@@ -177,6 +190,21 @@ let
         else
             cp ${settingsFile} "$f"
         fi
+
+        # Enforce the declared pi-web-access settings (recursive merge, so
+        # runtime-added API keys survive). This script runs as root, so the file
+        # has to be handed over explicitly: a root-owned 0600 file is unreadable
+        # for the user pi actually runs as inside the nixpak sandbox.
+        w=$homeDir/.pi/agent/web-search.json
+        mkdir -p "$homeDir/.pi/agent"
+        tmp=$(mktemp)
+        if [ -f "$w" ] && jq --slurpfile ws ${webSearchFile} '. * $ws[0]' "$w" > "$tmp" 2>/dev/null; then
+            :
+        else
+            cp ${webSearchFile} "$tmp"
+        fi
+        install -m 600 -o ${username} -g users "$tmp" "$w"
+        rm -f "$tmp"
     '';
 in {
     environment.systemPackages = [
