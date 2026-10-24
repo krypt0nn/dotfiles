@@ -46,11 +46,6 @@
             inputs.nixpkgs.follows = "nixpkgs";
         };
 
-        hermes-agent = {
-            url = "github:NousResearch/hermes-agent";
-            inputs.nixpkgs.follows = "nixpkgs";
-        };
-
         anime-games-launcher.url = "github:an-anime-team/anime-games-launcher";
         chekist.url = "git+https://git.dawn.wine/dawn-winery/chekist";
     };
