@@ -79,7 +79,6 @@ let
             "npm:pi-web-access"            # Web search
             "npm:@henryqw/pi-ask-question" # Ask user questions
             # "npm:pi-optchat"             # Context compression and subagents
-            "npm:pi-loop-police"           # Detect and break thinking loops
             "npm:pi-bansos"                # Free models provider
         ];
     });
