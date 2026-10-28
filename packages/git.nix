@@ -12,7 +12,7 @@
             commit.gpgsign = true;
             gpg.format = "ssh";
 
-            init.defaultBranch = "master";
+            init.defaultBranch = "main";
             advice.defaultBranchName = false;
 
             # HACK
