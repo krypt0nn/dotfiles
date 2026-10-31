@@ -181,17 +181,17 @@ in {
                     allow_ai = true;
                     source = pluginSource "ai_report_command";
                 }
-                {
-                    name = "ai_search_command";
-                    when = [ "ready" "command_use" ];
-                    allow_ai = true;
-                    source = pluginSource "ai_search_command";
-                }
+                # {
+                #     name = "ai_search_command";
+                #     when = [ "ready" "command_use" ];
+                #     allow_ai = true;
+                #     source = pluginSource "ai_search_command";
+                # }
             ];
 
             ai = {
                 embeddings = {
-                    enable = true;
+                    # enable = true;
                     embedding_model = "embedding-model";
                     # title_model = "embedding-title-model";
                     document_template = "title: {{title}} | text: {{content}}";
