@@ -181,17 +181,17 @@ in {
                     allow_ai = true;
                     source = pluginSource "ai_report_command";
                 }
-                # {
-                #     name = "ai_search_command";
-                #     when = [ "ready" "command_use" ];
-                #     allow_ai = true;
-                #     source = pluginSource "ai_search_command";
-                # }
+                {
+                    name = "ai_search_command";
+                    when = [ "ready" "command_use" ];
+                    allow_ai = true;
+                    source = pluginSource "ai_search_command";
+                }
             ];
 
             ai = {
                 embeddings = {
-                    # enable = true;
+                    enable = true;
                     embedding_model = "embedding-model";
                     # title_model = "embedding-title-model";
                     document_template = "title: {{title}} | text: {{content}}";
@@ -201,7 +201,7 @@ in {
 
                 decisions = {
                     enable = true;
-                    model = "~typesafe/jev-latest";
+                    model = "decision-model";
                 };
 
                 agent = {
@@ -223,12 +223,14 @@ in {
                         url = "http://192.168.1.10:9931/v1";
                         token = "";
                         alias = {
-                            embedding-model = "embeddinggemma-300m";
+                            embedding-model = "embeddinggemma2";
                             embedding-title-model = "ling3.0-tiny";
+                            decision-model = "d1-3b";
                         };
                         supported = [
                             "embedding-model"
                             "embedding-tilte-model"
+                            "decision-model"
                         ];
                     }
 
@@ -237,20 +239,14 @@ in {
                         url = "http://127.0.0.1:9931/v1";
                         token = "";
                         alias = {
-                            embedding-model = "embeddinggemma-300m";
+                            embedding-model = "embeddinggemma2";
                             embedding-title-model = "minicpm5-1b";
+                            decision-model = "d1-3b";
                         };
                         supported = [
                             "embedding-model"
                             "embedding-tilte-model"
-                        ];
-                    }
-
-                    # Decision model API
-                    {
-                        url = "https://openrouter.ai/api/v1";
-                        supported = [
-                            "~typesafe/jev-latest"
+                            "decision-model"
                         ];
                     }
 
