@@ -25,9 +25,9 @@
         ];
     };
 
-    # Exposes font packages' font files (symlinked from the read-only store)
-    # in ~/.local/share/fonts for apps that scan the user font dir directly.
-    systemd.user.services.symlink-fonts = {
+    # Copies font packages' font files (from the read-only store) into
+    # ~/.local/share/fonts for apps that scan the user font dir directly.
+    systemd.user.services.copy-fonts = {
         wantedBy = [ "default.target" ];
         serviceConfig.Type = "oneshot";
 
@@ -38,7 +38,7 @@
             for dir in ${toString (map (pkg: "${pkg}/share/fonts") config.fonts.packages)}; do
                 if [ -d "$dir" ]; then
                     find "$dir" -type f \( -name '*.ttf' -o -name '*.otf' -o -name '*.ttc' -o -name '*.otb' -o -name '*.woff' -o -name '*.woff2' \) \
-                        -exec ln -s {} "$HOME/.local/share/fonts/" \;
+                        -exec cp {} "$HOME/.local/share/fonts/" \;
                 fi
             done
         '';
