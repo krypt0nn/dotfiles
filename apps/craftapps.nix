@@ -6,6 +6,7 @@
         apps = {
             photocraft.enable = true;
             filmcraft.enable = true;
+            pdfcraft.enable = true;
         };
     };
 }

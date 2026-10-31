@@ -43,7 +43,7 @@ in {
         gnome-font-viewer gnome-logs gnome-maps gnome-music
         gnome-system-monitor gnome-connections
         gnome-tour snapshot gnome-console
-        gnome-shell-extensions
+        gnome-shell-extensions papers
     ];
 
     # Setup gnome settings
