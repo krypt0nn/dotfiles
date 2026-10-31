@@ -11,10 +11,6 @@ let
                 --add-flags "/home/${username}/Models/models.ini" \
                 --add-flags "--slot-save-path" \
                 --add-flags "/home/${username}/Models/kv-cache" \
-                --add-flags "--cache-type-k bf16" \
-                --add-flags "--cache-type-v bf16" \
-                --add-flags "--spec-draft-type-k bf16" \
-                --add-flags "--spec-draft-type-v bf16" \
                 --add-flags "--parallel 1"
         '';
     };
