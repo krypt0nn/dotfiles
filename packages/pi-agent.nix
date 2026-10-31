@@ -23,18 +23,6 @@ let
                     nodejs
                     wl-clipboard
                 ];
-
-                # bin/pi becomes a launcher that applies the declarative
-                # optchat role defaults to the installed pi-optchat before the
-                # real agent starts, so profiles created this session get them.
-                postBuild = ''
-                    mv $out/bin/pi $out/bin/.pi-real
-                    cat > $out/bin/pi <<WRAP
-                    #!${pkgs.runtimeShell}
-                    exec ${patchDefaults} "$out/bin/.pi-real" "\$@"
-                    WRAP
-                    chmod +x $out/bin/pi
-                '';
             };
 
             locale.enable = true;
@@ -64,7 +52,6 @@ let
                 tmpfs = [ "/tmp" ];
 
                 env.PI_CODING_AGENT_DIR = "/home/${username}/.pi/agent";
-                env.OPTCHAT_HOME = "/home/${username}/.pi/agent/optchat";
 
                 # Bypass list for pi-web-access.
                 env.NO_PROXY = "localhost,127.0.0.1,::1,.lan,.ts.net,observer-server";
@@ -75,10 +62,9 @@ let
     # npm package sources; pi installs them into ~/.pi/agent/npm/ at startup.
     settingsFile = pkgs.writeText "pi-settings-packages.json" (builtins.toJSON {
         packages = [
-            "npm:@narumitw/pi-lsp"         # LSP
             "npm:pi-web-access"            # Web search
-            "npm:@henryqw/pi-ask-question" # Ask user questions
-            # "npm:pi-optchat"             # Context compression and subagents
+            "npm:@henryqw/pi-ask-question" # User questions
+            "npm:@ravshansbox/pi-subagent" # Subagents
             "npm:pi-bansos"                # Free models provider
         ];
     });
@@ -103,44 +89,8 @@ let
         }
     ];
 
-    optchatRolesFile = pkgs.writeText "pi-optchat-roles.json" (builtins.toJSON {
-        compactor = {
-            provider = "openrouter";
-            model = "inclusionai/ling-3.0-flash";
-            thinking = "medium";
-        };
-        subagent = {
-            provider = "openrouter";
-            model = "~deepseek/deepseek-flash-latest";
-            thinking = "high";
-        };
-    });
-
     skillRoot = "/home/${username}/.pi/agent/skills";
     keepList = pkgs.lib.concatStringsSep " ";
-
-    # pi-optchat hardcodes its new-profile defaults (anthropic claude models) in
-    # src/profiles.ts and offers no override, so this script rewrites them to
-    # the declared roles on every pi launch (npm reinstalls revert it, so it
-    # must be re-applied at launch, not just at system activation).
-    patchDefaults = pkgs.writeShellScript "pi-optchat-patch-defaults" ''
-        export PATH=${pkgs.coreutils}/bin:${pkgs.gnugrep}/bin:${pkgs.gnused}/bin:${pkgs.jq}/bin:$PATH
-        real=$1; shift
-        f="$HOME/.pi/agent/npm/node_modules/pi-optchat/src/profiles.ts"
-        if [ -f "$f" ]; then
-            c=$(jq -c .compactor ${optchatRolesFile})
-            s=$(jq -c .subagent ${optchatRolesFile})
-            if ! grep -qF "compactor: $c" "$f"; then
-                sed -i -E \
-                    -e "s|compactor: [{] provider: '[^']*', model: '[^']*', thinking: '[^']*' [}]|compactor: $c|" \
-                    -e "s|subagent: [{] provider: '[^']*', model: '[^']*', thinking: '[^']*' [}]|subagent: $s|" \
-                    "$f" || echo "pi-optchat: failed to patch profile default models" >&2
-                grep -qF "compactor: $c" "$f" \
-                    || echo "pi-optchat: default models NOT patched (upstream defaults format changed?)" >&2
-            fi
-        fi
-        exec "$real" "$@"
-    '';
 
     # Oneshot script that makes ~/.pi/agent/skills mirror `piSkillRepos`:
     # declared repos are cloned/updated, anything not declared is deleted.
