@@ -87,6 +87,10 @@ let
             name = "rust";
             url = "https://github.com/actionbook/rust-skills.git";
         }
+        {
+            name = "humanizer";
+            url = "https://github.com/blader/humanizer.git";
+        }
     ];
 
     skillRoot = "/home/${username}/.pi/agent/skills";
