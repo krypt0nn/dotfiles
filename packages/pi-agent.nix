@@ -34,6 +34,7 @@ let
                 sockets.wayland = true;
 
                 bind.rw = [
+                    [ "/tmp/pi-agent" "/tmp" ]
                     (sloth.envOr "PWD" sloth.homeDir)
                     (sloth.concat' sloth.homeDir "/.pi/agent")
                     (sloth.concat' sloth.homeDir "/.npm")
@@ -49,8 +50,6 @@ let
                     "/nix/store"
                 ];
 
-                tmpfs = [ "/tmp" ];
-
                 env.PI_CODING_AGENT_DIR = "/home/${username}/.pi/agent";
 
                 # Bypass list for pi-web-access.
@@ -58,6 +57,15 @@ let
             };
         };
     };
+
+    # The very same pi binary, but without the nixpak/bubblewrap sandbox: it
+    # runs with the full host filesystem and network, so it can touch paths the
+    # sandbox does not bind (e.g. writing outside $HOME or running
+    # `nixos-rebuild`). Escape hatch, not the default.
+    pi-unsafe = pkgs.writeShellScriptBin "pi-unsafe" ''
+        export PI_CODING_AGENT_DIR="''${PI_CODING_AGENT_DIR:-$HOME/.pi/agent}"
+        exec ${pkgs-unstable.pi-coding-agent}/bin/pi "$@"
+    '';
 
     # npm package sources; pi installs them into ~/.pi/agent/npm/ at startup.
     settingsFile = pkgs.writeText "pi-settings-packages.json" (builtins.toJSON {
@@ -162,6 +170,14 @@ let
 in {
     environment.systemPackages = [
         pi-wrapped.config.env
+        pi-unsafe
+    ];
+
+    # /tmp is a tmpfs, so the sandbox's scratch dir has to be recreated at boot.
+    # "d" + age "-": never cleaned by systemd-tmpfiles-clean, owned by the user
+    # pi runs as in the nixpak sandbox.
+    systemd.tmpfiles.rules = [
+        "d /tmp/pi-agent 0700 ${username} users -"
     ];
 
     # One-shot service that clones/updates the skill repos into the user's

@@ -44,6 +44,7 @@
                     "wheel"
                     "networkmanager"
                     "libvirtd"
+                    "kvm"
                     "podman"
                     "render"
                     "video"
