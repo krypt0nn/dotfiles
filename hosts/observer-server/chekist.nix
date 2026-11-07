@@ -225,7 +225,7 @@ in {
                         alias = {
                             embedding-model = "embeddinggemma2";
                             embedding-title-model = "ling3.0-tiny";
-                            decision-model = "d1-3b";
+                            decision-model = "d1-2b";
                         };
                         supported = [
                             "embedding-model"
@@ -241,7 +241,7 @@ in {
                         alias = {
                             embedding-model = "embeddinggemma2";
                             embedding-title-model = "minicpm5-1b";
-                            decision-model = "d1-3b";
+                            decision-model = "d1-2b";
                         };
                         supported = [
                             "embedding-model"
