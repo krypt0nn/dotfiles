@@ -2,8 +2,8 @@
 let
     # HACK: force-use latest throne before it gets merged to next stable nixos.
     throneNixpkgs = fetchTarball {
-        url = "https://github.com/NixOS/nixpkgs/archive/30d4c9866718bfa88fff675ba5c9901e45a82f5f.tar.zst";
-        sha256 = "1d8jmyqd458g5ymm4ab223d49330qmqw39bjybjizsb99hf9h61i";
+        url = "https://github.com/TomaSajt/nixpkgs/archive/4675088df09b3db44929351aa8df13916015dc1c.tar.gz"; # tar.zst
+        sha256 = "1fqrjflf9pssnwwn8nf8yxd3grflpznk5lb6534pr4v34mg5rnsp";
     };
 
     thronePkgs = import throneNixpkgs {
