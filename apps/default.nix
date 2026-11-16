@@ -21,6 +21,7 @@
             ./virt-manager.nix
             ./steam.nix
             ./prism-launcher.nix
+            ./horizon-launcher.nix
             ./anime-games-launcher.nix
         ];
 
