@@ -148,12 +148,85 @@
                 "{dk}" # Denmark
                 "{at}" # Austria
                 "{hu}" # Hungary
-                "{cz}" # Czech Republic
+                "{cz}" # Czechia
+                "{sk}" # Slovakia
                 "{it}" # Italy
                 "{fr}" # France
+                "{ch}" # Switzerland
             ];
 
             StrictNodes = true;
+        };
+    };
+
+    systemd.services.tor-warmup = {
+        description = "Warm up the Tor SOCKS proxy with a small download";
+
+        # Also run once at boot, not just from the timer.
+        wantedBy = [ "multi-user.target" ];
+
+        serviceConfig = {
+            Type = "oneshot";
+            DynamicUser = true;
+            NoNewPrivileges = true;
+            PrivateTmp = true;
+            ProtectSystem = "strict";
+            ProtectHome = true;
+            RestrictAddressFamilies = [ "AF_INET" "AF_INET6" "AF_UNIX" ];
+        };
+
+        # Escaping note: "''${...}" would be a Nix interpolation, so shell
+        # variables are referenced as "$name".
+        script = ''
+            hour=$((10#$(date +%H)))
+            if [ "$hour" -lt 8 ]; then
+                printf 'nighttime (%02d:00), skipping\n' "$hour"
+                exit 0
+            fi
+
+            echo "warming up Tor"
+
+            # Latency here is %{time_starttransfer}: from the request going out
+            # (circuit already built) to the first byte of the body coming back.
+            # %{time_appconnect} covers the SOCKS handshake to the entry node.
+            # curl reports raw numbers only, so awk turns bytes into KiB.
+            if metrics=$(${pkgs.curl}/bin/curl \
+                    --silent --show-error --fail --location \
+                    --socks5-hostname 127.0.0.1:9050 \
+                    --max-time 120 \
+                    --output /dev/null \
+                    --write-out '%{response_code} %{size_download} %{speed_download} %{time_appconnect} %{time_starttransfer} %{time_total}' \
+                    http://cachefly.cachefly.net/5mb.test); then
+                rc=0
+                status=ok
+            else
+                rc=$?
+                status="failed (curl exit ''${rc})"
+            fi
+
+            # Fields: http size speed connect latency total; empty ones read as 0.
+            summary=$(printf '%s\n' "$metrics" | ${pkgs.gawk}/bin/awk '{
+                printf "http=%s size=%.0fKiB speed=%.1fKiB/s connect=%.2fs latency=%.2fs total=%.2fs", \
+                    $1, $2 / 1024, $3 / 1024, $4, $5, $6
+            }')
+            echo "''${status}: ''${summary}"
+            exit "$rc"
+        '';
+    };
+
+    systemd.timers.tor-warmup = {
+        description = "Tor warm-up, every 1 to 3 hours";
+        wantedBy = [ "timers.target" ];
+
+        timerConfig = {
+            # First run one hour after the timer starts; the service also runs
+            # once at boot via wantedBy, which OnUnitActiveSec counts from.
+            OnActiveSec = "1h";
+            OnUnitActiveSec = "1h";    # then an hour after the previous run
+            RandomizedDelaySec = "2h"; # + a fresh 0-2h draw each time
+            # Default AccuracySec=1min would coalesce the draws; this keeps
+            # them uniformly distributed over the window.
+            AccuracySec = "1us";
         };
     };
 
