@@ -184,8 +184,6 @@
                 exit 0
             fi
 
-            echo "warming up Tor"
-
             # Latency here is %{time_starttransfer}: from the request going out
             # (circuit already built) to the first byte of the body coming back.
             # %{time_appconnect} covers the SOCKS handshake to the entry node.
