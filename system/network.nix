@@ -5,7 +5,7 @@
 
             allowedTCPPorts = [
                 # Tor
-                9050
+                9050 1000
 
                 # BitTorrent
                 9090 9091
