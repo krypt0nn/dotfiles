@@ -172,8 +172,8 @@ let
             # implementation possible at all, explore and security are read-only
             # and only widen verification.
             allowed_subagents = "general, explore, security";
-            model = "opencode-go/kimi-k3.1-pro";
-            thinking = "high";
+            model = "opencode-go/deepseek-v4.1-flash";
+            thinking = "max";
             prompt_mode = "append";
             body = ''
                 You are the planning and orchestration subagent. You design the change and
@@ -238,9 +238,8 @@ let
             # this". security is deliberately left out so the audit stays a
             # separate, explicitly requested pass.
             allowed_subagents = "general, explore";
-            model = "opencode-go/glm-5.3";
-            thinking = "high";
-            max_turns = 40;
+            model = "opencode-go/deepseek-v4.1-flash";
+            thinking = "max";
             prompt_mode = "append";
             body = ''
                 You are the review subagent. You critique a change that already exists and,
