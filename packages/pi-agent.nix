@@ -239,7 +239,7 @@ let
             # separate, explicitly requested pass.
             allowed_subagents = "general, explore";
             model = "opencode-go/glm-5.3";
-            thinking = "low";
+            thinking = "high";
             max_turns = 40;
             prompt_mode = "append";
             body = ''
@@ -302,8 +302,8 @@ let
             display_name = "Security";
             color = "red";
             tools = "read, bash, grep, find, ls";
-            model = "opencode-go/glm-5.3";
-            thinking = "high";
+            model = "opencode-go/deepseek-v4.1-flash";
+            thinking = "max";
             prompt_mode = "replace";
             body = ''
                 You are an application security reviewer auditing this project. You are in
@@ -358,7 +358,7 @@ let
             ---
             name: ${agentYamlValue name}
         '' + pkgs.lib.concatStringsSep "\n" (map (k: "${k}: ${agentYamlValue cfg.${k}}") keys) + ''
-            
+
             ---
 
         '' + cfg.body;
