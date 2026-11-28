@@ -283,7 +283,7 @@ let
             # Fixing is what general is for; explore answers "what else touches
             # this". security is deliberately left out so the audit stays a
             # separate, explicitly requested pass.
-            allowed_subagents = "general, explore";
+            allowed_subagents = "general, explore, security";
             model = "inherit";
             thinking = "max";
             prompt_mode = "append";
